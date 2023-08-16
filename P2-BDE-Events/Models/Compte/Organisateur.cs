@@ -1,8 +1,8 @@
 ﻿namespace P2_BDE_Events.Models.Compte
 {
-    public class Organisateur
+    public class Organisateur : Compte
     {
-        public int IdCreateurResponsable { get; set; }
+        public int Id { get; set; }
     }
  
 }
