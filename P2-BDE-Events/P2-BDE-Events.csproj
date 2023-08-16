@@ -10,7 +10,6 @@
     <Folder Include="Models\Prestation\" />
     <Folder Include="wwwroot\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />

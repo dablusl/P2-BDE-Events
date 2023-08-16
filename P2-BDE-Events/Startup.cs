@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using P2_BDE_Events.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,20 @@ namespace P2_BDE_Events
                 app.UseDeveloperExceptionPage();
             }
 
+            using (Dal dal = new Dal())
+            {
+                dal.DeleteCreateDatabase();
+            }
+
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            using (BDDContext ctx = new BDDContext())
+            {
+                ctx.InitializeDb();
+            }
 
             app.UseEndpoints(endpoints =>
             {

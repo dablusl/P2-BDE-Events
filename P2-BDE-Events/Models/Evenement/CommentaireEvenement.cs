@@ -2,6 +2,7 @@
 {
     public class CommentaireEvenement : Commentaire
     {
+        public int Id { get; set; }
         public int IdEvenement;
     }
 }

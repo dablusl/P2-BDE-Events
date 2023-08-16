@@ -2,6 +2,7 @@
 {
     public class CommentairePhoto
     {
+        public int Id { get; set; }
         public int IdPhoto { get; set; }
     }
 }
