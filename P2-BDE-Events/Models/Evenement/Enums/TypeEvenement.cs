@@ -2,10 +2,10 @@
 {
     public enum TypeEvenement
     {
-        Soiree,
-        Repas,
-        Brunch,
-        JeuxDeSociete,
-        Sport
+        SOIREE,
+        REPAS,
+        BRUNCH,
+        JEUXDESOCIETE,
+        SPORT
     }
 }

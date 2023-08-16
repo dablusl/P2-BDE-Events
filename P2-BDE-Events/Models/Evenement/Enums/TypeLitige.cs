@@ -2,11 +2,11 @@
 {
     public enum TypeLitige
     {
-        Vol,
-        EvenementAnnule,
-        DescriptionTrompeuse,
-        ServiceTrompeur,
-        ComportementInadequat,
-        Autre
+        VOL,
+        EVENEMENT,
+        DESCRIPTION_TROMPEUSE,
+        SERVICE_TROMPEUR,
+        COMPORTEMENT_INADEQUAT,
+        AUTRE
     }
 }

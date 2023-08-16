@@ -2,13 +2,13 @@
 {
     public enum EtatEvenement
     {
-        Cree,
-        Ouvert,
-        Publie,
-        Clos,
-        EnReservation,
-        LetsParty,
-        Passe,
-        Annule
+        CREE,
+        OUVERT,
+        PUBLIE,
+        CLOS,
+        ENRESERVATION,
+        LETSPARTY,
+        PASSE,
+        ANNULE
     }
 }

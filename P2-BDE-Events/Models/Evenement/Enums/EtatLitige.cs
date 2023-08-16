@@ -2,9 +2,9 @@
 {
     public enum EtatLitige
     {
-        Cree,
-        EnTraitement,
-        Traite,
-        Annule
+        CREE,
+        ENTRAITEMENT,
+        TRAITE,
+        ANNULE
     }
 }
