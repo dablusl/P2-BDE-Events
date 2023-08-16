@@ -3,7 +3,7 @@ using System;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
-    public class IDal
+    public interface IDal: IDisposable
     {
 
     }

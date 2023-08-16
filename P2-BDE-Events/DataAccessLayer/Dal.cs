@@ -1,10 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Services;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
-    public class Dal
+    public class Dal : IDal
     {
-        private BDDContext _bddContext;
+        protected BDDContext _bddContext;
         public Dal()
         {
             _bddContext = new BDDContext();
@@ -15,5 +20,18 @@ namespace P2_BDE_Events.DataAccessLayer
             _bddContext.Database.EnsureDeleted();
             _bddContext.Database.EnsureCreated();
         }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
+        }
+
+        public CompteService Compte()
+        {
+            return new CompteService();
+
+        }  
+
+
     }
 }
