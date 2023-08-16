@@ -12,7 +12,6 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
