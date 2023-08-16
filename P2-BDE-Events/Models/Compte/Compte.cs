@@ -8,7 +8,7 @@
         public string Prenom { get; set; }
         public int NumeroTelephone { get; set; }
 
-        public string authorisation { get;  set; }
+        public string Authorisation { get;  set; }
 
 
 
