@@ -1,10 +1,11 @@
 ﻿using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Evenement;
+using System;
 using System.Collections.Generic;
 
 namespace P2_BDE_Events.Services.Evenements
 {
-    public class CommentairePhotoService
+    public class CommentairePhotoService : IDisposable
     {
         private readonly BDDContext _bddContext;
 
@@ -43,6 +44,11 @@ namespace P2_BDE_Events.Services.Evenements
                 _bddContext.CommentairePhotos.Remove(cible);
                 _bddContext.SaveChanges();
             }
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
     }
 }

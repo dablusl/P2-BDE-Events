@@ -1,11 +1,12 @@
 ﻿using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Compte;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace P2_BDE_Events.Services.Comtpes
 {
-    public class PrestataireService
+    public class PrestataireService : IDisposable
     {
         private readonly BDDContext _bddContext;
 
@@ -48,6 +49,11 @@ namespace P2_BDE_Events.Services.Comtpes
                 _bddContext.Prestataires.Remove(cible);
                 _bddContext.SaveChanges();
             }
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
     }
 }

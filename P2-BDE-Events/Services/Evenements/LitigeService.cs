@@ -1,11 +1,12 @@
 ﻿using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Evenement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace P2_BDE_Events.Services.Evenements
 {
-    public class LitigeService
+    public class LitigeService : IDisposable
     {
         private readonly BDDContext _bddContext;
 
@@ -48,6 +49,11 @@ namespace P2_BDE_Events.Services.Evenements
                 _bddContext.Litiges.Remove(cible);
                 _bddContext.SaveChanges();
             }
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
     }
 }

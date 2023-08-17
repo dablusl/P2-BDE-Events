@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 
 namespace P2_BDE_Events.Services.Comptes
 {
-    public class OrganisateurService : Dal
+    public class OrganisateurService : IDisposable
     {
-        //private readonly BDDContext _bddContext;
+        private readonly BDDContext _bddContext;
 
         public OrganisateurService()
         {
@@ -78,6 +78,11 @@ namespace P2_BDE_Events.Services.Comptes
         {
             string motDePasseSel = "BDEEVENTS" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
     }
 }
