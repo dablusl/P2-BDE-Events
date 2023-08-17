@@ -3,15 +3,15 @@ using P2_BDE_Events.Models.Compte;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P2_BDE_Events.Services
+namespace P2_BDE_Events.Services.Comptes
 {
     public class ParticipantService
     {
         private readonly BDDContext _bddContext;
 
-        public ParticipantService(BDDContext bddContext)
+        public ParticipantService()
         {
-            _bddContext = bddContext;
+            _bddContext = new BDDContext();
         }
         public int CreerParticipant(Participant participant)
         {

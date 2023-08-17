@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 
-
-namespace P2_BDE_Events.Services
+namespace P2_BDE_Events.Services.Comptes
 {
     public class OrganisateurService : Dal
     {
@@ -16,7 +15,7 @@ namespace P2_BDE_Events.Services
         public OrganisateurService()
         {
             _bddContext = new BDDContext();
-    }
+        }
         public int CreerOrganisateur(Organisateur organisateur)
         {
             _bddContext.Organisateurs.Add(organisateur);
@@ -34,7 +33,7 @@ namespace P2_BDE_Events.Services
             }
         }
 
-        public Organisateur  ObtenirOrganisateur(int id)
+        public Organisateur ObtenirOrganisateur(int id)
         {
             return _bddContext.Organisateurs.Find(id);
         }

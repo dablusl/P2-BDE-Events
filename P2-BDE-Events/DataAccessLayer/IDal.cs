@@ -6,6 +6,5 @@ namespace P2_BDE_Events.DataAccessLayer
     public interface IDal : IDisposable
     {
         void DeleteCreateDatabase();
-        
     }
 }
