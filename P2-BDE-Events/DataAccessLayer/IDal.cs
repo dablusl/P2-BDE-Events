@@ -3,8 +3,9 @@ using System;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
-    public interface IDal: IDisposable
+    public interface IDal
     {
-
+        void DeleteCreateDatabase();
+        void Dispose();
     }
 }
