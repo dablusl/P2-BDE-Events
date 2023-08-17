@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TestProjectBDEEvents.TestGestionComptes
 {
     [Collection("Database tests")]
-    public class TestGestionComptes
+    public class TestGestionComptesOrganisateur
     {
         [Fact]
         public void Creation_Organisateur_Verification()
