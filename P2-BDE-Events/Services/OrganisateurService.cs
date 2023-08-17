@@ -9,9 +9,9 @@ using System.Security.Cryptography;
 
 namespace P2_BDE_Events.Services
 {
-    public class OrganisateurService
+    public class OrganisateurService : Dal
     {
-        private readonly BDDContext _bddContext;
+        //private readonly BDDContext _bddContext;
 
         public OrganisateurService()
         {
@@ -56,7 +56,7 @@ namespace P2_BDE_Events.Services
         public void SupprimerOrganisateur(int id)
         {
             Organisateur cible = _bddContext.Organisateurs.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 _bddContext.Organisateurs.Remove(cible);
                 _bddContext.SaveChanges();

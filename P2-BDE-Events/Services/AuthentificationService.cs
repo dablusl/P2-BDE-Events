@@ -50,7 +50,7 @@ namespace P2_BDE_Events.Services
         {
             string motDePasse = EncodeMD5(password);
             Organisateur orga = new Organisateur() { Email = email, MotDePasse = motDePasse };
-            this._bddContext.Comptes.Add(orga);
+            this._bddContext.Organisateurs.Add(orga);
             this._bddContext.SaveChanges();
             return orga.Id;
         }
@@ -64,21 +64,6 @@ namespace P2_BDE_Events.Services
         }
 
 
-
-        //public Compte ObtenirCompte(int id)
-        //{
-        //    return this._bddContext.Comptes.Find(id);
-        //}
-        //public Compte ObtenirCompte(string idStr)
-        //{
-        //    int id;
-        //    if (int.TryParse(idStr, out id))
-        //    {
-        //        return this.ObtenirCompte(id);
-        //    }
-        //    return null;
-
-        //}
 
     }
 }
