@@ -38,17 +38,21 @@ namespace TestProjectBDEEvents.TestGestionComptes
         {
             using (Dal dal = new Dal())
             {
+                dal.DeleteCreateDatabase();
+
                 using (OrganisateurService organisateurService = new OrganisateurService())
                 {
                     // Execution
                     Organisateur organisateur1 = new Organisateur { Email = "orga2@orga.com", Prenom = "Jean", Nom = "Pedro", NumeroTelephone = "0102030102" };
                     organisateurService.CreerOrganisateur(organisateur1);
 
-                    organisateurService.ModifierOrganisateur(1, organisateur1);
+                    Organisateur nouveauOrganisateur = new Organisateur { Email = "orgaAZEAZEA2@orga.com", Prenom = "Jean", Nom = "Pedro", NumeroTelephone = "0102030102" };
+                    organisateurService.ModifierOrganisateur(1, nouveauOrganisateur);
                     // Verification
                     List<Organisateur> utilisateur = organisateurService.ObtenirTousLesOrganisateurs();
                     Assert.NotNull(utilisateur);
                     Assert.Single(utilisateur);
+                    Assert.Equal(nouveauOrganisateur.Email, utilisateur[0].Email);
                 }
                 dal.DeleteCreateDatabase();
             }
@@ -56,20 +60,21 @@ namespace TestProjectBDEEvents.TestGestionComptes
         [Fact]
         public void Supprimer_Organisateur_Verification()
         {
-            using(Dal dal = new Dal()) {
+            using (Dal dal = new Dal())
+            {
                 dal.DeleteCreateDatabase();
                 using (OrganisateurService organisateurService = new OrganisateurService())
-            {
-                // Execution
-                Organisateur organisateur1 = new Organisateur { Email = "orga2@orga.com", Prenom = "Jean", Nom = "Pedro", NumeroTelephone = "0102030102" };
-                organisateurService.CreerOrganisateur(organisateur1);
-                organisateurService.SupprimerOrganisateur(1);
+                {
+                    // Execution
+                    Organisateur organisateur1 = new Organisateur { Email = "orga2@orga.com", Prenom = "Jean", Nom = "Pedro", NumeroTelephone = "0102030102" };
+                    organisateurService.CreerOrganisateur(organisateur1);
+                    organisateurService.SupprimerOrganisateur(1);
 
-                // Verification
-                List<Organisateur> utilisateur = organisateurService.ObtenirTousLesOrganisateurs();
-                Assert.NotNull(utilisateur);
-                Assert.Empty(utilisateur);
-            }
+                    // Verification
+                    List<Organisateur> utilisateur = organisateurService.ObtenirTousLesOrganisateurs();
+                    Assert.NotNull(utilisateur);
+                    Assert.Empty(utilisateur);
+                }
                 dal.DeleteCreateDatabase();
             }
         }

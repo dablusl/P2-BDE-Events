@@ -21,7 +21,7 @@ namespace P2_BDE_Events.DataAccessLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=P2_BDE_Events");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=5.M~{swM6^QOsgm;database=P2_BDE_Events");
         }
         public void InitializeDb()
         {

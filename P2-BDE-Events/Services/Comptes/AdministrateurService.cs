@@ -44,7 +44,7 @@ namespace P2_BDE_Events.Services.Comtpes
         public void SupprimerAdministrateur(int id)
         {
             Administrateur cible = _bddContext.Administrateurs.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 _bddContext.Administrateurs.Remove(cible);
                 _bddContext.SaveChanges();

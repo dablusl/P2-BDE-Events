@@ -24,7 +24,7 @@ namespace P2_BDE_Events.Services.Comtpes
         public void ModifierPrestataire(int id, Prestataire modifications)
         {
             Prestataire cible = _bddContext.Prestataires.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 cible = modifications;
                 _bddContext.SaveChanges();
@@ -44,7 +44,7 @@ namespace P2_BDE_Events.Services.Comtpes
         public void SupprimerPrestataire(int id)
         {
             Prestataire cible = _bddContext.Prestataires.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 _bddContext.Prestataires.Remove(cible);
                 _bddContext.SaveChanges();

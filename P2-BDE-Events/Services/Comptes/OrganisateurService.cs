@@ -26,7 +26,7 @@ namespace P2_BDE_Events.Services.Comptes
         public void ModifierOrganisateur(int id, Organisateur modifications)
         {
             Organisateur cible = _bddContext.Organisateurs.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 cible = modifications;
                 _bddContext.SaveChanges();

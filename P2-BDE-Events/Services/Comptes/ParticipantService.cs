@@ -24,7 +24,7 @@ namespace P2_BDE_Events.Services.Comptes
         public void ModifierParticipant(int id, Participant modifications)
         {
             Participant cible = _bddContext.Participants.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 cible = modifications;
                 _bddContext.SaveChanges();
@@ -44,7 +44,7 @@ namespace P2_BDE_Events.Services.Comptes
         public void SupprimerParticipant(int id)
         {
             Participant cible = _bddContext.Participants.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 _bddContext.Participants.Remove(cible);
                 _bddContext.SaveChanges();
