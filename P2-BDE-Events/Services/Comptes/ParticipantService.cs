@@ -26,7 +26,11 @@ namespace P2_BDE_Events.Services.Comptes
             Participant cible = _bddContext.Participants.Find(id);
             if (cible != null)
             {
-                cible = modifications;
+                cible.Email = modifications.Email;
+                cible.Prenom = modifications.Prenom;
+                cible.Nom = modifications.Nom;
+                cible.NumeroTelephone = modifications.NumeroTelephone;
+
                 _bddContext.SaveChanges();
             }
         }

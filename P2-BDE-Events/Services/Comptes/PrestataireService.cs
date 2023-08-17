@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P2_BDE_Events.Services.Comtpes
+namespace P2_BDE_Events.Services.Comptes
 {
     public class PrestataireService : IDisposable
     {
@@ -26,7 +26,11 @@ namespace P2_BDE_Events.Services.Comtpes
             Prestataire cible = _bddContext.Prestataires.Find(id);
             if (cible != null)
             {
-                cible = modifications;
+                cible.Email = modifications.Email;
+                cible.Prenom = modifications.Prenom;
+                cible.Nom = modifications.Nom;
+                cible.NumeroTelephone = modifications.NumeroTelephone;
+
                 _bddContext.SaveChanges();
             }
         }
