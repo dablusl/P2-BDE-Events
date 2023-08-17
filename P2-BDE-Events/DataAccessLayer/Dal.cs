@@ -26,12 +26,5 @@ namespace P2_BDE_Events.DataAccessLayer
             _bddContext.Dispose();
         }
 
-        public CompteService Compte()
-        {
-            return new CompteService();
-
-        }  
-
-
     }
 }
