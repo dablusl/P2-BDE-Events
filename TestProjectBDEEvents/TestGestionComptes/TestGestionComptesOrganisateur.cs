@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Models.Compte;
-using System.ComponentModel.DataAnnotations;
 
 namespace TestProjectBDEEvents.TestGestionComptes
 {
