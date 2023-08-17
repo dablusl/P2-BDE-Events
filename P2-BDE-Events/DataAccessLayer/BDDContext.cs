@@ -16,7 +16,8 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<CommentaireEvenement> CommentaireEvenements { get; set; }  
         public DbSet<CommentairePhoto> CommentairePhotos { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Compte> Comptes { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,7 +34,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Email = "orga1@organisateur.com",
                     MotDePasse = "rrrrr",
                     Prenom = "Pierre",
-                    Nom = "Orga",
+                    Nom = "Dupont",
                     NumeroTelephone = "010101010101"
                 }               
             );
