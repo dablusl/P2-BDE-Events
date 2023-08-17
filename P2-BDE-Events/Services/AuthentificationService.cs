@@ -31,6 +31,7 @@ namespace P2_BDE_Events.Services
             
             return null;
         }
+
         public int AuthentifierID(string email, string motDePasse)
         {
             string passWord = EncodeMD5(motDePasse);
@@ -44,6 +45,7 @@ namespace P2_BDE_Events.Services
             if (presta != null) { return presta.Id; }
 
             return -1;
+
         }
 
         public int AjouterOrganisateur(string email, string password)
@@ -51,6 +53,7 @@ namespace P2_BDE_Events.Services
             string motDePasse = EncodeMD5(password);
             Organisateur orga = new Organisateur() { Email = email, MotDePasse = motDePasse };
             this._bddContext.Organisateurs.Add(orga);
+
             this._bddContext.SaveChanges();
             return orga.Id;
         }

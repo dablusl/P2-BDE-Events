@@ -12,12 +12,14 @@ namespace P2_BDE_Events.Controllers
 {
     public class LoginController : Controller
     {
+
         private OrganisateurService OrganisateurService;
         private AuthentificationService AuthentificationService;
         public LoginController()
         {
             OrganisateurService = new OrganisateurService();
             AuthentificationService = new AuthentificationService();    
+
         }
         [HttpGet]
         public IActionResult Index()
@@ -25,7 +27,9 @@ namespace P2_BDE_Events.Controllers
             CompteViewModel compteViewModel = new CompteViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             if (compteViewModel.Authentifie)
             {
+
                 compteViewModel.Organisateur = OrganisateurService.ObtenirOrganisateur(HttpContext.User.Identity.Name);
+
                 return View(compteViewModel);
             }
             return View(compteViewModel);
@@ -36,6 +40,7 @@ namespace P2_BDE_Events.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
                 int compteId = AuthentificationService.AuthentifierID(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
                 //Organisateur organisateur = (Organisateur)AuthentificationService.Authentifier(viewModel.Organisateur.Email, viewModel.Organisateur.MotDePasse);
@@ -46,6 +51,7 @@ namespace P2_BDE_Events.Controllers
                     {
                        new Claim(ClaimTypes.Email, compteId.ToString()),
                       // new Claim(ClaimTypes.Role, compte.Role),
+
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
@@ -59,11 +65,13 @@ namespace P2_BDE_Events.Controllers
                     return Redirect("/");
                 }
                 ModelState.AddModelError("Organisateur.Email", "Email et/ou mot de passe incorrect(s)");
+
             }
             return View(viewModel);
         }
 
         public IActionResult CreerCompteOrganisateur()
+
         {
             return View();
         }
@@ -73,6 +81,7 @@ namespace P2_BDE_Events.Controllers
             if (ModelState.IsValid)
             {
                 int id = OrganisateurService.AjouterOrganisateur(utilisateur.Email, utilisateur.MotDePasse);
+
 
                 // methode des cookies à supprimer pour rediriger vers page connexion après création
                 var userClaims = new List<Claim>()
