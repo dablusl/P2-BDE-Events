@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using P2_BDE_Events.DataAccessLayer;
-using P2_BDE_Events.Services;
+using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.ViewModels;
 using System.Collections.Generic;
 using System.Security.Claims;
 using P2_BDE_Events.Models;
 using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Services;
 
 namespace P2_BDE_Events.Controllers
 {

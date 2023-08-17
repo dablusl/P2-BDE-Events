@@ -1,11 +1,12 @@
 ﻿using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Compte;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P2_BDE_Events.Services.Comtpes
+namespace P2_BDE_Events.Services.Comptes
 {
-    public class AdministrateurService
+    public class AdministrateurService : IDisposable
     {
         private readonly BDDContext _bddContext;
 
@@ -25,7 +26,11 @@ namespace P2_BDE_Events.Services.Comtpes
             Administrateur cible = _bddContext.Administrateurs.Find(id);
             if (cible != null)
             {
-                cible = modifications;
+                cible.Email = modifications.Email;
+                cible.Prenom = modifications.Prenom;
+                cible.Nom = modifications.Nom;
+                cible.NumeroTelephone = modifications.NumeroTelephone;
+
                 _bddContext.SaveChanges();
             }
         }
@@ -43,11 +48,16 @@ namespace P2_BDE_Events.Services.Comtpes
         public void SupprimerAdministrateur(int id)
         {
             Administrateur cible = _bddContext.Administrateurs.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 _bddContext.Administrateurs.Remove(cible);
                 _bddContext.SaveChanges();
             }
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
     }
 }

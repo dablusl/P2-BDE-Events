@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 
 namespace P2_BDE_Events.Services.Comptes
 {
-    public class OrganisateurService : Dal
+    public class OrganisateurService : IDisposable
     {
-        //private readonly BDDContext _bddContext;
+        private readonly BDDContext _bddContext;
 
         public OrganisateurService()
         {
@@ -26,9 +26,13 @@ namespace P2_BDE_Events.Services.Comptes
         public void ModifierOrganisateur(int id, Organisateur modifications)
         {
             Organisateur cible = _bddContext.Organisateurs.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
-                cible = modifications;
+                cible.Email = modifications.Email;
+                cible.Prenom = modifications.Prenom;
+                cible.Nom = modifications.Nom;
+                cible.NumeroTelephone = modifications.NumeroTelephone;
+
                 _bddContext.SaveChanges();
             }
         }
@@ -78,6 +82,11 @@ namespace P2_BDE_Events.Services.Comptes
         {
             string motDePasseSel = "BDEEVENTS" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
+        }
+
+        public void Dispose()
+        {
+            _bddContext.Dispose();
         }
     }
 }
