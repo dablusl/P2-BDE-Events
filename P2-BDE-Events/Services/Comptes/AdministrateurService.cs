@@ -23,7 +23,7 @@ namespace P2_BDE_Events.Services.Comtpes
         public void ModifierAdministrateur(int id, Administrateur modifications)
         {
             Administrateur cible = _bddContext.Administrateurs.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 cible = modifications;
                 _bddContext.SaveChanges();

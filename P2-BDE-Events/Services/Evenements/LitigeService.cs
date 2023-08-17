@@ -5,25 +5,24 @@ using System.Linq;
 
 namespace P2_BDE_Events.Services.Evenements
 {
-    public class AlbumService
+    public class LitigeService
     {
         private readonly BDDContext _bddContext;
 
-        public AlbumService()
+        public LitigeService()
         {
             _bddContext = new BDDContext();
         }
-        public int CreerAlbum(Album album)
+        public int CreerLitige(Litige litige)
         {
-            _bddContext.Albums.Add(album);
+            _bddContext.Litiges.Add(litige);
             _bddContext.SaveChanges();
-
-            return album.Id;
+            return litige.Id;
         }
 
-        public void ModifierAlbum(int id, Album modifications)
+        public void ModifierLitige(int id, Litige modifications)
         {
-            Album cible = _bddContext.Albums.Find(id);
+            Litige cible = _bddContext.Litiges.Find(id);
             if (cible != null)
             {
                 cible = modifications;
@@ -31,25 +30,24 @@ namespace P2_BDE_Events.Services.Evenements
             }
         }
 
-        public Album ObtenirAlbum(int id)
+        public Litige ObtenirLitige(int id)
         {
-            return _bddContext.Albums.Find(id);
+            return _bddContext.Litiges.Find(id);
         }
 
-        public List<Album> ObtenirTousLesAlbums()
+        public List<Litige> ObtenirTousLesLitiges()
         {
-            return _bddContext.Albums.ToList();
+            return _bddContext.Litiges.ToList();
         }
 
-        public void SupprimerAlbum(int id)
+        public void SupprimerLitige(int id)
         {
-            Album cible = _bddContext.Albums.Find(id);
+            Litige cible = _bddContext.Litiges.Find(id);
             if (cible != null)
             {
-                _bddContext.Albums.Remove(cible);
+                _bddContext.Litiges.Remove(cible);
                 _bddContext.SaveChanges();
             }
         }
-
     }
 }

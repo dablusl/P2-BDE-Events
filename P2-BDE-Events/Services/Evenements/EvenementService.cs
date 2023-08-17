@@ -23,7 +23,7 @@ namespace P2_BDE_Events.Services.Evenements
         public void ModifierEvenement(int id, Evenement modifications)
         {
             Evenement cible = _bddContext.Evenements.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 cible = modifications;
                 _bddContext.SaveChanges();
@@ -43,7 +43,7 @@ namespace P2_BDE_Events.Services.Evenements
         public void SupprimerEvenement(int id)
         {
             Evenement cible = _bddContext.Evenements.Find(id);
-            if (cible == null)
+            if (cible != null)
             {
                 _bddContext.Evenements.Remove(cible);
                 _bddContext.SaveChanges();
