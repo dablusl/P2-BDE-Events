@@ -14,7 +14,7 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        public int CreerPresetataire(Prestataire prestataire)
+        public int CreerPrestataire(Prestataire prestataire)
         {
             _bddContext.Prestataires.Add(prestataire);
             _bddContext.SaveChanges();
