@@ -9,13 +9,14 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Organisateur> Organisateurs { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Prestataire> Prestataires { get; set; }
-        public DbSet<Administrateur> Administratieurs { get; set; }
+        public DbSet<Administrateur> Administrateurs { get; set; }
         public DbSet<Evenement> Evenements { get; set; }
         public DbSet<Litige> Litiges { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<CommentaireEvenement> CommentaireEvenements { get; set; }  
         public DbSet<CommentairePhoto> CommentairePhotos { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Compte> Comptes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
