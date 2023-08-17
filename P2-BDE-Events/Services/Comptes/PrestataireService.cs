@@ -3,7 +3,7 @@ using P2_BDE_Events.Models.Compte;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P2_BDE_Events.Services
+namespace P2_BDE_Events.Services.Comtpes
 {
     public class PrestataireService
     {

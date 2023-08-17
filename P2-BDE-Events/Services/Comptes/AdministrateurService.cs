@@ -3,15 +3,15 @@ using P2_BDE_Events.Models.Compte;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P2_BDE_Events.Services
+namespace P2_BDE_Events.Services.Comtpes
 {
     public class AdministrateurService
     {
         private readonly BDDContext _bddContext;
 
-        public AdministrateurService(BDDContext bddContext)
+        public AdministrateurService()
         {
-            _bddContext = bddContext;
+            _bddContext = new BDDContext();
         }
         public int CreerAdministrateur(Administrateur administrateur)
         {

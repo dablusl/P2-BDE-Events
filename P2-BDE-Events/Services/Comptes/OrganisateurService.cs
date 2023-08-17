@@ -3,15 +3,15 @@ using P2_BDE_Events.Models.Compte;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P2_BDE_Events.Services
+namespace P2_BDE_Events.Services.Comptes
 {
     public class OrganisateurService
     {
         private readonly BDDContext _bddContext;
 
-        public OrganisateurService(BDDContext bddContext)
+        public OrganisateurService()
         {
-            _bddContext = bddContext;
+            _bddContext = new BDDContext();
         }
         public int CreerOrganisateur(Organisateur organisateur)
         {
@@ -30,7 +30,7 @@ namespace P2_BDE_Events.Services
             }
         }
 
-        public Organisateur  ObtenirOrganisateur(int id)
+        public Organisateur ObtenirOrganisateur(int id)
         {
             return _bddContext.Organisateurs.Find(id);
         }
