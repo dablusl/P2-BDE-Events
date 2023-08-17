@@ -12,10 +12,14 @@ namespace P2_BDE_Events.Controllers
 {
     public class LoginController : Controller
     {
-        private CompteService compteService;
+
+        private OrganisateurService OrganisateurService;
+        private AuthentificationService AuthentificationService;
         public LoginController()
         {
-            compteService = new CompteService();
+            OrganisateurService = new OrganisateurService();
+            AuthentificationService = new AuthentificationService();    
+
         }
         [HttpGet]
         public IActionResult Index()
@@ -23,7 +27,9 @@ namespace P2_BDE_Events.Controllers
             CompteViewModel compteViewModel = new CompteViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             if (compteViewModel.Authentifie)
             {
-                compteViewModel.Compte = compteService.ObtenirCompte(HttpContext.User.Identity.Name);
+
+                compteViewModel.Organisateur = OrganisateurService.ObtenirOrganisateur(HttpContext.User.Identity.Name);
+
                 return View(compteViewModel);
             }
             return View(compteViewModel);
@@ -34,13 +40,18 @@ namespace P2_BDE_Events.Controllers
         {
             if (ModelState.IsValid)
             {
-                Compte utilisateur = dal.Authentifier(viewModel.Utilisateur.Prenom, viewModel.Utilisateur.Password);
-                if (utilisateur != null) // bon mot de passe    
+
+                Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
+                int compteId = AuthentificationService.AuthentifierID(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
+                //Organisateur organisateur = (Organisateur)AuthentificationService.Authentifier(viewModel.Organisateur.Email, viewModel.Organisateur.MotDePasse);
+
+                if (compte != null) // bon mot de passe    
                 {
                     var userClaims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Name, utilisateur.Id.ToString()),
-                       //new Claim(ClaimTypes.Role, utilisateur.Role),
+                       new Claim(ClaimTypes.Email, compteId.ToString()),
+                      // new Claim(ClaimTypes.Role, compte.Role),
+
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
@@ -53,21 +64,24 @@ namespace P2_BDE_Events.Controllers
 
                     return Redirect("/");
                 }
-                ModelState.AddModelError("Utilisateur.Prenom", "Prénom et/ou mot de passe incorrect(s)");
+                ModelState.AddModelError("Organisateur.Email", "Email et/ou mot de passe incorrect(s)");
+
             }
             return View(viewModel);
         }
 
-        public IActionResult CreerCompte()
+        public IActionResult CreerCompteOrganisateur()
+
         {
             return View();
         }
         [HttpPost]
-        public IActionResult CreerCompte(Utilisateur utilisateur)
+        public IActionResult CreerCompteOrganisateur(Organisateur utilisateur)
         {
             if (ModelState.IsValid)
             {
-                int id = dal.AjouterUtilisateur(utilisateur.Prenom, utilisateur.Password);
+                int id = OrganisateurService.AjouterOrganisateur(utilisateur.Email, utilisateur.MotDePasse);
+
 
                 // methode des cookies à supprimer pour rediriger vers page connexion après création
                 var userClaims = new List<Claim>()
