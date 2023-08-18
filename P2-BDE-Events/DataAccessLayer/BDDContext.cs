@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Models.Evenement;
+using System;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
@@ -21,7 +22,9 @@ namespace P2_BDE_Events.DataAccessLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=5.M~{swM6^QOsgm;database=P2_BDE_Events");
+            string dbPassword = Environment.GetEnvironmentVariable("BDE_EVENT_BDD_PASS");
+            string connectionString = $"server=localhost;user id=root;password={dbPassword};database=P2_BDE_Events";
+            optionsBuilder.UseMySql(connectionString);
         }
         public void InitializeDb()
         {
