@@ -4,4 +4,35 @@
 @{
     Layout = "~/Views/Shared/_LayoutVisitor.cshtml";
 }
-<h1>MAIN HOME BUILDING HEREEEEE......</h1>
+<section class="phrase-banner">
+    <h1 class="banner-quote">“ Live for today, plan for tomorrow, party tonight ”</h1>
+    <h4 class="banner-author">- some dude</h4>
+</section>
+<section class="event-carrousel">
+</section>
+<section class="emoji-bar">
+</section>
+<section class="BDE-Events-synthese">
+</section>
+<section class="avis">
+</section>
+<script>
+
+    window.addEventListener('resize', adjustFontSize);
+
+    function adjustFontSize() {
+        const phraseBanner = document.querySelector('.phrase-banner');
+        const bannerQuote = document.querySelector('.banner-quote');
+
+        const widthRatio = phraseBanner.offsetWidth / bannerQuote.offsetWidth;
+        const heightRatio = phraseBanner.offsetHeight / bannerQuote.offsetHeight;
+
+        const ratio = Math.min(widthRatio, heightRatio);
+        const maxFontSize = 80; // Define the maximum font size you want
+
+        const fontSize = ratio * maxFontSize;
+        bannerQuote.style.fontSize = fontSize + 'px';
+    }
+
+    adjustFontSize();
+</script>

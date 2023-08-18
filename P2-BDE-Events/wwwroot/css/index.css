@@ -2,11 +2,71 @@
     --primary-base-color: #0D2158;
     --seconday-base-color: #7E2553;
     --primary-contrast-color: #FFF024;
-    --secondary-contrast-color: #FF004D
+    --secondary-contrast-color: #FF004D;
+    --primary-body-font: 'Inter', sans-serif;
+    --fancy-curvy : 'Lobster', cursive;
 }
 
-header nav{
-    background-color : var(--primary-base-color);
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--primary-body-font);
+    text-decoration: none;
+    background-color: var(--primary-base-color);
+}
+
+header, nav, a{
     color : var(--secondary-contrast-color);
 }
 
+header {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li, a {
+    display: inline-block;
+    
+}
+.btn-navbar {
+    display:block;
+    width: 120px;
+    text-align : center;
+    padding : 10px 0;
+}
+
+.btn-agenda{
+    color: var(--primary-contrast-color);
+}
+
+.phrase-banner {
+    color: var(--primary-contrast-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.banner-quote {
+    font-family: var(--fancy-curvy);
+    font-size: 36px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 1000px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 10px 10px 10px var(--secondary-contrast-color);
+}
+
+.banner-author {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
