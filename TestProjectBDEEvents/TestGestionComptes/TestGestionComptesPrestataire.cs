@@ -8,6 +8,7 @@ using Xunit;
 
 namespace TestProjectBDEEvents.TestGestionComptes
 {
+    [Collection("Database tests")]
     public class TestGestionComptesPrestataire
     {
         [Fact]
