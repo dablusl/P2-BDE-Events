@@ -1,0 +1,12 @@
+﻿:root {
+    --primary-base-color: #0D2158;
+    --seconday-base-color: #7E2553;
+    --primary-contrast-color: #FFF024;
+    --secondary-contrast-color: #FF004D
+}
+
+header nav{
+    background-color : var(--primary-base-color);
+    color : var(--secondary-contrast-color);
+}
+
