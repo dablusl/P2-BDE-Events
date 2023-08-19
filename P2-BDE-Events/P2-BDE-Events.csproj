@@ -8,7 +8,12 @@
   <ItemGroup>
     <Folder Include="Models\Prestation\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="wwwroot\images\evenement\1\" />
+    <Folder Include="wwwroot\images\evenement\2\" />
+    <Folder Include="wwwroot\images\evenement\3\" />
+    <Folder Include="wwwroot\images\evenement\4\" />
+    <Folder Include="wwwroot\images\evenement\5\" />
+    <Folder Include="wwwroot\images\utilisateurs\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />

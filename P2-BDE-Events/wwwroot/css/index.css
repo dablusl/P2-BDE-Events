@@ -1,6 +1,6 @@
 ﻿:root {
     --primary-base-color: #0D2158;
-    --seconday-base-color: #7E2553;
+    --secondary-base-color: #7E2553;
     --primary-contrast-color: #FFF024;
     --secondary-contrast-color: #FF004D;
     --primary-body-font: 'Inter', sans-serif;
@@ -85,6 +85,23 @@ li, a {
 
 /* emoji barbreak*/
 .emoji-bar{
-    height: 20px;
+    height: 30px;
     background-color: var(--primary-contrast-color);
 }
+
+/* enelever giphy interactions avec lutilsiateur*/
+.gif-container {
+    pointer-events: none;
+}
+
+/* synthese bde events*/
+.BDE-Events-synthese {
+    background-color: var(--secondary-base-color);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0px;
+}
+
