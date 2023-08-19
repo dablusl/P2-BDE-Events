@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="Models\Prestation\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />

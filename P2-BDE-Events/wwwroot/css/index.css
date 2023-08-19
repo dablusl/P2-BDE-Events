@@ -43,6 +43,9 @@ li, a {
     color: var(--primary-contrast-color);
 }
 
+
+/*Grande phrase daccueil en home*/
+
 .phrase-banner {
     color: var(--primary-contrast-color);
     display: flex;
@@ -50,6 +53,7 @@ li, a {
     justify-content: center;
     align-items: center;
     height: 30vh;
+    margin: 10px;
 }
 
 .banner-quote {
@@ -69,4 +73,18 @@ li, a {
     font-size: 24px;
     margin: 0;
     text-align: center;
+}
+
+/* css pour le carrousel*/
+.event-carrousel{
+    height: 40vh;
+    width:100%;
+    background-color : grey;
+    margin-top: 50px;
+}
+
+/* emoji barbreak*/
+.emoji-bar{
+    height: 20px;
+    background-color: var(--primary-contrast-color);
 }
