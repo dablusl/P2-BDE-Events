@@ -17,6 +17,10 @@
     text-decoration: none;
 }
 
+*::before, *::after{
+    box-sizing: border-box;
+}
+
 header, nav, a {
     color: var(--secondary-contrast-color);
 }
@@ -104,6 +108,28 @@ li, a {
     flex-direction: column;
     margin-top: 50px;
     font-size:50px;
+}
+
+.carousel{
+    width :100vw;
+    height : 100%;
+}
+
+.slide{
+    position: absolute;
+    inset:0;
+}
+
+slide > img {
+    display: block;
+    width : 100%;
+    height : 100%;
+    object-fit:cover;
+    object-position: center;
+}
+
+.slide[data-active]{
+    opacity:1;
 }
 
 /* emoji barbreak*/
