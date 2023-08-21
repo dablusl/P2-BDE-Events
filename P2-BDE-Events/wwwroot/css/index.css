@@ -1,5 +1,6 @@
 ﻿:root {
-    --primary-base-color: #0D2158;
+    /*--primary-base-color: #0D2158;*/ /*bleu*/
+    --primary-base-color: #1e1e1e;
     --secondary-base-color: #7E2553;
     --primary-contrast-color: #FFF024;
     --secondary-contrast-color: #FF004D;
@@ -17,12 +18,9 @@
     text-decoration: none;
 }
 
-*::before, *::after{
-    box-sizing: border-box;
-}
-
 header, nav, a {
     color: var(--secondary-contrast-color);
+    z-index: 1;
 }
 
 header {
@@ -103,33 +101,11 @@ li, a {
 .event-carrousel {
     height: 40vh;
     width: 100%;
-    background-color: grey;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    margin-top: 50px;
-    font-size:50px;
-}
-
-.carousel{
-    width :100vw;
-    height : 100%;
-}
-
-.slide{
-    position: absolute;
-    inset:0;
-}
-
-slide > img {
-    display: block;
-    width : 100%;
-    height : 100%;
-    object-fit:cover;
-    object-position: center;
-}
-
-.slide[data-active]{
-    opacity:1;
+    margin: 50px 0px 75px 0px;
+    font-size: 50px;
+    border-radius: 20px;
 }
 
 /* emoji barbreak*/
