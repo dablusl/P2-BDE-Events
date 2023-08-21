@@ -2,4 +2,79 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "~/Views/Shared/_LayoutVisitor.cshtml";
 }
+<section class="phrase-banner">
+    <h1 class="banner-quote">“ Live for today, plan for tomorrow, party tonight ”</h1>
+    <h4 class="banner-author">- some dude</h4>
+</section>
+<section class="event-carrousel">
+    <div>
+        <p>ICI ON METS LES EVENEMENT A VENIR ICIIIIII</p>
+    </div>
+</section>
+<section class="emoji-bar">
+</section>
+<section class="BDE-Events-synthese">
+    <article class="article-container">
+        <div class="gif-container">
+            <iframe src="https://giphy.com/embed/a5viI92PAF89q" width="100%" height="250" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        </div>
+        <div class="txt-info-container">
+            <h1>Tu es un BDE avec des idées de rêve?</h1>
+            <p>blablablalbalbalblablablalbalbalalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbabalbalblablablablalbalbalbalbalbalbalbalbalbalblabalbalbalbalbalbalbalbalbalbalbalbalbalbalbalblabalbalblablalbaa</p>
+            <div class="buttons-container">
+                <button>Dit-moi plus...</button>
+                <button>Je suis prêt!</button>
+            </div>
+        </div>
+    </article>
+    <article class="article-container">
+        <div class="txt-info-container">
+            <h1>Tu es un restaurateur, artiste... avec des idées de rêve?</h1>
+            <p>blablablalbalbalblablablalbalbalalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbabalbalblablablablalbalbalbalbalbalbalbalbalbalblabalbalbalbalbalbalbalbalbalbalbalbalbalbalbalblabalbalblablalbaa</p>
+            <div class="buttons-container">
+                <button>Dit-moi plus...</button>
+                <button>Je suis prêt!</button>
+            </div>
+        </div>
+        <div class="gif-container"><iframe src="https://giphy.com/embed/dXICCcws9oxxK" width="480" height="222" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+    </article>
+    <article class="article-container">
+        <div class="gif-container"><iframe src="https://giphy.com/embed/Ny0wKKu09ppug" width="100%" height="250" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+        <div class="txt-info-container">
+            <h1>Tu es à la fac?</h1>
+            <p>blablablalbalbalblablablalbalbalalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbaalbalblablablalbalbabalbalblablablablalbalbalbalbalbalbalbalbalbalblabalbalbalbalbalbalbalbalbalbalbalbalbalbalbalblabalbalblablalbaa</p>
+            <div class="buttons-container">
+                <button>Dit-moi plus...</button>
+                <button>Je suis prêt!</button>
+            </div>
+        </div>
+    </article>
+</section>
+<section class="avis-utilisateurs">
+    <h1>On est forts, très forts</h1>
+    <div class="card-avis-container">
+        <p>ICI AJOUTER  DES AVIS POSITIFS DE NOS UTILSIATEURS</p>
+    </div>
+</section>
+<script>
+
+    window.addEventListener('resize', adjustFontSize);
+
+    function adjustFontSize() {
+        const phraseBanner = document.querySelector('.phrase-banner');
+        const bannerQuote = document.querySelector('.banner-quote');
+
+        const widthRatio = phraseBanner.offsetWidth / bannerQuote.offsetWidth;
+        const heightRatio = phraseBanner.offsetHeight / bannerQuote.offsetHeight;
+
+        const ratio = Math.min(widthRatio, heightRatio);
+        const maxFontSize = 80; // Define the maximum font size you want
+
+        const fontSize = ratio * maxFontSize;
+        bannerQuote.style.fontSize = fontSize + 'px';
+    }
+
+    adjustFontSize();
+</script>
