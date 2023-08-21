@@ -1,0 +1,13 @@
+﻿@using P2_BDE_Events.Models.Evenement
+@model List<Evenement>
+
+<div class="photo-carousel">
+    @foreach (var evenement in Model)
+    {
+        <div class="event-item">
+            <h2>@evenement.Titre</h2>
+            <p>@evenement.Description</p>
+            
+        </div>
+    }
+</div>

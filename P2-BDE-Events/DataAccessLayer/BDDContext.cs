@@ -3,6 +3,7 @@ using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Models.Evenement;
 using System;
 using P2_BDE_Events.Models.Evenement.Enums;
+using P2_BDE_Events.Models.Stats;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
@@ -18,8 +19,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<CommentaireEvenement> CommentaireEvenements { get; set; }
         public DbSet<CommentairePhoto> CommentairePhotos { get; set; }
         public DbSet<Photo> Photos { get; set; }
-
-
+        public DbSet<Avis> AvisUtilisateur { get; set; } 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,7 +36,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Organisateurs.AddRange(
                 new Organisateur
                 {
-                    Id = 1,
+                    Id = 5,
                     Email = "pierre.dupont@etu.univ-paris.com",
                     MotDePasse = "rrrrr",
                     Prenom = "Pierre",
@@ -179,7 +179,44 @@ namespace P2_BDE_Events.DataAccessLayer
                     PrixBillet = 5,
                     IdOrganisateur = 3,
                 }
-                ) ;
+                );
+            this.AvisUtilisateur.AddRange(
+                new Avis
+                {
+                    Id = 1,
+                    Titre = "Super Plateforme<3",
+                    Contenu = "L'organisation devenements n'a jamais ete balbalbalba",
+                    PublieLe = new DateTime(2023, 07, 02, 22, 10, 12),
+                    Notation = 5,
+                    IdAuthor = 2,
+                },
+                new Avis
+                {
+                    Id = 2,
+                    Titre = "BDE Events à sauvé mon business",
+                    Contenu = "Une croissance de 500% par rapport à l'année dernière",
+                    PublieLe = new DateTime(2023, 08, 01, 12, 1, 2),
+                    Notation = 5,
+                    IdAuthor = 3,
+                },
+                new Avis
+                {
+                    Id = 3,
+                    Titre = "IN CROY ABLE",
+                    Contenu = "Plaisir d'avoir travailler avec vous les gars",
+                    PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
+                    Notation = 4.5,
+                    IdAuthor = 4,
+                },
+                new Avis
+                {
+                    Id = 4,
+                    Titre = "Concept Super",
+                    Contenu = "Plaisir d'avoir travailler avec vous les garsx2",
+                    PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
+                    Notation = 4.5,
+                    IdAuthor = 5,
+                });
             this.SaveChanges();
         }
     }
