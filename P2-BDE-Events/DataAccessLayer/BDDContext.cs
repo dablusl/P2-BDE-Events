@@ -42,7 +42,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Prenom = "Pierre",
                     Nom = "Dupont",
                     NumeroTelephone = "010101010101",
-                    PhotoProfilePath = "../wwwroot/utilisateurs/41752-125261.jpg"
+                    PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
                 },
                 new Organisateur
                 {
@@ -52,7 +52,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Prenom = "Michael",
                     Nom = "Cera",
                     NumeroTelephone = "+330712211221",
-                    PhotoProfilePath = "../wwwroot/utilisateurs/5421c3ef22d1b.image.jpg"
+                    PhotoProfilePath = "/images/utilisateurs/5421c3ef22d1b.image.jpg"
                 },
                 new Organisateur
                 {
@@ -62,7 +62,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Prenom = "Maybe",
                     Nom = "Funke",
                     NumeroTelephone = "+330712211221",
-                    PhotoProfilePath = "../wwwroot/utilisateurs/5e795e773cf12ae5e5ef36b6b9d40a2e.jpg"
+                    PhotoProfilePath = "/images/utilisateurs/5e795e773cf12ae5e5ef36b6b9d40a2e.jpg"
                 },
                 new Organisateur
                 {
@@ -72,7 +72,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Prenom = "Michael",
                     Nom = "Scott",
                     NumeroTelephone = "+330712211221",
-                    PhotoProfilePath = "../wwwroot/utilisateurs/b44f223d3ae049249c7a00be21eb4c6a--ellie-kemper-unbreakable-kimmy-schmidt.jpg"
+                    PhotoProfilePath = "/images/utilisateurs/b44f223d3ae049249c7a00be21eb4c6a--ellie-kemper-unbreakable-kimmy-schmidt.jpg"
                 }
 
             );
@@ -122,7 +122,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Prenom = "Emmanuelle",
                     Nom = "Hollande",
                     NumeroTelephone = "+330712211221",
-                    PhotoProfilePath = "../wwwroot/utilisateurs/Dwight-the-office.jpg"
+                    PhotoProfilePath = "/images/utilisateurs/Dwight-the-office.jpg"
                 });
             this.Evenements.AddRange(
                 new Evenement
@@ -135,7 +135,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
                     DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
                     Description = "Defend l'honneur de ta fac avec ton talent surhumain",
-                    CoverPhotoPath = "../wwwroot/evenement/1/téléchargement (1).jpeg",
+                    CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
                     MaxParticipants = 100,
                     MinParticipants = 70,
                     NbReservations = 0,
@@ -153,7 +153,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
                     DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
                     Description = "Soirée faits moi très peur et concours de costumes",
-                    CoverPhotoPath = "../wwwroot/evenement/5/HEX-HP-344199-site-080823-4x3.jpeg",
+                    CoverPhotoPath = "/images/evenement/5/HEX-HP-344199-site-080823-4x3.jpeg",
                     MaxParticipants = 200,
                     MinParticipants = 120,
                     NbReservations = 0,
@@ -171,7 +171,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
                     DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
                     Description = "Ramenez vos instruments et vos cordes vocales",
-                    CoverPhotoPath = "../wwwroot/evenement/3/top-karaoke-songs.jpg",
+                    CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
                     MaxParticipants = 80,
                     MinParticipants = 50,
                     NbReservations = 0,

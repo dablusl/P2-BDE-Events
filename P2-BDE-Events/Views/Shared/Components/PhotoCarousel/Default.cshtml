@@ -5,9 +5,9 @@
     @foreach (var evenement in Model)
     {
         <div class="event-item">
+            <img src="@evenement.CoverPhotoPath"/>
             <h2>@evenement.Titre</h2>
-            <p>@evenement.Description</p>
-            
+            <h5>@evenement.DateEvenement</h5>            
         </div>
     }
 </div>
