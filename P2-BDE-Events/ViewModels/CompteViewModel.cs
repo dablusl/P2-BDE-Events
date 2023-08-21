@@ -9,7 +9,6 @@ namespace P2_BDE_Events.ViewModels
         public Prestataire Prestataire { get; set; }
         public Participant Participant { get; set; }
         public Administrateur Administrateur { get; set; }
-
         public Compte Compte { get; set; }
         public bool Authentifie { get; set; }
     }
