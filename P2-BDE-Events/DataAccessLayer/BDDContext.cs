@@ -128,9 +128,58 @@ namespace P2_BDE_Events.DataAccessLayer
                 new Evenement
                 {
                     Id = 1,
-                    Titre = "Beer Pong LEA vs DROIT",
+                    Titre = "Beer-pong LEA vs DROIT",
                     Etat = EtatEvenement.PUBLIE,
-                }) ;
+                    Type = TypeEvenement.SOIREE,
+                    CreeLe = new DateTime(2023, 09, 02, 10, 30, 20),
+                    DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
+                    DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
+                    Description = "Defend l'honneur de ta fac avec ton talent surhumain",
+                    CoverPhotoPath = "../wwwroot/evenement/1/téléchargement (1).jpeg",
+                    MaxParticipants = 100,
+                    MinParticipants = 70,
+                    NbReservations = 0,
+                    NbParticipants = 0,
+                    PrixBillet = 8.5,
+                    IdOrganisateur = 1,
+                },
+                new Evenement
+                {
+                    Id = 2,
+                    Titre = "BOOO BOOO BOOO Halloween",
+                    Etat = EtatEvenement.PUBLIE,
+                    Type = TypeEvenement.SOIREE,
+                    CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
+                    DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                    DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                    Description = "Soirée faits moi très peur et concours de costumes",
+                    CoverPhotoPath = "../wwwroot/evenement/5/HEX-HP-344199-site-080823-4x3.jpeg",
+                    MaxParticipants = 200,
+                    MinParticipants = 120,
+                    NbReservations = 0,
+                    NbParticipants = 0,
+                    PrixBillet = 10,
+                    IdOrganisateur = 2,
+                },
+                new Evenement
+                {
+                    Id = 3,
+                    Titre = "Karaoke Jam Sesh Beaux Arts",
+                    Etat = EtatEvenement.PUBLIE,
+                    Type = TypeEvenement.SOIREE,
+                    CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
+                    DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                    DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                    Description = "Ramenez vos instruments et vos cordes vocales",
+                    CoverPhotoPath = "../wwwroot/evenement/3/top-karaoke-songs.jpg",
+                    MaxParticipants = 80,
+                    MinParticipants = 50,
+                    NbReservations = 0,
+                    NbParticipants = 0,
+                    PrixBillet = 5,
+                    IdOrganisateur = 3,
+                }
+                ) ;
             this.SaveChanges();
         }
     }
