@@ -1,4 +1,4 @@
-﻿namespace P2_BDE_Events.Models.Prestation.Enums
+﻿namespace P2_BDE_Events.Models.Prestations.Enums
 {
     public enum EtatDePrestation
     {

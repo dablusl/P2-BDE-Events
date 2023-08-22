@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace P2_BDE_Events.Models.Prestation
+namespace P2_BDE_Events.Models.Prestations
 {
     public class Prestation
     {
@@ -13,6 +13,6 @@ namespace P2_BDE_Events.Models.Prestation
         public string Description { get; set; }
         public Enums.EtatDePrestation Etat { get; set; }
         public Enums.TypeDePrestation Type { get; set; }
-        public List<FacturePrestation> Factures { get; set; } = new List<FacturePrestation>();
+        
     }
 }
