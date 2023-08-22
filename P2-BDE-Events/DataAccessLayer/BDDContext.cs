@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Prestations;
@@ -25,6 +25,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Avis> AvisUtilisateur { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string dbPassword = Environment.GetEnvironmentVariable("BDE_EVENT_BDD_PASS");
@@ -47,7 +48,6 @@ namespace P2_BDE_Events.DataAccessLayer
                     Nom = "Dupont",
                     NumeroTelephone = "010101010101",
                     PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
-
                 },
                 new Organisateur
                 {
@@ -222,6 +222,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Notation = 4.5,
                     IdAuthor = 5,
                 });
+
             this.Prestations.AddRange(
           new Prestation
           {
@@ -294,6 +295,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MontantHT = 5000,
                 Prestation = 1
             });
+
             this.SaveChanges();
         }
     }
