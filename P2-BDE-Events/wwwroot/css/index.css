@@ -199,3 +199,18 @@ footer{
     width : 100%;
     height : 200px;
 }
+
+.btn{
+    color : black;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight : bolder;
+}
+
+.btn-contraste-1{
+    background-color : var(--primary-contrast-color)
+}
+
+.btn-contraste-2{
+    background-color : var(--secondary-contrast-color)
+}
