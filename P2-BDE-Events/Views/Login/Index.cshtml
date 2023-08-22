@@ -16,40 +16,40 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
 
-                @if (Model.Authentifie)
-                {
-                    <h3>
-                        Vous êtes déjà authentifié avec le login :
-                        @Model.Compte.Email
-                    </h3>
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.Compte.Email
+    </h3>
                     @Html.ActionLink("Voulez-vous vous déconnecter ?", "Logout")
-                }
-                else
-                {
+}
+else
+{
 
-                    using (Html.BeginForm())
-                    {
-                        //if (User.IsInRole("Admin"))
-                        //{
-                        //}
+    using (Html.BeginForm())
+    {
+        //if (User.IsInRole("Admin"))
+        //{
+        //}
                         //<div class="form-floating mb-3">
-                        <div>
+        <div>
 
                             @Html.LabelFor(m => m.Compte.Email, new { @class = "form-control", placeholder = "Email" })
-                            @Html.TextBoxFor(m => m.Compte.Email)
-                            @Html.ValidationMessageFor(m => m.Compte.Email)
-                        </div>
+            @Html.TextBoxFor(m => m.Compte.Email)
+            @Html.ValidationMessageFor(m => m.Compte.Email)
+        </div>
                         //<div class="form-floating mb-3">
-                        <div>
+        <div>
                             @Html.LabelFor(m => m.Compte.MotDePasse, new { @type="password", @class = "form-control", placeholder = "Mot de Passe" })
-                            @Html.PasswordFor(m => m.Compte.MotDePasse)
-                            @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
-                        </div>
+            @Html.PasswordFor(m => m.Compte.MotDePasse)
+            @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
+        </div>
                         <button class="btn btn-primary btn-xl" type="submit">Se Connecter</button>
-                        <br />
+        <br />
                         //@Html.ActionLink("Créer un compte", "CreerCompte")
-                    }
-                }
+    }
+}
             </div>
         </div>
     </div>

@@ -16,20 +16,20 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                @using (Html.BeginForm())
-                {
-                    <div>
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email)
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </div>
-                    <div>
-                        @Html.LabelFor(m => m.MotDePasse)
-                        @Html.PasswordFor(m => m.MotDePasse)
-                        @Html.ValidationMessageFor(m => m.MotDePasse)
-                    </div>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.MotDePasse)
+        @Html.PasswordFor(m => m.MotDePasse)
+        @Html.ValidationMessageFor(m => m.MotDePasse)
+    </div>
                     <button class="btn btn-primary btn-xl" type="submit">Créer</button>
-                }
+}
             </div>
         </div>
     </div>
