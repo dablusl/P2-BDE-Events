@@ -1,0 +1,34 @@
+﻿@model P2_BDE_Events.ViewModels.CompteViewModel
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.Compte.Email
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+    using (Html.BeginForm())
+    {
+        //if (User.IsInRole("Admin"))
+        //{
+        //}
+        <div>
+            @Html.LabelFor(m => m.Compte.Email)
+            @Html.TextBoxFor(m => m.Compte.Email)
+            @Html.ValidationMessageFor(m => m.Compte.Email)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Compte.MotDePasse)
+            @Html.PasswordFor(m => m.Compte.MotDePasse)
+            @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
+        </div>
+        <input type="submit" value="Se connecter" />
+        <br />
+        @Html.ActionLink("Créer un compte", "CreerCompte")
+    }
+}
