@@ -6,8 +6,9 @@
     @foreach (var evenement in Model)
     {
         <div class="mySlides fade">
-            <img src="@evenement.CoverPhotoPath" style="width:100%">
-            <div class="text">@evenement.DateEvenement</div>
+            <img clas="image-evenement"src="@evenement.CoverPhotoPath" style="width:100%">
+            <div class="titre-evenement">@evenement.Titre</div>
+            <div class="date-evenement">@evenement.DateEvenement.ToString("dd . MM . yyyy")</div>
         </div>
     }
 
