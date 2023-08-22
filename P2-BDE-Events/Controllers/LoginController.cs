@@ -31,7 +31,7 @@ namespace P2_BDE_Events.Controllers
 
                 compteViewModel.Organisateur = OrganisateurService.ObtenirOrganisateur(HttpContext.User.Identity.Name);
 
-                return View(compteViewModel);
+                return View("/Home/Index");
             }
             return View(compteViewModel);
         }
@@ -63,7 +63,7 @@ namespace P2_BDE_Events.Controllers
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
 
-                    return Redirect("/");
+                    return Redirect("/Home/Index");
                 }
                 ModelState.AddModelError("Organisateur.Email", "Email et/ou mot de passe incorrect(s)");
 

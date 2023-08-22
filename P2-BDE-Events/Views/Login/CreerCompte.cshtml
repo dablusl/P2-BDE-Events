@@ -1,0 +1,19 @@
+﻿@model P2_BDE_Events.Models.Compte.Compte
+
+<p>
+    Veuillez Remplir les champs pour créer voter compte :
+</p>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.MotDePasse)
+        @Html.PasswordFor(m => m.MotDePasse)
+        @Html.ValidationMessageFor(m => m.MotDePasse)
+    </div>
+    <input type="submit" value="Créer" />
+}
