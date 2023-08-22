@@ -15,7 +15,7 @@ namespace P2_BDE_Events.ViewComponents
                 .ObtenirTousLesEvenements()
                 .Where(evenement => evenement.Etat == EtatEvenement.PUBLIE)
                 .OrderByDescending(evenement => evenement.DateEvenement)
-                .Take(4)
+                .Take(3)
                 .ToList();
 
             return View(evenements);
