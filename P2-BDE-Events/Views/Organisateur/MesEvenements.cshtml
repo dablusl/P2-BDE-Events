@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/ProfilOrganisateur/_LayoutProfilOrganisateur.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/ProfilOrganisateur/mesEvenements.css">
+
+@section Header {
+    <ul>
+        <li><a href="evenementsPrecedents">Evenements précédents</a></li>
+        <li class="pageActive"><a href="evenementsEnCours">Evenements en cours</a></li>
+        <li><a href="EvenementsSuivants">Evenements suivants</a></li>
+    </ul>
+}
+
+<p>Vous n'avez aucun évènement en cours</p>
+<form>
+    <button class="creerEvenement">Créer un évènement</button>
+</form>

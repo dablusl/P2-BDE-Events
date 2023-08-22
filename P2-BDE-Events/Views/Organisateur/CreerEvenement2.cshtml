@@ -1,0 +1,16 @@
+﻿@using P2_BDE_Events.Models.Evenement
+@model Evenement
+
+@{
+    Layout = "~/Views/Shared/Organisateur/_LayoutOrganisateur.cshtml";
+}
+
+@section Header {
+
+}
+
+<form method="post">
+    <h1>Deuxieme partie</h1>
+    <h2>@Model.Titre</h2>
+    <button type="submit">Créer un évènement</button>
+</form>

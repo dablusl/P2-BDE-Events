@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="~/image/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="~/css/_LayoutProfilOrganisateur.css">
+    <link rel="stylesheet" href="~/css/Organisateur/_LayoutOrganisateur.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
@@ -20,13 +20,13 @@
 
 <body>
     <header>
-
+        @RenderSection("Header")
         <div class="header-border"></div>
     </header>
 
     <nav>
         <a href="mesEvenements.html">
-            <img src="/logo.png" alt="logoDuSite">
+            <img src="~/image/logo.png" alt="logoDuSite">
         </a>
         <ul>
             <li><a href="mesEvenements.html" class="pageActive">Mes évènements</a></li>

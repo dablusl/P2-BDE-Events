@@ -28,6 +28,15 @@ namespace P2_BDE_Events
             });
             services.AddControllersWithViews();
             services.AddMvc().AddRazorRuntimeCompilation();
+
+            services.AddDistributedMemoryCache(); // Add the distributed memory cache for session
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout as needed
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +56,7 @@ namespace P2_BDE_Events
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             using (BDDContext ctx = new BDDContext())
             {
