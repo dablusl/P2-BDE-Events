@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/Organisateur/_LayoutOrganisateur.cshtml";
+}
+@using P2_BDE_Events.ViewModels
+@model EvenementViewModel
+
+<h1>ah?</h1>
+<h1>@Model.Evenement.Titre</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(model => model.Evenement.Titre)
+    <button type="submit">next</button>
+}
+
+<!--
+<form method="post">
+    <input type="hidden" name="nouveauEvent" value="@Model" />
+    <input type="text" name="Evenement.Titre" />
+    <button type="submit">next</button>
+    <h1></h1>
+</form>
+-->

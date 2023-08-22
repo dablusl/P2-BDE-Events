@@ -2,48 +2,62 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.ViewModels;
 using System;
 
 namespace P2_BDE_Events.Controllers
 {
     public class OrganisateurController : Controller
     {
+        //DataTemp
+        //ViewData ...
+        //Session
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public OrganisateurController(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         public IActionResult MesEvenements()
         {
             return View();
         }
 
-        public IActionResult CreerEvenement()
+        public IActionResult Etape1()
         {
-            Evenement nouveauEvenement = new Evenement { Titre = "Ici"};
-            return View(nouveauEvenement);
+            EvenementViewModel nouveauEvent = new EvenementViewModel
+            {
+                Evenement = new Evenement()
+                {
+                    Titre = "Hello"
+                }
+            };
+
+            string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
+            _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
+
+            return View(nouveauEvent);
         }
 
         [HttpPost]
-        public IActionResult CreerEvenement(Evenement nouveauEvenement)
+        public IActionResult Etape1(EvenementViewModel nouveauEvent)
         {
-            string evenementJson = JsonConvert.SerializeObject(nouveauEvenement);
-            HttpContext.Session.SetString("EvenementData", evenementJson);
-            return RedirectToAction("CreerEvenement2");
-        }
-        
 
-        public IActionResult CreerEvenement2()
-        {
-            string evenementJson = HttpContext.Session.GetString("EvenementData");
+            string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
+            
+            _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
-            if (!string.IsNullOrEmpty(evenementJson))
-            {
-                Evenement evenement = JsonConvert.DeserializeObject<Evenement>(evenementJson);
-                return View(evenement);
-            }
-            else
-            {
-                // Handle the case where the session data is not available
-                return RedirectToAction("CreerEvenement");
-            }
+            return RedirectToAction("Etape2");
         }
 
+        public IActionResult Etape2()
+        {
+            string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");
+
+            EvenementViewModel evenementViewModel = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel); 
+            return View(evenementViewModel);
+        }
 
     }
 }
