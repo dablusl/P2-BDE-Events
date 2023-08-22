@@ -66,8 +66,16 @@ namespace P2_BDE_Events
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "organisateur",
+                    pattern: "Organisateur/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "participant",
+                    pattern: "Participant/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
             });
         }
     }

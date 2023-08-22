@@ -25,17 +25,19 @@
     </header>
 
     <nav>
-        <a href="mesEvenements.html">
+        <a onclick="window.location.href = '@Url.Action("EvenementsEnCours", "MesEvenements", new { area = "Organisateur" })'">
             <img src="~/image/logo.png" alt="logoDuSite">
         </a>
+
         <ul>
-            <li><a href="mesEvenements.html" class="pageActive">Mes évènements</a></li>
-            <li><a href="nouvelEvenement.html">Nouvel évènement</a></li>
-            <li><a href="evenementAVenir.html">Evènement à venir</a></li>
-            <li><a href="prestataires.html">Prestataires</a></li>
-            <li><a href="messagesDePrestataire.html">Messages</a></li>
-            <li><a href="monBde.html">Mon BDE</a></li>
+            <li><a onclick="window.location.href = '/Organisateur/MesEvenements/EvenementsEnCours'">Mes évènements</a></li>
+            <li><a onclick="window.location.href = '/Organisateur/CreerUnEvenement/ChoixCreation'">Créer un évènement</a></li>
+            <li><a onclick="window.location.href = '/Organisateur/EvenementAVenir/'">Évènement à venir</a></li>
+            <li><a onclick="window.location.href = '/Organisateur/Prestataires/'">Prestataires</a></li>
+            <li><a onclick="window.location.href = '/Organisateur/Messages/'">Messages</a></li>
+            <li><a onclick="window.location.href = '/Organisateur/MonBDE/'">Mon BDE</a></li>
         </ul>
+
     </nav>
 
     <main>

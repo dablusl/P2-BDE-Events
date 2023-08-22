@@ -1,4 +1,11 @@
-﻿.creerEvenement {
+﻿main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.creerEvenement {
     padding: 5px 10px;
     border-radius: 7px;
     font-size: 15px;
