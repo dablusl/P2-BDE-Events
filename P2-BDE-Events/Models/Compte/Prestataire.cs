@@ -2,7 +2,7 @@
 
 namespace P2_BDE_Events.Models.Compte
 {
-    public class Prestataire : Compte
+    public class Prestataire
     {
         public int Id { get; set; }
         public string Adresse { get; set; }

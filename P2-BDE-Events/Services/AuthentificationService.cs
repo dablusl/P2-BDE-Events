@@ -20,43 +20,45 @@ namespace P2_BDE_Events.Services
         public Compte Authentifier(string email, string motDePasse)
         {
             string passWord = EncodeMD5(motDePasse);
-            Administrateur admin = this._bddContext.Administrateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (admin!=null) { return admin; }
-            Organisateur orga = this._bddContext.Organisateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (orga != null) { return orga; }
-            Participant particip = this._bddContext.Participants.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (particip != null) { return particip; }
-            Prestataire presta = this._bddContext.Prestataires.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (presta != null) { return presta; }
+            Compte user = this._bddContext.Comptes.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+            if (user != null) { return user; }
+            //Administrateur admin = this._bddContext.Administrateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+            //if (admin!=null) { return admin; }
+            //Organisateur orga = this._bddContext.Organisateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+            //if (orga != null) { return orga; }
+            //Participant particip = this._bddContext.Participants.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+            //if (particip != null) { return particip; }
+            //Prestataire presta = this._bddContext.Prestataires.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+            //if (presta != null) { return presta; }
             
             return null;
         }
 
-        public int AuthentifierID(string email, string motDePasse)
-        {
-            string passWord = EncodeMD5(motDePasse);
-            Administrateur admin = this._bddContext.Administrateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (admin != null) { return admin.Id; }
-            Organisateur orga = this._bddContext.Organisateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (orga != null) { return orga.Id; }
-            Participant particip = this._bddContext.Participants.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (particip != null) { return particip.Id; }
-            Prestataire presta = this._bddContext.Prestataires.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
-            if (presta != null) { return presta.Id; }
+        //public int AuthentifierID(string email, string motDePasse)
+        //{
+        //    string passWord = EncodeMD5(motDePasse);
+        //    Administrateur admin = this._bddContext.Administrateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+        //    if (admin != null) { return admin.Id; }
+        //    Organisateur orga = this._bddContext.Organisateurs.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+        //    if (orga != null) { return orga.Id; }
+        //    Participant particip = this._bddContext.Participants.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+        //    if (particip != null) { return particip.Id; }
+        //    Prestataire presta = this._bddContext.Prestataires.FirstOrDefault(u => u.Email == email && u.MotDePasse == passWord);
+        //    if (presta != null) { return presta.Id; }
 
-            return -1;
+        //    return -1;
 
-        }
+        //}
 
-        public int AjouterOrganisateur(string email, string password)
-        {
-            string motDePasse = EncodeMD5(password);
-            Organisateur orga = new Organisateur() { Email = email, MotDePasse = motDePasse };
-            this._bddContext.Organisateurs.Add(orga);
+        //public int AjouterOrganisateur(string email, string password)
+        //{
+        //    string motDePasse = EncodeMD5(password);
+        //    Organisateur orga = new Organisateur() { Email = email, MotDePasse = motDePasse };
+        //    this._bddContext.Organisateurs.Add(orga);
 
-            this._bddContext.SaveChanges();
-            return orga.Id;
-        }
+        //    this._bddContext.SaveChanges();
+        //    return orga.Id;
+        //}
 
 
 
