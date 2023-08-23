@@ -9,9 +9,4 @@
         SPORT
     }
 
-    public List<TypeEvenement> TypesEvent()
-    {
-
-    }
-
 }
