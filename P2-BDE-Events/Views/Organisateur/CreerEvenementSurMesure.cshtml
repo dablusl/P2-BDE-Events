@@ -15,6 +15,6 @@
 @using (Html.BeginForm())
 {
     @Html.TextBoxFor(model => model.Evenement.Titre)
-    @Html.ListBox( model => model.Evenement.Type , Model.TypeEvenements.ToList(),new { style= "width:200px"})
+    @Html.ListBoxFor(model => model.SelectedType, Model.TypeEvenements, new { style = "width:200px" })
     <button type="submit">next</button>
 }
