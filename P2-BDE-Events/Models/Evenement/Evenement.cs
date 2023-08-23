@@ -21,6 +21,5 @@ namespace P2_BDE_Events.Models.Evenement
         public double PrixBillet { get; set; }
         public int IdOrganisateur { get; set; }
         public int IdAlbum { get; set; }
-
     }
 }

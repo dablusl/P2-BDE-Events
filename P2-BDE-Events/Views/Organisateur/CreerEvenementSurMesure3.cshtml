@@ -16,8 +16,6 @@
 
 @using (Html.BeginForm())
 {
-   @Html.HiddenFor(model => model.Evenement.Titre, Model.Evenement.Titre)
-   @Html.HiddenFor(model => model.Evenement.Type, Model.Evenement.Type)
 
     @Html.LabelFor(model => model.Evenement.NbParticipants)
     @Html.TextBoxFor(model => model.Evenement.NbParticipants)

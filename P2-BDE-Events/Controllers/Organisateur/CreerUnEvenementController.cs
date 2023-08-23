@@ -35,11 +35,6 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
             foreach (TypeEvenement type in Enum.GetValues(typeof(TypeEvenement)))
             {
-                //1 Etape -init evenement
-                //Saisir Un Titre et choisir le type d'evenement
-                //Init EvenementViewModel
-                //TODO : ajouter contraintes de input de texte
-
                 SelectListItem selectList = new SelectListItem() { 
                     Text = type.ToString(), 
                     Value = type.ToString() 
@@ -54,8 +49,6 @@ namespace P2_BDE_Events.Controllers.Organisateur
             };
 
             string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
-
-
             _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
             return View("Views/Organisateur/CreerEvenementSurMesure.cshtml", nouveauEvent);
@@ -64,8 +57,13 @@ namespace P2_BDE_Events.Controllers.Organisateur
         [HttpPost]
         public IActionResult CreerEvenementSurMesure(EvenementViewModel nouveauEvent)
         {
-            string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
-            string checking = nouveauEvent.Evenement.Titre;
+            string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");
+            EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
+            
+            vieuxEvent.Evenement.Titre = nouveauEvent.Evenement.Titre;
+            vieuxEvent.Evenement.Type = nouveauEvent.Evenement.Type;
+
+            serializedEnementViewModel = JsonConvert.SerializeObject(vieuxEvent);
 
             _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
@@ -74,22 +72,21 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
         public IActionResult CreerEvenementSurMesure2()
         {
-            //2 Etape -Ou et quand ?
-            //donner zone de reference date et heure souhaitée
-            //TODO : comment on va gerer les zone ? departement ? region ? CP? ...etc?
 
-            string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");
-            
+            string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");  
             EvenementViewModel nouveauEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
 
-            string checking = nouveauEvent.Evenement.Titre;
             return View("Views/Organisateur/CreerEvenementSurMesure2.cshtml", nouveauEvent);
         }
         [HttpPost]
         public IActionResult CreerEvenementSurMesure2(EvenementViewModel nouveauEvent)
         {
-            string checking = nouveauEvent.Evenement.Titre;
-            string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
+            string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");
+            EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
+
+            vieuxEvent.Evenement.DateEvenement = nouveauEvent.Evenement.DateEvenement;
+
+            serializedEnementViewModel = JsonConvert.SerializeObject(vieuxEvent);
 
             _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
@@ -98,9 +95,6 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
         public IActionResult CreerEvenementSurMesure3()
         {
-            //3 Etape -Quoi et combien ?
-            //Saisir nb de participants et choisir les services attendus
-            //TODO : affichage de prestations à choisir 
             string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");
 
             EvenementViewModel nouveauEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
@@ -110,7 +104,12 @@ namespace P2_BDE_Events.Controllers.Organisateur
         [HttpPost]
         public IActionResult CreerEvenementSurMesure3(EvenementViewModel nouveauEvent)
         {
-            string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
+            string serializedEnementViewModel = _httpContextAccessor.HttpContext.Session.GetString("EventViewModel");
+            EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
+
+            vieuxEvent.Evenement.NbParticipants = nouveauEvent.Evenement.NbParticipants;
+
+            serializedEnementViewModel = JsonConvert.SerializeObject(vieuxEvent);
 
             _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 

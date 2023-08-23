@@ -16,6 +16,5 @@ namespace P2_BDE_Events.ViewModels
         public IFormFile CoverPhoto { get; set; }
 
         public DateTime DateTimeTest { get; set; }
-
     }
 }

@@ -16,9 +16,7 @@
 
 @using (Html.BeginForm())
 {   
-    //@Html.HiddenFor(model => model.Evenement.Titre , Model.Evenement.Titre)
-    @Html.HiddenFor(model => model.Evenement.Titre , Model.Evenement.Titre)
-    @Html.HiddenFor(model => model.Evenement.Type , Model.Evenement.Type)
+
     <!--gestion zone grographique??-->
     //picker à être remplacés par BootstrapDatePicker
     @Html.LabelFor(model => model.Evenement.DateEvenement)
