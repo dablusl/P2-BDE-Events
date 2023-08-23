@@ -29,12 +29,19 @@ namespace P2_BDE_Events.Controllers
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
                 Evenement = new Evenement()
-                {
-                    Titre = "Hello"
-                }
             };
 
             string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
+
+            /*
+             * obj = {
+             *              prop1 : kfhoas
+             *              prop2 : qslkfhq
+             *       }
+             *       
+             *  obj="{prop1:kfds,prop2:shgqd}"     
+             */
+
             _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
             return View(nouveauEvent);
