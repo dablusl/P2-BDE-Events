@@ -8,4 +8,10 @@
         JEUXDESOCIETE,
         SPORT
     }
+
+    public List<TypeEvenement> TypesEvent()
+    {
+
+    }
+
 }
