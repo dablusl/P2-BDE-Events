@@ -31,13 +31,14 @@ namespace P2_BDE_Events
             services.AddDistributedMemoryCache(); // You can replace this with a different distributed cache provider in production
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout
+                options.IdleTimeout = TimeSpan.FromMinutes(60); // Set the session timeout
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 
             services.AddHttpContextAccessor();
             services.AddMvc().AddRazorRuntimeCompilation();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

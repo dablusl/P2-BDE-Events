@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
+@using P2_BDE_Events.ViewModels
+@model EvenementViewModel
+
+@section Header {
+
+}
+
+<h1>Quoi et combien?</h1>
+<h1>@Model.Evenement.Titre</h1>
+<h1>@Model.Evenement.Type</h1>
+
+
+
+@using (Html.BeginForm())
+{
+   @Html.HiddenFor(model => model.Evenement.Titre, Model.Evenement.Titre)
+   @Html.HiddenFor(model => model.Evenement.Type, Model.Evenement.Type)
+
+    @Html.LabelFor(model => model.Evenement.NbParticipants)
+    @Html.TextBoxFor(model => model.Evenement.NbParticipants)
+
+    <!-- choix de services affiches sous quel format ?-->
+
+    <button type="submit">next</button>
+}
+

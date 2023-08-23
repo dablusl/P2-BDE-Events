@@ -8,29 +8,23 @@
 
 }
 
-<h1>ah?</h1>
+<h1>Creons Votre Evenement...</h1>
+<h1>@Model.Evenement.Id</h1>
 <h1>@Model.Evenement.Titre</h1>
+<h1>@Model.Evenement.Type</h1>
 
 
 @using (Html.BeginForm())
 {
+    @Html.LabelFor(model => model.Evenement.Titre)
     @Html.TextBoxFor(model => model.Evenement.Titre)
+    <br />
+
+    @Html.LabelFor(model => model.Evenement.Type)
     @Html.DropDownListFor( model => model.Evenement.Type, Model.TypeEvenements, new { @class="type-evenement" } )
-    @Html.TextBoxFor(model => model.CoverPhoto, new { type = "file", accept = "image/*" })
-
-    @Html.TextBoxFor(model => model.DateTimeTest.Date, new { @class = "datepicker" })//<-------date for DateTest
-    @Html.TextBoxFor(model => model.DateTimeTest.TimeOfDay, new { @class = "timepicker" })//<-------time for DateTest
-
+    <br />
 
     <button type="submit">next</button>
 }
 
-<script>
-    $(document).ready(function () {
-        // Initialize the datepicker
-        $(".datepicker").datepicker();
 
-        // Initialize the timepicker
-        $(".timepicker").timepicker();
-    });
-</script>
