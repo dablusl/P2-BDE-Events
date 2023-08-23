@@ -35,6 +35,7 @@ namespace P2_BDE_Events.Controllers
                compteViewModel.Compte = CompteService.ObtenirCompte(HttpContext.User.Identity.Name);
 
                 return Redirect("/Home/Index");
+                
             }
             return View(compteViewModel);
         }
@@ -70,6 +71,8 @@ namespace P2_BDE_Events.Controllers
                         return Redirect(returnUrl);
 
                     return Redirect("/");
+                    
+
                 }
                 ModelState.AddModelError("Compte.Email", "Email et/ou mot de passe incorrect(s)");
 
@@ -130,7 +133,7 @@ namespace P2_BDE_Events.Controllers
         //    }
         //    return View(utilisateur);
         //}
-        public ActionResult Deconnexion()
+        public ActionResult Logout()
         {
             HttpContext.SignOutAsync();
             return Redirect("/");

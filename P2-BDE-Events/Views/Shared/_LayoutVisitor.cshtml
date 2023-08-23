@@ -24,7 +24,16 @@
                 <li><a href="#"><span class="btn-navbar btn-agenda">agenda</span></a></li>
                 <li><a href="#"><span class="btn-navbar">services</span></a></li>
                 <li><a href="#"><span class="btn-navbar">news</span></a></li>
-                <li><a href="#"><span class="btn-navbar">nous... </span></a></li>
+                <li><a href="#"><span class="btn-navbar">nous </span></a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="/Login/Logout"><span class="btn-navbar">déconnexion </span></a></li>
+                }
+                else
+                {
+                    <li><a href="/Login/Index"><span class="btn-navbar">connexion </span></a></li>
+                }
+                <!--<li><a href="#"><span class="btn-navbar">se déconnecter </span></a></li> -->
             </ul>
         </nav>
     </header>

@@ -5,6 +5,7 @@ namespace P2_BDE_Events.Models.Compte
     public class Prestataire
     {
         public int Id { get; set; }
+        public virtual Compte Compte { get; set; }
         public string Adresse { get; set; }
         public string ZoneActivite { get; set; }
         public DateTime HeureDebutActivite { get; set; }

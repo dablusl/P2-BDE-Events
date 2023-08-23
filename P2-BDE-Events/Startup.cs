@@ -24,6 +24,7 @@ namespace P2_BDE_Events
             .AddCookie(options =>
             {
                 options.LoginPath = "/Login/Index";
+                options.LogoutPath = "/Home/Index";
 
             });
             services.AddControllersWithViews();
