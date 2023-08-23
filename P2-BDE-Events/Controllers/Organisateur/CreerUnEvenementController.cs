@@ -19,9 +19,9 @@ namespace P2_BDE_Events.Controllers.Organisateur
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IActionResult ChoixCreation() 
-        { 
-            return View("Views/Organisateur/ChoixCreation.cshtml"); 
+        public IActionResult ChoixCreation()
+        {
+            return View("Views/Organisateur/ChoixCreation.cshtml");
         }
 
         public IActionResult CreerEvenementSurMesure()
@@ -30,13 +30,17 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
             foreach (TypeEvenement type in Enum.GetValues(typeof(TypeEvenement)))
             {
-                SelectListItem selectList = new SelectListItem() { Text = type.ToString(), Value = ((int)type).ToString() };
+                SelectListItem selectList = new SelectListItem() { 
+                    Text = type.ToString(), 
+                    Value = type.ToString() 
+                };
                 typeEvenements.Add(selectList);
             }
 
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
-                Evenement = new Evenement(), TypeEvenements = typeEvenements
+                Evenement = new Evenement(),
+                TypeEvenements = typeEvenements
             };
 
             string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);

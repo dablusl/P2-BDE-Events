@@ -15,6 +15,22 @@
 @using (Html.BeginForm())
 {
     @Html.TextBoxFor(model => model.Evenement.Titre)
-    @Html.ListBoxFor( model => model.Evenement.Type, new SelectList(Model.TypeEvenements),new { style= "width:200px"})
+    @Html.DropDownListFor( model => model.Evenement.Type, Model.TypeEvenements, new { @class="type-evenement" } )
+    @Html.TextBoxFor(model => model.CoverPhoto, new { type = "file", accept = "image/*" })
+
+    @Html.TextBoxFor(model => model.DateTimeTest.Date, new { @class = "datepicker" })//<-------date for DateTest
+    @Html.TextBoxFor(model => model.DateTimeTest.TimeOfDay, new { @class = "timepicker" })//<-------time for DateTest
+
+
     <button type="submit">next</button>
 }
+
+<script>
+    $(document).ready(function () {
+        // Initialize the datepicker
+        $(".datepicker").datepicker();
+
+        // Initialize the timepicker
+        $(".timepicker").timepicker();
+    });
+</script>
