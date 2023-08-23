@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
@@ -25,11 +26,12 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
         public IActionResult CreerEvenementSurMesure()
         {
-            List<TypeEvenement> typeEvenements = new List<TypeEvenement>();
+            List<SelectListItem> typeEvenements = new List<SelectListItem>();
 
             foreach (TypeEvenement type in Enum.GetValues(typeof(TypeEvenement)))
             {
-                typeEvenements.Add(type);
+                SelectListItem selectList = new SelectListItem() { Text = type.ToString(), Value = ((int)type).ToString() };
+                typeEvenements.Add(selectList);
             }
 
             EvenementViewModel nouveauEvent = new EvenementViewModel
