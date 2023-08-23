@@ -24,10 +24,10 @@
     <div class="form-group">
         <label for="Theme">Thème de l'événement</label>
         <select class="form-control" id="Theme" name="Theme">
-            <option value="Theme1">Thème 1</option>
-            <option value="Theme2">Thème 2</option>
-            <option value="Theme3">Thème 3</option>
-            <!-- Ajoutez d'autres options de thème si nécessaire -->
+            @foreach (var eventType in Enum.GetValues(typeof(P2_BDE_Events.Models.Evenement.Enums.TypeEvenement)))
+            {
+                <option value="@eventType">@eventType</option>
+            }
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Suivant</button>
