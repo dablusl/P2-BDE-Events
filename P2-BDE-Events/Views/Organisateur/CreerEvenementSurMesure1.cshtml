@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+@section Header {
+
+}
+
+@model P2_BDE_Events.ViewModels.Etape1ViewModel
+
+<form asp-action="CreerEvenementSurMesure1" method="post">
+    <div class="form-group">
+        <label for="Titre">Titre de l'événement</label>
+        <input type="text" class="form-control" id="Titre" name="Titre" value="@Model.Titre">
+    </div>
+    <div class="form-group">
+        <label for="Affiche">Affiche de l'événement</label>
+        <input type="file" class="form-control" id="Affiche" name="Affiche">
+    </div>
+    <div class="form-group">
+        <label for="Date">Date de l'événement</label>
+        <input type="datetime-local" class="form-control" id="Date" name="Date" value="@Model.Date">
+    </div>
+    <div class="form-group">
+        <label for="Theme">Thème de l'événement</label>
+        <select class="form-control" id="Theme" name="Theme">
+            <option value="Theme1">Thème 1</option>
+            <option value="Theme2">Thème 2</option>
+            <option value="Theme3">Thème 3</option>
+            <!-- Ajoutez d'autres options de thème si nécessaire -->
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Suivant</button>
+</form>

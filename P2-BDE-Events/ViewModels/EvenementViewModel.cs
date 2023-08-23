@@ -12,6 +12,5 @@ namespace P2_BDE_Events.ViewModels
 
         public TypeEvenement SelectedType { get; set; }
 
-        public List<TypeEvenement> TypeEvenements { get; set;}
     }
 }

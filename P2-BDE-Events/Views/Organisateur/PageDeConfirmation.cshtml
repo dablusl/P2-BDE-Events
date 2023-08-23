@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+@section Header {
+
+}
+
+@model P2_BDE_Events.ViewModels.PageDeConfirmationViewModel
+
+<h3>Confirmation des données de l'événement</h3>
+<p><strong>Étape 1 :</strong></p>
+<p>Titre de l'événement : @Model.Etape1Data.Titre</p>
+<p>Date de l'événement : @Model.Etape1Data.Date</p>
+<p>Thème de l'événement : @Model.Etape1Data.Theme</p>
+
+<p><strong>Étape 2 :</strong></p>
+<p>Nombre de participants souhaité (max) : @Model.Etape2Data.NombreParticipants</p>
+
+<p><strong>Étape 3 :</strong></p>
+<p>Alcool : @Model.Etape3Data.Alcool</p>
+<p>Restauration : @Model.Etape3Data.Restauration</p>
+<p>Sécurité : @Model.Etape3Data.Securite</p>
+<p>Bar : @Model.Etape3Data.Bar</p>
+
+<form asp-action="PageDeConfirmation" method="post">
+    <button type="submit" class="btn btn-primary">Confirmer et Enregistrer</button>
+</form>

@@ -1,12 +1,17 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
-@using P2_BDE_Events.ViewModels
-@model EvenementViewModel
 
 @section Header {
 
 }
 
-<h1>ah?</h1>
-<h1>@Model.Evenement.Titre</h1>
+@model P2_BDE_Events.ViewModels.Etape2ViewModel
+
+<form asp-action="CreerEvenementSurMesure2" method="post">
+    <div class="form-group">
+        <label for="NombreParticipants">Nombre de participants souhaité (max)</label>
+        <input type="number" class="form-control" id="NombreParticipants" name="NombreParticipants" value="@Model.NombreParticipants">
+    </div>
+    <button type="submit" class="btn btn-primary">Suivant</button>
+</form>

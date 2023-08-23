@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
+
+@section Header {
+
+}
+
+@model P2_BDE_Events.ViewModels.Etape3ViewModel
+
+<form asp-action="CreerEvenementSurMesure3" method="post">
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="Alcool" name="Alcool" checked="@Model.Alcool">
+        <label class="form-check-label" for="Alcool">Alcool</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="Restauration" name="Restauration" checked="@Model.Restauration">
+        <label class="form-check-label" for="Restauration">Restauration</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="Securite" name="Securite" checked="@Model.Securite">
+        <label class="form-check-label" for="Securite">Sécurité</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="Bar" name="Bar" checked="@Model.Bar">
+        <label class="form-check-label" for="Bar">Bar</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Suivant</button>
+</form>
