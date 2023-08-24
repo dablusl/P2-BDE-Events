@@ -15,7 +15,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Prestataire> Prestataires { get; set; }
         public DbSet<Prestation> Prestations { get; set; }
-        public DbSet<FacturePrestation> FacturePrestations { get; set; }
+        public DbSet<FacturePrestation> FacturePrestation { get; set; }
         public DbSet<Administrateur> Administrateurs { get; set; }
         public DbSet<Evenement> Evenements { get; set; }
         public DbSet<Litige> Litiges { get; set; }
@@ -222,20 +222,19 @@ namespace P2_BDE_Events.DataAccessLayer
                     Notation = 4.5,
                     IdAuthor = 5,
                 });
-
             this.Prestations.AddRange(
-          new Prestation
-          {
-              Id = 1,
-              Titre = "Ma Prestation",
-              Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
-              CapaciteMax = 10,
-              Tarif = 100,
-              Calendrier = "Du 1er au 5 août",
-              Livraison = true,
-              Description = "Une description de la prestation",
-              Etat = EtatDePrestation.EnAttenteDeValidation
-          });
+         new Prestation
+         {
+             Id = 1,
+             Titre = "Ma Prestation",
+             Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
+             CapaciteMax = 10,
+             Tarif = 100,
+             Calendrier = "Du 1er au 5 août",
+             Livraison = true,
+             Description = "Une description de la prestation",
+             Etat = EtatDePrestation.EnAttenteDeValidation
+         },
             new Prestation
             {
                 Id = 2,
@@ -247,8 +246,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 Livraison = true,
                 Description = "Dj pour vos soirée",
                 Etat = EtatDePrestation.EnCours
-            });
-            new Prestation
+            },
+             new Prestation
             {
                 Id = 3,
                 Titre = "Ma Prestation",
@@ -260,43 +259,51 @@ namespace P2_BDE_Events.DataAccessLayer
                 Description = "Traiteur spécialisé en calamar",
                 Etat = EtatDePrestation.Annulee
             });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230101,
-                Date = 2023 / 01 / 01,
-                MontantHT = 1000,
-                Prestation = 3
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230201,
-                Date = 01 / 02 / 2023,
-                MontantHT = 2000,
-                Prestation = 2
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230506,
-                Date = 06 / 05 / 2023,
-                MontantHT = 500,
-                Prestation = 2
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20231011,
-                Date = 11 / 10 / 2023,
-                MontantHT = 3000,
-                Prestation = 3
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230706,
-                Date = 2023 / 07 / 06,
-                MontantHT = 5000,
-                Prestation = 1
-            });
 
-            this.SaveChanges();
-        }
-    }
+            this.FacturePrestation.AddRange(
+                 new FacturePrestation
+                 {
+                     Id = 1,
+                     NumeroFacture = 20230101,
+                     Date = new DateTime(2023, 01, 01),
+                     MontantHT = 1000,
+                     IdPrestation = 3 
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 2,
+                     NumeroFacture = 20230201,
+                     Date = new DateTime(2023, 02, 01),
+                     MontantHT = 2000,
+                     IdPrestation = 1
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 3,
+                     NumeroFacture = 20230506,
+                     Date = new DateTime(2023, 05, 06),
+                     MontantHT = 500,
+                     IdPrestation = 2
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 4,
+                     NumeroFacture = 20231011,
+                     Date = new DateTime(2023, 10, 11),
+                     MontantHT = 3000,
+                     IdPrestation = 3
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 5,
+                     NumeroFacture = 20230706,
+                     Date = new DateTime(2023, 07, 06),
+                     MontantHT = 5000,
+                     IdPrestation = 1
+                 });
+
+                 this.SaveChanges();
+
+                }
+            }
 }
