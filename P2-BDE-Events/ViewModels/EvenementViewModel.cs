@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
 using System;
@@ -10,7 +11,11 @@ namespace P2_BDE_Events.ViewModels
     {
         public Evenement Evenement { get; set; }
 
-        public TypeEvenement SelectedType { get; set; }
+        public List<SelectListItem> TypeEvenements { get; set;}
+
+        public IFormFile CoverPhoto { get; set; }
+
+        public DateTime DateTimeTest { get; set; }
 
     }
 }
