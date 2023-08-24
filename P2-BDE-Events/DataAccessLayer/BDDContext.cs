@@ -16,7 +16,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Prestataire> Prestataires { get; set; }
         public DbSet<Prestation> Prestations { get; set; }
-        public DbSet<FacturePrestation> FacturePrestations { get; set; }
+        // public DbSet<FacturePrestation> FacturePrestations { get; set; }
         public DbSet<Administrateur> Administrateurs { get; set; }
         public DbSet<Evenement> Evenements { get; set; }
         public DbSet<Litige> Litiges { get; set; }
@@ -47,6 +47,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     Id = 1,
                     Email = "pierre",
                     MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                    Profil = "Administrateur",
                     Prenom = "Pierre",
                     Nom = "Dupont",
                     NumeroTelephone = "010101010101",
@@ -203,116 +204,116 @@ namespace P2_BDE_Events.DataAccessLayer
                     IdOrganisateur = 3,
                 }
                 );
-            this.AvisUtilisateur.AddRange(
-                new Avis
-                {
-                    Id = 1,
-                    Titre = "Super Plateforme<3",
-                    Contenu = "L'organisation devenements n'a jamais ete balbalbalba",
-                    PublieLe = new DateTime(2023, 07, 02, 22, 10, 12),
-                    Notation = 5,
-                    IdAuthor = 2,
-                },
-                new Avis
-                {
-                    Id = 2,
-                    Titre = "BDE Events à sauvé mon business",
-                    Contenu = "Une croissance de 500% par rapport à l'année dernière",
-                    PublieLe = new DateTime(2023, 08, 01, 12, 1, 2),
-                    Notation = 5,
-                    IdAuthor = 3,
-                },
-                new Avis
-                {
-                    Id = 3,
-                    Titre = "IN CROY ABLE",
-                    Contenu = "Plaisir d'avoir travailler avec vous les gars",
-                    PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
-                    Notation = 4.5,
-                    IdAuthor = 4,
-                },
-                new Avis
-                {
-                    Id = 4,
-                    Titre = "Concept Super",
-                    Contenu = "Plaisir d'avoir travailler avec vous les garsx2",
-                    PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
-                    Notation = 4.5,
-                    IdAuthor = 5,
-                });
+          //  this.AvisUtilisateur.AddRange(
+          //      new Avis
+          //      {
+          //          Id = 1,
+          //          Titre = "Super Plateforme<3",
+          //          Contenu = "L'organisation devenements n'a jamais ete balbalbalba",
+          //          PublieLe = new DateTime(2023, 07, 02, 22, 10, 12),
+          //          Notation = 5,
+          //          IdAuthor = 2,
+          //      },
+          //      new Avis
+          //      {
+          //          Id = 2,
+          //          Titre = "BDE Events à sauvé mon business",
+          //          Contenu = "Une croissance de 500% par rapport à l'année dernière",
+          //          PublieLe = new DateTime(2023, 08, 01, 12, 1, 2),
+          //          Notation = 5,
+          //          IdAuthor = 3,
+          //      },
+          //      new Avis
+          //      {
+          //          Id = 3,
+          //          Titre = "IN CROY ABLE",
+          //          Contenu = "Plaisir d'avoir travailler avec vous les gars",
+          //          PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
+          //          Notation = 4.5,
+          //          IdAuthor = 4,
+          //      },
+          //      new Avis
+          //      {
+          //          Id = 4,
+          //          Titre = "Concept Super",
+          //          Contenu = "Plaisir d'avoir travailler avec vous les garsx2",
+          //          PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
+          //          Notation = 4.5,
+          //          IdAuthor = 5,
+          //      });
 
-            this.Prestations.AddRange(
-          new Prestation
-          {
-              Id = 1,
-              Titre = "Ma Prestation",
-              Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
-              CapaciteMax = 10,
-              Tarif = 100,
-              Calendrier = "Du 1er au 5 août",
-              Livraison = true,
-              Description = "Une description de la prestation",
-              Etat = EtatDePrestation.EnAttenteDeValidation
-          });
-            new Prestation
-            {
-                Id = 2,
-                Titre = "Votre Dj",
-                Type = Models.Prestations.Enums.TypeDePrestation.DJ,
-                CapaciteMax = 50,
-                Tarif = 200,
-                Calendrier = "Tout août",
-                Livraison = true,
-                Description = "Dj pour vos soirée",
-                Etat = EtatDePrestation.EnCours
-            });
-            new Prestation
-            {
-                Id = 3,
-                Titre = "Ma Prestation",
-                Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
-                CapaciteMax = 300,
-                Tarif = 1000,
-                Calendrier = "3eme weekend du mois",
-                Livraison = true,
-                Description = "Traiteur spécialisé en calamar",
-                Etat = EtatDePrestation.Annulee
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230101,
-                Date = 2023 / 01 / 01,
-                MontantHT = 1000,
-                Prestation = 3
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230201,
-                Date = 01 / 02 / 2023,
-                MontantHT = 2000,
-                Prestation = 2
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230506,
-                Date = 06 / 05 / 2023,
-                MontantHT = 500,
-                Prestation = 2
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20231011,
-                Date = 11 / 10 / 2023,
-                MontantHT = 3000,
-                Prestation = 3
-            });
-            new FacturePrestation
-            {
-                NumeroFacture = 20230706,
-                Date = 2023 / 07 / 06,
-                MontantHT = 5000,
-                Prestation = 1
-            });
+          //  this.Prestations.AddRange(
+          //new Prestation
+          //{
+          //    Id = 1,
+          //    Titre = "Ma Prestation",
+          //    Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
+          //    CapaciteMax = 10,
+          //    Tarif = 100,
+          //    Calendrier = "Du 1er au 5 août",
+          //    Livraison = true,
+          //    Description = "Une description de la prestation",
+          //    Etat = EtatDePrestation.EnAttenteDeValidation
+          //});
+          //  new Prestation
+          //  {
+          //      Id = 2,
+          //      Titre = "Votre Dj",
+          //      Type = Models.Prestations.Enums.TypeDePrestation.DJ,
+          //      CapaciteMax = 50,
+          //      Tarif = 200,
+          //      Calendrier = "Tout août",
+          //      Livraison = true,
+          //      Description = "Dj pour vos soirée",
+          //      Etat = EtatDePrestation.EnCours
+          //  });
+          //  new Prestation
+          //  {
+          //      Id = 3,
+          //      Titre = "Ma Prestation",
+          //      Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
+          //      CapaciteMax = 300,
+          //      Tarif = 1000,
+          //      Calendrier = "3eme weekend du mois",
+          //      Livraison = true,
+          //      Description = "Traiteur spécialisé en calamar",
+          //      Etat = EtatDePrestation.Annulee
+          //  });
+          //  new FacturePrestation
+          //  {
+          //      NumeroFacture = 20230101,
+          //      Date = 2023 / 01 / 01,
+          //      MontantHT = 1000,
+          //      Prestation = 3
+          //  });
+          //  new FacturePrestation
+          //  {
+          //      NumeroFacture = 20230201,
+          //      Date = 01 / 02 / 2023,
+          //      MontantHT = 2000,
+          //      Prestation = 2
+          //  });
+          //  new FacturePrestation
+          //  {
+          //      NumeroFacture = 20230506,
+          //      Date = 06 / 05 / 2023,
+          //      MontantHT = 500,
+          //      Prestation = 2
+          //  });
+          //  new FacturePrestation
+          //  {
+          //      NumeroFacture = 20231011,
+          //      Date = 11 / 10 / 2023,
+          //      MontantHT = 3000,
+          //      Prestation = 3
+          //  });
+          //  new FacturePrestation
+          //  {
+          //      NumeroFacture = 20230706,
+          //      Date = 2023 / 07 / 06,
+          //      MontantHT = 5000,
+          //      Prestation = 1
+          //  });
 
             this.SaveChanges();
         }

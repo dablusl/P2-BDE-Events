@@ -10,6 +10,8 @@ using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Services;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Numerics;
 
 namespace P2_BDE_Events.Controllers
 {
@@ -23,7 +25,7 @@ namespace P2_BDE_Events.Controllers
         {
             OrganisateurService = new OrganisateurService();
             CompteService = new CompteService();
-            AuthentificationService = new AuthentificationService();    
+            AuthentificationService = new AuthentificationService();
 
         }
         [HttpGet]
@@ -32,10 +34,10 @@ namespace P2_BDE_Events.Controllers
             CompteViewModel compteViewModel = new CompteViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             if (compteViewModel.Authentifie)
             {
-               compteViewModel.Compte = CompteService.ObtenirCompte(HttpContext.User.Identity.Name);
+                compteViewModel.Compte = CompteService.ObtenirCompte(HttpContext.User.Identity.Name);
 
                 return Redirect("/Home/Index");
-                
+
             }
             return View(compteViewModel);
         }
@@ -43,22 +45,18 @@ namespace P2_BDE_Events.Controllers
         [HttpPost]
         public IActionResult Index(CompteViewModel viewModel, string returnUrl)
         {
-            Console.WriteLine("Avant le IsValid");
             if (ModelState.IsValid)
             {
-                Console.WriteLine("On lance la récupération du compte");
 
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
-               // int compteId = AuthentificationService.AuthentifierID(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
-                //Organisateur organisateur = (Organisateur)AuthentificationService.Authentifier(viewModel.Organisateur.Email, viewModel.Organisateur.MotDePasse);
 
-                if (compte != null) // bon mot de passe    
+
+                if (compte != null)    
                 {
-                    Console.WriteLine("On a récupéré un compte");
                     var userClaims = new List<Claim>()
                     {
                        new Claim(ClaimTypes.Email, compte.Email),
-                      // new Claim(ClaimTypes.Role, compte.Role),
+                       new Claim(ClaimTypes.Role, compte.Profil),
 
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -71,7 +69,7 @@ namespace P2_BDE_Events.Controllers
                         return Redirect(returnUrl);
 
                     return Redirect("/");
-                    
+
 
                 }
                 ModelState.AddModelError("Compte.Email", "Email et/ou mot de passe incorrect(s)");
@@ -79,60 +77,59 @@ namespace P2_BDE_Events.Controllers
             }
             return View(viewModel);
         }
+        [HttpGet]
         public IActionResult CreerCompte()
-
         {
-            return View();
+            var viewModel = new CreationCompteViewModel
+            {
+                AvailableProfiles = new List<SelectListItem>
+        {
+                    new SelectListItem { Value = "Prestataire", Text = "Prestataire" },
+                    new SelectListItem { Value = "Organisateur", Text = "BDE" },
+                    new SelectListItem { Value = "Participant", Text = "Etudiant" }
+        }
+            };
+
+            return View(viewModel);
         }
         [HttpPost]
-        public IActionResult CreerCompte(Compte utilisateur)
+        public IActionResult CreerCompte(CreationCompteViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                int id = CompteService.AjouterCompte(utilisateur.Email, utilisateur.MotDePasse);
+                viewModel.Compte.Profil = viewModel.SelectedProfile;
+                int id = CompteService.AjouterCompte(viewModel.Compte);
+                        
 
 
                 // methode des cookies à supprimer pour rediriger vers page connexion après création
                 var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, id.ToString()),
+                   new Claim(ClaimTypes.Email, viewModel.Compte.Email),
+                   new Claim(ClaimTypes.Role, viewModel.Compte.Profil),
                 };
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
                 // jusqu'ici
-
                 return Redirect("/");
             }
-            return View(utilisateur);
+
+            {
+                viewModel.AvailableProfiles = new List<SelectListItem>
+                    {
+                    new SelectListItem { Value = "Prestataire", Text = "Prestataire" },
+                    new SelectListItem { Value = "Organisateur", Text = "BDE" },
+                    new SelectListItem { Value = "Participant", Text = "Etudiant" }
+
+                };
+
+                return View(viewModel);
+            }
+
+
         }
-        //public IActionResult CreerCompteOrganisateur()
 
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult CreerCompteOrganisateur(Organisateur utilisateur)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        int id = OrganisateurService.AjouterOrganisateur(utilisateur.Email, utilisateur.MotDePasse);
-
-
-        //        // methode des cookies à supprimer pour rediriger vers page connexion après création
-        //        var userClaims = new List<Claim>()
-        //        {
-        //            new Claim(ClaimTypes.Name, id.ToString()),
-        //        };
-        //        var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
-        //        var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
-        //        HttpContext.SignInAsync(userPrincipal);
-        //        // jusqu'ici
-
-        //        return Redirect("/");
-        //    }
-        //    return View(utilisateur);
-        //}
         public ActionResult Logout()
         {
             HttpContext.SignOutAsync();

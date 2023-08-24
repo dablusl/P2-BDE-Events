@@ -8,7 +8,7 @@
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string NumeroTelephone { get; set; }
-        public string Authorisation { get;  set; }
+        public string Profil { get;  set; }
         public string PhotoProfilePath { get; set; }
         public string PhotoCoverPath { get; set; }
     }

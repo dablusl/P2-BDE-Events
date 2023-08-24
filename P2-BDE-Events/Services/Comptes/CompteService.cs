@@ -65,15 +65,21 @@ namespace P2_BDE_Events.Services.Comptes
                 _bddContext.SaveChanges();
             }
         }
-
+        public int AjouterCompte(Compte compte)
+        {
+            compte.MotDePasse = EncodeMD5(compte.MotDePasse);
+            this._bddContext.Comptes.Add(compte);
+            this._bddContext.SaveChanges();
+            return compte.Id;
+        }
 
         public int AjouterCompte(string email, string password)
         {
             string motDePasse = EncodeMD5(password);
-            Compte orga = new Compte() { Email = email, MotDePasse = motDePasse };
-            this._bddContext.Comptes.Add(orga);
+            Compte compte = new Compte() { Email = email, MotDePasse = motDePasse };
+            this._bddContext.Comptes.Add(compte);
             this._bddContext.SaveChanges();
-            return orga.Id;
+            return compte.Id;
         }
 
 
