@@ -67,7 +67,7 @@ namespace P2_BDE_Events.Controllers.Organisateur
                 string serializedEnementViewModel = HttpContext.Session.GetString("Event");
                 EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
 
-                //Manque ajoutes les propietes apr rapprot à la region, etc
+                //Manque ajoutes les proprietes par rapport à la region, etc
                 vieuxEvent.Evenement.DateEvenement = model.Evenement.DateEvenement;
 
                 HttpContext.Session.SetString("Event", JsonConvert.SerializeObject(vieuxEvent));
@@ -156,6 +156,16 @@ namespace P2_BDE_Events.Controllers.Organisateur
             }
 
             return View("View/Organisateur/MesEvenements/EvenementsEnCours");
+        }
+
+        public EvenementViewModel GetEventSession()
+        {
+            return null;
+        }
+
+        public void SetEventSession(EvenementViewModel evenement)
+        {
+
         }
     }
 }
