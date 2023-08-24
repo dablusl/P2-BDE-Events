@@ -39,9 +39,8 @@ namespace P2_BDE_Events.Controllers.Organisateur
         public IActionResult CreerEvenementSurMesure1(EvenementViewModel model)
         {
             if (ModelState.IsValid) {
-
-                HttpContext.Session.SetString("Event", JsonConvert.SerializeObject(model));
-
+                SetEventSession(model);
+                
                 return RedirectToAction("CreerEvenementSurMesure2");
             }
             return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", model);
@@ -64,13 +63,11 @@ namespace P2_BDE_Events.Controllers.Organisateur
         {
             if (ModelState.IsValid)
             {
-                string serializedEnementViewModel = HttpContext.Session.GetString("Event");
-                EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
+                EvenementViewModel savedEvent = GetEventSession();
 
-                //Manque ajoutes les proprietes par rapport à la region, etc
-                vieuxEvent.Evenement.DateEvenement = model.Evenement.DateEvenement;
+                savedEvent.Evenement.DateEvenement = model.Evenement.DateEvenement;
 
-                HttpContext.Session.SetString("Event", JsonConvert.SerializeObject(vieuxEvent));
+                SetEventSession(savedEvent);
                 return RedirectToAction("CreerEvenementSurMesure3");
             }
             return View("~/Views/Organisateur/CreerEvenementSurMesure2.cshtml", model);
@@ -91,16 +88,16 @@ namespace P2_BDE_Events.Controllers.Organisateur
         {            
             if (ModelState.IsValid)
             {
-                string serializedEnementViewModel = HttpContext.Session.GetString("Event");
-                EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
+                EvenementViewModel savedEvent = GetEventSession();
 
-                vieuxEvent.Evenement.NbParticipants = model.Evenement.NbParticipants;
-                vieuxEvent.Alcool = model.Alcool;
-                vieuxEvent.Restauration = model.Restauration;
-                vieuxEvent.Securite = model.Securite;
-                vieuxEvent.Bar = model.Bar;
+                savedEvent.Evenement.NbParticipants = model.Evenement.NbParticipants;
+                savedEvent.Alcool = model.Alcool;
+                savedEvent.Restauration = model.Restauration;
+                savedEvent.Securite = model.Securite;
+                savedEvent.Bar = model.Bar;
 
-                HttpContext.Session.SetString("Event", JsonConvert.SerializeObject(vieuxEvent));
+                SetEventSession(savedEvent);
+
                 return RedirectToAction("CreerEvenementSurMesure4");
             }
             return View("~/Views/Organisateur/CreerEvenementSurMesure3.cshtml", model);
@@ -119,15 +116,14 @@ namespace P2_BDE_Events.Controllers.Organisateur
         [HttpPost]
         public IActionResult CreerEvenementSurMesure4(EvenementViewModel nouveauEvent)
         {
-            string serializedEnementViewModel = HttpContext.Session.GetString("Event");
-            EvenementViewModel vieuxEvent = JsonConvert.DeserializeObject<EvenementViewModel>(serializedEnementViewModel);
-
-            vieuxEvent.CoverPhoto = nouveauEvent.CoverPhoto;
+            EvenementViewModel savedEvent = GetEventSession(); 
+            
+            savedEvent.CoverPhoto = nouveauEvent.CoverPhoto;
 
 
             //si tout les trucs requis son good
             //creation evenement
-            int idNouveauEvent = evenementService.CreerEvenement(vieuxEvent.Evenement);
+            int idNouveauEvent = evenementService.CreerEvenement(savedEvent.Evenement);
 
             string str = _webHostEnvironment.WebRootPath;
             //Sauvegarder image dans nos dossiers
@@ -155,17 +151,25 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
             }
 
-            return View("View/Organisateur/MesEvenements/EvenementsEnCours");
+            return Redirect("Views/Organisateur/MesEvenements/EvenementsEnCours");
         }
 
         public EvenementViewModel GetEventSession()
         {
-            return null;
+            return JsonConvert
+                .DeserializeObject<EvenementViewModel>(
+                    HttpContext.Session.GetString("Event")
+                    ); ;
         }
 
-        public void SetEventSession(EvenementViewModel evenement)
+        public void SetEventSession(EvenementViewModel evenementViewModel)
         {
-
+            HttpContext
+                .Session
+                .SetString(
+                    "Event", 
+                    JsonConvert.SerializeObject(evenementViewModel)
+                    );
         }
     }
 }
