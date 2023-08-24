@@ -1,5 +1,6 @@
 ﻿using P2_BDE_Events.Models.Evenement.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace P2_BDE_Events.Models.Evenement
 {
@@ -21,5 +22,6 @@ namespace P2_BDE_Events.Models.Evenement
         public double PrixBillet { get; set; }
         public int IdOrganisateur { get; set; }
         public int IdAlbum { get; set; }
+
     }
 }

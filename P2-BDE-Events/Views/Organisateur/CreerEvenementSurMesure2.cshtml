@@ -6,39 +6,23 @@
 
 }
 
-@model P2_BDE_Events.ViewModels.Etape2ViewModel
+@model P2_BDE_Events.ViewModels.EvenementViewModel
+<!--model P2_BDE_Events.ViewModels.Etape1ViewModel-->
+
 
 <form asp-action="CreerEvenementSurMesure2" method="post">
     <div class="form-group">
-        <label for="NombreParticipants">Nombre de participants souhaité (max)</label>
-        <input type="number" class="form-control" id="NombreParticipants" name="NombreParticipants" value="@Model.NombreParticipants">
+        <!-- Gestion region,localisation ??? etc... -->
+        
+        <div class="form-group">
+            <label for="Date">Date de l'événement</label>
+            <input type="datetime-local" class="form-control" id="Evenement.DateEvenement" name="Evenement.DateEvenement" value="">
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Suivant</button>
 </form>
 <h1>Quand et Où ?</h1>
-<h1>@Model.Evenement.Id</h1>
-<h1>@Model.Evenement.Titre</h1>
-<h1>@Model.Evenement.Type</h1>
 
 
-@using (Html.BeginForm())
-{   
 
-    <!--gestion zone grographique??-->
-    //picker à être remplacés par BootstrapDatePicker
-    @Html.LabelFor(model => model.Evenement.DateEvenement)
-    @Html.TextBoxFor(model => model.Evenement.DateEvenement.Date, new { @class = "datepicker" })
-    @Html.TextBoxFor(model => model.Evenement.DateEvenement.TimeOfDay, new { @class = "timepicker" })
 
-    <button type="submit">next</button>
-}
-
-<script>
-    $(document).ready(function () {
-        // Initialize the datepicker
-        $(".datepicker").datepicker();
-
-        // Initialize the timepicker
-        $(".timepicker").timepicker();
-    });
-</script>

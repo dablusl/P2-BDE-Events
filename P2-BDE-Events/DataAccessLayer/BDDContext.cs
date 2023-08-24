@@ -163,7 +163,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 },
                 new Evenement
                 {
-                    Id = 3,
+                    Id = 0,
                     Titre = "Karaoke Jam Sesh Beaux Arts",
                     Etat = EtatEvenement.PUBLIE,
                     Type = TypeEvenement.SOIREE,

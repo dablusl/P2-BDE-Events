@@ -1,27 +1,28 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
-@using P2_BDE_Events.ViewModels
-@model EvenementViewModel
+@model P2_BDE_Events.ViewModels.EvenementViewModel
+<!--model P2_BDE_Events.ViewModels.Etape1ViewModel-->
+
 
 @section Header {
 
 }
 
 <h1>Choses Optionnels?</h1>
-<h1>@Model.Evenement.Titre</h1>
-<h1>@Model.Evenement.Type</h1>
-<h1>@Model.Evenement.NbParticipants</h1>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.HiddenFor(model => model.Evenement.Titre, Model.Evenement.Titre)
-    @Html.HiddenFor(model => model.Evenement.Type, Model.Evenement.Type)
-    @Html.HiddenFor(model => model.Evenement.NbParticipants, Model.Evenement.NbParticipants)
-   
+    /*
     @Html.LabelFor(model => model.CoverPhoto)
     @Html.TextBoxFor(model => model.CoverPhoto, new { type = "file", accept = "image/*" })
+    */
+
+
+    <div class="form-group">
+        <label for="Affiche">Affiche de l'événement</label>
+        <input type="file" class="form-control" id="CoverPhoto" name="CoverPhoto">
+    </div>
     <br />
 
     <!-- truc à cocher evement privé , habiliter le parrinage de BDE etc....-->
