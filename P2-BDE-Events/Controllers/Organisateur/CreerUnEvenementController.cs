@@ -49,7 +49,7 @@ namespace P2_BDE_Events.Controllers.Organisateur
             };
 
             string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
-            _httpContextAccessor.HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
+            HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
             return View("Views/Organisateur/CreerEvenementSurMesure.cshtml", nouveauEvent);
         }
