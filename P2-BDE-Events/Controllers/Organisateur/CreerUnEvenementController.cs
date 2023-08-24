@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
@@ -22,23 +21,32 @@ namespace P2_BDE_Events.Controllers.Organisateur
             evenementService = new EvenementService();
         }
 
-        public IActionResult ChoixCreation()
+        [HttpGet]
+        public IActionResult CreerEvenementSurMesure1()
         {
-            return View("Views/Organisateur/ChoixCreation.cshtml");
+
+            var model = new Etape1ViewModel();
+            return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", model);
         }
 
-        public IActionResult CreerEvenementSurMesure()
+        [HttpPost]
+        public IActionResult CreerEvenementSurMesure1(Etape1ViewModel model)
         {
-            List<SelectListItem> typeEvenements = new List<SelectListItem>();
-
-            foreach (TypeEvenement type in Enum.GetValues(typeof(TypeEvenement)))
+            if (ModelState.IsValid)
             {
-                SelectListItem selectList = new SelectListItem() { 
-                    Text = type.ToString(), 
-                    Value = type.ToString() 
-                };
-                typeEvenements.Add(selectList);
+                HttpContext.Session.SetString("Etape1Data", JsonConvert.SerializeObject(model));
+                return RedirectToAction("CreerEvenementSurMesure2");
             }
+
+            return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", model);
+        }
+
+        [HttpGet]
+        public IActionResult CreerEvenementSurMesure2()
+        {
+            var model = new Etape2ViewModel();
+            return View("~/Views/Organisateur/CreerEvenementSurMesure2.cshtml", model);
+        }
 
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
@@ -49,7 +57,11 @@ namespace P2_BDE_Events.Controllers.Organisateur
             string serializedEnementViewModel = JsonConvert.SerializeObject(nouveauEvent);
             HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
-            return View("Views/Organisateur/CreerEvenementSurMesure.cshtml", nouveauEvent);
+        [HttpGet]
+        public IActionResult CreerEvenementSurMesure3()
+        {
+            var model = new Etape3ViewModel();
+            return View("~/Views/Organisateur/CreerEvenementSurMesure3.cshtml", model);
         }
 
         [HttpPost]
@@ -65,8 +77,9 @@ namespace P2_BDE_Events.Controllers.Organisateur
 
             HttpContext.Session.SetString("EventViewModel", serializedEnementViewModel);
 
-            return RedirectToAction("CreerEvenementSurMesure2");
-        }
+            HttpContext.Session.Remove("Etape1Data");
+            HttpContext.Session.Remove("Etape2Data");
+            HttpContext.Session.Remove("Etape3Data");
 
         public IActionResult CreerEvenementSurMesure2()
         {
@@ -158,4 +171,3 @@ namespace P2_BDE_Events.Controllers.Organisateur
         }
     }
 }
-

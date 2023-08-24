@@ -15,23 +15,20 @@ namespace P2_BDE_Events
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.LoginPath = "/Login/Index";
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login/Index";
+                });
 
-            });
             services.AddControllersWithViews();
 
-            services.AddDistributedMemoryCache(); // You can replace this with a different distributed cache provider in production
+            services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(60); // Set the session timeout
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -41,7 +38,6 @@ namespace P2_BDE_Events
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -81,4 +77,5 @@ namespace P2_BDE_Events
             });
         }
     }
+
 }
