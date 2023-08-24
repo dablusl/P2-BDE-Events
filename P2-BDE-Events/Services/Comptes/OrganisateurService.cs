@@ -16,12 +16,12 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        //public int CreerOrganisateur(Organisateur organisateur)
-        //{
-        //    _bddContext.Organisateurs.Add(organisateur);
-        //    _bddContext.SaveChanges();
-        //    return organisateur.Id;
-        //}
+        public int CreerOrganisateur(Organisateur organisateur)
+        {
+            _bddContext.Organisateurs.Add(organisateur);
+            _bddContext.SaveChanges();
+            return organisateur.Id;
+        }
 
         //public void ModifierOrganisateur(int id, Organisateur modifications)
         //{

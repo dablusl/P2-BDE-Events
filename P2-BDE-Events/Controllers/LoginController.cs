@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Http;
 
 namespace P2_BDE_Events.Controllers
 {
@@ -102,12 +104,11 @@ namespace P2_BDE_Events.Controllers
             {
                 viewModel.Compte.Profil = viewModel.SelectedProfile;
                 int id = CompteService.AjouterCompte(viewModel.Compte);
-                        
-
 
                 // methode des cookies à supprimer pour rediriger vers page connexion après création
                 var userClaims = new List<Claim>()
                 {
+                   //new Claim(ClaimTypes.NameIdentifier, viewModel.Compte.Id),
                    new Claim(ClaimTypes.Email, viewModel.Compte.Email),
                    new Claim(ClaimTypes.Role, viewModel.Compte.Profil),
                 };
@@ -115,7 +116,15 @@ namespace P2_BDE_Events.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
                 HttpContext.SignInAsync(userPrincipal);
                 // jusqu'ici
-                return Redirect("/");
+
+                HttpContext.Session.SetString("iDCompte", id.ToString());
+
+                if(viewModel.Compte.Profil == "Organisateur")
+                    return RedirectToAction("CreaCompteOrga");
+                if (viewModel.Compte.Profil == "Prestataire")
+                    return View("/Login/CreaComptePresta");
+                if (viewModel.Compte.Profil == "Participant")
+                    return View("/Login/CreaCompteParticip");
             }
 
             {
@@ -129,8 +138,34 @@ namespace P2_BDE_Events.Controllers
 
                 return View(viewModel);
             }
+        }
+       
+       public IActionResult CreaCompteOrga()
+        {
+            Compte compte = CompteService.ObtenirCompte(HttpContext.Session.GetString("iDCompte"));
+            CreaCompteOrgaViewModel viewModel = new CreaCompteOrgaViewModel
+            {
+                Compte = compte,
+                Organisateur = new Organisateur
+                {
+                    Compte = compte
+                }
+            };
 
-
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult CreaCompteOrga(CreaCompteOrgaViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+                viewModel.Organisateur.CompteId = int.Parse(HttpContext.Session.GetString("iDCompte"));
+                OrganisateurService.CreerOrganisateur(viewModel.Organisateur);
+                
+                return Redirect("/");
+            }
+            return View(viewModel);
         }
 
         public ActionResult Logout()

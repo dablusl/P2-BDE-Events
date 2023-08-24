@@ -32,6 +32,15 @@ namespace P2_BDE_Events
 
             services.AddControllersWithViews();
             services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddHttpContextAccessor();
 
             //services.AddAuthorization(options =>
             //{
@@ -40,7 +49,7 @@ namespace P2_BDE_Events
             //    options.AddPolicy("RequireRolePresta", policy => policy.RequireRole("Prestataire"));
             //    options.AddPolicy("RequireRoleParticip", policy => policy.RequireRole("Participant"));
             //});
-            
+
 
         }
 
@@ -62,6 +71,7 @@ namespace P2_BDE_Events
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             using (BDDContext ctx = new BDDContext())
             {

@@ -1,0 +1,44 @@
+﻿@model P2_BDE_Events.ViewModels.CreaCompteOrgaViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<section class="page-section portfolio mt-5">
+
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Compléter mon compte</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            @*<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>*@
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor( m => m.Compte.Email, @Model.Compte.Email)
+                    @Html.HiddenFor( m => m.Compte.MotDePasse, @Model.Compte.MotDePasse)
+                    //@Html.HiddenFor( m => m.Organisateur.Compte, @Model.Compte.Id)
+                    <div>
+                        @Html.LabelFor(m => m.Compte.Nom)
+                        @Html.TextBoxFor(m => m.Compte.Nom)
+                        @Html.ValidationMessageFor(m => m.Compte.Nom)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Compte.Prenom)
+                        @Html.TextBoxFor(m => m.Compte.Prenom)
+                        @Html.ValidationMessageFor(m => m.Compte.Prenom)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Organisateur.NomBDE)
+                        @Html.TextBoxFor(m => m.Organisateur.NomBDE)
+                        @Html.ValidationMessageFor(m => m.Organisateur.NomBDE)
+                    </div>
+                    
+                    <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>
