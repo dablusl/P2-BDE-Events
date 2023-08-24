@@ -73,6 +73,7 @@ namespace P2_BDE_Events.Services.Comptes
             return compte.Id;
         }
 
+
         public int AjouterCompte(string email, string password)
         {
             string motDePasse = EncodeMD5(password);

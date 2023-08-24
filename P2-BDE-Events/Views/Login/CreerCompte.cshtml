@@ -17,14 +17,14 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                @using (Html.BeginForm())
-                {
-                    <div>
+@using (Html.BeginForm())
+{
+    <div>
                         @Html.LabelFor(m => m.Compte.Email)
                         @Html.TextBoxFor(m => m.Compte.Email)
                         @Html.ValidationMessageFor(m => m.Compte.Email)
-                    </div>
-                    <div>
+    </div>
+    <div>
                         @Html.LabelFor(m => m.Compte.MotDePasse, "Mot de passe")
                         @Html.PasswordFor(m => m.Compte.MotDePasse)
                         @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
@@ -33,9 +33,9 @@
                         @Html.LabelFor(m => m.SelectedProfile, "Profil" )
                         @Html.DropDownListFor(m => m.SelectedProfile , new SelectList(Model.AvailableProfiles, "Value", "Text"), "Choisisez votre profil", new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.SelectedProfile )
-                    </div>
+    </div>
                     <button class="btn btn-primary btn-xl" type="submit">Créer</button>
-                }
+}
             </div>
         </div>
     </div>

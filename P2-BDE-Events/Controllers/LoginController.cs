@@ -45,14 +45,17 @@ namespace P2_BDE_Events.Controllers
         [HttpPost]
         public IActionResult Index(CompteViewModel viewModel, string returnUrl)
         {
+            Console.WriteLine("Avant le IsValid");
             if (ModelState.IsValid)
             {
+                Console.WriteLine("On lance la récupération du compte");
 
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
 
 
                 if (compte != null)    
                 {
+                    Console.WriteLine("On a récupéré un compte");
                     var userClaims = new List<Claim>()
                     {
                        new Claim(ClaimTypes.Email, compte.Email),
