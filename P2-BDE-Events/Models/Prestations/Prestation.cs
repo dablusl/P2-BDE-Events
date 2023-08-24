@@ -4,7 +4,7 @@ namespace P2_BDE_Events.Models.Prestations
 {
     public class Prestation
     {
-        public int IdPrestation { get; set; }
+        public int Id { get; set; }
         public string Titre { get; set; }
         public int CapaciteMax { get; set; }
         public decimal Tarif { get; set; }
