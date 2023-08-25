@@ -226,7 +226,7 @@ namespace P2_BDE_Events.DataAccessLayer
          new Prestation
          {
              Id = 1,
-             Titre = "Ma Prestation",
+             Titre = "Une salle pour vos evenement",
              Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
              CapaciteMax = 10,
              Tarif = 100,
@@ -250,7 +250,7 @@ namespace P2_BDE_Events.DataAccessLayer
              new Prestation
             {
                 Id = 3,
-                Titre = "Ma Prestation",
+                Titre = "Tratieur pour vos papille",
                 Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
                 CapaciteMax = 300,
                 Tarif = 1000,
