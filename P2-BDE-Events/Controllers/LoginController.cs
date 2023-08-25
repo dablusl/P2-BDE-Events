@@ -5,13 +5,11 @@ using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.ViewModels;
 using System.Collections.Generic;
 using System.Security.Claims;
-using P2_BDE_Events.Models;
-using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Services;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
-
+using P2_BDE_Events.Models.Compte;
 
 namespace P2_BDE_Events.Controllers
 
@@ -55,7 +53,7 @@ namespace P2_BDE_Events.Controllers
                 Console.WriteLine("On lance la récupération du compte");
 
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
-
+                
 
                 if (compte != null)
                 {

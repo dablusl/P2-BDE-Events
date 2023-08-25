@@ -70,12 +70,10 @@ namespace P2_BDE_Events
 
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseSession();
 
             app.UseRouting();
-
-
+            app.UseAuthorization();
+            app.UseSession();
             using (BDDContext ctx = new BDDContext())
             {
                 ctx.InitializeDb();

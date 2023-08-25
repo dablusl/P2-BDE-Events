@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace P2_BDE_Events.Controllers.Participant
+namespace P2_BDE_Events.Controllers.ParticipantControllers
 {
     public class MesEvenementsController : Controller
     {
