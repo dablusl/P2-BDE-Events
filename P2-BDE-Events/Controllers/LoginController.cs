@@ -167,7 +167,7 @@ namespace P2_BDE_Events.Controllers
         {
             if (ModelState.IsValid)
             {
-                //CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+                CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
                 //viewModel.Organisateur.Participant.Compte = CompteService.ObtenirCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
                 OrganisateurService.CreerOrganisateur(viewModel.Organisateur, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
@@ -191,7 +191,7 @@ namespace P2_BDE_Events.Controllers
         {
             if (ModelState.IsValid)
             {
-                //CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+                CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
                // viewModel.Compte = CompteService.ObtenirCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
                 ParticipantService.CreerParticipant(viewModel, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
@@ -232,7 +232,7 @@ namespace P2_BDE_Events.Controllers
         {
             if (ModelState.IsValid)
             {
-                //CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+                CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
                 //viewModel.Prestataire.CompteId = int.Parse(HttpContext.Session.GetString("iDCompte"));
                 viewModel.Prestataire.TypeActivite = string.Join(", ", viewModel.SelectedServiceTypes);
 
