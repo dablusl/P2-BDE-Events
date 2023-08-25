@@ -4,10 +4,22 @@
 @{
     Layout = "~/Views/Shared/_LayoutVisitor.cshtml";
 }
+@model P2_BDE_Events.ViewModels.ListePrestationsViewModel
 
 <section class="avis-utilisateurs">
     <h1>On est forts, très forts</h1>
     <div class="card-avis-container">
         <p>ICI AJOUTER  DES AVIS POSITIFS DE NOS UTILSIATEURS</p>
     </div>
+</section>
+
+
+<section>
+    <h1>Toutes les prestations</h1>
+    <ul>
+        @foreach (var prestation in Model.Prestations)
+        {
+            <li>@prestation.Titre - @prestation.Tarif</li>
+        }
+    </ul>
 </section>
