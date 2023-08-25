@@ -281,8 +281,9 @@ namespace P2_BDE_Events.DataAccessLayer
             });
 
 
-            this.FacturePrestation.AddRange(
+            this.FacturePrestations.AddRange(
                  new FacturePrestation
+
                  {
                      Id = 1,
                      NumeroFacture = 20230101,

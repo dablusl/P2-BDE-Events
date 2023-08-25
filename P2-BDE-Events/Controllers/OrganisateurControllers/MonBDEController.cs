@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace P2_BDE_Events.Controllers.Participant
+namespace P2_BDE_Events.Controllers.OrganisateurControllers
 {
-    public class MonCompteController : Controller
+    public class MonBDEController : Controller
     {
         public IActionResult Index()
         {

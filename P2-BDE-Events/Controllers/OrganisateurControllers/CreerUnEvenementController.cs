@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace P2_BDE_Events.Controllers.Organisateur
+namespace P2_BDE_Events.Controllers.OrganisateurControllers
 {
     public class CreerUnEvenementController : Controller
     {
