@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace P2_BDE_Events.Controllers
 {
@@ -8,5 +9,11 @@ namespace P2_BDE_Events.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Organisateur")]
+        public IActionResult testaccesprofil()
+        {
+            return View();
+        }
+
     }
 }

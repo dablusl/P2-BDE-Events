@@ -1,0 +1,83 @@
+﻿@model P2_BDE_Events.ViewModels.CreaComptePrestaViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<section class="page-section portfolio mt-5">
+
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Compléter mon compte</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            @*<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>*@
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                @using (Html.BeginForm())
+                {
+                    @Html.HiddenFor( m => m.Compte.Email, @Model.Compte.Email)
+                    @Html.HiddenFor( m => m.Compte.MotDePasse, @Model.Compte.MotDePasse)
+                    //@Html.HiddenFor( m => m.Organisateur.Compte, @Model.Compte.Id)
+                    <div>
+                        @Html.LabelFor(m => m.Compte.Nom)
+                        @Html.TextBoxFor(m => m.Compte.Nom)
+                        @Html.ValidationMessageFor(m => m.Compte.Nom)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Compte.Prenom)
+                        @Html.TextBoxFor(m => m.Compte.Prenom)
+                        @Html.ValidationMessageFor(m => m.Compte.Prenom)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Compte.NumeroTelephone, "Votre numéro de téléphone")
+                        @Html.TextBoxFor(m => m.Compte.NumeroTelephone)
+                        @Html.ValidationMessageFor(m => m.Compte.NumeroTelephone)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Prestataire.Adresse, "Adresse de votre établissement")
+                        @Html.TextBoxFor(m => m.Prestataire.Adresse)
+                        @Html.ValidationMessageFor(m => m.Prestataire.Adresse)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Prestataire.RaisonSocial, "Votre Raison Social")
+                        @Html.TextBoxFor(m => m.Prestataire.RaisonSocial)
+                        @Html.ValidationMessageFor(m => m.Prestataire.RaisonSocial)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Prestataire.NumeroSiret, "Votre numéro Siret")
+                        @Html.TextBoxFor(m => m.Prestataire.NumeroSiret)
+                        @Html.ValidationMessageFor(m => m.Prestataire.NumeroSiret)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Prestataire.TypeActivite, "Veuillez séléctionnez le service proposé (plusieurs choix possible)")
+                    </div>
+                    @foreach (var serviceType in Model.AvailableServiceTypes ?? new List<SelectListItem>())
+                    {
+                        <div>
+                            <input type="checkbox" id="@serviceType.Value" name="SelectedServiceTypes" value="@serviceType.Value"
+                            @(Model.SelectedServiceTypes?.Contains(serviceType.Value) ?? false ? "checked" : "")>
+                            <label for="@serviceType.Value">@serviceType.Text</label>
+                        </div>
+                    }
+@*                    @Html.ValidationMessageFor(m => m.Prestataire.TypeActivite)
+*@                    <div>
+                        @Html.LabelFor(m => m.Prestataire.ZoneActivite, "Ville, département ou région où vous exercez votre activité (sur site ou en déplacement)")
+                        @Html.TextBoxFor(m => m.Prestataire.ZoneActivite)
+                        @Html.ValidationMessageFor(m => m.Prestataire.ZoneActivite)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Prestataire.Presentation, "Vous pouvez écrire ici une brève présentation qui sera visible par vos futurs clients")
+                        @Html.TextAreaFor(m => m.Prestataire.Presentation)
+                        @Html.ValidationMessageFor(m => m.Prestataire.Presentation)
+                    </div>
+
+
+
+                    <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>

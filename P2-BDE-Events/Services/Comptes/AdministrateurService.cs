@@ -14,46 +14,46 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        public int CreerAdministrateur(Administrateur administrateur)
-        {
-            _bddContext.Organisateurs.Add(administrateur);
-            _bddContext.SaveChanges();
-            return administrateur.Id;
-        }
+        //public int CreerAdministrateur(Administrateur administrateur)
+        //{
+        //    _bddContext.Organisateurs.Add(administrateur);
+        //    _bddContext.SaveChanges();
+        //    return administrateur.Id;
+        //}
 
-        public void ModifierAdministrateur(int id, Administrateur modifications)
-        {
-            Administrateur cible = _bddContext.Administrateurs.Find(id);
-            if (cible != null)
-            {
-                cible.Email = modifications.Email;
-                cible.Prenom = modifications.Prenom;
-                cible.Nom = modifications.Nom;
-                cible.NumeroTelephone = modifications.NumeroTelephone;
+        //public void ModifierAdministrateur(int id, Administrateur modifications)
+        //{
+        //    Administrateur cible = _bddContext.Administrateurs.Find(id);
+        //    if (cible != null)
+        //    {
+        //        cible.Email = modifications.Email;
+        //        cible.Prenom = modifications.Prenom;
+        //        cible.Nom = modifications.Nom;
+        //        cible.NumeroTelephone = modifications.NumeroTelephone;
 
-                _bddContext.SaveChanges();
-            }
-        }
+        //        _bddContext.SaveChanges();
+        //    }
+        //}
 
-        public Administrateur ObtenirAdministrateur(int id)
-        {
-            return _bddContext.Administrateurs.Find(id);
-        }
+        //public Administrateur ObtenirAdministrateur(int id)
+        //{
+        //    return _bddContext.Administrateurs.Find(id);
+        //}
 
-        public List<Administrateur> ObtenirTousLesAdministrateurs()
-        {
-            return _bddContext.Administrateurs.ToList();
-        }
+        //public List<Administrateur> ObtenirTousLesAdministrateurs()
+        //{
+        //    return _bddContext.Administrateurs.ToList();
+        //}
 
-        public void SupprimerAdministrateur(int id)
-        {
-            Administrateur cible = _bddContext.Administrateurs.Find(id);
-            if (cible != null)
-            {
-                _bddContext.Administrateurs.Remove(cible);
-                _bddContext.SaveChanges();
-            }
-        }
+        //public void SupprimerAdministrateur(int id)
+        //{
+        //    Administrateur cible = _bddContext.Administrateurs.Find(id);
+        //    if (cible != null)
+        //    {
+        //        _bddContext.Administrateurs.Remove(cible);
+        //        _bddContext.SaveChanges();
+        //    }
+        //}
 
         public void Dispose()
         {

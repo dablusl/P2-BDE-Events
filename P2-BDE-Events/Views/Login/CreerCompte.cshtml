@@ -1,0 +1,42 @@
+﻿@model P2_BDE_Events.ViewModels.CreationCompteViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+<section class="page-section portfolio mt-5">
+
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Création de compte</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            @*<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>*@
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+@using (Html.BeginForm())
+{
+    <div>
+                        @Html.LabelFor(m => m.Compte.Email)
+                        @Html.TextBoxFor(m => m.Compte.Email)
+                        @Html.ValidationMessageFor(m => m.Compte.Email)
+    </div>
+    <div>
+                        @Html.LabelFor(m => m.Compte.MotDePasse, "Mot de passe")
+                        @Html.PasswordFor(m => m.Compte.MotDePasse)
+                        @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.SelectedProfile, "Profil" )
+                        @Html.DropDownListFor(m => m.SelectedProfile , new SelectList(Model.AvailableProfiles, "Value", "Text"), "Choisisez votre profil", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SelectedProfile )
+    </div>
+                    <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+}
+            </div>
+        </div>
+    </div>
+</section>
