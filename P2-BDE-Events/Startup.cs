@@ -15,22 +15,29 @@ namespace P2_BDE_Events
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.LoginPath = "/Login/Index";
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login/Index";
+                });
 
-            });
             services.AddControllersWithViews();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddHttpContextAccessor();
             services.AddMvc().AddRazorRuntimeCompilation();
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -44,9 +51,10 @@ namespace P2_BDE_Events
             }
 
             app.UseStaticFiles();
-            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+            app.UseRouting();
 
             using (BDDContext ctx = new BDDContext())
             {
@@ -56,9 +64,18 @@ namespace P2_BDE_Events
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "organisateur",
+                    pattern: "Organisateur/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "participant",
+                    pattern: "Participant/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
             });
         }
     }
+
 }

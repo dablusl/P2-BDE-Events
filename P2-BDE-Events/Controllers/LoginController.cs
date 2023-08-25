@@ -9,7 +9,9 @@ using P2_BDE_Events.Models;
 using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Services;
 
+
 namespace P2_BDE_Events.Controllers
+
 {
     public class LoginController : Controller
     {
@@ -77,7 +79,7 @@ namespace P2_BDE_Events.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreerCompteOrganisateur(Organisateur utilisateur)
+        public IActionResult CreerCompteOrganisateur(P2_BDE_Events.Models.Compte.Organisateur utilisateur)
         {
             if (ModelState.IsValid)
             {

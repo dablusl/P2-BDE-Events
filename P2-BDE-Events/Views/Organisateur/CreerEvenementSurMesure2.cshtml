@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+@section Header {
+
+}
+
+@model P2_BDE_Events.ViewModels.EvenementViewModel
+<!--model P2_BDE_Events.ViewModels.Etape1ViewModel-->
+
+
+<form asp-action="CreerEvenementSurMesure2" method="post">
+    <div class="form-group">
+        <!-- Gestion region,localisation ??? etc... -->
+        
+        <div class="form-group">
+            <label for="Date">Date de l'événement</label>
+            <input type="datetime-local" class="form-control" id="Evenement.DateEvenement" name="Evenement.DateEvenement" value="">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Suivant</button>
+</form>
+<h1>Quand et Où ?</h1>
+
+
+
+

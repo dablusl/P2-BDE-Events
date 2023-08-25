@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Participant/EvenementsTermines.css">
+
+@section Header {
+    <ul>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Evènements terminés</li>
+        <li onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Prochains évènements</li>
+        <li onclick="window.location.href = '@Url.Action("EvenementsInteressant", "MesEvenements", new { area = "Participant" })'">Evènements intéréssants</li>
+    </ul>
+}
+
+<p>Vous n'avez aucun évènement terminé</p>
+<button class="rejoindreEvenement" onclick="window.location.href = '@Url.Action("AgendaEvenement", "Agenda", new { area = "Participant" })'">Rejoindre un évènement</button>
