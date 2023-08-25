@@ -111,7 +111,6 @@ namespace P2_BDE_Events.Controllers
                 // methode des cookies à supprimer pour rediriger vers page connexion après création
                 var userClaims = new List<Claim>()
                 {
-                   //new Claim(ClaimTypes.NameIdentifier, viewModel.Compte.Id),
                    new Claim(ClaimTypes.Email, viewModel.Compte.Email),
                    new Claim(ClaimTypes.Role, viewModel.Compte.Profil),
                 };
@@ -168,7 +167,6 @@ namespace P2_BDE_Events.Controllers
             if (ModelState.IsValid)
             {
                 CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
-                //viewModel.Organisateur.Participant.Compte = CompteService.ObtenirCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
                 OrganisateurService.CreerOrganisateur(viewModel.Organisateur, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
                 return Redirect("/");
@@ -192,7 +190,6 @@ namespace P2_BDE_Events.Controllers
             if (ModelState.IsValid)
             {
                 CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
-               // viewModel.Compte = CompteService.ObtenirCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
                 ParticipantService.CreerParticipant(viewModel, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
                 return Redirect("/");
@@ -233,7 +230,6 @@ namespace P2_BDE_Events.Controllers
             if (ModelState.IsValid)
             {
                 CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
-                //viewModel.Prestataire.CompteId = int.Parse(HttpContext.Session.GetString("iDCompte"));
                 viewModel.Prestataire.TypeActivite = string.Join(", ", viewModel.SelectedServiceTypes);
 
                 PrestataireService.CreerPrestataire(viewModel.Prestataire, int.Parse(HttpContext.Session.GetString("iDCompte")));

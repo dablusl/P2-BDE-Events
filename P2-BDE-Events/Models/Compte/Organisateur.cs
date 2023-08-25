@@ -6,7 +6,7 @@ namespace P2_BDE_Events.Models.Compte
     public class Organisateur
     {
         public int Id { get; set; }
-        //public int ParticipantId { get; set; }
+
         public virtual Participant Participant { get; set; }
 
 
