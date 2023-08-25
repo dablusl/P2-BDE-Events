@@ -23,12 +23,15 @@ namespace P2_BDE_Events.Controllers
         private OrganisateurService OrganisateurService;
         private CompteService CompteService;
         private AuthentificationService AuthentificationService;
+        private ParticipantService ParticipantService;
+        private PrestataireService PrestataireService;
         public LoginController()
         {
             OrganisateurService = new OrganisateurService();
             CompteService = new CompteService();
             AuthentificationService = new AuthentificationService();
-
+            ParticipantService = new ParticipantService();
+            PrestataireService = new PrestataireService();
         }
         [HttpGet]
         public IActionResult Index()
@@ -55,7 +58,7 @@ namespace P2_BDE_Events.Controllers
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
 
 
-                if (compte != null)    
+                if (compte != null)
                 {
                     Console.WriteLine("On a récupéré un compte");
                     var userClaims = new List<Claim>()
@@ -119,12 +122,12 @@ namespace P2_BDE_Events.Controllers
 
                 HttpContext.Session.SetString("iDCompte", id.ToString());
 
-                if(viewModel.Compte.Profil == "Organisateur")
+                if (viewModel.Compte.Profil == "Organisateur")
                     return RedirectToAction("CreaCompteOrga");
                 if (viewModel.Compte.Profil == "Prestataire")
-                    return View("/Login/CreaComptePresta");
+                    return RedirectToAction("CreaComptePresta");
                 if (viewModel.Compte.Profil == "Participant")
-                    return View("/Login/CreaCompteParticip");
+                    return RedirectToAction("CreaCompteParticipant");
             }
 
             {
@@ -139,8 +142,8 @@ namespace P2_BDE_Events.Controllers
                 return View(viewModel);
             }
         }
-       
-       public IActionResult CreaCompteOrga()
+
+        public IActionResult CreaCompteOrga()
         {
             Compte compte = CompteService.ObtenirCompte(HttpContext.Session.GetString("iDCompte"));
             CreaCompteOrgaViewModel viewModel = new CreaCompteOrgaViewModel
@@ -148,8 +151,13 @@ namespace P2_BDE_Events.Controllers
                 Compte = compte,
                 Organisateur = new Organisateur
                 {
-                    Compte = compte
+                    Participant = new Participant
+                    {
+                        Compte = compte
+                    }
+                    
                 }
+                
             };
 
             return View(viewModel);
@@ -159,12 +167,80 @@ namespace P2_BDE_Events.Controllers
         {
             if (ModelState.IsValid)
             {
-                CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
-                viewModel.Organisateur.CompteId = int.Parse(HttpContext.Session.GetString("iDCompte"));
-                OrganisateurService.CreerOrganisateur(viewModel.Organisateur);
-                
+                //CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+                //viewModel.Organisateur.Participant.Compte = CompteService.ObtenirCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
+                OrganisateurService.CreerOrganisateur(viewModel.Organisateur, int.Parse(HttpContext.Session.GetString("iDCompte")));
+
                 return Redirect("/");
             }
+            return View(viewModel);
+        }
+        [HttpGet]
+        public IActionResult CreaCompteParticipant()
+        {
+            Compte compte = CompteService.ObtenirCompte(HttpContext.Session.GetString("iDCompte"));
+            Participant viewModel = new Participant
+            {
+                    Compte = compte
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult CreaCompteParticipant(Participant viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                //CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+               // viewModel.Compte = CompteService.ObtenirCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
+                ParticipantService.CreerParticipant(viewModel, int.Parse(HttpContext.Session.GetString("iDCompte")));
+
+                return Redirect("/");
+            }
+            return View(viewModel);
+        }
+
+        private List<SelectListItem> GetAvailableServiceTypes()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Restaurateur", Text = "Restaurateur" },
+                new SelectListItem { Value = "Photographe", Text = "Photographe" },
+                new SelectListItem { Value = "Vidéaste", Text = "Vidéaste" },
+                new SelectListItem { Value = "Lieu de réception", Text = "Lieu de réception" },
+                new SelectListItem { Value = "Service de sécurité", Text = "Service de sécurité" }
+            };
+        }
+        public IActionResult CreaComptePresta()
+        {
+            Compte compte = CompteService.ObtenirCompte(HttpContext.Session.GetString("iDCompte"));
+            CreaComptePrestaViewModel viewModel = new CreaComptePrestaViewModel
+            {
+                Compte = compte,
+                Prestataire = new Prestataire
+                {
+                    Compte = compte
+                },
+                AvailableServiceTypes = GetAvailableServiceTypes() 
+
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult CreaComptePresta(CreaComptePrestaViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                //CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
+                //viewModel.Prestataire.CompteId = int.Parse(HttpContext.Session.GetString("iDCompte"));
+                viewModel.Prestataire.TypeActivite = string.Join(", ", viewModel.SelectedServiceTypes);
+
+                PrestataireService.CreerPrestataire(viewModel.Prestataire, int.Parse(HttpContext.Session.GetString("iDCompte")));
+
+                return Redirect("/");
+            }
+            viewModel.AvailableServiceTypes = GetAvailableServiceTypes();
             return View(viewModel);
         }
 

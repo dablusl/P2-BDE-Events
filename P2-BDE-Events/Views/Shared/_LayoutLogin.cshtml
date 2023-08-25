@@ -24,12 +24,12 @@
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                 <div class="container">
                     @{
-                        if (User.Identity.IsAuthenticated)
-                        {
-                            <a class="navbar-brand" href="#page-top">Bonjour @User.Identity.Name</a>
+                        //if (User.Identity.IsAuthenticated)
+                        //{
+                        //    <a class="navbar-brand" href="#page-top">Bonjour @User.Identity.Name</a>
 
-                        }
-                        else
+                        //}
+                        //else
                         {
                             <a class="navbar-brand" href="#page-top">Bienvenue</a>
                         }
@@ -44,10 +44,10 @@
                             @{
                                 if (User.Identity.IsAuthenticated)
                                 {
-                                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Home/Index">Accueil</a></li>
+                                    //<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Home/Index">Accueil</a></li>
                                     //<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Sejour/Index">Séjours</a></li>
                                     //<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Vote/ListeSondages">Sondages</a></li>
-                                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Login/Deconnexion">Déconnexion</a></li>
+                                    //<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Login/Deconnexion">Déconnexion</a></li>
                                 }
                                 else
                                 {

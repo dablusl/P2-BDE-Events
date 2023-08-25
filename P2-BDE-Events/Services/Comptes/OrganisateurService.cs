@@ -16,8 +16,10 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        public int CreerOrganisateur(Organisateur organisateur)
+        public int CreerOrganisateur(Organisateur organisateur, int IdCompte)
         {
+            Compte compte = _bddContext.Comptes.Find(IdCompte);
+            organisateur.Participant.Compte = compte;
             _bddContext.Organisateurs.Add(organisateur);
             _bddContext.SaveChanges();
             return organisateur.Id;

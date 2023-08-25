@@ -14,12 +14,14 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        //public int CreerPrestataire(Prestataire prestataire)
-        //{
-        //    _bddContext.Prestataires.Add(prestataire);
-        //    _bddContext.SaveChanges();
-        //    return prestataire.Id;
-        //}
+        public int CreerPrestataire(Prestataire prestataire, int IdCompte)
+        {
+            Compte compte = _bddContext.Comptes.Find(IdCompte);
+            prestataire.Compte = compte;
+            _bddContext.Prestataires.Add(prestataire);
+            _bddContext.SaveChanges();
+            return prestataire.Id;
+        }
 
         //public void ModifierPrestataire(int id, Prestataire modifications)
         //{

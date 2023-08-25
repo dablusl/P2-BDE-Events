@@ -1,4 +1,4 @@
-﻿@model P2_BDE_Events.ViewModels.CreaCompteOrgaViewModel
+﻿@model P2_BDE_Events.Models.Compte.Participant
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
@@ -36,24 +36,18 @@
                         @Html.ValidationMessageFor(m => m.Compte.NumeroTelephone)
                     </div>
                     <div>
-                        @Html.LabelFor(m => m.Organisateur.Participant.Universite, "Nom de votre établissement")
-                        @Html.TextBoxFor(m => m.Organisateur.Participant.Universite)
-                        @Html.ValidationMessageFor(m => m.Organisateur.Participant.Universite)
+                        @Html.LabelFor(m => m.Universite, "Nom de votre établissement")
+                        @Html.TextBoxFor(m => m.Universite)
+                        @Html.ValidationMessageFor(m => m.Universite)
                     </div>
                     <div>
-                        @Html.LabelFor(m => m.Organisateur.Participant.NomBDE, "Nom de votre BDE")
-                        @Html.TextBoxFor(m => m.Organisateur.Participant.NomBDE)
-                        @Html.ValidationMessageFor(m => m.Organisateur.Participant.NomBDE)
+                        @Html.LabelFor(m => m.NomBDE, "Nom de votre BDE")
+                        @Html.TextBoxFor(m => m.NomBDE)
+                        @Html.ValidationMessageFor(m => m.NomBDE)
                     </div>
-                    <div>
-                        @Html.LabelFor(m => m.Organisateur.FonctionBDE, "Votre fonction au sein du BDE")
-                        @Html.TextBoxFor(m => m.Organisateur.FonctionBDE)
-                        @Html.ValidationMessageFor(m => m.Organisateur.FonctionBDE)
-                    </div>
-                   
 
 
-                    
+
                     <button class="btn btn-primary btn-xl" type="submit">Créer</button>
                 }
             </div>

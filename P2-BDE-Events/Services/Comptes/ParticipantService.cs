@@ -14,12 +14,14 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        //public int CreerParticipant(Participant participant)
-        //{
-        //    _bddContext.Participants.Add(participant);
-        //    _bddContext.SaveChanges();
-        //    return participant.Id;
-        //}
+        public int CreerParticipant(Participant participant, int IdCompte)
+        {
+            Compte compte = _bddContext.Comptes.Find(IdCompte);
+            participant.Compte = compte;
+            _bddContext.Participants.Add(participant);
+            _bddContext.SaveChanges();
+            return participant.Id;
+        }
 
         //public void ModifierParticipant(int id, Participant modifications)
         //{
