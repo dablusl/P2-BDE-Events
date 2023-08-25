@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.Models.Prestations;
+using P2_BDE_Events.Models.Prestations.Enums;
 using System;
 using P2_BDE_Events.Models.Evenement.Enums;
 using P2_BDE_Events.Models.Stats;
@@ -12,6 +14,8 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Organisateur> Organisateurs { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Prestataire> Prestataires { get; set; }
+        public DbSet<Prestation> Prestations { get; set; }
+        public DbSet<FacturePrestation> FacturePrestation { get; set; }
         public DbSet<Administrateur> Administrateurs { get; set; }
         public DbSet<Evenement> Evenements { get; set; }
         public DbSet<Litige> Litiges { get; set; }
@@ -19,7 +23,8 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<CommentaireEvenement> CommentaireEvenements { get; set; }
         public DbSet<CommentairePhoto> CommentairePhotos { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Avis> AvisUtilisateur { get; set; } 
+        public DbSet<Avis> AvisUtilisateur { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -217,7 +222,88 @@ namespace P2_BDE_Events.DataAccessLayer
                     Notation = 4.5,
                     IdAuthor = 5,
                 });
-            this.SaveChanges();
-        }
-    }
+            this.Prestations.AddRange(
+         new Prestation
+         {
+             Id = 1,
+             Titre = "Une salle pour vos evenement",
+             Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
+             CapaciteMax = 10,
+             Tarif = 100,
+             Calendrier = "Du 1er au 5 août",
+             Livraison = true,
+             Description = "Une description de la prestation",
+             Etat = EtatDePrestation.EnAttenteDeValidation
+         },
+            new Prestation
+            {
+                Id = 2,
+                Titre = "Votre Dj",
+                Type = Models.Prestations.Enums.TypeDePrestation.DJ,
+                CapaciteMax = 50,
+                Tarif = 200,
+                Calendrier = "Tout août",
+                Livraison = true,
+                Description = "Dj pour vos soirée",
+                Etat = EtatDePrestation.EnCours
+            },
+             new Prestation
+            {
+                Id = 3,
+                Titre = "Tratieur pour vos papille",
+                Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
+                CapaciteMax = 300,
+                Tarif = 1000,
+                Calendrier = "3eme weekend du mois",
+                Livraison = true,
+                Description = "Traiteur spécialisé en calamar",
+                Etat = EtatDePrestation.Annulee
+            });
+
+            this.FacturePrestation.AddRange(
+                 new FacturePrestation
+                 {
+                     Id = 1,
+                     NumeroFacture = 20230101,
+                     Date = new DateTime(2023, 01, 01),
+                     MontantHT = 1000,
+                     IdPrestation = 3 
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 2,
+                     NumeroFacture = 20230201,
+                     Date = new DateTime(2023, 02, 01),
+                     MontantHT = 2000,
+                     IdPrestation = 1
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 3,
+                     NumeroFacture = 20230506,
+                     Date = new DateTime(2023, 05, 06),
+                     MontantHT = 500,
+                     IdPrestation = 2
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 4,
+                     NumeroFacture = 20231011,
+                     Date = new DateTime(2023, 10, 11),
+                     MontantHT = 3000,
+                     IdPrestation = 3
+                 },
+                 new FacturePrestation
+                 {
+                     Id = 5,
+                     NumeroFacture = 20230706,
+                     Date = new DateTime(2023, 07, 06),
+                     MontantHT = 5000,
+                     IdPrestation = 1
+                 });
+
+                 this.SaveChanges();
+
+                }
+            }
 }

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="wwwroot\images\evenement\1\" />
     <Folder Include="wwwroot\images\evenement\2\" />
     <Folder Include="wwwroot\images\evenement\3\" />
