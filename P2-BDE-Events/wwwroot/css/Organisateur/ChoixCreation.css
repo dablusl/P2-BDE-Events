@@ -1,0 +1,135 @@
+﻿main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 200px;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    background: #07182E;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+    .card h2 {
+        z-index: 1;
+        color: white;
+        font-size: 2em;
+        position: absolute;
+        bottom: 210px;
+    }
+
+    .card p {
+        z-index: 1;
+        color: white;
+        font-size: 0.8em;
+    }
+
+.description {
+    position: absolute;
+    text-align: center;
+    bottom: auto;
+}
+
+.continuer {
+    position: absolute;
+    bottom: 10px;
+}
+
+    .continuer a {
+        color: white;
+    }
+
+.card::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+    height: 130%;
+    animation: rotBGimg 3s linear infinite;
+    transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    background: #07182E;
+    inset: 5px;
+    border-radius: 15px;
+}
+
+.card2 {
+    width: 150px;
+    height: 250px;
+    border-radius: 20px;
+    background: black;
+    position: relative;
+    padding: 1.8rem;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+}
+
+.card-details {
+    color: white;
+    height: 100%;
+    gap: .5em;
+    display: grid;
+    place-content: center;
+}
+
+.card-button {
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 1rem;
+    border: none;
+    background-color: red;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+}
+
+.text-body {
+    color: white;
+}
+
+/*Text*/
+.text-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/*Hover*/
+.card2:hover {
+    border-color: red;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+    .card2:hover .card-button {
+        transform: translate(-50%, 50%);
+        opacity: 1;
+    }

@@ -18,7 +18,6 @@ namespace P2_BDE_Events
 {
     public class Startup
     {
-       
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,10 +27,22 @@ namespace P2_BDE_Events
                     options.LoginPath = "/Login/Index";
                     options.LogoutPath = "/Home/Index";
                     options.AccessDeniedPath = "/Home/Index";
+
                 });
 
             services.AddControllersWithViews();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddHttpContextAccessor();
             services.AddMvc().AddRazorRuntimeCompilation();
+
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
@@ -42,19 +53,9 @@ namespace P2_BDE_Events
 
             services.AddHttpContextAccessor();
 
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("RequireRoleAdmin", policy => policy.RequireRole("Administrateur"));
-            //    options.AddPolicy("RequireRoleOrga", policy => policy.RequireRole("Organisateur"));
-            //    options.AddPolicy("RequireRolePresta", policy => policy.RequireRole("Prestataire"));
-            //    options.AddPolicy("RequireRoleParticip", policy => policy.RequireRole("Participant"));
-            //});
-
-
         }
 
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -68,10 +69,12 @@ namespace P2_BDE_Events
             }
 
             app.UseStaticFiles();
-            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
+
+            app.UseRouting();
+
 
             using (BDDContext ctx = new BDDContext())
             {
@@ -81,9 +84,18 @@ namespace P2_BDE_Events
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "organisateur",
+                    pattern: "Organisateur/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "participant",
+                    pattern: "Participant/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
             });
         }
     }
+
 }

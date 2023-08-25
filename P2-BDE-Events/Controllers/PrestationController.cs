@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using P2_BDE_Events.Models.Prestations;
+using P2_BDE_Events.Services.Prestations;
+using P2_BDE_Events.ViewModels;
+using System.Collections.Generic;
 
 namespace P2_BDE_Events.Controllers
 {
@@ -6,7 +10,15 @@ namespace P2_BDE_Events.Controllers
     {
         public IActionResult ToutesLesPrestations()
         {
-            return View();
+            using (PrestationService prestationService = new PrestationService())
+            {
+                ListePrestationsViewModel viewModel = new ListePrestationsViewModel
+                {
+                    Prestations = prestationService.ObtenirToutesLesPrestations()
+                };
+                return View(viewModel);
+            }           
         }
-    }
+    }    
 }
+

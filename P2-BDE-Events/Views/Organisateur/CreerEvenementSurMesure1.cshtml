@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+@section Header {
+
+}
+
+@model P2_BDE_Events.ViewModels.EvenementViewModel
+
+<!-- model P2_BDE_Events.ViewModels.Etape1ViewModel-->
+
+
+<form asp-action="CreerEvenementSurMesure1" method="post">
+    <div class="form-group">
+        <label for="Titre">Titre de l'événement</label>
+        <input type="text" class="form-control" id="Evenement.Titre" name="Evenement.Titre" value="">
+    </div>
+    
+    
+    <div class="form-group">
+        <label for="Theme">Thème de l'événement</label>
+        <select class="form-control" id="Evenement.Type" name="Evenement.Type">
+            @foreach (var eventType in Enum.GetValues(typeof(P2_BDE_Events.Models.Evenement.Enums.TypeEvenement)))
+            {
+                <!-- A voir-->
+                <option value="@eventType">@eventType</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Suivant</button>
+</form>

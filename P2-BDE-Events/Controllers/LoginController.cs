@@ -12,7 +12,9 @@ using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 
+
 namespace P2_BDE_Events.Controllers
+
 {
     public class LoginController : Controller
     {
@@ -99,6 +101,7 @@ namespace P2_BDE_Events.Controllers
         }
         [HttpPost]
         public IActionResult CreerCompte(CreationCompteViewModel viewModel)
+
         {
             if (ModelState.IsValid)
             {

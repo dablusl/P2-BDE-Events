@@ -10,8 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="~/image/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="~/css/_LayoutProfilOrganisateur.css">
+    <link rel="icon" href="/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/Participant/_LayoutParticipant.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
@@ -20,21 +20,18 @@
 
 <body>
     <header>
-
+        @RenderSection("Header")
         <div class="header-border"></div>
     </header>
 
     <nav>
-        <a href="mesEvenements.html">
-            <img src="/logo.png" alt="logoDuSite">
+        <a onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">
+            <img src="~/image/logo.png" alt="logoDuSite">
         </a>
         <ul>
-            <li><a href="mesEvenements.html" class="pageActive">Mes évènements</a></li>
-            <li><a href="nouvelEvenement.html">Nouvel évènement</a></li>
-            <li><a href="evenementAVenir.html">Evènement à venir</a></li>
-            <li><a href="prestataires.html">Prestataires</a></li>
-            <li><a href="messagesDePrestataire.html">Messages</a></li>
-            <li><a href="monBde.html">Mon BDE</a></li>
+            <li><a onclick="window.location.href = '/Participant/MesEvenements/ProchainsEvenements'">Mes évènements</a></li>
+            <li><a onclick="window.location.href = '/Participant/Agenda/AgendaEvenement'">Agenda évènements</a></li>
+            <li><a onclick="window.location.href = '/Participant/MonCompte/Parametre'">Mon Compte</a></li>
         </ul>
     </nav>
 
