@@ -8,11 +8,8 @@ using System.Security.Claims;
 using P2_BDE_Events.Models;
 using P2_BDE_Events.Models.Compte;
 using P2_BDE_Events.Services;
-using Microsoft.Extensions.Logging;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Http;
 
 namespace P2_BDE_Events.Controllers
