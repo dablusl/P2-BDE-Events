@@ -11,10 +11,10 @@ namespace P2_BDE_Events.Models.Evenement
         public EtatEvenement Etat { get; set; }
         public TypeEvenement Type { get; set; }
         public DateTime CreeLe { get; set; }
-        public DateTime DateEvenement { get; set; } // Ajoutez la propriété pour la date de l'événement
+        public DateTime DateEvenement { get; set; } 
         public DateTime DateLimiteInscription { get; set; }
         public string Description { get; set; }
-        public string CoverPhotoPath { get; set; } // Ajoutez la propriété pour l'affiche de l'événement
+        public string CoverPhotoPath { get; set; }
         public int MaxParticipants { get; set; }
         public int MinParticipants { get; set; }
         public int NbReservations { get; set; }

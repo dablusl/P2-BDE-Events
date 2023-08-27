@@ -27,6 +27,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Avis> AvisUtilisateur { get; set; }
         public DbSet<Compte> Comptes { get; set; }
+        public DbSet<LigneEvenement> LignesEvenement { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
