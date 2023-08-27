@@ -10,5 +10,12 @@ namespace P2_BDE_Events.Models.Evenement
         public EtatPhoto Etat {get; set; }
         public virtual Album Album { get; set; }
         public virtual Compte Author { get; set; }
+
+        public Photo(Album album, Compte author)
+        {
+            Album = album;
+            Author = author;
+            Etat = EtatPhoto.AFFICHE;
+        }
     }
 }

@@ -4,5 +4,10 @@
     {
         public int Id { get; set; }
         public virtual Photo Photo { get; set; }
+
+        public CommentairePhoto(Photo photo)
+        {
+            Photo = photo;
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace P2_BDE_Events.Models.Evenement
         public virtual Organisateur Organisateur{ get; set; }
         public virtual Album Album { get; set; }
 
+
+        public Evenement (Organisateur organisateur)
+        {
+            Organisateur = organisateur;
+        }
     }
 }
