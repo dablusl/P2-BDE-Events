@@ -10,6 +10,9 @@ using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using P2_BDE_Events.Models.Compte;
+using System.Numerics;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace P2_BDE_Events.Controllers
 
@@ -22,6 +25,7 @@ namespace P2_BDE_Events.Controllers
         private AuthentificationService AuthentificationService;
         private ParticipantService ParticipantService;
         private PrestataireService PrestataireService;
+        private AdministrateurService AdministrateurService;
         public LoginController()
         {
             OrganisateurService = new OrganisateurService();
@@ -29,6 +33,7 @@ namespace P2_BDE_Events.Controllers
             AuthentificationService = new AuthentificationService();
             ParticipantService = new ParticipantService();
             PrestataireService = new PrestataireService();
+            AdministrateurService = new AdministrateurService();
         }
         [HttpGet]
         public IActionResult Index()
@@ -53,7 +58,7 @@ namespace P2_BDE_Events.Controllers
                 Console.WriteLine("On lance la récupération du compte");
 
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
-                
+
 
                 if (compte != null)
                 {
@@ -88,11 +93,11 @@ namespace P2_BDE_Events.Controllers
             var viewModel = new CreationCompteViewModel
             {
                 AvailableProfiles = new List<SelectListItem>
-        {
+                {
                     new SelectListItem { Value = "Prestataire", Text = "Prestataire" },
                     new SelectListItem { Value = "Organisateur", Text = "BDE" },
                     new SelectListItem { Value = "Participant", Text = "Etudiant" }
-        }
+                }
             };
 
             return View(viewModel);
@@ -152,9 +157,9 @@ namespace P2_BDE_Events.Controllers
                     {
                         Compte = compte
                     }
-                    
+
                 }
-                
+
             };
 
             return View(viewModel);
@@ -177,7 +182,7 @@ namespace P2_BDE_Events.Controllers
             Compte compte = CompteService.ObtenirCompte(HttpContext.Session.GetString("iDCompte"));
             Participant viewModel = new Participant
             {
-                    Compte = compte
+                Compte = compte
             };
 
             return View(viewModel);
@@ -216,7 +221,7 @@ namespace P2_BDE_Events.Controllers
                 {
                     Compte = compte
                 },
-                AvailableServiceTypes = GetAvailableServiceTypes() 
+                AvailableServiceTypes = GetAvailableServiceTypes()
 
             };
 
@@ -236,6 +241,35 @@ namespace P2_BDE_Events.Controllers
             }
             viewModel.AvailableServiceTypes = GetAvailableServiceTypes();
             return View(viewModel);
+        }
+
+        [Authorize(Roles = "Administrateur")]
+        [HttpGet]
+        public IActionResult CreaCompteAdmin()
+        {
+            var viewModel = new CreaCompteAdminViewModel();
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Administrateur")]
+        [HttpPost]
+        public IActionResult CreaCompteAdmin(CreaCompteAdminViewModel viewModel)
+
+        {
+            if (ModelState.IsValid)
+            {
+                viewModel.Compte.Profil = "Administrateur";
+                CompteService.AjouterCompte(viewModel.Compte);
+                var administrateur = new Administrateur
+                {
+                    Compte = viewModel.Compte
+                };
+                AdministrateurService.CreerAdministrateur(administrateur, viewModel.Compte.Id);
+
+                return Redirect("/");
+            }
+            return View(viewModel);
+
         }
 
         public ActionResult Logout()
