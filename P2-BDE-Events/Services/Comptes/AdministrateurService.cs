@@ -14,12 +14,15 @@ namespace P2_BDE_Events.Services.Comptes
         {
             _bddContext = new BDDContext();
         }
-        //public int CreerAdministrateur(Administrateur administrateur)
-        //{
-        //    _bddContext.Organisateurs.Add(administrateur);
-        //    _bddContext.SaveChanges();
-        //    return administrateur.Id;
-        //}
+        public int CreerAdministrateur(Administrateur administrateur, int IdCompte)
+        {
+            using var dbContext = _bddContext;
+            Compte compte = _bddContext.Comptes.Find(IdCompte);
+            administrateur.Compte = compte;
+            _bddContext.Administrateurs.Add(administrateur);
+            _bddContext.SaveChanges();
+            return administrateur.Id;
+        }
 
         //public void ModifierAdministrateur(int id, Administrateur modifications)
         //{

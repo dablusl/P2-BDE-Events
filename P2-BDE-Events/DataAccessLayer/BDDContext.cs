@@ -7,6 +7,7 @@ using System;
 using P2_BDE_Events.Models.Evenement.Enums;
 using P2_BDE_Events.Models.Stats;
 using P2_BDE_Events.Services.Comptes;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
@@ -40,114 +41,31 @@ namespace P2_BDE_Events.DataAccessLayer
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
-            
-            this.Comptes.Add(new Compte
+
+            var adminCompte = new Compte
             {
+                Id = 1,
+                Email = "AdminAlpha",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Administrateur",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "010101010101",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+            this.Comptes.Add(adminCompte);
+            this.SaveChanges();
 
-                    Id = 1,
-                    Email = "pierre",
-                    MotDePasse = CompteService.EncodeMD5("rrrrr"),
-                    Profil = "Administrateur",
-                    Prenom = "Pierre",
-                    Nom = "Dupont",
-                    NumeroTelephone = "010101010101",
-                    PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
-                
-            });
+            // Associer l'administrateur au compte
+            var administrateur = new Administrateur
+            {
+                Id = 1,
+                Compte = adminCompte,
+            };
+            this.Administrateurs.Add(administrateur);
+            this.SaveChanges();
 
-            //this.Organisateurs.AddRange(
-                
-            //    new Organisateur
-            //    {
-      
-            //        Id = 5,
-            //        Email = "pierre.dupont@etu.univ-paris.com",
-            //        MotDePasse = "rrrrr",
-            //        Prenom = "Pierre",
-            //        Nom = "Dupont",
-            //        NumeroTelephone = "010101010101",
-            //        PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
-            //    },
-            //    new Organisateur
-            //    {
-            //        Id = 2,
-            //        Email = "michael.cera@etu.univ-nantes.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Michael",
-            //        Nom = "Cera",
-            //        NumeroTelephone = "+330712211221",
-            //        PhotoProfilePath = "/images/utilisateurs/5421c3ef22d1b.image.jpg"
-            //    },
-            //    new Organisateur
-            //    {
-            //        Id = 3,
-            //        Email = "maybe.funke@etu.univ-nantes.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Maybe",
-            //        Nom = "Funke",
-            //        NumeroTelephone = "+330712211221",
-            //        PhotoProfilePath = "/images/utilisateurs/5e795e773cf12ae5e5ef36b6b9d40a2e.jpg"
-            //    },
-            //    new Organisateur
-            //    {
-            //        Id = 4,
-            //        Email = "michael.scott@etu.univ-orleans.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Michael",
-            //        Nom = "Scott",
-            //        NumeroTelephone = "+330712211221",
-            //        PhotoProfilePath = "/images/utilisateurs/b44f223d3ae049249c7a00be21eb4c6a--ellie-kemper-unbreakable-kimmy-schmidt.jpg"
-            //    }
 
-            //);
-            //this.Participants.AddRange(
-            //    new Participant
-            //    {
-            //        Id = 8,
-            //        Email = "gonzalo.benites@etu.univ-marseille.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Gonzalo",
-            //        Nom = "Benites",
-            //        NumeroTelephone = "+330712211221"
-            //    },
-            //    new Participant
-            //    {
-            //        Id = 9,
-            //        Email = "maybe.funke@etu.univ-orleans.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Lucas",
-            //        Nom = "Dechaumet",
-            //        NumeroTelephone = "+330712211221"
-            //    },
-            //    new Participant
-            //    {
-            //        Id = 10,
-            //        Email = "ezaiah.funke@etu.univ-orleans.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Ezaiah",
-            //        Nom = "Scott",
-            //        NumeroTelephone = "+330712211221"
-            //    },
-            //    new Participant
-            //    {
-            //        Id = 11,
-            //        Email = "maybe.funke@etu.univ-orleans.com",
-            //        MotDePasse = "123.Csq2.&",
-            //        Prenom = "Thadé",
-            //        Nom = "Scott",
-            //        NumeroTelephone = "+330712211221"
-            //    });
-            //this.Administrateurs.AddRange(
-            //    new Administrateur
-            //    {
-            //        Id = 12,
-            //        Email = "admin@BDE-Events.com",
-            //        MotDePasse = "1234",
-            //        Prenom = "Emmanuelle",
-            //        Nom = "Hollande",
-            //        NumeroTelephone = "+330712211221",
-            //        PhotoProfilePath = "/images/utilisateurs/Dwight-the-office.jpg"
-            //    });
             this.Evenements.AddRange(
                 new Evenement
                 {

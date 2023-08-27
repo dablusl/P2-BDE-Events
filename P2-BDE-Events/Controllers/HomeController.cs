@@ -9,11 +9,5 @@ namespace P2_BDE_Events.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Organisateur")]
-        public IActionResult testaccesprofil()
-        {
-            return View();
-        }
-
     }
 }

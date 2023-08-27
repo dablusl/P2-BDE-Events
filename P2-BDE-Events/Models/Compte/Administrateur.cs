@@ -4,6 +4,5 @@
     {
         public int Id { get; set; }
         public virtual Compte Compte { get; set; }
-        public virtual Organisateur Organisateur { get; set; }
     }
 }
