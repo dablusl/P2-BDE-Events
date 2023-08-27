@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P2_BDE_Events.Models.Comptes;
+using System;
 
 namespace P2_BDE_Events.Models.Stats
 {
@@ -9,6 +10,6 @@ namespace P2_BDE_Events.Models.Stats
         public string Contenu { get; set; }
         public DateTime PublieLe { get; set; }
         public double Notation { get; set; }
-        public int IdAuthor { get; set; }
+        public virtual Compte Compte { get; set; }
     }
 }

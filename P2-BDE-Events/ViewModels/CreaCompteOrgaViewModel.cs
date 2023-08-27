@@ -1,4 +1,4 @@
-﻿using P2_BDE_Events.Models.Compte;
+﻿using P2_BDE_Events.Models.Comptes;
 
 namespace P2_BDE_Events.ViewModels
 {

@@ -9,7 +9,7 @@ using P2_BDE_Events.Services;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
-using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Models.Comptes;
 using System.Numerics;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
