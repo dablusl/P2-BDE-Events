@@ -1,6 +1,7 @@
 ﻿using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement.Enums;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace P2_BDE_Events.Models.Evenement
 {
@@ -20,13 +21,8 @@ namespace P2_BDE_Events.Models.Evenement
         public int NbReservations { get; set; }
         public int NbParticipants { get; set; }
         public double PrixBillet { get; set; }
+
+        [Required]
         public virtual Organisateur Organisateur{ get; set; }
-        public virtual Album Album { get; set; }
-
-
-        public Evenement (Organisateur organisateur)
-        {
-            this.Organisateur = organisateur;
-        }
     }
 }

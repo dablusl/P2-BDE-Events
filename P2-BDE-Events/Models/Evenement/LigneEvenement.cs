@@ -1,18 +1,16 @@
 ﻿using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace P2_BDE_Events.Models.Evenement
 {
     public class LigneEvenement
     {
         public virtual Prestation Prestation { get; set; }
+        [Required]
         public virtual Evenement Evenement { get; set; }
+        [Required]
         public TypeDePrestation Type { get; set; }
 
-        public LigneEvenement(Evenement evenement, TypeDePrestation type)
-        {
-            Evenement = evenement;
-            Type = type;
-        }
     }
 }

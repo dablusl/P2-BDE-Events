@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace P2_BDE_Events.Models.Prestations
 {
@@ -8,6 +9,7 @@ namespace P2_BDE_Events.Models.Prestations
         public int NumeroFacture { get; set; }
         public DateTime Date { get; set; }
         public decimal MontantHT { get; set; }
+        [Required]
         public Prestation Prestation { get; set; }
     }
 }

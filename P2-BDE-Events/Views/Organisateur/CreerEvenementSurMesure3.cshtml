@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
+@using P2_BDE_Events.Models.Prestations.Enums
 @model P2_BDE_Events.ViewModels.EvenementViewModel
 <!--model P2_BDE_Events.ViewModels.Etape1ViewModel-->
 
@@ -14,23 +15,21 @@
     <label for="NombreParticipants">Nombre de participants souhaité (max)</label>
     <input type="number" class="form-control" id="Evenement.NbParticipants" name="Evenement.NbParticipants" value="">
 
+    @foreach (var prestation in Model.Types)
+    {
+        <div class="form-check">
+            <input type="checkbox" class="@prestation.Key" id="@prestation.Key" name="Alcool" value="true" />
+            <label class="form-check-label" for="Alcool">Alcool</label>
+        </div>
+    }
 
+    <!--
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="Alcool" name="Alcool" value="true" />
         <label class="form-check-label" for="Alcool">Alcool</label>
     </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="Restauration" name="Restauration" value="true">
-        <label class="form-check-label" for="Restauration">Restauration</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="Securite" name="Securite" value="true">
-        <label class="form-check-label" for="Securite">Sécurité</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="Bar" name="Bar" value="true">
-        <label class="form-check-label" for="Bar">Bar</label>
-    </div>
+    -->
+
     <button type="submit" class="btn btn-primary">Suivant</button>
 </form>
 

@@ -36,7 +36,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         {
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
-                Evenement = new Evenement(organisateur),
+                Evenement = new Evenement { Organisateur = organisateur},
             };
 
             return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", nouveauEvent);
@@ -59,7 +59,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         {
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
-                Evenement = new Evenement(),
+                Evenement = new Evenement { Organisateur = organisateur },
             };
 
             return View("~/Views/Organisateur/CreerEvenementSurMesure2.cshtml", nouveauEvent);
@@ -85,7 +85,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         {
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
-                Evenement = new Evenement(),
+                Evenement = new Evenement { Organisateur = organisateur },
             };
             return View("~/Views/Organisateur/CreerEvenementSurMesure3.cshtml", nouveauEvent);
         }
@@ -98,10 +98,11 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                 EvenementViewModel savedEvent = GetEventSession();
 
                 savedEvent.Evenement.NbParticipants = model.Evenement.NbParticipants;
-                savedEvent.Alcool = model.Alcool;
-                savedEvent.Restauration = model.Restauration;
-                savedEvent.Securite = model.Securite;
-                savedEvent.Bar = model.Bar;
+
+                foreach ( var typePrestation in savedEvent.Types)
+                {
+                    savedEvent.Types[typePrestation.Key] = model.Types[typePrestation.Key];
+                }
 
                 SetEventSession(savedEvent);
 
@@ -114,7 +115,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         {
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
-                Evenement = new Evenement(),
+                Evenement = new Evenement { Organisateur = organisateur },
             };
 
             return View("Views/Organisateur/CreerEvenementSurMesure4.cshtml", nouveauEvent);
@@ -166,7 +167,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             return JsonConvert
                 .DeserializeObject<EvenementViewModel>(
                     HttpContext.Session.GetString("Event")
-                    ); ;
+                    ); 
         }
 
         public void SetEventSession(EvenementViewModel evenementViewModel)
