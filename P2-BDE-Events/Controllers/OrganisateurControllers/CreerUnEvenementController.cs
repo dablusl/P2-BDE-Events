@@ -18,6 +18,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
     [Authorize(Roles = "Organisateur")]
     public class CreerUnEvenementController : Controller
     {
+        private int idCompte;
         private EvenementService evenementService;
         private LigneEvenementService ligneEvenementService;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -27,6 +28,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             this.evenementService = new EvenementService();
             this.ligneEvenementService = new LigneEvenementService();
             this._webHostEnvironment = webHostEnvironment;
+            idCompte = int.Parse(HttpContext.Session.GetString("iDCompte"));
         }
 
         [HttpGet]
@@ -60,10 +62,9 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             if (ModelState.IsValid)
             {
                 EvenementViewModel savedEvent = GetEventSession();
-
                 savedEvent.Evenement.DateEvenement = model.Evenement.DateEvenement;
-
                 SetEventSession(savedEvent);
+
                 return RedirectToAction("CreerEvenementSurMesure3");
             }
             return View("~/Views/Organisateur/CreerEvenementSurMesure2.cshtml", model);
@@ -139,46 +140,31 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
         public int CreationEvenementBD(EvenementViewModel nouveauEvent)
         {
-            string idCompte = HttpContext.Session.GetString("iDCompte");
-            Compte compte = new CompteService().ObtenirCompte(idCompte);
-            Participant participant = new ParticipantService().ObtenirParticipant(compte);
-            Organisateur organisateur = new OrganisateurService().ObtenirOrganisateur(participant);
+            Organisateur organisateur = new OrganisateurService().GetOrganisateurParCompte(idCompte);
 
-
-            int idNouveauEvent = evenementService.CreerEvenement(GetEventSession().Evenement);
-            Evenement evenementCree = evenementService.ObtenirEvenement(idNouveauEvent);
-            evenementCree.CoverPhotoPath = SaveCoverPhoto(nouveauEvent, idNouveauEvent);
-            evenementCree.Organisateur = organisateur;
-            evenementService.ModifierEvenement(idNouveauEvent, evenementCree);
-
-            return idNouveauEvent;
+            return evenementService.CreerEvenement(
+                GetEventSession().Evenement,
+                organisateur.Id,
+                SaveCoverPhoto(nouveauEvent));
         }
 
         public void CreationLignesEvenement(int idEvenement)
-        {   
-            foreach( var type in GetEventSession().Types )
+        {
+            foreach (var type in GetEventSession().Types)
             {
                 if (type.Value)
                 {
-                    LigneEvenement nouvelleLigne = new LigneEvenement
-                    { 
-                        Type = type.Key
-                    };
-
-                    int idligne = ligneEvenementService.CreerLigneEvenement(nouvelleLigne);
-                    LigneEvenement novuelleLigne = ligneEvenementService.ObtenirLigneEvenement(idligne);
-                    ligneEvenementService.ModifierLigneEvenement(idligne, evenementService.ObtenirEvenement(idEvenement));
+                    ligneEvenementService.CreerLigneEvenement(type.Key, idEvenement);
                 }
-
             }
         }
 
-        public string SaveCoverPhoto(EvenementViewModel nouveauEvent, int idNouveauEvent)
+        public string SaveCoverPhoto(EvenementViewModel nouveauEvent)
         {
             if (nouveauEvent.CoverPhoto != null & nouveauEvent.CoverPhoto.Length > 0)
             {
                 string imageFileName = $"{Guid.NewGuid()}{Path.GetExtension(nouveauEvent.CoverPhoto.FileName)}";
-                string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "evenement", idNouveauEvent.ToString());
+                string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "evenement");
 
                 if (!Directory.Exists(folderPath))
                 {
