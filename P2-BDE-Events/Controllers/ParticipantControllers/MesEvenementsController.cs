@@ -19,5 +19,10 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
         {
             return View("Views/Participant/EvenementsInteressant.cshtml");
         }
+
+        public IActionResult ReserverUnEvenement()
+        {
+
+        }
     }
 }
