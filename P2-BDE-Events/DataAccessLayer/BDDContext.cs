@@ -28,6 +28,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Avis> AvisUtilisateur { get; set; }
         public DbSet<Compte> Comptes { get; set; }
         public DbSet<LigneEvenement> LignesEvenement { get; set; }
+        public DbSet<Reserver> Reservations { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,13 +37,25 @@ namespace P2_BDE_Events.DataAccessLayer
             string connectionString = $"server=localhost;user id=root;password={dbPassword};database=P2_BDE_Events";
             optionsBuilder.UseMySql(connectionString);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Reserver>()
+                .HasOne(r => r.Participant)
+                .WithMany(p => p.Reservations)
+                .HasForeignKey(r => r.ParticipantId);
 
-        //organisateurs, etudiants,
+            modelBuilder.Entity<Reserver>()
+                .HasOne(r => r.Evenement)
+                .WithMany(e => e.Reservations)
+                .HasForeignKey(r => r.EvenementId);
+        }
+        //Initiation différents comptes
         public void InitializeDb()
         {
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
 
+            //Compte Admin
             var adminCompte = new Compte
             {
                 Id = 1,
@@ -66,6 +79,78 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Administrateurs.Add(administrateur);
             this.SaveChanges();
 
+            //Compte Participant
+            var Participant1 = new Compte
+            {
+                Id = 2,
+                Email = "Participant1",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Participant",
+                Prenom = "Jon",
+                Nom = "LeFetar",
+                NumeroTelephone = "010206080901",
+            };
+            this.Comptes.Add(Participant1);
+            this.SaveChanges();
+
+            // Associer le participant au compte
+            var participant = new Participant
+            {
+                Id = 1,
+                Compte = Participant1,
+            };
+            this.Participants.Add(participant);
+            this.SaveChanges();
+            
+            //Compte Orga
+            var Orga1 = new Compte
+            {
+                Id = 3,
+                Email = "Orga1",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Organisateur",
+                Prenom = "Juan Carlos",
+                Nom = "L'Organisé",
+                NumeroTelephone = "01020645945",
+            };
+            this.Comptes.Add(Orga1);
+            this.SaveChanges();
+
+            // Associer le participant au compte
+            var orgaParticip = new Participant
+            {
+                Id = 2,
+                Compte = Orga1,
+            };
+            var organisateur = new Organisateur
+            {
+                Id = 1,
+                Participant = orgaParticip,
+            };
+            this.Organisateurs.Add(organisateur);
+            this.SaveChanges();
+
+            this.Evenements.Add(
+                new Evenement
+                {
+                    Id = 1,
+                    Titre = "Beer-pong LEA vs DROIT",
+                    Etat = EtatEvenement.PUBLIE,
+                    Type = TypeEvenement.SOIREE,
+                    CreeLe = new DateTime(2023, 09, 02, 10, 30, 20),
+                    DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
+                    DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
+                    Description = "Defend l'honneur de ta fac avec ton talent surhumain",
+                    CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
+                    MaxParticipants = 100,
+                    MinParticipants = 70,
+                    NbReservations = 0,
+                    NbParticipants = 0,
+                    PrixBillet = 8.5,
+                    Organisateur = organisateur,
+                });
+
+            
             /*
             this.Evenements.AddRange(
                 new Evenement

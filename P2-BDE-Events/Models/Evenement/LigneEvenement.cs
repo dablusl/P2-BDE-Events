@@ -8,7 +8,9 @@ namespace P2_BDE_Events.Models.Evenement
     {
         public int Id { get; set; }
         public virtual Prestation Prestation { get; set; }
+
         public virtual Evenement Evenement { get; set; }
+        [Key]
         [Required]
         public TypeDePrestation Type { get; set; }
 
