@@ -9,11 +9,9 @@ namespace P2_BDE_Events.Models.Evenement
         public int Id { get; set; }
         public string PhotoPath { get; set; }
         public EtatPhoto Etat {get; set; }
-        [Required]
+        public int AlbumId { get; set; }
         public virtual Album Album { get; set; }
-        [Required]
-        public virtual Compte Author { get; set; }
-
-
+        public int CompteId { get; set; }
+        public virtual Compte Compte { get; set; }
     }
 }

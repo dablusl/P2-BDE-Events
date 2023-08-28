@@ -16,11 +16,16 @@ namespace P2_BDE_Events.Services.Evenements
         {
             _bddContext = new BDDContext();
         }
-        public int CreerLigneEvenement(LigneEvenement ligne)
+        public void CreerLigneEvenement(TypeDePrestation type, int idEvenement)
         {
+            LigneEvenement ligne = new LigneEvenement
+            {
+                Type = type,
+                EvenementId = idEvenement,
+            };
+
             _bddContext.LignesEvenement.Add(ligne);
             _bddContext.SaveChanges();
-            return ligne.Id;
         }
 
         public void ModifierLigneEvenement(Evenement evenement, TypeDePrestation type, Prestation nouvellePrestation) 
