@@ -1,4 +1,5 @@
 ﻿using P2_BDE_Events.Models.Comptes;
+using P2_BDE_Events.Models.Prestations.Enums;
 using System.Collections.Generic;
 
 namespace P2_BDE_Events.Models.Prestations
@@ -12,8 +13,8 @@ namespace P2_BDE_Events.Models.Prestations
         public string Calendrier { get; set; }
         public bool Livraison { get; set; }
         public string Description { get; set; }
-        public Enums.EtatDePrestation Etat { get; set; }
-        public Enums.TypeDePrestation Type { get; set; }
+        public EtatDePrestation Etat { get; set; }
+        public TypeDePrestation Type { get; set; }
         public virtual Prestataire Prestataire { get; set; }
         
     }

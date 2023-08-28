@@ -26,7 +26,7 @@ namespace P2_BDE_Events.Models.Evenement
 
         public Evenement (Organisateur organisateur)
         {
-            Organisateur = organisateur;
+            this.Organisateur = organisateur;
         }
     }
 }
