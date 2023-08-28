@@ -19,11 +19,13 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
     public class CreerUnEvenementController : Controller
     {
         private EvenementService evenementService;
+        private LigneEvenementService ligneEvenementService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public CreerUnEvenementController(IWebHostEnvironment webHostEnvironment)
         {
             this.evenementService = new EvenementService();
+            this.ligneEvenementService = new LigneEvenementService();
             this._webHostEnvironment = webHostEnvironment;
         }
 
@@ -102,16 +104,9 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         [HttpPost]
         public IActionResult CreerEvenementSurMesure4(EvenementViewModel nouveauEvent)
         {
-            EvenementViewModel savedEvent = GetEventSession();
 
-            savedEvent.CoverPhoto = nouveauEvent.CoverPhoto;
-
-            int idNouveauEvent = evenementService.CreerEvenement(savedEvent.Evenement);
-
-            Evenement evenementCree = evenementService.ObtenirEvenement(idNouveauEvent);
-            evenementCree.CoverPhotoPath = SaveCoverPhoto(nouveauEvent, idNouveauEvent);
-            evenementCree.Organisateur = GetOrganisateurEvenement();
-            evenementService.ModifierEvenement(idNouveauEvent, evenementCree);
+            int idNouveauEvenement = CreationEvenementBD(nouveauEvent);
+            CreationLignesEvenement(idNouveauEvenement);
 
             return View("~/Views/Organisateur/MesEvenements/EvenementsEnCours");
         }
@@ -142,6 +137,42 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                     );
         }
 
+        public int CreationEvenementBD(EvenementViewModel nouveauEvent)
+        {
+            string idCompte = HttpContext.Session.GetString("iDCompte");
+            Compte compte = new CompteService().ObtenirCompte(idCompte);
+            Participant participant = new ParticipantService().ObtenirParticipant(compte);
+            Organisateur organisateur = new OrganisateurService().ObtenirOrganisateur(participant);
+
+
+            int idNouveauEvent = evenementService.CreerEvenement(GetEventSession().Evenement);
+            Evenement evenementCree = evenementService.ObtenirEvenement(idNouveauEvent);
+            evenementCree.CoverPhotoPath = SaveCoverPhoto(nouveauEvent, idNouveauEvent);
+            evenementCree.Organisateur = organisateur;
+            evenementService.ModifierEvenement(idNouveauEvent, evenementCree);
+
+            return idNouveauEvent;
+        }
+
+        public void CreationLignesEvenement(int idEvenement)
+        {   
+            foreach( var type in GetEventSession().Types )
+            {
+                if (type.Value)
+                {
+                    LigneEvenement nouvelleLigne = new LigneEvenement
+                    { 
+                        Type = type.Key
+                    };
+
+                    int idligne = ligneEvenementService.CreerLigneEvenement(nouvelleLigne);
+                    LigneEvenement novuelleLigne = ligneEvenementService.ObtenirLigneEvenement(idligne);
+                    ligneEvenementService.ModifierLigneEvenement(idligne, evenementService.ObtenirEvenement(idEvenement));
+                }
+
+            }
+        }
+
         public string SaveCoverPhoto(EvenementViewModel nouveauEvent, int idNouveauEvent)
         {
             if (nouveauEvent.CoverPhoto != null & nouveauEvent.CoverPhoto.Length > 0)
@@ -155,8 +186,6 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                 }
 
                 string imagePath = Path.Combine(folderPath, imageFileName);
-
-
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     nouveauEvent.CoverPhoto.CopyTo(stream);
