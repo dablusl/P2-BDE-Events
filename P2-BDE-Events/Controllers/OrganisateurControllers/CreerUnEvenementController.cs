@@ -1,21 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
-using P2_BDE_Events.Models.Evenement.Enums;
 using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
 using P2_BDE_Events.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Security.Claims;
 
 namespace P2_BDE_Events.Controllers.OrganisateurControllers
 {
@@ -35,30 +30,16 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         [HttpGet]
         public IActionResult CreerEvenementSurMesure1()
         {
-            /*
-            string idCompte = HttpContext.Session.GetString("iDCompte");
-            Compte compte = new CompteService().ObtenirCompte(idCompte);
-            Participant participant = new ParticipantService().ObtenirParticipant(compte);            
-            
-            Organisateur organisateur = new OrganisateurService().ObtenirOrganisateur(participant);
-            */
-
-            EvenementViewModel nouveauEvent = new EvenementViewModel
-            {
-                Evenement = new Evenement { Organisateur = new Organisateur() },
-            };
-
-            SetEventSession(nouveauEvent);
-
-            return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", nouveauEvent);
+            return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", InitViewModel());
         }
 
         [HttpPost]
         public IActionResult CreerEvenementSurMesure1(EvenementViewModel model)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 SetEventSession(model);
-                
+
                 return RedirectToAction("CreerEvenementSurMesure2");
             }
             return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", model);
@@ -68,12 +49,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         [HttpGet]
         public IActionResult CreerEvenementSurMesure2()
         {
-            EvenementViewModel nouveauEvent = new EvenementViewModel
-            {
-                Evenement = new Evenement { Organisateur = new Organisateur() },
-            };
-
-            return View("~/Views/Organisateur/CreerEvenementSurMesure2.cshtml", nouveauEvent);
+            return View("~/Views/Organisateur/CreerEvenementSurMesure2.cshtml", InitViewModel());
         }
 
         [HttpPost]
@@ -94,23 +70,19 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         [HttpGet]
         public IActionResult CreerEvenementSurMesure3()
         {
-            EvenementViewModel nouveauEvent = new EvenementViewModel
-            {
-                Evenement = new Evenement { Organisateur = new Organisateur() },
-            };
-            return View("~/Views/Organisateur/CreerEvenementSurMesure3.cshtml", nouveauEvent);
+            return View("~/Views/Organisateur/CreerEvenementSurMesure3.cshtml", InitViewModel());
         }
 
         [HttpPost]
         public IActionResult CreerEvenementSurMesure3(EvenementViewModel model)
-        {            
+        {
             if (ModelState.IsValid)
             {
                 EvenementViewModel savedEvent = GetEventSession();
 
                 savedEvent.Evenement.NbParticipants = model.Evenement.NbParticipants;
 
-                foreach ( var typePrestation in model.Types)
+                foreach (var typePrestation in model.Types)
                 {
                     savedEvent.Types[typePrestation.Key] = model.Types[typePrestation.Key];
                 }
@@ -124,36 +96,55 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
         public IActionResult CreerEvenementSurMesure4()
         {
-            EvenementViewModel nouveauEvent = new EvenementViewModel
-            {
-                Evenement = new Evenement { Organisateur = new Organisateur() },
-            };
-
-            return View("Views/Organisateur/CreerEvenementSurMesure4.cshtml", nouveauEvent);
+            return View("Views/Organisateur/CreerEvenementSurMesure4.cshtml", InitViewModel());
         }
 
         [HttpPost]
         public IActionResult CreerEvenementSurMesure4(EvenementViewModel nouveauEvent)
         {
-            EvenementViewModel savedEvent = GetEventSession(); 
-            
+            EvenementViewModel savedEvent = GetEventSession();
+
             savedEvent.CoverPhoto = nouveauEvent.CoverPhoto;
-
-            string idCompte = HttpContext.Session.GetString("iDCompte");
-            Compte compte = new CompteService().ObtenirCompte(idCompte);
-            Participant participant = new ParticipantService().ObtenirParticipant(compte);
-
-            Organisateur organisateur = new OrganisateurService().ObtenirOrganisateur(participant);
-
-            //si tout les trucs requis son good
-            //creation evenement
-
-            //savedEvent.Evenement.Organisateur = organisateur;
 
             int idNouveauEvent = evenementService.CreerEvenement(savedEvent.Evenement);
 
-            //Sauvegarder image dans nos dossiers
-            if (nouveauEvent.CoverPhoto!= null & nouveauEvent.CoverPhoto.Length > 0)
+            Evenement evenementCree = evenementService.ObtenirEvenement(idNouveauEvent);
+            evenementCree.CoverPhotoPath = SaveCoverPhoto(nouveauEvent, idNouveauEvent);
+            evenementCree.Organisateur = GetOrganisateurEvenement();
+            evenementService.ModifierEvenement(idNouveauEvent, evenementCree);
+
+            return View("~/Views/Organisateur/MesEvenements/EvenementsEnCours");
+        }
+
+        public EvenementViewModel InitViewModel()
+        {
+            return new EvenementViewModel
+            {
+                Evenement = new Evenement { Organisateur = new Organisateur() },
+            };
+        }
+
+        public EvenementViewModel GetEventSession()
+        {
+            return JsonConvert
+                .DeserializeObject<EvenementViewModel>(
+                    HttpContext.Session.GetString("Event")
+                    );
+        }
+
+        public void SetEventSession(EvenementViewModel evenementViewModel)
+        {
+            HttpContext
+                .Session
+                .SetString(
+                    "Event",
+                    JsonConvert.SerializeObject(evenementViewModel)
+                    );
+        }
+
+        public string SaveCoverPhoto(EvenementViewModel nouveauEvent, int idNouveauEvent)
+        {
+            if (nouveauEvent.CoverPhoto != null & nouveauEvent.CoverPhoto.Length > 0)
             {
                 string imageFileName = $"{Guid.NewGuid()}{Path.GetExtension(nouveauEvent.CoverPhoto.FileName)}";
                 string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "evenement", idNouveauEvent.ToString());
@@ -171,32 +162,20 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                     nouveauEvent.CoverPhoto.CopyTo(stream);
                 }
 
-                Evenement evenementCree = evenementService.ObtenirEvenement(idNouveauEvent);
-                evenementCree.CoverPhotoPath = imagePath;
-                evenementCree.Organisateur = organisateur;
-                evenementService.ModifierEvenement(idNouveauEvent, evenementCree);
-
+                return imagePath;
             }
 
-            return View("~/Views/Organisateur/MesEvenements/EvenementsEnCours");
+            return "";
         }
 
-        public EvenementViewModel GetEventSession()
+        public Organisateur GetOrganisateurEvenement()
         {
-            return JsonConvert
-                .DeserializeObject<EvenementViewModel>(
-                    HttpContext.Session.GetString("Event")
-                    ); 
-        }
+            string idCompte = HttpContext.Session.GetString("iDCompte");
+            Compte compte = new CompteService().ObtenirCompte(idCompte);
+            Participant participant = new ParticipantService().ObtenirParticipant(compte);
+            Organisateur organisateur = new OrganisateurService().ObtenirOrganisateur(participant);
 
-        public void SetEventSession(EvenementViewModel evenementViewModel)
-        {
-            HttpContext
-                .Session
-                .SetString(
-                    "Event", 
-                    JsonConvert.SerializeObject(evenementViewModel)
-                    );
+            return organisateur;
         }
     }
 }
