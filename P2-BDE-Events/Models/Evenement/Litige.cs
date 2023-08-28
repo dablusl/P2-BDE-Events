@@ -12,8 +12,7 @@ namespace P2_BDE_Events.Models.Evenement
         public TypeLitige Type { get; set; }
         public string Description { get; set; }
         public DateTime CreeLe {  get ; set; }
-        [Required]
+        public int CompteId { get; set; }
         public virtual Compte Compte { get; set; }
-
     }
 }

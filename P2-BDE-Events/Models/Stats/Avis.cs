@@ -10,6 +10,7 @@ namespace P2_BDE_Events.Models.Stats
         public string Contenu { get; set; }
         public DateTime PublieLe { get; set; }
         public double Notation { get; set; }
+        public int CompteId { get; set; }
         public virtual Compte Compte { get; set; }
     }
 }
