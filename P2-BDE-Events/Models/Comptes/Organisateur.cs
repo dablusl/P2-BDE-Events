@@ -5,7 +5,5 @@
         public int Id { get; set; }
         public virtual Participant Participant { get; set; }
         public string FonctionBDE { get; set; }
-
-        public virtual Compte Compte { get; set; }
     }
 }
