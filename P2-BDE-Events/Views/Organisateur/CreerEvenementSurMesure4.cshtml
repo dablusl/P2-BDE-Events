@@ -13,6 +13,7 @@
 
 @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
     /*
     @Html.LabelFor(model => model.CoverPhoto)
     @Html.TextBoxFor(model => model.CoverPhoto, new { type = "file", accept = "image/*" })

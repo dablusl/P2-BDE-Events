@@ -12,14 +12,16 @@
 <h4>Quoi et combien?</h4>
 
 <form asp-action="CreerEvenementSurMesure3" method="post">
+    <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
     <label for="NombreParticipants">Nombre de participants souhaité (max)</label>
     <input type="number" class="form-control" id="Evenement.NbParticipants" name="Evenement.NbParticipants" value="">
 
     @foreach (var prestation in Model.Types)
     {
         <div class="form-check">
-            <input type="checkbox" class="@prestation.Key" id="@prestation.Key" name="Alcool" value="true" />
-            <label class="form-check-label" for="Alcool">Alcool</label>
+            @*<input type="checkbox" class="@prestation.Key" id="@prestation.Key" name="@Model.Types[prestation.Key]" value="true" />*@
+            @Html.CheckBoxFor(m => m.Types[@prestation.Key])
+            <label class="form-check-label" for="@prestation.Key">@prestation.Key</label>
         </div>
     }
 

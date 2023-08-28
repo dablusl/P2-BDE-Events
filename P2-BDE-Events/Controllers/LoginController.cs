@@ -66,6 +66,7 @@ namespace P2_BDE_Events.Controllers
                        new Claim(ClaimTypes.Role, compte.Profil),
                        new Claim(ClaimTypes.Sid, compte.Id.ToString()),
 
+
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 

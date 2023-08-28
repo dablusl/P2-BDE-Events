@@ -12,6 +12,7 @@
 
 
 <form asp-action="CreerEvenementSurMesure1" method="post">
+    <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
     <div class="form-group">
         <label for="Titre">Titre de l'événement</label>
         <input type="text" class="form-control" id="Evenement.Titre" name="Evenement.Titre" value="">
