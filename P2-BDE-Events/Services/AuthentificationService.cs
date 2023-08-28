@@ -1,5 +1,5 @@
 ﻿using P2_BDE_Events.DataAccessLayer;
-using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Models.Comptes;
 using System;
 using System.Security.Cryptography;
 using System.Collections.Generic;

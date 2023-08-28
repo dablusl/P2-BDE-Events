@@ -1,6 +1,7 @@
 ﻿using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Prestations.Enums;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace P2_BDE_Events.Models.Prestations
 {
@@ -15,6 +16,7 @@ namespace P2_BDE_Events.Models.Prestations
         public string Description { get; set; }
         public EtatDePrestation Etat { get; set; }
         public TypeDePrestation Type { get; set; }
+        [Required]
         public virtual Prestataire Prestataire { get; set; }
         
     }

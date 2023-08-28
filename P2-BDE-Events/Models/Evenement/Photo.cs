@@ -1,5 +1,6 @@
 ﻿using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace P2_BDE_Events.Models.Evenement
 {
@@ -8,14 +9,11 @@ namespace P2_BDE_Events.Models.Evenement
         public int Id { get; set; }
         public string PhotoPath { get; set; }
         public EtatPhoto Etat {get; set; }
+        [Required]
         public virtual Album Album { get; set; }
+        [Required]
         public virtual Compte Author { get; set; }
 
-        public Photo(Album album, Compte author)
-        {
-            Album = album;
-            Author = author;
-            Etat = EtatPhoto.AFFICHE;
-        }
+
     }
 }

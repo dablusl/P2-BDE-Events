@@ -66,7 +66,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Administrateurs.Add(administrateur);
             this.SaveChanges();
 
-
+            /*
             this.Evenements.AddRange(
                 new Evenement
                 {
@@ -242,9 +242,10 @@ namespace P2_BDE_Events.DataAccessLayer
                      MontantHT = 5000,
                      IdPrestation = 1
                  });
+            */
+            this.SaveChanges();
 
-                 this.SaveChanges();
+        }
+    }
 
-                }
-            }
 }

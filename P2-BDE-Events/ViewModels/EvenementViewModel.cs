@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
+using P2_BDE_Events.Models.Prestations.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,17 +17,14 @@ namespace P2_BDE_Events.ViewModels
         //public List<SelectListItem> TypeEvenements { get; set;}
 
         public IFormFile CoverPhoto { get; set; }
+        public Dictionary<TypeDePrestation, bool> Types { get; set; }
 
-        [Display(Name = "Alcool")]
-        public bool Alcool { get; set; }
-
-        [Display(Name = "Restauration")]
-        public bool Restauration { get; set; }
-
-        [Display(Name = "Sécurité")]
-        public bool Securite { get; set; }
-
-        [Display(Name = "Bar")]
-        public bool Bar { get; set; }
+        public EvenementViewModel()
+        {
+            foreach (TypeDePrestation prestation in Enum.GetValues(typeof(TypeDePrestation)))
+            {
+                Types[prestation] = false;
+            }
+        }
     }
 }
