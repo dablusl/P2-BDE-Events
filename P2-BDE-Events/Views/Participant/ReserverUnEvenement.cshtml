@@ -1,6 +1,9 @@
-﻿@{
+﻿@model P2_BDE_Events.Models.Evenement.Evenement
+
+@{
     Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
 }
+
 
 <link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
 
@@ -13,12 +16,12 @@
 }
 
 <h2>Réservation de l'événement</h2>
-@*<p>Événement ID: @Model.Evenement.Id</p>*@
+<p>Événement ID: @Model.Titre</p>
 
 <!-- Autres détails de l'événement à afficher -->
 
 <form method="post">
-    <input type="hidden" name="evenementId" @*value="@Model.Evenement.Id*@" />
+    <input type="hidden" name="evenementId" value="@Model.Id" />
     <button class="rejoindreEvenement" type="submit">Réserver</button>
 </form>
 

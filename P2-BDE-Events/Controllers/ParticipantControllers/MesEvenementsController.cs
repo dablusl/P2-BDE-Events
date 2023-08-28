@@ -32,15 +32,27 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             return View("Views/Participant/EvenementsInteressant.cshtml");
         }
 
+        //[HttpGet]
+        //public IActionResult ReserverUnEvenement()
+        //{
+        //    return View("Views/Participant/ReserverUnEvenement.cshtml");
+        //}
         [HttpGet]
-        [HttpGet]
-        public IActionResult ReserverUnEvenement()
+        public IActionResult ReserverUnEvenement(int EvenementID)
         {
-            return View("Views/Participant/ReserverUnEvenement.cshtml");
+            var evenement = EvenementService.ObtenirEvenement(EvenementID);
+
+            //if (evenement == null)
+            //{
+            //    return NotFound(); // L'événement n'a pas été trouvé
+            //}
+
+            return View("Views/Participant/ReserverUnEvenement.cshtml", evenement);
         }
 
         [HttpPost]
-        public IActionResult ReserverUnEvenement(int evenementId)
+        [ActionName("ReserverUnEvenement")]
+        public IActionResult ReserverUnEvenementPost(int evenementId)
         {
             // Assurez-vous que l'utilisateur est authentifié en tant que participant
             if (!User.Identity.IsAuthenticated)
@@ -51,19 +63,19 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             // Récupérer l'événement à partir de la base de données
             var evenement = EvenementService.ObtenirEvenement(evenementId);
 
-            if (evenement == null)
-            {
-                return NotFound(); // L'événement n'a pas été trouvé
-            }
+            //if (evenement == null)
+            //{
+            //    return NotFound(); // L'événement n'a pas été trouvé
+            //}
 
             // Récupérer l'utilisateur actuellement connecté (participant)
             var utilisateurId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
             var participant = ParticipantService.ObtenirParticipant(utilisateurId);
 
-            if (participant == null)
-            {
-                return NotFound(); // Le participant n'a pas été trouvé
-            }
+            //if (participant == null)
+            //{
+            //    return NotFound(); // Le participant n'a pas été trouvé
+            //}
 
             // Ajouter la réservation pour l'événement et le participant
             EvenementService.ReserverEvenement(participant.Id, evenement.Id);
@@ -71,7 +83,7 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             // Rediriger vers une page de confirmation
             TempData["EvenementTitre"] = evenement.Titre;
 
-            return RedirectToAction("Confirmation", new { evenementId = evenement.Id });
+            return RedirectToAction("Confirmation");
         }
         public IActionResult Confirmation()
         {
@@ -81,7 +93,7 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             TempData.Remove("EvenementTitre");
 
             ViewBag.EvenementTitre = evenementTitre;
-            return View();
+            return View("Views/Participant/Confirmation.cshtml");
         }
 
     }
