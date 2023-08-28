@@ -18,7 +18,6 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
     [Authorize(Roles = "Organisateur")]
     public class CreerUnEvenementController : Controller
     {
-        private int idCompte;
         private EvenementService evenementService;
         private LigneEvenementService ligneEvenementService;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -28,7 +27,6 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             this.evenementService = new EvenementService();
             this.ligneEvenementService = new LigneEvenementService();
             this._webHostEnvironment = webHostEnvironment;
-            idCompte = int.Parse(HttpContext.Session.GetString("iDCompte"));
         }
 
         [HttpGet]
@@ -130,17 +128,17 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
         public void SetEventSession(EvenementViewModel evenementViewModel)
         {
-            HttpContext
-                .Session
-                .SetString(
-                    "Event",
-                    JsonConvert.SerializeObject(evenementViewModel)
-                    );
+            HttpContext.Session.SetString("Event",JsonConvert.SerializeObject(evenementViewModel));
+        }
+
+        public int GetIdCompte()
+        {
+            return int.Parse(HttpContext.Session.GetString("iDCompte"));
         }
 
         public int CreationEvenementBD(EvenementViewModel nouveauEvent)
         {
-            Organisateur organisateur = new OrganisateurService().GetOrganisateurParCompte(idCompte);
+            Organisateur organisateur = new OrganisateurService().GetOrganisateurParCompte(GetIdCompte());
 
             return evenementService.CreerEvenement(
                 GetEventSession().Evenement,
@@ -181,16 +179,6 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             }
 
             return "";
-        }
-
-        public Organisateur GetOrganisateurEvenement()
-        {
-            string idCompte = HttpContext.Session.GetString("iDCompte");
-            Compte compte = new CompteService().ObtenirCompte(idCompte);
-            Participant participant = new ParticipantService().ObtenirParticipant(compte);
-            Organisateur organisateur = new OrganisateurService().ObtenirOrganisateur(participant);
-
-            return organisateur;
         }
     }
 }

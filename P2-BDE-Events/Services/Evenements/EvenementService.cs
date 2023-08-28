@@ -18,6 +18,7 @@ namespace P2_BDE_Events.Services.Evenements
         }
         public int CreerEvenement(Evenement evenement,int idOrga, string photoPath)
         {
+            evenement.Organisateur = null;
             evenement.OrganisateurId = idOrga;
             evenement.CoverPhotoPath = photoPath;
             _bddContext.Evenements.Add(evenement);

@@ -65,14 +65,13 @@ namespace P2_BDE_Events.Controllers
                        new Claim(ClaimTypes.Email, compte.Email),
                        new Claim(ClaimTypes.Role, compte.Profil),
                        new Claim(ClaimTypes.Sid, compte.Id.ToString()),
-
-
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
 
                     HttpContext.SignInAsync(userPrincipal);
+                    HttpContext.Session.SetString("iDCompte", compte.Id.ToString());
 
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
