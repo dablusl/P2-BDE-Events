@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
@@ -27,6 +27,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Avis> AvisUtilisateur { get; set; }
         public DbSet<Compte> Comptes { get; set; }
+        public DbSet<LigneEvenement> LignesEvenement { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

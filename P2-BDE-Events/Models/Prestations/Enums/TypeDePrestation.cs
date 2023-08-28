@@ -4,7 +4,8 @@
     {
         TRAITEUR,
         DJ,
-        SALLE
-
+        SALLE,
+        SECUTITE,
+        BAR
     }
 }

@@ -1,5 +1,5 @@
 ﻿using P2_BDE_Events.DataAccessLayer;
-using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Models.Comptes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +38,12 @@ namespace P2_BDE_Events.Services.Comptes
         //        _bddContext.SaveChanges();
         //    }
         //}
+
+        public Organisateur ObtenirOrganisateur(Compte compte)
+        {
+            return _bddContext.Organisateurs.Find(compte);
+            //return _bddContext.Organisateurs.Where(organisateur => organisateur.Compte == compte);
+        }
 
         //public Organisateur ObtenirOrganisateur(int id)
         //{

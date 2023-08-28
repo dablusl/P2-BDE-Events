@@ -1,4 +1,4 @@
-﻿namespace P2_BDE_Events.Models.Compte
+﻿namespace P2_BDE_Events.Models.Comptes
 {
     public class Compte
     {

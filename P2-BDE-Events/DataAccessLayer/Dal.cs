@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Services;
 using System.Collections.Generic;
 using System;

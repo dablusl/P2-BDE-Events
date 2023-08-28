@@ -1,4 +1,5 @@
-﻿using P2_BDE_Events.Models.Evenement.Enums;
+﻿using P2_BDE_Events.Models.Comptes;
+using P2_BDE_Events.Models.Evenement.Enums;
 using System;
 
 namespace P2_BDE_Events.Models.Evenement
@@ -9,7 +10,12 @@ namespace P2_BDE_Events.Models.Evenement
         public EtatLitige Etat { get; set; }
         public TypeLitige Type { get; set; }
         public string Description { get; set; }
-        public int IdEmetteur { get; set; }
         public DateTime CreeLe {  get ; set; }
+        public virtual Compte Compte { get; set; }
+
+        public Litige(Compte compte)
+        {
+            Compte = compte;
+        }
     }
 }

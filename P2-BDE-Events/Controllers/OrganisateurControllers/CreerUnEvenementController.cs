@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
+using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
 using P2_BDE_Events.ViewModels;
 using System;
@@ -17,11 +19,16 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
     {
         private EvenementService evenementService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private Organisateur organisateur;
 
         public CreerUnEvenementController(IWebHostEnvironment webHostEnvironment)
         {
-            evenementService = new EvenementService();
-            _webHostEnvironment = webHostEnvironment;
+            this.evenementService = new EvenementService();
+            this._webHostEnvironment = webHostEnvironment;
+
+            Compte compte = new CompteService().ObtenirCompte(HttpContext.Session.GetString("iDCompte"));
+
+            this.organisateur = new OrganisateurService().ObtenirOrganisateur(compte);
         }
 
         [HttpGet]
@@ -29,7 +36,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         {
             EvenementViewModel nouveauEvent = new EvenementViewModel
             {
-                Evenement = new Evenement { Titre = "HELLOOOO"},
+                Evenement = new Evenement(organisateur),
             };
 
             return View("~/Views/Organisateur/CreerEvenementSurMesure1.cshtml", nouveauEvent);
