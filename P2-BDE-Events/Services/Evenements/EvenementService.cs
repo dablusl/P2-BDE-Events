@@ -1,4 +1,6 @@
-﻿using P2_BDE_Events.DataAccessLayer;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Evenement;
 using System;
 using System.Collections.Generic;
@@ -49,6 +51,28 @@ namespace P2_BDE_Events.Services.Evenements
                 _bddContext.Evenements.Remove(cible);
                 _bddContext.SaveChanges();
             }
+        }
+        public void ReserverEvenement(int participantId, int evenementId)
+        {
+            var participant = _bddContext.Participants.Find(participantId);
+            var evenement = _bddContext.Evenements.Find(evenementId);
+
+            if (participant == null || evenement == null)
+            {
+                throw new ArgumentException("Participant ou Evènement non trouvé");
+            }
+
+            // Créer une nouvelle réservation
+            var reservation = new Reserver
+            {
+                ParticipantId = participantId,
+                EvenementId = evenementId,
+                DateReservation = DateTime.Now
+            };
+
+            // Ajouter la réservation à la base de données
+            _bddContext.Reservations.Add(reservation);
+            _bddContext.SaveChanges();
         }
         public void Dispose()
         {

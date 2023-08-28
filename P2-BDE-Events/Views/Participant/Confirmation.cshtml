@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
+
+@section Header {
+    <ul>
+        <li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Evènements terminés</li>
+        <li onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Prochains évènements</li>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsInteressant", "MesEvenements", new { area = "Participant" })'">Evènements intéréssants</li>
+    </ul>
+}
+
+<h2>Confirmation de réservation</h2>
+<p>Merci pour votre réservation à l'événement <strong>@ViewBag.EvenementNom</strong>. Vous êtes maintenant inscrit à l'événement.</p>

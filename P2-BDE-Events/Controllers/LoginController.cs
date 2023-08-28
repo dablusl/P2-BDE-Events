@@ -52,21 +52,19 @@ namespace P2_BDE_Events.Controllers
         [HttpPost]
         public IActionResult Index(CompteViewModel viewModel, string returnUrl)
         {
-            Console.WriteLine("Avant le IsValid");
             if (ModelState.IsValid)
             {
-                Console.WriteLine("On lance la récupération du compte");
 
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
 
 
                 if (compte != null)
                 {
-                    Console.WriteLine("On a récupéré un compte");
                     var userClaims = new List<Claim>()
                     {
                        new Claim(ClaimTypes.Email, compte.Email),
                        new Claim(ClaimTypes.Role, compte.Profil),
+                       new Claim(ClaimTypes.Sid, compte.Id.ToString()),
 
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -116,6 +114,8 @@ namespace P2_BDE_Events.Controllers
                 {
                    new Claim(ClaimTypes.Email, viewModel.Compte.Email),
                    new Claim(ClaimTypes.Role, viewModel.Compte.Profil),
+                   new Claim(ClaimTypes.Sid, viewModel.Compte.Id.ToString())
+
                 };
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });

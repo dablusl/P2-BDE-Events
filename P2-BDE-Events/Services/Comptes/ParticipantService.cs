@@ -37,10 +37,10 @@ namespace P2_BDE_Events.Services.Comptes
         //    }
         //}
 
-        //public Participant ObtenirParticipant(int id)
-        //{
-        //    return _bddContext.Participants.Find(id);
-        //}
+        public Participant ObtenirParticipant(int id)
+        {
+            return _bddContext.Participants.Find(id);
+        }
 
         //public List<Participant> ObtenirTousLesParticipants()
         //{

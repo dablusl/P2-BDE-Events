@@ -1,6 +1,7 @@
 ﻿using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace P2_BDE_Events.Models.Evenement
@@ -24,5 +25,7 @@ namespace P2_BDE_Events.Models.Evenement
 
         [Required]
         public virtual Organisateur Organisateur{ get; set; }
+        public virtual ICollection<Reserver> Reservations { get; set; }
+
     }
 }

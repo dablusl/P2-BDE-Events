@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
+
+@section Header {
+    <ul>
+        <li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Evènements terminés</li>
+        <li onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Prochains évènements</li>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsInteressant", "MesEvenements", new { area = "Participant" })'">Evènements intéréssants</li>
+    </ul>
+}
+
+<h2>Réservation de l'événement</h2>
+@*<p>Événement ID: @Model.Evenement.Id</p>*@
+
+<!-- Autres détails de l'événement à afficher -->
+
+<form method="post">
+    <input type="hidden" name="evenementId" @*value="@Model.Evenement.Id*@" />
+    <button class="rejoindreEvenement" type="submit">Réserver</button>
+</form>
+
+@*
+<p>Vous pouvez encore vous inscrire pour cet événement</p>
+<button class="rejoindreEvenement" onclick="window.location.href = '@Url.Action("AgendaEvenement", "Agenda", new { area = "Participant" })'">Réserver cet évènement</button>*@
