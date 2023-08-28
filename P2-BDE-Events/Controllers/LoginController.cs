@@ -67,7 +67,8 @@ namespace P2_BDE_Events.Controllers
                     {
                        new Claim(ClaimTypes.Email, compte.Email),
                        new Claim(ClaimTypes.Role, compte.Profil),
-
+                       new Claim(ClaimTypes.Sid, compte.Id.ToString()),
+                       new Claim("CompteId", compte.Id.ToString())
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
@@ -116,6 +117,8 @@ namespace P2_BDE_Events.Controllers
                 {
                    new Claim(ClaimTypes.Email, viewModel.Compte.Email),
                    new Claim(ClaimTypes.Role, viewModel.Compte.Profil),
+                   new Claim("CompteId", viewModel.Compte.Id.ToString()),
+                   new Claim(ClaimTypes.Sid, viewModel.Compte.Id.ToString()),
                 };
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
