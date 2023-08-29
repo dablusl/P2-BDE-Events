@@ -18,6 +18,5 @@ namespace P2_BDE_Events.Models.Prestations
         public TypeDePrestation Type { get; set; }
         public int PrestataireId { get; set; }
         public virtual Prestataire Prestataire { get; set; }
-        
     }
 }
