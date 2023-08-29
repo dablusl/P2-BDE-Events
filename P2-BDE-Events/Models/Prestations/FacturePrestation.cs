@@ -9,8 +9,8 @@ namespace P2_BDE_Events.Models.Prestations
         public int NumeroFacture { get; set; }
         public DateTime Date { get; set; }
         public decimal MontantHT { get; set; }
-        
-        public int PrestatationId { get; set; }
+
+        public int PrestationId { get; set; }
         public Prestation Prestation { get; set; }
     }
 }

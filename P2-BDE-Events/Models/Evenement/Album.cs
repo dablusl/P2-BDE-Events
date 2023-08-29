@@ -6,9 +6,7 @@ namespace P2_BDE_Events.Models.Evenement
     {
         public int Id { get; set; }
         public string Description { get; set; }
-
-        [Required]
+        public int EvenementId { get; set; }
         public virtual Evenement Evenement { get; set; }
-
     }
 }

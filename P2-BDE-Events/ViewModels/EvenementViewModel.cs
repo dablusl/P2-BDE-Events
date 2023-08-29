@@ -14,13 +14,12 @@ namespace P2_BDE_Events.ViewModels
     {
         public Evenement Evenement { get; set; }
 
-        //public List<SelectListItem> TypeEvenements { get; set;}
-
         public IFormFile CoverPhoto { get; set; }
         public Dictionary<TypeDePrestation, bool> Types { get; set; }
 
         public EvenementViewModel()
         {
+            Types = new Dictionary<TypeDePrestation, bool>();
             foreach (TypeDePrestation prestation in Enum.GetValues(typeof(TypeDePrestation)))
             {
                 Types[prestation] = false;

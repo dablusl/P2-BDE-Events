@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 
 namespace P2_BDE_Events.Services.Comptes
 {
@@ -39,9 +40,12 @@ namespace P2_BDE_Events.Services.Comptes
         //    }
         //}
 
-        public Organisateur ObtenirOrganisateur(Compte compte)
+        public Organisateur ObtenirOrganisateur(Participant participant)
         {
-            return _bddContext.Organisateurs.Find(compte);
+            return _bddContext.Organisateurs
+                .Where( organisateur => organisateur.Participant.Id == participant.Id)
+                .ToList()[0];
+
             //return _bddContext.Organisateurs.Where(organisateur => organisateur.Compte == compte);
         }
 
@@ -91,6 +95,13 @@ namespace P2_BDE_Events.Services.Comptes
         //    string motDePasseSel = "BDEEVENTS" + motDePasse + "ASP.NET MVC";
         //    return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         //}
+
+        public Organisateur GetOrganisateurParCompte(int idCompte)
+        {
+            Compte compte = new CompteService().ObtenirCompte(idCompte);
+            Participant participant = new ParticipantService().ObtenirParticipant(compte);
+            return this.ObtenirOrganisateur(participant);
+        }
 
         public void Dispose()
         {
