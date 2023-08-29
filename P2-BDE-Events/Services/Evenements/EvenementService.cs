@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.Models.Evenement.Enums;
 using P2_BDE_Events.Models.Prestations.Enums;
 using System;
 using System.Collections.Generic;
@@ -96,11 +97,14 @@ namespace P2_BDE_Events.Services.Evenements
                 .ToList();
         }
         //count equiv .Length .Size
-        public List<Evenement> EnAppelDoffreAsync(List<TypeDePrestation> types)
+        public List<Evenement> EnAppelDoffre(List<TypeDePrestation> types)
         {
             return _bddContext.Evenements
                 .Include(e => e.Lignes)
-                .Where(e => e.Lignes.Any(l => types.Contains(l.Type)))
+                .Where(e => e.Etat == EtatEvenement.OUVERT 
+                        && e.Lignes.Any(
+                            l => types.Contains(l.Type) 
+                                && l.Prestation == null))
                 .ToList();
         }
 
