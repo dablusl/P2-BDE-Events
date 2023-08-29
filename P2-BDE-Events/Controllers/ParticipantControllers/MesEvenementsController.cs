@@ -32,20 +32,11 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             return View("Views/Participant/EvenementsInteressant.cshtml");
         }
 
-        //[HttpGet]
-        //public IActionResult ReserverUnEvenement()
-        //{
-        //    return View("Views/Participant/ReserverUnEvenement.cshtml");
-        //}
+
         [HttpGet]
         public IActionResult ReserverUnEvenement(int EvenementID)
         {
             var evenement = EvenementService.ObtenirEvenement(EvenementID);
-
-            //if (evenement == null)
-            //{
-            //    return NotFound(); // L'événement n'a pas été trouvé
-            //}
 
             return View("Views/Participant/ReserverUnEvenement.cshtml", evenement);
         }
@@ -54,33 +45,19 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
         [ActionName("ReserverUnEvenement")]
         public IActionResult ReserverUnEvenementPost(int evenementId)
         {
-            // Assurez-vous que l'utilisateur est authentifié en tant que participant
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("/Login/Index"); // Rediriger vers la page de connexion si non authentifié
+                return RedirectToAction("/Login/Index");
             }
 
-            // Récupérer l'événement à partir de la base de données
             var evenement = EvenementService.ObtenirEvenement(evenementId);
 
-            //if (evenement == null)
-            //{
-            //    return NotFound(); // L'événement n'a pas été trouvé
-            //}
-
-            // Récupérer l'utilisateur actuellement connecté (participant)
             var utilisateurId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
             var participant = ParticipantService.ObtenirParticipant(utilisateurId);
 
-            //if (participant == null)
-            //{
-            //    return NotFound(); // Le participant n'a pas été trouvé
-            //}
 
-            // Ajouter la réservation pour l'événement et le participant
             EvenementService.ReserverEvenement(participant.Id, evenement.Id);
 
-            // Rediriger vers une page de confirmation
             TempData["EvenementTitre"] = evenement.Titre;
 
             return RedirectToAction("Confirmation");
@@ -89,7 +66,6 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
         {
             var evenementTitre = TempData["EvenementTitre"] as string;
 
-            // réinitialiser TempData pour libérer la mémoire
             TempData.Remove("EvenementTitre");
 
             ViewBag.EvenementTitre = evenementTitre;
