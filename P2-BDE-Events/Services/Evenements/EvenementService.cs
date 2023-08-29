@@ -84,6 +84,14 @@ namespace P2_BDE_Events.Services.Evenements
             return _bddContext.Reservations
                 .Where(r => r.EvenementId == evenementId)
                 .Select(r => r.Participant)
+                .Select(p => new Participant
+                {
+                    Id = p.Id,
+                    Compte = _bddContext.Participants
+                        .Where(participant => participant.Id == p.Id)
+                        .Select(participant => participant.Compte)
+                        .FirstOrDefault()
+                })
                 .ToList();
         }
         public List<Evenement> ObtenirEvenementsOrganisateur(int organisateurId)

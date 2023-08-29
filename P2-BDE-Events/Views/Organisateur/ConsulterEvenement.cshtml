@@ -24,14 +24,16 @@
 
 
 <h3>Liste des participants :</h3>
-@*@if (participant != null && participant.Compte != null)
-*@
-<ol>
-    @foreach (var participant in Model.Participants)
-    {
-        <li>@participant.NomBDE </li>
-        <li>@participant.Compte.Nom @participant.Compte.Prenom </li>
-    }
-</ol>
+@if (Model.Participants != null)
+{
+    <ol>
+        @foreach (var participant in Model.Participants)
+        {
+            <li>@participant.Compte.Nom @participant.Compte.Prenom </li>
+        }
+    </ol>
+}
+
+
 
 
