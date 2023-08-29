@@ -81,10 +81,10 @@ namespace P2_BDE_Events.DataAccessLayer
 
 
             //creation prestataire Compte
-            var prestataireCompte2 = new Compte
+            var prestataireCompte5 = new Compte
             {
-                Id = 2,
-                Email = "Presta2",
+                Id = 5,
+                Email = "Presta5",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
                 Prenom = "Pierre",
@@ -93,10 +93,10 @@ namespace P2_BDE_Events.DataAccessLayer
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
-            var prestataire2 = new Prestataire
+            var prestataire5 = new Prestataire
             {
-                Id = 2,
-                Compte = prestataireCompte2,
+                Id = 5,
+                Compte = prestataireCompte5,
                 RaisonSocial = "Isitest"
             };
 
@@ -112,7 +112,7 @@ namespace P2_BDE_Events.DataAccessLayer
              Livraison = true,
              Description = "Une description de la prestation",
              Etat = EtatDePrestation.EnAttenteDeValidation,
-             Prestataire = prestataire2
+             Prestataire = prestataire5
          },
             new Prestation
             {
@@ -125,7 +125,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 Livraison = true,
                 Description = "Dj pour vos soirée",
                 Etat = EtatDePrestation.EnCours,
-                Prestataire = prestataire2
+                Prestataire = prestataire5
             },
              new Prestation
              {
@@ -138,7 +138,7 @@ namespace P2_BDE_Events.DataAccessLayer
                  Livraison = true,
                  Description = "Traiteur spécialisé en calamar",
                  Etat = EtatDePrestation.Annulee,
-                 Prestataire = prestataire2
+                 Prestataire = prestataire5
              });
 
 

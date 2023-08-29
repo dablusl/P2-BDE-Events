@@ -8,8 +8,6 @@ namespace P2_BDE_Events.Models.Comptes
     {
 
         public int Id { get; set; }
-        public int CompteId { get; set; }
-        public virtual Compte Compte { get; set; }
         public string Adresse { get; set; }
         public string RaisonSocial { get; set; }
         public int NumeroSiret { get; set; }
@@ -21,6 +19,5 @@ namespace P2_BDE_Events.Models.Comptes
         public virtual ICollection<Prestation> Prestations { get; set; }
         public int CompteId { get; set; }
         public virtual Compte Compte { get; set; }
-
     }
 }
