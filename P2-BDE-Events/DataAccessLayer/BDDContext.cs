@@ -186,7 +186,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 });
 
             
-            /*
+            
             this.Evenements.AddRange(
                 new Evenement
                 {
@@ -204,7 +204,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     NbReservations = 0,
                     NbParticipants = 0,
                     PrixBillet = 8.5,
-                    IdOrganisateur = 1,
+                    Organisateur = organisateur,
                 },
                 new Evenement
                 {
@@ -222,7 +222,7 @@ namespace P2_BDE_Events.DataAccessLayer
                     NbReservations = 0,
                     NbParticipants = 0,
                     PrixBillet = 10,
-                    IdOrganisateur = 2,
+                    Organisateur = organisateur,
                 },
                 new Evenement
                 {
@@ -240,10 +240,10 @@ namespace P2_BDE_Events.DataAccessLayer
                     NbReservations = 0,
                     NbParticipants = 0,
                     PrixBillet = 5,
-                    IdOrganisateur = 3,
+                    Organisateur = organisateur,
                 }
                 );
-
+            /*
             this.AvisUtilisateur.AddRange(
                 new Avis
                 {
