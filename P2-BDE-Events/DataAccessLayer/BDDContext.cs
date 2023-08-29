@@ -98,6 +98,8 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 1,
                 Compte = Participant1,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
             };
             this.Participants.Add(participant);
             this.SaveChanges();
@@ -121,13 +123,46 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 2,
                 Compte = Orga1,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
+
             };
             var organisateur = new Organisateur
             {
                 Id = 1,
                 Participant = orgaParticip,
+                FonctionBDE = "Directeur"
             };
             this.Organisateurs.Add(organisateur);
+            this.SaveChanges();
+
+            ////Compte Participant
+            var Presta1 = new Compte
+            {
+                Id = 4,
+                Email = "Presta1",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Luke",
+                Nom = "LePresta",
+                NumeroTelephone = "0102548974",
+            };
+            this.Comptes.Add(Presta1);
+            this.SaveChanges();
+
+            // Associer le presta au compte
+            var prestat1 = new Prestataire
+            {
+                Id = 1,
+                Compte = Presta1,
+                RaisonSocial = "OnFaiTout",
+                NumeroSiret = 124598787,
+                ZoneActivite = "Ile De France",
+                TypeActivite = "Lieu de réception",
+                Presentation = "Chez OnFaiTout, on fait tout pour vous rendre heureux"
+
+            };
+            this.Prestataires.Add(prestat1);
             this.SaveChanges();
 
             this.Evenements.Add(
