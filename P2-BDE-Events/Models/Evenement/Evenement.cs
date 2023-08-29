@@ -22,9 +22,9 @@ namespace P2_BDE_Events.Models.Evenement
         public int NbReservations { get; set; }
         public int NbParticipants { get; set; }
         public double PrixBillet { get; set; }
-
         public int OrganisateurId { get; set; }
         public virtual Organisateur Organisateur{ get; set; }
         public virtual ICollection<Reserver> Reservations { get; set; }
+        public virtual ICollection<LigneEvenement> Lignes { get; set; }
     }
 }
