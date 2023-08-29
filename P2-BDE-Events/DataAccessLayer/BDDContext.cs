@@ -79,6 +79,70 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Administrateurs.Add(administrateur);
             this.SaveChanges();
 
+
+            //creation prestataire Compte
+            var prestataireCompte2 = new Compte
+            {
+                Id = 2,
+                Email = "Presta2",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "010101010101",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            var prestataire2 = new Prestataire
+            {
+                Id = 2,
+                Compte = prestataireCompte2,
+                RaisonSocial = "Isitest"
+            };
+
+            this.Prestations.AddRange(
+         new Prestation
+         {
+             Id = 1,
+             Titre = "Une salle pour vos evenement",
+             Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
+             CapaciteMax = 10,
+             Tarif = 100,
+             Calendrier = "Du 1er au 5 août",
+             Livraison = true,
+             Description = "Une description de la prestation",
+             Etat = EtatDePrestation.EnAttenteDeValidation,
+             Prestataire = prestataire2
+         },
+            new Prestation
+            {
+                Id = 2,
+                Titre = "Votre Dj",
+                Type = Models.Prestations.Enums.TypeDePrestation.DJ,
+                CapaciteMax = 50,
+                Tarif = 200,
+                Calendrier = "Tout août",
+                Livraison = true,
+                Description = "Dj pour vos soirée",
+                Etat = EtatDePrestation.EnCours,
+                Prestataire = prestataire2
+            },
+             new Prestation
+             {
+                 Id = 3,
+                 Titre = "Tratieur pour vos papille",
+                 Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
+                 CapaciteMax = 300,
+                 Tarif = 1000,
+                 Calendrier = "3eme weekend du mois",
+                 Livraison = true,
+                 Description = "Traiteur spécialisé en calamar",
+                 Etat = EtatDePrestation.Annulee,
+                 Prestataire = prestataire2
+             });
+
+
+
             //Compte Participant
             var Participant1 = new Compte
             {
@@ -280,46 +344,10 @@ namespace P2_BDE_Events.DataAccessLayer
                     PublieLe = new DateTime(2023, 05, 01, 14, 1, 2),
                     Notation = 4.5,
                     IdAuthor = 5,
-                });
-            this.Prestations.AddRange(
-         new Prestation
-         {
-             Id = 1,
-             Titre = "Une salle pour vos evenement",
-             Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
-             CapaciteMax = 10,
-             Tarif = 100,
-             Calendrier = "Du 1er au 5 août",
-             Livraison = true,
-             Description = "Une description de la prestation",
-             Etat = EtatDePrestation.EnAttenteDeValidation
-         },
-            new Prestation
-            {
-                Id = 2,
-                Titre = "Votre Dj",
-                Type = Models.Prestations.Enums.TypeDePrestation.DJ,
-                CapaciteMax = 50,
-                Tarif = 200,
-                Calendrier = "Tout août",
-                Livraison = true,
-                Description = "Dj pour vos soirée",
-                Etat = EtatDePrestation.EnCours
-            },
-             new Prestation
-            {
-                Id = 3,
-                Titre = "Tratieur pour vos papille",
-                Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
-                CapaciteMax = 300,
-                Tarif = 1000,
-                Calendrier = "3eme weekend du mois",
-                Livraison = true,
-                Description = "Traiteur spécialisé en calamar",
-                Etat = EtatDePrestation.Annulee
-            });
+                });*/
 
 
+            /*
             this.FacturePrestations.AddRange(
                  new FacturePrestation
 
@@ -328,7 +356,7 @@ namespace P2_BDE_Events.DataAccessLayer
                      NumeroFacture = 20230101,
                      Date = new DateTime(2023, 01, 01),
                      MontantHT = 1000,
-                     IdPrestation = 3 
+                     PrestationId = 3 
                  },
                  new FacturePrestation
                  {
