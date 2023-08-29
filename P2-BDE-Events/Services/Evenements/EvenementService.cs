@@ -67,7 +67,6 @@ namespace P2_BDE_Events.Services.Evenements
                 throw new ArgumentException("Participant ou Evènement non trouvé");
             }
 
-            // Créer une nouvelle réservation
             var reservation = new Reserver
             {
                 ParticipantId = participantId,
@@ -75,23 +74,17 @@ namespace P2_BDE_Events.Services.Evenements
                 DateReservation = DateTime.Now
             };
 
-            // Ajouter la réservation à la base de données
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
         }
         public List<Participant> ObtenirParticipants(int evenementId)
         {
             return _bddContext.Reservations
+                .Include(r => r.Participant)
+                .ThenInclude(p => p.Compte)
                 .Where(r => r.EvenementId == evenementId)
                 .Select(r => r.Participant)
-                .Select(p => new Participant
-                {
-                    Id = p.Id,
-                    Compte = _bddContext.Participants
-                        .Where(participant => participant.Id == p.Id)
-                        .Select(participant => participant.Compte)
-                        .FirstOrDefault()
-                })
+                //.AsEnumerable()
                 .ToList();
         }
         public List<Evenement> ObtenirEvenementsOrganisateur(int organisateurId)
