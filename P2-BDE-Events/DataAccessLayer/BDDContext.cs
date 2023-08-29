@@ -29,6 +29,7 @@ namespace P2_BDE_Events.DataAccessLayer
         public DbSet<Compte> Comptes { get; set; }
         public DbSet<LigneEvenement> LignesEvenement { get; set; }
         public DbSet<Reserver> Reservations { get; set; }
+        public DbSet<PropositionPrestation> Propositions { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -48,6 +49,10 @@ namespace P2_BDE_Events.DataAccessLayer
                 .HasOne(r => r.Evenement)
                 .WithMany(e => e.Reservations)
                 .HasForeignKey(r => r.EvenementId);
+
+
+
+
         }
         //Initiation différents comptes
         public void InitializeDb()
@@ -105,7 +110,7 @@ namespace P2_BDE_Events.DataAccessLayer
          {
              Id = 1,
              Titre = "Une salle pour vos evenement",
-             Type = Models.Prestations.Enums.TypeDePrestation.SALLE,
+             Type = TypeDePrestation.SALLE,
              CapaciteMax = 10,
              Tarif = 100,
              Calendrier = "Du 1er au 5 août",
@@ -118,7 +123,7 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 2,
                 Titre = "Votre Dj",
-                Type = Models.Prestations.Enums.TypeDePrestation.DJ,
+                Type = TypeDePrestation.DJ,
                 CapaciteMax = 50,
                 Tarif = 200,
                 Calendrier = "Tout août",
@@ -131,7 +136,7 @@ namespace P2_BDE_Events.DataAccessLayer
              {
                  Id = 3,
                  Titre = "Tratieur pour vos papille",
-                 Type = Models.Prestations.Enums.TypeDePrestation.TRAITEUR,
+                 Type = TypeDePrestation.TRAITEUR,
                  CapaciteMax = 300,
                  Tarif = 1000,
                  Calendrier = "3eme weekend du mois",
@@ -254,24 +259,6 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Evenements.AddRange(
                 new Evenement
                 {
-                    Id = 1,
-                    Titre = "Beer-pong LEA vs DROIT",
-                    Etat = EtatEvenement.PUBLIE,
-                    Type = TypeEvenement.SOIREE,
-                    CreeLe = new DateTime(2023, 09, 02, 10, 30, 20),
-                    DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
-                    DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
-                    Description = "Defend l'honneur de ta fac avec ton talent surhumain",
-                    CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
-                    MaxParticipants = 100,
-                    MinParticipants = 70,
-                    NbReservations = 0,
-                    NbParticipants = 0,
-                    PrixBillet = 8.5,
-                    Organisateur = organisateur,
-                },
-                new Evenement
-                {
                     Id = 2,
                     Titre = "BOOO BOOO BOOO Halloween",
                     Etat = EtatEvenement.PUBLIE,
@@ -290,7 +277,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 },
                 new Evenement
                 {
-                    Id = 0,
+                    Id = 3,
                     Titre = "Karaoke Jam Sesh Beaux Arts",
                     Etat = EtatEvenement.PUBLIE,
                     Type = TypeEvenement.SOIREE,

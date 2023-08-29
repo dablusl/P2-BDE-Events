@@ -1,4 +1,5 @@
-﻿using P2_BDE_Events.DataAccessLayer;
+﻿using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,10 @@ namespace P2_BDE_Events.Services.Comptes
 
         public Prestataire GetPrestataireParCompte(int IdCompte)
         {
-            return _bddContext.Prestataires.Find(IdCompte);
+            return _bddContext.Prestataires
+                .Include(p => p.Prestations)
+                .Include(p => p.Compte)
+                .FirstOrDefault(p => p.CompteId == IdCompte);
         }
 
         //public void ModifierPrestataire(int id, Prestataire modifications)

@@ -1,4 +1,5 @@
 ﻿using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -8,7 +9,8 @@ namespace P2_BDE_Events.ViewModels
 {
     public class AppelDoffreViewModel
     {
-        public List<TypeDePrestation> Types { get; set; }
         public List<Evenement> EvenementsEnAppelDoffre { get; set; }
+        public PropositionPrestation PropositionPrestation { get; set; }
+        public List<TypeDePrestation> Types { get; set; }
     }
 }
