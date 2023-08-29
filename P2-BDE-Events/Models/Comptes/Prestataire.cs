@@ -16,7 +16,5 @@ namespace P2_BDE_Events.Models.Comptes
         public DateTime HeureDebutActivite { get; set; }
         public DateTime HeureFinActivite { get; set; }
         public string Presentation { get; set; }
-        public int CompteId { get; set; }
-        public virtual Compte Compte { get; set; }
     }
 }
