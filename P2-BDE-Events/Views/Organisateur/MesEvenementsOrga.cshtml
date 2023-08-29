@@ -1,0 +1,36 @@
+﻿@model P2_BDE_Events.ViewModels.MesEvenementsOrgaViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Organisateur/EvenementsEnCours.css">
+
+@section Header {
+    <ul>
+        <li onclick="window.location.href = '@Url.Action("EvenementsPrecedents", "MesEvenements", new { area = "Organisateur" })'">Evenements précédents</li>
+        <li onclick="window.location.href = '@Url.Action("EvenementsEnCours", "MesEvenements", new { area = "Organisateur" })'">Evenements en cours</li>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsSuivants", "MesEvenements", new { area = "Organisateur" })'">Evenements suivants</li>
+    </ul>
+}
+
+
+
+@if (Model.Evenements.Any())
+{
+    <ul>
+        @foreach (var evenement in Model.Evenements)
+        {
+            <span>@evenement.Titre @evenement.DateEvenement</span>
+            <button class="selectEvent" onclick="window.location.href = '@Url.Action("ConsulterEvenement", new { area = "Organisateur", evenementId = evenement.Id })'">Sélectionner</button>
+        }
+    </ul>
+}
+else
+{
+    <p>Vous n'avez aucun évènement en cours</p>
+}
+
+<form>
+    <button class="creerEvenement">Créer un évènement</button>
+</form>
