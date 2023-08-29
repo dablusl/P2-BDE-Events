@@ -230,9 +230,6 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Prestataires.Add(prestat1);
             this.SaveChanges();
 
-
-
-
             //prestations
 
             Compte cPrestataire10 = new Compte
@@ -434,7 +431,107 @@ namespace P2_BDE_Events.DataAccessLayer
                 presta17
                 );
             this.SaveChanges();
-            //evenements de Base
+            //evenements
+
+            Compte cOrga10 = new Compte
+            {
+                Id = 15,
+                Email = "michael.cera@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cOrga11 = new Compte
+            {
+                Id = 16,
+                Email = "maybee.funke@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cOrga12 = new Compte
+            {
+                Id = 17,
+                Email = "maybee.funke@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+            this.Comptes.AddRange(
+                cOrga10,
+                cOrga11,
+                cOrga12
+                );
+            this.SaveChanges();
+
+            Participant pOrga10 = new Participant
+            {
+                Id = 10,
+                Compte = cOrga10,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
+            };
+
+            Participant pOrga11 = new Participant
+            {
+                Id = 11,
+                Compte = cOrga11,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
+            };
+
+            Participant pOrga12 = new Participant
+            {
+                Id = 12,
+                Compte = cOrga12,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
+            };
+            this.Participants.AddRange(
+                pOrga10,
+                pOrga11,
+                pOrga12
+                );
+            this.SaveChanges();
+
+            Organisateur oOrga10 = new Organisateur
+            {
+                Id = 10,
+                Participant = pOrga10,
+                FonctionBDE = "Directeur"
+            };
+
+            Organisateur oOrga11 = new Organisateur
+            {
+                Id = 11,
+                Participant = pOrga11,
+                FonctionBDE = "Directeur"
+            };
+
+            Organisateur oOrga12 = new Organisateur
+            {
+                Id = 12,
+                Participant = pOrga12,
+                FonctionBDE = "Directeur"
+            };
+            this.Organisateurs.AddRange(
+                oOrga10,
+                oOrga11,
+                oOrga12
+                );
+            this.SaveChanges();
+
             Evenement evenement1 = new Evenement
             {
                 Id = 1,
@@ -489,12 +586,150 @@ namespace P2_BDE_Events.DataAccessLayer
                 PrixBillet = 5,
                 Organisateur = organisateur,
             };
-            //Evenement evenement4 = ;
+            Evenement evenement4 = new Evenement
+            {
+                Id = 4,
+                Titre = "Concert Indie",
+                Etat = EtatEvenement.OUVERT,
+                Type = TypeEvenement.CONCERT,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Ramenez vos instruments et vos cordes vocales",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = organisateur,
+            };
+
+            Evenement evenement5 = new Evenement
+            {
+                Id = 5,
+                Titre = "Soiree Jeux de Societes & Trivia",
+                Etat = EtatEvenement.OUVERT,
+                Type = TypeEvenement.JEUXDESOCIETE,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Ramenez vos instruments et vos cordes vocales",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = oOrga11,
+            };
+
+            Evenement evenement6 = new Evenement
+            {
+                Id = 6,
+                Titre = "Petanque d'Intégration",
+                Etat = EtatEvenement.OUVERT,
+                Type = TypeEvenement.SPORT,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Ramenez vos instruments et vos cordes vocales",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = oOrga11,
+            };
+
+            Evenement evenement7 = new Evenement
+            {
+                Id = 7,
+                Titre = "Soiree Horror Cinema Slasher",
+                Etat = EtatEvenement.OUVERT,
+                Type = TypeEvenement.CINEMA,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Pop corn non inclus",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = oOrga11,
+            };
+
+            Evenement evenement8 = new Evenement
+            {
+                Id = 8,
+                Titre = "Repas de Noël + Santa Mega Secret",
+                Etat = EtatEvenement.OUVERT,
+                Type = TypeEvenement.REPAS,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Pop corn non inclus",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = oOrga10,
+            };
+
+            Evenement evenement9 = new Evenement
+            {
+                Id = 9,
+                Titre = "2024 new year new me",
+                Etat = EtatEvenement.OUVERT,
+                Type = TypeEvenement.SOIREE,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Pop corn non inclus",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = oOrga10,
+            };
+
+            Evenement evenement10 = new Evenement
+            {
+                Id = 10,
+                Titre = "Picnic et Animaux de Compagnie",
+                Etat = EtatEvenement.PUBLIE,
+                Type = TypeEvenement.PLEINE_AIRE,
+                CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Pop corn non inclus",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 0,
+                Organisateur = oOrga12,
+            };
 
             this.Evenements.AddRange(
                 evenement1,
                 evenement2,
-                evenement3
+                evenement3,
+                evenement4,
+                evenement5,
+                evenement6,
+                evenement7,
+                evenement8,
+                evenement9,
+                evenement10
                 );
             this.SaveChanges();
 
@@ -534,9 +769,90 @@ namespace P2_BDE_Events.DataAccessLayer
                     Evenement = evenement2,
                     Type = TypeDePrestation.DJ,
                     Prestation = presta17
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement4,
+                    Type = TypeDePrestation.SALLE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement4,
+                    Type = TypeDePrestation.BAR,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement5,
+                    Type = TypeDePrestation.BAR,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement5,
+                    Type = TypeDePrestation.SALLE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement6,
+                    Type = TypeDePrestation.PHOTOGRAPHIE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement7,
+                    Type = TypeDePrestation.SALLE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement7,
+                    Type = TypeDePrestation.TRAITEUR,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement7,
+                    Type = TypeDePrestation.BAR,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement7,
+                    Type = TypeDePrestation.LOCATION,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement8,
+                    Type = TypeDePrestation.TRAITEUR,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement8,
+                    Type = TypeDePrestation.SALLE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement9,
+                    Type = TypeDePrestation.SALLE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement9,
+                    Type = TypeDePrestation.BAR,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement9,
+                    Type = TypeDePrestation.DJ,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement9,
+                    Type = TypeDePrestation.PHOTOGRAPHIE,
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement9,
+                    Type = TypeDePrestation.LOCATION,
+                    Location = TypeDeLocation.PHOTOMATON
                 }
-
                 );
+            this.SaveChanges();
 
             /*
             this.AvisUtilisateur.AddRange(

@@ -6,6 +6,10 @@
         DJ,
         SALLE,
         SECURITE,
-        BAR
+        BAR,
+        VIDEO_PROJECTION,
+        MUSICIEN,
+        PHOTOGRAPHIE,
+        LOCATION
     }
 }

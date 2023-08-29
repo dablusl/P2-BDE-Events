@@ -33,7 +33,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
             AppelDoffreViewModel viewModel = new AppelDoffreViewModel
             {
                 PropositionPrestation = new PropositionPrestation(),
-                EvenementsEnAppelDoffre = new EvenementService().EnAppelDoffreAsync(typesDuPresta),
+                EvenementsEnAppelDoffre = new EvenementService().EnAppelDoffre(typesDuPresta),
                 Types = typesDuPresta,
             };
 
