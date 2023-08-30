@@ -1,4 +1,8 @@
-﻿@{
+﻿@model P2_BDE_Events.ViewModels.AgendaEvenementViewModel
+@*@Model P2_BDE_Events.Models.Evenement
+*@
+
+@{
     Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
 }
 
@@ -13,7 +17,36 @@
     </ul>
 }
 
-<a href="evenementChoisit.html" class="voirPlus">
+<div class="search-form">
+    <form method="get">
+        <input type="text" name="eventId" placeholder="Rechercher par ID d'événement" />
+        <button type="submit">Rechercher</button>
+    </form>
+</div>
+
+@foreach (var evenement in Model.Evenements)
+{
+    <a href="@Url.Action("ReserverUnEvenement", "MesEvenements", new { area = "Participant", EvenementID = evenement.Id })" class="voirPlus">
+        <div class="evenement">
+            <div class="photo">
+                <img src="@evenement.CoverPhotoPath" alt="">
+            </div>
+            <div class="info">
+                <div class="prix">
+                    <p>@evenement.PrixBillet €</p>
+                </div>
+                <div class="date">
+                    <p>@evenement.DateEvenement.ToShortDateString()</p>
+                </div>
+                <div class="participant">
+                    <p>@evenement.NbParticipants/@evenement.MaxParticipants</p>
+                </div>
+            </div>
+        </div>
+    </a>
+}
+
+@*<a href="evenementChoisit.html" class="voirPlus">
     <div class="evenement">
         <div class="photo"><img src="~/image/8cdc9ab775544b56b2f1a9ba94dbe751JPG_637226663ae84.jpg" alt=""></div>
         <div class="info">
@@ -133,4 +166,4 @@
             </div>
         </div>
     </div>
-</a>
+</a>*@
