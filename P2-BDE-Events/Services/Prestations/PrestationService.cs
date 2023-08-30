@@ -57,6 +57,15 @@ namespace P2_BDE_Events.Services.Prestations
             return proposition.Id;
         }
 
+        public void NettoyerPropositions(int idLigne)
+        {
+            List<PropositionPrestation> propositionsASupprimer = _bddContext
+                .Propositions.Where(p => p.LigneEvenementId == idLigne).ToList();
+
+            _bddContext.Propositions.RemoveRange(propositionsASupprimer);
+            _bddContext.SaveChanges();
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();

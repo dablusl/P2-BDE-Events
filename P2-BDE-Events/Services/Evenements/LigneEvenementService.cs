@@ -95,6 +95,17 @@ namespace P2_BDE_Events.Services.Evenements
                 .ToList();               
         }
 
+        public int ChoisirPrestation(int idLigne, Prestation prestation, double nouvelleTarif)
+        {
+            LigneEvenement ligne = _bddContext.LignesEvenement.Find(idLigne);
+            ligne.Prestation = prestation;
+            ligne.TarifProposee = nouvelleTarif;
+
+            _bddContext.SaveChanges();
+
+            return ligne.Id;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();
