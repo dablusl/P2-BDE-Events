@@ -1,30 +1,30 @@
-﻿@model P2_BDE_Events.Models.Prestations.Prestation
+﻿@model P2_BDE_Events.ViewModels.UnePrestationViewsModel
 
 <h2>Créer une prestation</h2>
 
 <form asp-action="Creer">
     <div class="form-group">
-        <label for="Titre">Titre</label>
+        <label for="Prestataire.Titre">Titre</label>
         <input type="text" class="form-control" asp-for="Titre">
     </div>
      <div class="form-group">
-        <label for="CapaciteMax">Capacité maximale</label>
+        <label for="Prestataire.CapaciteMax">Capacité maximale</label>
         <input type="number" class="form-control" asp-for="CapaciteMax">
     </div>
     <div class="form-group">
-        <label for="Tarif">Tarif</label>
+        <label for="Prestataire.Tarif">Tarif</label>
         <input type="number" class="form-control" asp-for="Tarif">
     </div>
     <div class="form-group">
-        <label for="Calendrier">Calendrier</label>
+        <label for="Prestataire.Calendrier">Calendrier</label>
         <input type="text" class="form-control" asp-for="Calendrier">
     </div>
     <div class="form-group">
-        <label for="Livraison">Livraison</label>
+        <label for="Prestataire.Livraison">Livraison</label>
         <input type="checkbox" class="form-control" asp-for="Livraison">
     </div>
     <div class="form-group">
-        <label for="Description">Description</label>
+        <label for="Prestataire.Description">Description</label>
         <textarea class="form-control" asp-for="Description"></textarea>
     </div>
 
