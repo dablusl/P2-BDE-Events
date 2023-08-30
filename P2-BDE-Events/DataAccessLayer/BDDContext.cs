@@ -48,9 +48,6 @@ namespace P2_BDE_Events.DataAccessLayer
                 .HasOne(r => r.Evenement)
                 .WithMany(e => e.Reservations)
                 .HasForeignKey(r => r.EvenementId);
-
-            modelBuilder.Entity<LigneEvenement>()
-                .HasKey(le => new { le.EvenementId, le.Type });
         }
         //Initiation différents comptes
         public void InitializeDb()
@@ -828,117 +825,139 @@ namespace P2_BDE_Events.DataAccessLayer
             this.LignesEvenement.AddRange(
                 new LigneEvenement
                 {
+                    Id= 1,
                     Evenement = evenement1,
                     Type = TypeDePrestation.BAR,
                     Prestation = presta10
                 },
                 new LigneEvenement
                 {
+                    Id = 2,
                     Evenement = evenement1,
                     Type = TypeDePrestation.SALLE,
                     Prestation = presta11
                 },
                 new LigneEvenement
                 {
+                    Id = 3,
                     Evenement = evenement1,
                     Type = TypeDePrestation.TRAITEUR,
                     Prestation = presta12
                 },
                 new LigneEvenement
                 {
+                    Id = 4,
                     Evenement = evenement2,
                     Type = TypeDePrestation.SALLE,
                     Prestation = presta14
                 },
                 new LigneEvenement
                 {
+                    Id = 5,
                     Evenement = evenement3,
                     Type = TypeDePrestation.SECURITE,
                     Prestation = presta16
                 },
                 new LigneEvenement
                 {
+                    Id = 6,
                     Evenement = evenement2,
                     Type = TypeDePrestation.DJ,
                     Prestation = presta17
                 },
                 new LigneEvenement
                 {
+                    Id = 7,
                     Evenement = evenement4,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 8,
                     Evenement = evenement4,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 9,
                     Evenement = evenement5,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 10,
                     Evenement = evenement5,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 11,
                     Evenement = evenement6,
                     Type = TypeDePrestation.PHOTOGRAPHIE,
                 },
                 new LigneEvenement
                 {
+                    Id = 12,
                     Evenement = evenement7,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 13,
                     Evenement = evenement7,
                     Type = TypeDePrestation.TRAITEUR,
                 },
                 new LigneEvenement
                 {
+                    Id = 14,
                     Evenement = evenement7,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 15,
                     Evenement = evenement7,
                     Type = TypeDePrestation.LOCATION,
                 },
                 new LigneEvenement
                 {
+                    Id = 16,
                     Evenement = evenement8,
                     Type = TypeDePrestation.TRAITEUR,
                 },
                 new LigneEvenement
                 {
+                    Id = 17,
                     Evenement = evenement8,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 18,
                     Evenement = evenement9,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 19,
                     Evenement = evenement9,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 20,
                     Evenement = evenement9,
                     Type = TypeDePrestation.DJ,
                 },
                 new LigneEvenement
                 {
+                    Id = 21,
                     Evenement = evenement9,
                     Type = TypeDePrestation.PHOTOGRAPHIE,
                 },
                 new LigneEvenement
                 {
+                    Id=22,
                     Evenement = evenement9,
                     Type = TypeDePrestation.LOCATION,
                     Location = TypeDeLocation.PHOTOMATON

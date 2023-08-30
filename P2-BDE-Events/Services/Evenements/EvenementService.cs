@@ -4,6 +4,7 @@ using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
+using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
 using System;
 using System.Collections.Generic;
@@ -102,10 +103,9 @@ namespace P2_BDE_Events.Services.Evenements
         {
             return _bddContext.Evenements
                 .Include(e => e.Lignes)
-                .Where(e => e.Etat == EtatEvenement.OUVERT
-                        && e.Lignes.Any(
-                            l => types.Contains(l.Type)
-                                && l.Prestation == null))
+
+                .Where(e => e.Etat == EtatEvenement.OUVERT &&
+                    e.Lignes.Any(l => types.Contains(l.Type)))
                 .ToList();
         }
         public List<Evenement> ObtenirEvenementsParUniversite(string universite)

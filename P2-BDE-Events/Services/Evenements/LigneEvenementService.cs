@@ -1,4 +1,5 @@
-﻿using P2_BDE_Events.DataAccessLayer;
+﻿using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
@@ -18,7 +19,7 @@ namespace P2_BDE_Events.Services.Evenements
         {
             _bddContext = new BDDContext();
         }
-        public void CreerLigneEvenement(TypeDePrestation type, int idEvenement)
+        public int CreerLigneEvenement(TypeDePrestation type, int idEvenement)
         {
             LigneEvenement ligne = new LigneEvenement
             {
@@ -28,6 +29,8 @@ namespace P2_BDE_Events.Services.Evenements
 
             _bddContext.LignesEvenement.Add(ligne);
             _bddContext.SaveChanges();
+
+            return ligne.Id;
         }
 
         public void ModifierLigneEvenement(Evenement evenement, TypeDePrestation type, Prestation nouvellePrestation) 
@@ -38,11 +41,6 @@ namespace P2_BDE_Events.Services.Evenements
                 cible.Prestation = nouvellePrestation;
                 _bddContext.SaveChanges();
             }
-        }
-
-        public Evenement ObtenirEvenement(int id)
-        {
-            return _bddContext.Evenements.Find(id);
         }
 
         public LigneEvenement ObtenirLigneEvenement(int id)
@@ -85,6 +83,31 @@ namespace P2_BDE_Events.Services.Evenements
             return _bddContext.LignesEvenement
                 .Where( ligne => types.Contains(ligne.Type) && ligne.Prestation == null)
                 .ToList();
+        }
+
+        public List<PropositionPrestation> ObtenirPropositions(int idLigneEvenement)
+        {
+            return _bddContext.LignesEvenement
+                .Include(l => l.Propositions)
+                    .ThenInclude(p => p.Prestation)
+                .FirstOrDefault(l => l.Id == idLigneEvenement)
+                .Propositions
+                .ToList();               
+        }
+
+        public int ChoisirPrestation(int idLigne, int idProposition)
+        {
+            LigneEvenement ligne = _bddContext.LignesEvenement.Find(idLigne);
+            PropositionPrestation proposition = _bddContext.Propositions
+                .Include(p => p.Prestation)
+                .FirstOrDefault(p => p.Id == idProposition);
+
+            ligne.Prestation = proposition.Prestation;
+            ligne.TarifProposee = proposition.TarifPropose;
+
+            _bddContext.SaveChanges();
+
+            return ligne.Id;
         }
 
         public void Dispose()
