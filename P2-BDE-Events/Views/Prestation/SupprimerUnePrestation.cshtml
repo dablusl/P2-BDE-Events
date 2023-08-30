@@ -1,12 +1,12 @@
-@model P2_BDE_Events.Models.Prestations.Prestation
+﻿@model P2_BDE_Events.Models.Prestations.Prestation
 
-<h2>Modifier une prestation</h2>
+<h2>Supprimer une prestation</h2>
 
-<form asp-action="Modifier">
+<form asp-action="SuppressionConfirmee">
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <label for="Titre">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre">
+        <input type="text" class="form-control" asp-for="Titre" readonly>
     </div>
     <div class="form-group">
         <label for="CapaciteMax">Capacité maximale</label>
@@ -35,9 +35,10 @@
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
-            
+
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    <p>Êtes-vous sûr de vouloir supprimer cette prestation ?</p>
+    <button type="submit" class="btn btn-danger">Supprimer</button>
 </form>
