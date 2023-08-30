@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Newtonsoft.Json;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
@@ -21,6 +22,8 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         private EvenementService evenementService;
         private LigneEvenementService ligneEvenementService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public IActionResult ChoixCreation() { return View("~/Views/Organisateur/ChoixCreation.cshtml"); }
 
         public CreerUnEvenementController(IWebHostEnvironment webHostEnvironment)
         {
@@ -128,7 +131,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
         public void SetEventSession(EvenementViewModel evenementViewModel)
         {
-            HttpContext.Session.SetString("Event",JsonConvert.SerializeObject(evenementViewModel));
+            HttpContext.Session.SetString("Event", JsonConvert.SerializeObject(evenementViewModel));
         }
 
         public int GetIdCompte()

@@ -1,0 +1,179 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Baloo 2', cursive;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(50, 2%);
+    grid-template-rows: repeat(50, 2%);
+    overflow: hidden;
+}
+
+header {
+    grid-row: 1/5;
+    grid-column: 9/51;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    grid-row: 48/51;
+    grid-column: 9/51;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    grid-row: 1/51;
+    grid-column: 1/9;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    grid-row: 5/48;
+    grid-column: 9/51;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav img {
+    width: 100%;
+    height: 65%;
+}
+
+nav ul {
+    padding: 0;
+    margin-top: -50px;
+    cursor: pointer;
+}
+
+    nav ul li {
+        list-style: none;
+        margin-bottom: 40px;
+    }
+
+    nav ul li:hover {
+        color: red;
+    }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+header ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    header ul li {
+        margin: 0 50px;
+        cursor: pointer;
+    }
+
+        header ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        header ul li.pageActive {
+            font-weight: bold;
+        }
+
+.header-border {
+    position: absolute;
+    top: 63px;
+    width: 50%;
+    border-bottom: solid 1px;
+    border-color: black;
+}
+
+.footer-border {
+    position: absolute;
+    bottom: 47px;
+    width: 100%;
+    border-bottom: solid 1px;
+    border-color: black;
+}
+
+.ensembleMedia {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    bottom: 6px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.contenue {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
+}
+
+.numerosUn:hover {
+    background-color: #d62966;
+    transition-duration: .3s;
+}
+
+.numerosDeux:hover {
+    background-color: #00acee;
+    transition-duration: .3s;
+}
+
+.numerosTrois:hover {
+    background-color: #00427f;
+    transition-duration: .3s;
+}
+
+.numerosQuatre:hover {
+    background-color: #0a845b;
+    transition-duration: .3s;
+}
+
+.contenue:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+}
+
+.socialSvg {
+    width: 17px;
+}
+
+    .socialSvg path {
+        fill: white;
+    }
+
+.contenue:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
