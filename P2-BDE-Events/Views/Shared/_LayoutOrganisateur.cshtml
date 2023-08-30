@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="~/image/logo.ico" type="image/x-icon">
+    <link rel="icon" href="/Shared/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/css/Organisateur/_LayoutOrganisateur.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +36,8 @@
     </header>
 
     <nav>
-        <a onclick="window.location.href = '@Url.Action("EvenementsEnCours", "MesEvenements", new { area = "Organisateur" })'">
-            <img src="~/image/logo.png" alt="logoDuSite">
+        <a onclick="window.location.href = '@Url.Action("Index", "Home")'">
+            <img src="/Shared/logo.png" alt="logoDuSite">
         </a>
 
         <ul>
@@ -47,6 +47,7 @@
             <li><a onclick="window.location.href = '/Organisateur/Prestataires/'">Prestataires</a></li>
             <li><a onclick="window.location.href = '/Organisateur/Messages/'">Messages</a></li>
             <li><a onclick="window.location.href = '/Organisateur/MonBDE/'">Mon BDE</a></li>
+            <li><a onclick="window.location.href = '@Url.Action("Logout", "Login")'">Déconnexion</a></li>
         </ul>
 
     </nav>

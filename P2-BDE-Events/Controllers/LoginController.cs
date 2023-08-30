@@ -35,37 +35,57 @@ namespace P2_BDE_Events.Controllers
             PrestataireService = new PrestataireService();
             AdministrateurService = new AdministrateurService();
         }
+
         [HttpGet]
         public IActionResult Index()
         {
             CompteViewModel compteViewModel = new CompteViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+
             if (compteViewModel.Authentifie)
             {
-                compteViewModel.Compte = CompteService.ObtenirCompte(HttpContext.User.Identity.Name);
+                Compte compte = new CompteService().ObtenirCompte(GetIdCompte());
 
-                return Redirect("/Home/Index");
-
+                if (compte.Profil == "Organisateur")
+                {
+                    return RedirectToAction("EvenementsSuivants", "MesEvenements", new { area = "OrganisateurControllers" });
+                }
+                else if (compte.Profil == "Participant")
+                {
+                    return RedirectToAction("AgendaEvenement", "Agenda", new { area = "ParticipantControllers" });
+                }
+                else if (compte.Profil == "Prestataire")
+                {
+                    return RedirectToAction("Index", "CreerUnePrestation", new { area = "PrestataireControllers" });
+                }
+                else if (compte.Profil == "Administrateur")
+                {
+                    return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             return View(compteViewModel);
         }
+
+
 
         [HttpPost]
         public IActionResult Index(CompteViewModel viewModel, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-
                 Compte compte = AuthentificationService.Authentifier(viewModel.Compte.Email, viewModel.Compte.MotDePasse);
-
 
                 if (compte != null)
                 {
                     var userClaims = new List<Claim>()
-                    {
-                       new Claim(ClaimTypes.Email, compte.Email),
-                       new Claim(ClaimTypes.Role, compte.Profil),
-                       new Claim(ClaimTypes.Sid, compte.Id.ToString()),
-                    };
+            {
+               new Claim(ClaimTypes.Email, compte.Email),
+               new Claim(ClaimTypes.Role, compte.Profil),
+               new Claim(ClaimTypes.Sid, compte.Id.ToString()),
+            };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
@@ -74,17 +94,38 @@ namespace P2_BDE_Events.Controllers
                     HttpContext.Session.SetString("iDCompte", compte.Id.ToString());
 
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
                         return Redirect(returnUrl);
-
-                    return Redirect("/");
-
-
+                    }
+                    else
+                    {
+                        if (compte.Profil == "Organisateur")
+                        {
+                            return RedirectToAction("EvenementsSuivants", "MesEvenements", new { area = "OrganisateurControllers" });
+                        }
+                        else if (compte.Profil == "Participant")
+                        {
+                            return RedirectToAction("AgendaEvenement", "Agenda", new { area = "ParticipantControllers" });
+                        }
+                        else if (compte.Profil == "Prestataire")
+                        {
+                            return RedirectToAction("Index", "CreerUnePrestation", new { area = "PrestataireControllers" });
+                        }
+                        else if (compte.Profil == "Administrateur")
+                        {
+                            return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
                 }
                 ModelState.AddModelError("Compte.Email", "Email et/ou mot de passe incorrect(s)");
-
             }
             return View(viewModel);
         }
+
         [HttpGet]
         public IActionResult CreerCompte()
         {
@@ -276,6 +317,11 @@ namespace P2_BDE_Events.Controllers
         {
             HttpContext.SignOutAsync();
             return Redirect("/");
+        }
+
+        public int GetIdCompte()
+        {
+            return int.Parse(HttpContext.Session.GetString("iDCompte"));
         }
     }
 }

@@ -38,6 +38,9 @@ nav {
 main {
     grid-row: 5/48;
     grid-column: 9/51;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav img {
@@ -54,6 +57,10 @@ nav ul {
     nav ul li {
         list-style: none;
         margin-bottom: 40px;
+    }
+
+    nav ul li:hover {
+        color: red;
     }
 
         nav ul li a {

@@ -41,19 +41,20 @@ nav {
     width: 100%;
 }
 
-    nav ul {
+    nav ul, nav ul li a {
         list-style-type: none;
         display: flex;
         justify-content: center;
         gap: 45px;
         cursor: pointer;
+        text-decoration: none;
     }
 
-    nav li {
-        color: white;
-        font-size: 21px;
-        letter-spacing: 2px;
-    }
+        nav li, nav ul li a {
+            color: white;
+            font-size: 21px;
+            letter-spacing: 2px;
+        }
 
         nav li:hover {
             color: red;

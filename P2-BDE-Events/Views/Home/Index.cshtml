@@ -27,13 +27,12 @@
                 <li>CONTACT</li>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a href="/Login/Logout"><span class="btn-navbar">déconnexion </span></a></li>
+                    <li onclick="window.location.href = '@Url.Action("Index", "Login")'">MON COMPTE</li>
                 }
                 else
                 {
-                    <li><a href="/Login/Index"><span class="btn-navbar">connexion </span></a></li>
+                    <li><a href="/Login/Index">CONNEXION</a></li>
                 }
-                @* <li onclick="window.location.href = '@Url.Action("Index", "Login")'">CONNEXION</li> *@
             </ul>
         </nav>
         <div class="logo"><img src="/Shared/logo.png" alt="Logo BDE EVENTS"></div>
