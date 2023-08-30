@@ -1,4 +1,6 @@
-﻿@{
+﻿@model P2_BDE_Events.ViewModels.AgendaEvenementViewModel
+
+@{
     Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
 }
 
@@ -6,131 +8,45 @@
 
 @section Header {
     <ul>
-        <li>Intérêt</li>
+@*        <li>Intérêt</li>
         <li class="pageActive">Date</li>
         <li>Participant</li>
-        <li>Prix</li>
+        <li>Prix</li>*@
+        <li class="search-form">
+            <form method="get" action="@Url.Action("AgendaEvenement", "Agenda", new { area = "Participant" })">
+                <input type="hidden" name="universite" value="@Model.Participant.Universite" />
+                <button type="submit">Les événements de mon université</button>
+            </form>
+        </li>
+        <li>
+            <form method="get">
+                <input type="text" name="eventId" placeholder="Rechercher par identifiant" />
+                <button type="submit">Rechercher</button>
+            </form>
+        </li>
     </ul>
 }
 
-<a href="evenementChoisit.html" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="~/image/8cdc9ab775544b56b2f1a9ba94dbe751JPG_637226663ae84.jpg" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p>9€</p>
+
+@foreach (var evenement in Model.Evenements)
+{
+    <a href="@Url.Action("ReserverUnEvenement", "MesEvenements", new { area = "Participant", EvenementID = evenement.Id })" class="voirPlus">
+        <div class="evenement">
+            <div class="photo">
+                <img src="@evenement.CoverPhotoPath" alt="">
             </div>
-            <div class="date">
-                <p>19/09</p>
-            </div>
-            <div class="participant">
-                <p>49/100</p>
-            </div>
-        </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
+            <div class="info">
+                <div class="prix">
+                    <p>@evenement.PrixBillet €</p>
+                </div>
+                <div class="date">
+                    <p>@evenement.DateEvenement.ToShortDateString()</p>
+                </div>
+                <div class="participant">
+                    <p>@evenement.NbParticipants/@evenement.MaxParticipants</p>
+                </div>
             </div>
         </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
-            </div>
-        </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
-            </div>
-        </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
-            </div>
-        </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
-            </div>
-        </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
-            </div>
-        </div>
-    </div>
-</a><a href="" class="voirPlus">
-    <div class="evenement">
-        <div class="photo"><img src="" alt=""></div>
-        <div class="info">
-            <div class="prix">
-                <p></p>
-            </div>
-            <div class="date">
-                <p></p>
-            </div>
-            <div class="participant">
-                <p></p>
-            </div>
-        </div>
-    </div>
-</a>
+    </a>
+}
+
