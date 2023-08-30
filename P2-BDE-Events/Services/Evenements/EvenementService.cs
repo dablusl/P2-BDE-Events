@@ -96,16 +96,29 @@ namespace P2_BDE_Events.Services.Evenements
                 .Where(e => e.OrganisateurId == organisateurId)
                 .ToList();
         }
-        //count equiv .Length .Size
         public List<Evenement> EnAppelDoffre(List<TypeDePrestation> types)
         {
             return _bddContext.Evenements
                 .Include(e => e.Lignes)
-                .Where(e => e.Etat == EtatEvenement.OUVERT 
+                .Where(e => e.Etat == EtatEvenement.OUVERT
                         && e.Lignes.Any(
-                            l => types.Contains(l.Type) 
+                            l => types.Contains(l.Type)
                                 && l.Prestation == null))
                 .ToList();
+        }
+        public List<Evenement> ObtenirEvenementsParUniversite(string universite)
+        {
+
+            if (!string.IsNullOrEmpty(universite))
+            {
+                return _bddContext.Evenements
+                    .Include(o => o.Organisateur)
+                    .ThenInclude(p => p.Participant)
+                    .Where(e => e.Organisateur.Participant.Universite == universite)
+                           .ToList();
+            }
+
+            return null;
         }
 
         public void Dispose()

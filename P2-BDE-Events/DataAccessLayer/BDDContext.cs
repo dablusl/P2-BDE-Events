@@ -499,24 +499,24 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 10,
                 Compte = cOrga10,
-                NomBDE = "Paris12-ECO-BDE",
-                Universite = "Paris12"
+                NomBDE = "Paris-Descartes-Droit-BDE",
+                Universite = "Paris-Descartes"
             };
 
             Participant pOrga11 = new Participant
             {
                 Id = 11,
                 Compte = cOrga11,
-                NomBDE = "Paris12-ECO-BDE",
-                Universite = "Paris12"
+                NomBDE = "ParisSorbonne-Lettres-BDE",
+                Universite = "Paris-Sorbonne"
             };
 
             Participant pOrga12 = new Participant
             {
                 Id = 12,
                 Compte = cOrga12,
-                NomBDE = "Paris12-ECO-BDE",
-                Universite = "Paris12"
+                NomBDE = "HEC-ECO-BDE",
+                Universite = "HEC"
             };
             this.Participants.AddRange(
                 pOrga10,
@@ -586,7 +586,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 NbReservations = 0,
                 NbParticipants = 0,
                 PrixBillet = 10,
-                Organisateur = organisateur,
+                Organisateur = oOrga10,
             };
             Evenement evenement3 = new Evenement
             {

@@ -1,42 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
 using P2_BDE_Events.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace P2_BDE_Events.Controllers.ParticipantControllers
 {
     public class AgendaController : Controller
     {
         private EvenementService EvenementService;
+        private ParticipantService ParticipantService;
 
         public AgendaController()
         {
             EvenementService = new EvenementService();
+            ParticipantService = new ParticipantService();
         }
-        //public IActionResult AgendaEvenement()
-        //{
-        //    return View("Views/Participant/AgendaEvenement.cshtml");
-        //}
 
         [HttpGet]
-        public IActionResult AgendaEvenement(int? eventId)
+        public IActionResult AgendaEvenement(int? eventId, string universite)
         {
-            List<Evenement> evenements = EvenementService.ObtenirTousLesEvenements(); // Obtenez la liste complète des événements
+            List<Evenement> evenements = EvenementService.ObtenirTousLesEvenements();
 
             if (eventId.HasValue)
             {
-                evenements = evenements.Where(e => e.Id == eventId.Value).ToList(); // Filtrer les événements par identifiant
+                evenements = evenements.Where(e => e.Id == eventId.Value).ToList();
+            }
+            int compteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
+            Participant participant = ParticipantService.ObtenirParticipant(compteId);
+
+           if (!string.IsNullOrEmpty(universite))
+            {
+                universite = participant.Universite;
+                evenements = EvenementService.ObtenirEvenementsParUniversite(universite);
+
             }
 
-            // Créez le modèle pour la vue
             var viewModel = new AgendaEvenementViewModel
             {
-                Evenements = evenements
+                Evenements = evenements,
+                Participant = participant
             };
 
             return View("Views/Participant/AgendaEvenement.cshtml", viewModel);
         }
+
     }
 }
