@@ -49,9 +49,18 @@ namespace P2_BDE_Events.Services.Prestations
                 _bddContext.SaveChanges();
             }
         }
+
+        public int CreerPropositionPrestation(PropositionPrestation proposition)
+        {
+            _bddContext.Propositions.Add(proposition);
+            _bddContext.SaveChanges();
+            return proposition.Id;
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();
         }
+
     }
 }

@@ -6,6 +6,7 @@ using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
 using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
+using P2_BDE_Events.Services.Prestations;
 using P2_BDE_Events.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +15,27 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 {
     public class AppelsDoffreController : Controller
     {
-        //afficher toutes les appels d'offre possibles par prestations du prestataire
-        //commentaire test push
+        PrestationService PrestationService { get; set; }
+
+        public AppelsDoffreController()
+        {
+            PrestationService = new PrestationService();
+        }
         public IActionResult ConsulterLesAppels()
         {
             return View("~/Views/Prestation/ConsulterLesAppels.cshtml", ConsultationViewModel());
         }
 
-        public IActionResult ProposerUnePrestation(int idEvenement, TypeDePrestation type)
+        public IActionResult ProposerUnePrestation(int idEvenement, int idLigne)
         {
-            return View("~/Views/Prestation/ProposerUnePrestation.cshtml", PropositionViewModel(idEvenement, type));
+            return View("~/Views/Prestation/ProposerUnePrestation.cshtml", PropositionViewModel(idEvenement, idLigne));
+        }
+        [HttpPost]
+        public IActionResult ProposerUnePrestation(AppelDoffreViewModel viewModel)
+        {
+            PrestationService.CreerPropositionPrestation(viewModel.PropositionPrestation);
+
+            return Redirect("ConsulterLesAppels");
         }
 
         public int GetIdCompte()
@@ -46,19 +58,31 @@ namespace P2_BDE_Events.Controllers.PrestataireController
             return viewModel;
         }
 
-        public AppelDoffreViewModel PropositionViewModel(int idEvenement, TypeDePrestation type)
+        public AppelDoffreViewModel PropositionViewModel(int idEvenement, int idLigne)
         {
             Prestataire prestataire = new PrestataireService().GetPrestataireParCompte(GetIdCompte());
             List<TypeDePrestation> typesDuPresta = prestataire.Prestations.Select(Prestation => Prestation.Type).ToList();
 
+            Evenement evenement = new EvenementService().ObtenirEvenement(idEvenement);
+            LigneEvenement ligne = new LigneEvenementService().ObtenirLigneEvenement(idLigne);
+
             //On doit lui passer Evenements ayant dappel de prestation concernants
             AppelDoffreViewModel viewModel = new AppelDoffreViewModel
             {
-                EvenementInteresse = new EvenementService().ObtenirEvenement(idEvenement),
-                PrestationsDuPrestataire = prestataire.Prestations.Where(p =>  p.Type == type).ToList(),
+                EvenementInteresse = evenement,
+                Ligne = ligne,
+                PrestationsDuPrestataire = prestataire.Prestations.Where(p => p.Type == ligne.Type).ToList(),
+                PropositionPrestation = new PropositionPrestation()
             };
 
             return viewModel;
+        }
+
+        public void CreationProposition(AppelDoffreViewModel model)
+        {
+            
+
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace P2_BDE_Events.Services.Evenements
         {
             _bddContext = new BDDContext();
         }
-        public void CreerLigneEvenement(TypeDePrestation type, int idEvenement)
+        public int CreerLigneEvenement(TypeDePrestation type, int idEvenement)
         {
             LigneEvenement ligne = new LigneEvenement
             {
@@ -28,6 +28,8 @@ namespace P2_BDE_Events.Services.Evenements
 
             _bddContext.LignesEvenement.Add(ligne);
             _bddContext.SaveChanges();
+
+            return ligne.Id;
         }
 
         public void ModifierLigneEvenement(Evenement evenement, TypeDePrestation type, Prestation nouvellePrestation) 
@@ -38,11 +40,6 @@ namespace P2_BDE_Events.Services.Evenements
                 cible.Prestation = nouvellePrestation;
                 _bddContext.SaveChanges();
             }
-        }
-
-        public Evenement ObtenirEvenement(int id)
-        {
-            return _bddContext.Evenements.Find(id);
         }
 
         public LigneEvenement ObtenirLigneEvenement(int id)
@@ -86,6 +83,8 @@ namespace P2_BDE_Events.Services.Evenements
                 .Where( ligne => types.Contains(ligne.Type) && ligne.Prestation == null)
                 .ToList();
         }
+
+
 
         public void Dispose()
         {

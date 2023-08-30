@@ -6,6 +6,7 @@ namespace P2_BDE_Events.Models.Evenement
 {
     public class LigneEvenement
     {
+        public int Id { get; set; }
         public virtual Prestation Prestation { get; set; }
         public TypeDePrestation Type { get; set; }
         public TypeDeLocation Location { get; set; }

@@ -10,12 +10,19 @@
 <h1>@Model.EvenementInteresse.Titre</h1>
 <h1>@Model.EvenementInteresse.Description</h1>
 
-@foreach(Prestation prestation in Model.PrestationsDuPrestataire)
+@foreach (Prestation prestation in Model.PrestationsDuPrestataire)
 {
     <div class="container-prestation-proposition">
-        <h4>@prestation.Titre</h4>
-        <p>@prestation.Description</p>
-        <input />
-        <button>proposer</button>
+        @using (Html.BeginForm())
+        {
+            @*<form method="post" action="/YourControllerName/ProposerUnePrestation">*@
+            <h4>@prestation.Titre</h4>
+            <p>@prestation.Description</p>
+            <input type="hidden" name="PropositionPrestation.LigneEvenementId" value="@Model.Ligne.Id" />
+            <input type="hidden" name="PropositionPrestation.PrestationId" value="@prestation.Id" />
+            <input type="number" name="PropositionPrestation.TarifPropose" /> <!-- Input for TarifPropose -->
+            <button type="submit">proposer</button>
+            @*</form>*@
+        }
     </div>
 }

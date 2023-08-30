@@ -13,6 +13,7 @@ namespace P2_BDE_Events.ViewModels
         public PropositionPrestation PropositionPrestation { get; set; }
         public List<TypeDePrestation> Types { get; set; }
 
+        public LigneEvenement Ligne { get; set; }
         public Evenement EvenementInteresse { get; set; }
         public TypeDePrestation TypeInteresse { get; set; }
         public List<Prestation> PrestationsDuPrestataire { get; set; }
