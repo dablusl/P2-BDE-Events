@@ -15,6 +15,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
     public class AppelsDoffreController : Controller
     {
         //afficher toutes les appels d'offre possibles par prestations du prestataire
+        //commentaire test push
         public IActionResult ConsulterLesAppels()
         {
             return View("~/Views/Prestation/ConsulterLesAppels.cshtml", ConsultationViewModel());
