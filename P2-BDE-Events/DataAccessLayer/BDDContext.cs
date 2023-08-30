@@ -7,7 +7,6 @@ using System;
 using P2_BDE_Events.Models.Evenement.Enums;
 using P2_BDE_Events.Models.Stats;
 using P2_BDE_Events.Services.Comptes;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
@@ -50,9 +49,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 .WithMany(e => e.Reservations)
                 .HasForeignKey(r => r.EvenementId);
 
-
-
-
+            modelBuilder.Entity<LigneEvenement>()
+                .HasKey(le => new { le.EvenementId, le.Type });
         }
         //Initiation différents comptes
         public void InitializeDb()
@@ -144,8 +142,6 @@ namespace P2_BDE_Events.DataAccessLayer
                  Etat = EtatDePrestation.Annulee,
                  Prestataire = prestataire5
              });
-
-
 
             //Compte Participant
             var Participant1 = new Compte
@@ -254,73 +250,314 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Prestataires.Add(prestat1);
             this.SaveChanges();
 
-            this.Evenements.Add(
-                new Evenement
-                {
-                    Id = 1,
-                    Titre = "Beer-pong LEA vs DROIT",
-                    Etat = EtatEvenement.PUBLIE,
-                    Type = TypeEvenement.SOIREE,
-                    CreeLe = new DateTime(2023, 09, 02, 10, 30, 20),
-                    DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
-                    DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
-                    Description = "Defend l'honneur de ta fac avec ton talent surhumain",
-                    CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
-                    MaxParticipants = 100,
-                    MinParticipants = 70,
-                    NbReservations = 0,
-                    NbParticipants = 0,
-                    PrixBillet = 8.5,
-                    Organisateur = organisateur,
-                });
-            this.Reservations.Add(
-                new Reserver
-                {
-                    Id= 1,
-                    DateReservation = new DateTime(2023, 09, 02, 12, 30, 20),
-                    ParticipantId = 3,
-                    EvenementId = 1,
-                });
-            
-            
-            this.Evenements.AddRange(
-                new Evenement
-                {
-                    Id = 2,
-                    Titre = "BOOO BOOO BOOO Halloween",
-                    Etat = EtatEvenement.PUBLIE,
-                    Type = TypeEvenement.SOIREE,
-                    CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
-                    DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
-                    DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
-                    Description = "Soirée faits moi très peur et concours de costumes",
-                    CoverPhotoPath = "/images/evenement/5/HEX-HP-344199-site-080823-4x3.jpeg",
-                    MaxParticipants = 200,
-                    MinParticipants = 120,
-                    NbReservations = 0,
-                    NbParticipants = 0,
-                    PrixBillet = 10,
-                    Organisateur = organisateur,
-                },
-                new Evenement
-                {
-                    Id = 3,
-                    Titre = "Karaoke Jam Sesh Beaux Arts",
-                    Etat = EtatEvenement.PUBLIE,
-                    Type = TypeEvenement.SOIREE,
-                    CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
-                    DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
-                    DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
-                    Description = "Ramenez vos instruments et vos cordes vocales",
-                    CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
-                    MaxParticipants = 80,
-                    MinParticipants = 50,
-                    NbReservations = 0,
-                    NbParticipants = 0,
-                    PrixBillet = 5,
-                    Organisateur = organisateur,
-                }
+
+
+
+            //prestations
+
+            Compte cPrestataire10 = new Compte
+            {
+                Id = 10,
+                Email = "bBieres@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cPrestataire11 = new Compte
+            {
+                Id = 11,
+                Email = "pizzasLumberjack@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cPrestataire12 = new Compte
+            {
+                Id = 12,
+                Email = "j.elbeux@stereolux.fr",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cPrestataire13 = new Compte
+            {
+                Id = 13,
+                Email = "j.elbeux@crit.fr",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cPrestataire14 = new Compte
+            {
+                Id = 14,
+                Email = "daDj@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Prestataire",
+                Prenom = "Pierre",
+                Nom = "Dupont",
+                NumeroTelephone = "+33674544676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            this.Comptes.AddRange(
+                cPrestataire11,
+                cPrestataire10,
+                cPrestataire12,
+                cPrestataire13,
+                cPrestataire14
                 );
+            this.SaveChanges();
+
+            Prestataire pPrestataire11 = new Prestataire
+            {
+                Id = 11,
+                Compte = cPrestataire11,
+                RaisonSocial = "Pizzas Lumberjack"
+            };
+
+            Prestataire pPrestataire10 = new Prestataire
+            {
+                Id = 10,
+                Compte = cPrestataire10,
+                RaisonSocial = "B Bar à Bieres"
+            };
+            Prestataire pPrestataire12 = new Prestataire
+            {
+                Id = 12,
+                Compte = cPrestataire12,
+                RaisonSocial = "Stereolux"
+            };
+
+            Prestataire pPrestataire13 = new Prestataire
+            {
+                Id = 13,
+                Compte = cPrestataire13,
+                RaisonSocial = "Crit Interim Securite"
+            };
+
+            Prestataire pPrestataire14 = new Prestataire
+            {
+                Id = 14,
+                Compte = cPrestataire14,
+                RaisonSocial = "DJ Blaz"
+            };
+
+            this.Prestataires.AddRange(
+                pPrestataire10,
+                pPrestataire11,
+                pPrestataire12,
+                pPrestataire13,
+                pPrestataire14
+                );
+            this.SaveChanges();
+
+            Prestation presta10 = new Prestation
+            {
+                Id = 10,
+                Type = TypeDePrestation.BAR,
+                Description = "Bar à bières, large sélection belge et allemande",
+                CapaciteMax = 99999999,
+                Prestataire = pPrestataire10,
+                Tarif = 100,
+            };
+
+            Prestation presta11 = new Prestation
+            {
+                Id = 11,
+                Type = TypeDePrestation.SALLE,
+                Description = "Bar à bières, large sélection belge et allemande",
+                CapaciteMax = 80,
+                Prestataire = pPrestataire10,
+                Tarif = 100,
+            };
+            Prestation presta12 = new Prestation
+            {
+                Id = 12,
+                Type = TypeDePrestation.TRAITEUR,
+                Description = "Pizza artisanales",
+                CapaciteMax = 120,
+                Prestataire = pPrestataire11,
+                Tarif = 120,
+            };
+            Prestation presta13 = new Prestation
+            {
+                Id = 13,
+                Type = TypeDePrestation.SALLE,
+                Description = "Salle MAXI - Salle Concert",
+                CapaciteMax = 1000,
+                Prestataire = pPrestataire12,
+                Tarif = 1000,
+            };
+            Prestation presta14 = new Prestation
+            {
+                Id = 14,
+                Type = TypeDePrestation.SALLE,
+                Description = "Salle MICRO - Salle Concert",
+                CapaciteMax = 500,
+                Prestataire = pPrestataire12,
+                Tarif = 1000,
+            };
+            Prestation presta15 = new Prestation
+            {
+                Id = 15,
+                Type = TypeDePrestation.BAR,
+                Description = "Bière Pression Locale, plus d'info inbox",
+                CapaciteMax = 1000,
+                Prestataire = pPrestataire12,
+                Tarif = 1000,
+
+            };
+            Prestation presta16 = new Prestation
+            {
+                Id = 16,
+                Type = TypeDePrestation.SECURITE,
+                Description = "Securite moyen evenements",
+                CapaciteMax = 1000,
+                Prestataire = pPrestataire13,
+                Tarif = 1000,
+            };
+            Prestation presta17 = new Prestation
+            {
+                Id = 17,
+                Type = TypeDePrestation.DJ,
+                Description = "DJ",
+                CapaciteMax = 99999,
+                Prestataire = pPrestataire13,
+                Tarif = 1000,
+            };
+
+
+            this.Prestations.AddRange(
+                presta10,
+                presta11,
+                presta12,
+                presta13,
+                presta14,
+                presta15,
+                presta16,
+                presta17
+                );
+            this.SaveChanges();
+            //evenements de Base
+            Evenement evenement1 = new Evenement
+            {
+                Id = 1,
+                Titre = "Beer-pong LEA vs DROIT",
+                Etat = EtatEvenement.PUBLIE,
+                Type = TypeEvenement.SOIREE,
+                CreeLe = new DateTime(2023, 09, 02, 10, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
+                Description = "Defend l'honneur de ta fac avec ton talent surhumain",
+                CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
+                MaxParticipants = 100,
+                MinParticipants = 70,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 8.5,
+                Organisateur = organisateur,
+            };
+            Evenement evenement2 = new Evenement
+            {
+                Id = 2,
+                Titre = "BOOO BOOO BOOO Halloween",
+                Etat = EtatEvenement.PUBLIE,
+                Type = TypeEvenement.SOIREE,
+                CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Soirée faits moi très peur et concours de costumes",
+                CoverPhotoPath = "/images/evenement/5/HEX-HP-344199-site-080823-4x3.jpeg",
+                MaxParticipants = 200,
+                MinParticipants = 120,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 10,
+                Organisateur = organisateur,
+            };
+            Evenement evenement3 = new Evenement
+            {
+                Id = 3,
+                Titre = "Karaoke Jam Sesh Beaux Arts",
+                Etat = EtatEvenement.PUBLIE,
+                Type = TypeEvenement.SOIREE,
+                CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                Description = "Ramenez vos instruments et vos cordes vocales",
+                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                MaxParticipants = 80,
+                MinParticipants = 50,
+                NbReservations = 0,
+                NbParticipants = 0,
+                PrixBillet = 5,
+                Organisateur = organisateur,
+            };
+            //Evenement evenement4 = ;
+
+            this.Evenements.AddRange(
+                evenement1,
+                evenement2,
+                evenement3
+                );
+            this.SaveChanges();
+
+            this.LignesEvenement.AddRange(
+                new LigneEvenement
+                {
+                    Evenement = evenement1,
+                    Type = TypeDePrestation.BAR,
+                    Prestation = presta10
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement1,
+                    Type = TypeDePrestation.SALLE,
+                    Prestation = presta11
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement1,
+                    Type = TypeDePrestation.TRAITEUR,
+                    Prestation = presta12
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement2,
+                    Type = TypeDePrestation.SALLE,
+                    Prestation = presta14
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement3,
+                    Type = TypeDePrestation.SECURITE,
+                    Prestation = presta16
+                },
+                new LigneEvenement
+                {
+                    Evenement = evenement2,
+                    Type = TypeDePrestation.DJ,
+                    Prestation = presta17
+                }
+
+                );
+
             /*
             this.AvisUtilisateur.AddRange(
                 new Avis

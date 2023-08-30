@@ -5,7 +5,7 @@
         TRAITEUR,
         DJ,
         SALLE,
-        SECUTITE,
+        SECURITE,
         BAR
     }
 }
