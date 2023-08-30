@@ -2,36 +2,39 @@
 using Microsoft.AspNetCore.Mvc;
 using P2_BDE_Events.DataAccessLayer; 
 using P2_BDE_Events.Models.Prestations;
+using P2_BDE_Events.Services.Prestations;
+using P2_BDE_Events.ViewModels;
 
-namespace P2_BDE_Events.Controllers
+namespace P2_BDE_Events.Controllers.PrestataireController
 {
-    public class PrestationController : Controller
+    public class CreerUnePrestationController : Controller
     {
         private readonly BDDContext _dbContext; 
 
-        public PrestationController(BDDContext dbContext)
+        public CreerUnePrestationController()
         {
-            _dbContext = dbContext;
+            _dbContext = new BDDContext();
         }
 
         
         [HttpGet]
         public IActionResult Creer()
         {
-            return View();
+            var viewModel = new UnePrestationViewsModel();
+            return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModel); ;
         }
 
         [HttpPost]
-        public IActionResult Creer(Prestation prestation)
+        public IActionResult Creer(UnePrestationViewsModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Prestations.Add(prestation);
+                _dbContext.Prestations.Add(viewModel.prestation);
                 _dbContext.SaveChanges();
-                return RedirectToAction("Index"); // Redirigez où vous le souhaitez
+                return View("~/Views/Prestation/CreerUnePrestation.cshtml"); ; 
             }
 
-            return View(prestation);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -43,7 +46,7 @@ namespace P2_BDE_Events.Controllers
                 return NotFound();
             }
 
-            return View(prestation);
+            return View("~/Views/Prestation/ModifierUnePrestation.cshtml",prestation);
         }
 
         [HttpPost]
@@ -53,7 +56,7 @@ namespace P2_BDE_Events.Controllers
             {
                 _dbContext.Prestations.Update(prestation);
                 _dbContext.SaveChanges();
-                return RedirectToAction("Index"); // Redirigez où vous le souhaitez
+                return View("~/Views/Prestation/ModifierUnePrestation.cshtml");
             }
 
             return View(prestation);
@@ -71,7 +74,7 @@ namespace P2_BDE_Events.Controllers
             return View(prestation);
         }
 
-        [HttpPost, ActionName("Supprime")]
+        [HttpPost, ActionName("Supprimer")]
         public IActionResult SuppressionConfirmee(int id)
         {
             var prestation = _dbContext.Prestations.Find(id);
@@ -83,7 +86,7 @@ namespace P2_BDE_Events.Controllers
             _dbContext.Prestations.Remove(prestation);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index"); // Redirigez où vous le souhaitez
+            return View("~/Views/Prestation/SupprimerUnePrestation.cshtml"); 
         }
     }
 }
