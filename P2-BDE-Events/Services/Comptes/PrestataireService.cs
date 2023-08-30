@@ -23,6 +23,11 @@ namespace P2_BDE_Events.Services.Comptes
             return prestataire.Id;
         }
 
+        public Prestataire GetPrestataireParCompte(int IdCompte)
+        {
+            return _bddContext.Prestataires.Find(IdCompte);
+        }
+
         //public void ModifierPrestataire(int id, Prestataire modifications)
         //{
         //    Prestataire cible = _bddContext.Prestataires.Find(id);
