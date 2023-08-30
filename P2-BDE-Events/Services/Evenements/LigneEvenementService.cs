@@ -12,6 +12,8 @@ namespace P2_BDE_Events.Services.Evenements
     {
         private readonly BDDContext _bddContext;
 
+        public TypeDePrestation TRAITEUR { get; private set; }
+
         public LigneEvenementService()
         {
             _bddContext = new BDDContext();
@@ -77,6 +79,14 @@ namespace P2_BDE_Events.Services.Evenements
                 _bddContext.SaveChanges();
             }
         }
+
+        public List<LigneEvenement> AppelsDoffre(List<TypeDePrestation> types)
+        {
+            return _bddContext.LignesEvenement
+                .Where( ligne => types.Contains(ligne.Type) && ligne.Prestation == null)
+                .ToList();
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();
