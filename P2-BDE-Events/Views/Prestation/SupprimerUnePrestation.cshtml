@@ -1,0 +1,44 @@
+﻿@model P2_BDE_Events.Models.Prestations.Prestation
+
+<h2>Supprimer une prestation</h2>
+
+<form asp-action="SuppressionConfirmee">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label for="Titre">Titre</label>
+        <input type="text" class="form-control" asp-for="Titre" readonly>
+    </div>
+    <div class="form-group">
+        <label for="CapaciteMax">Capacité maximale</label>
+        <input type="number" class="form-control" asp-for="CapaciteMax">
+    </div>
+    <div class="form-group">
+        <label for="Tarif">Tarif</label>
+        <input type="number" class="form-control" asp-for="Tarif">
+    </div>
+    <div class="form-group">
+        <label for="Calendrier">Calendrier</label>
+        <input type="text" class="form-control" asp-for="Calendrier">
+    </div>
+    <div class="form-group">
+        <label for="Livraison">Livraison</label>
+        <input type="checkbox" class="form-control" asp-for="Livraison">
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" asp-for="Description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Type">Type</label>
+        <select class="form-control" asp-for="Type">
+            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
+            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
+            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
+
+        </select>
+    </div>
+
+    <p>Êtes-vous sûr de vouloir supprimer cette prestation ?</p>
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+</form>
