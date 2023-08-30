@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.Models.Prestations.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace P2_BDE_Events.Services.Evenements
 {
@@ -93,6 +95,15 @@ namespace P2_BDE_Events.Services.Evenements
                 .Where(e => e.OrganisateurId == organisateurId)
                 .ToList();
         }
+        //count equiv .Length .Size
+        public List<Evenement> EnAppelDoffreAsync(List<TypeDePrestation> types)
+        {
+            return _bddContext.Evenements
+                .Include(e => e.Lignes)
+                .Where(e => e.Lignes.Any(l => types.Contains(l.Type)))
+                .ToList();
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();

@@ -26,21 +26,16 @@ namespace P2_BDE_Events.Controllers.PrestataireController
         }
         public AppelDoffreViewModel InitViewModel()
         {
-
             Prestataire prestataire = new PrestataireService().GetPrestataireParCompte(GetIdCompte());
             List<TypeDePrestation> typesDuPresta = prestataire.Prestations.Select(Prestation => Prestation.Type).ToList();
-            List<LigneEvenement> lignesEnAppelDOffre = new LigneEvenementService().AppelsDoffre(typesDuPresta);
 
-            AppelDoffreViewModel viewModel = new AppelDoffreViewModel();
-
-            foreach (LigneEvenement ligne in lignesEnAppelDOffre)
+            //On doit lui passer Evenements ayant dappel de prestation concernants
+            AppelDoffreViewModel viewModel = new AppelDoffreViewModel
             {
-                viewModel.Lignes.Add(new AppelDoffreViewModel.LigneAProposer
-                    {
-                        Ligne = ligne,
-                        OnParticipe = false,
-                    });
-            }
+                PropositionPrestation = new PropositionPrestation(),
+                EvenementsEnAppelDoffre = new EvenementService().EnAppelDoffreAsync(typesDuPresta),
+                Types = typesDuPresta,
+            };
 
             return viewModel;
         }
