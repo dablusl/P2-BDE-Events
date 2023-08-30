@@ -1,4 +1,5 @@
-﻿using P2_BDE_Events.DataAccessLayer;
+﻿using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Prestations;
@@ -65,7 +66,13 @@ namespace P2_BDE_Events.Services.Prestations
             _bddContext.Propositions.RemoveRange(propositionsASupprimer);
             _bddContext.SaveChanges();
         }
-
+        public List<PropositionPrestation> GetPropositionsDuPrestataire(int idPrestataire)
+        {
+            return _bddContext.Propositions
+                .Include(p => p.Prestation)
+                .Where(p => p.Prestation.PrestataireId == idPrestataire)
+                .ToList();
+        }
         public void Dispose()
         {
             _bddContext.Dispose();

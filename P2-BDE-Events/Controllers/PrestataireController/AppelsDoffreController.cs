@@ -15,11 +15,11 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 {
     public class AppelsDoffreController : Controller
     {
-        PrestationService PrestationService { get; set; }
+        PrestationService prestationService { get; set; }
 
         public AppelsDoffreController()
         {
-            PrestationService = new PrestationService();
+            prestationService = new PrestationService();
         }
         public IActionResult ConsulterLesAppels()
         {
@@ -33,7 +33,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
         [HttpPost]
         public IActionResult ProposerUnePrestation(AppelDoffreViewModel viewModel)
         {
-            PrestationService.CreerPropositionPrestation(viewModel.PropositionPrestation);
+            prestationService.CreerPropositionPrestation(viewModel.PropositionPrestation);
 
             return Redirect("ConsulterLesAppels");
         }
@@ -46,6 +46,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
         {
             Prestataire prestataire = new PrestataireService().GetPrestataireParCompte(GetIdCompte());
             List<TypeDePrestation> typesDuPresta = prestataire.Prestations.Select(Prestation => Prestation.Type).ToList();
+            List<PropositionPrestation> propositions = prestationService.GetPropositionsDuPrestataire(prestataire.Id);
 
             //On doit lui passer Evenements ayant dappel de prestation concernants
             AppelDoffreViewModel viewModel = new AppelDoffreViewModel
@@ -53,6 +54,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
                 PropositionPrestation = new PropositionPrestation(),
                 EvenementsEnAppelDoffre = new EvenementService().EnAppelDoffre(typesDuPresta),
                 Types = typesDuPresta,
+                Propositions = propositions
             };
 
             return viewModel;

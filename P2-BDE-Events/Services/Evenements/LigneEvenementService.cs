@@ -95,11 +95,15 @@ namespace P2_BDE_Events.Services.Evenements
                 .ToList();               
         }
 
-        public int ChoisirPrestation(int idLigne, Prestation prestation, double nouvelleTarif)
+        public int ChoisirPrestation(int idLigne, int idProposition)
         {
             LigneEvenement ligne = _bddContext.LignesEvenement.Find(idLigne);
-            ligne.Prestation = prestation;
-            ligne.TarifProposee = nouvelleTarif;
+            PropositionPrestation proposition = _bddContext.Propositions
+                .Include(p => p.Prestation)
+                .FirstOrDefault(p => p.Id == idProposition);
+
+            ligne.Prestation = proposition.Prestation;
+            ligne.TarifProposee = proposition.TarifPropose;
 
             _bddContext.SaveChanges();
 

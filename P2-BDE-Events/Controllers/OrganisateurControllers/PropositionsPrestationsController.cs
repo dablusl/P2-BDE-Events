@@ -30,8 +30,8 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         public IActionResult PropositionsDeLaPrestation(PropositionsPrestationViewModel model)
         {
             // authoriser seulement a lorganisateur de levenement
-            ligneEvenementService.ChoisirPrestation(model.Ligne.Id,model.PrestationChoisi,0);
-            prestationService.NettoyerPropositions(model.Ligne.Id);
+            ligneEvenementService.ChoisirPrestation(model.LigneId,model.PropositionID);
+            prestationService.NettoyerPropositions(model.LigneId);
 
             return View();
         }
@@ -51,7 +51,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             {
                 Ligne = ligne,
                 Propositions = propositions,
-                PrestationChoisi = new Prestation()
+                LigneId = idLigne
             };
              
             return viewModel;

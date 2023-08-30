@@ -12,7 +12,7 @@ namespace P2_BDE_Events.ViewModels
         public List<Evenement> EvenementsEnAppelDoffre { get; set; }
         public PropositionPrestation PropositionPrestation { get; set; }
         public List<TypeDePrestation> Types { get; set; }
-
+        public List<PropositionPrestation> Propositions { get; set; }
         public LigneEvenement Ligne { get; set; }
         public Evenement EvenementInteresse { get; set; }
         public TypeDePrestation TypeInteresse { get; set; }

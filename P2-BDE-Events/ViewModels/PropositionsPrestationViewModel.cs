@@ -8,6 +8,7 @@ namespace P2_BDE_Events.ViewModels
     {
         public LigneEvenement Ligne { get; set; }
         public List<PropositionPrestation> Propositions { get; set; }
-        public Prestation PrestationChoisi { get; set; }
+        public int LigneId { get; set; }
+        public int PropositionID { get; set; }
     }
 }

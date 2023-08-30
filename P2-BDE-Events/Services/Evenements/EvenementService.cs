@@ -102,14 +102,10 @@ namespace P2_BDE_Events.Services.Evenements
         {
             return _bddContext.Evenements
                 .Include(e => e.Lignes)
-                .Where(e => e.Etat == EtatEvenement.OUVERT 
-                        && e.Lignes.Any(
-                            l => types.Contains(l.Type) 
-                                && l.Prestation == null))
+                .Where(e => e.Etat == EtatEvenement.OUVERT &&
+                    e.Lignes.Any(l => types.Contains(l.Type)))
                 .ToList();
         }
-
-        
 
         public void Dispose()
         {
