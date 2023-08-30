@@ -11,7 +11,7 @@
 <div class="card">
     <h2>Pack Event</h2>
     <p class="description">Un minimum d'effort, avec des évènements clé en main  !</p>
-    <p class="continuer"><a href="#">Continuer</a></p>
+    <p class="continuer" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'">Continuer</p>
 </div>
 
 <div class="card2">
@@ -19,5 +19,5 @@
         <p class="text-title">Sur mesure</p>
         <p class="text-body">Créer votre évènement de A à Z !</p>
     </div>
-    <button class="card-button">Continuer</button>
+    <button class="card-button" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'">Continuer</button>
 </div>

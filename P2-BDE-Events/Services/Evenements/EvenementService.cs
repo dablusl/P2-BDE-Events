@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 using P2_BDE_Events.DataAccessLayer;
+using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace P2_BDE_Events.Services.Evenements
         {
             _bddContext = new BDDContext();
         }
-        public int CreerEvenement(Evenement evenement,int idOrga, string photoPath)
+        public int CreerEvenement(Evenement evenement, int idOrga, string photoPath)
         {
             evenement.Organisateur = null;
             evenement.OrganisateurId = idOrga;
@@ -66,7 +67,6 @@ namespace P2_BDE_Events.Services.Evenements
                 throw new ArgumentException("Participant ou Evènement non trouvé");
             }
 
-            // Créer une nouvelle réservation
             var reservation = new Reserver
             {
                 ParticipantId = participantId,
@@ -74,9 +74,24 @@ namespace P2_BDE_Events.Services.Evenements
                 DateReservation = DateTime.Now
             };
 
-            // Ajouter la réservation à la base de données
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
+        }
+        public List<Participant> ObtenirParticipants(int evenementId)
+        {
+            return _bddContext.Reservations
+                .Include(r => r.Participant)
+                .ThenInclude(p => p.Compte)
+                .Where(r => r.EvenementId == evenementId)
+                .Select(r => r.Participant)
+                //.AsEnumerable()
+                .ToList();
+        }
+        public List<Evenement> ObtenirEvenementsOrganisateur(int organisateurId)
+        {
+            return _bddContext.Evenements
+                .Where(e => e.OrganisateurId == organisateurId)
+                .ToList();
         }
         public void Dispose()
         {

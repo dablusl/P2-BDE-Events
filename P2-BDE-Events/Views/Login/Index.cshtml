@@ -1,57 +1,65 @@
 ﻿@model P2_BDE_Events.ViewModels.CompteViewModel
+
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<section class="page-section portfolio mt-5">
+<link rel="stylesheet" href="/css/Login/Index.css">
 
-    <div class="container">
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Connexion</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            @*<div class="divider-custom-icon"><i class="fas fa-star"></i></div>*@
-            @*<div class="divider-custom-line"></div>*@
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-7">
-
-@if (Model.Authentifie)
-{
-    <h3>
-        Vous êtes déjà authentifié avec le login :
-        @Model.Compte.Email
-    </h3>
-                    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Logout")
+@section Header {
+    <p>Connectez-vous à votre compte</p>
 }
-else
-{
 
+@section Nav {
+    <li onclick="window.location.href = '@Url.Action("CreerCompte", "Login")'">Créer un compte</li>
+    <li>Mot de passe oublié</li>
+    <li>Obtenir de l'aide</li>
+}
+
+@* @if (!Model.Authentifie)
+{
     using (Html.BeginForm())
     {
-        //if (User.IsInRole("Admin"))
-        //{
-        //}
-                        //<div class="form-floating mb-3">
         <div>
-                            @*@Html.LabelFor(m => m.Compte.Email, new { @class = "form-control", placeholder = "Email" })*@
             @Html.LabelFor(m => m.Compte.Email)
             @Html.TextBoxFor(m => m.Compte.Email)
             @Html.ValidationMessageFor(m => m.Compte.Email)
         </div>
-                        //<div class="form-floating mb-3">
         <div>
-@*                            @Html.LabelFor(m => m.Compte.MotDePasse,"Mot de Passe", new { @type="password", @class = "form-control", placeholder = "Mot de Passe" })
-*@                            @Html.LabelFor(m => m.Compte.MotDePasse,"Mot de Passe")
+            @Html.LabelFor(m => m.Compte.MotDePasse,"Mot de Passe")
             @Html.PasswordFor(m => m.Compte.MotDePasse)
             @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
         </div>
-                        <button class="btn btn-primary btn-xl" type="submit">Se Connecter</button>
-        <br />
-                        //@Html.ActionLink("Créer un compte", "CreerCompte")
+        <button class="connexion" type="submit">Se Connecter</button>
     }
 }
-            </div>
+ *@
+
+<div class="login-box">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm" }))
+    {
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Compte.Email, new { required = "required" })
+            @Html.LabelFor(m => m.Compte.Email, "Email")
+            @Html.ValidationMessageFor(m => m.Compte.Email)
         </div>
-    </div>
-</section>
+        <div class="user-box">
+            @Html.PasswordFor(m => m.Compte.MotDePasse, new { required = "required" })
+            @Html.LabelFor(m => m.Compte.MotDePasse, "Mot de passe")
+            @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
+        </div>
+        <center>
+            <a href="#" id="submitForm">
+                SE CONNECTER
+                <span></span>
+            </a>
+        </center>
+    }
+</div>
+
+<script>
+    document.getElementById("submitForm").addEventListener("click", function (event) {
+        event.preventDefault();
+        document.getElementById("myForm").submit();
+    });
+</script>

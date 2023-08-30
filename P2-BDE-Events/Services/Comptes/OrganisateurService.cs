@@ -48,11 +48,11 @@ namespace P2_BDE_Events.Services.Comptes
 
             //return _bddContext.Organisateurs.Where(organisateur => organisateur.Compte == compte);
         }
+        public Organisateur ObtenirOrganisateur(int id)
+        {
+            return _bddContext.Organisateurs.Find(id);
+        }
 
-        //public Organisateur ObtenirOrganisateur(int id)
-        //{
-        //    return _bddContext.Organisateurs.Find(id);
-        //}
         //public Organisateur ObtenirOrganisateur(string idStr)
         //{
         //    int id;

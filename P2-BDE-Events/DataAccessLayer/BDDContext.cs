@@ -70,7 +70,6 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Comptes.Add(adminCompte);
             this.SaveChanges();
 
-            // Associer l'administrateur au compte
             var administrateur = new Administrateur
             {
                 Id = 1,
@@ -157,7 +156,6 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Comptes.Add(Participant1);
             this.SaveChanges();
 
-            // Associer le participant au compte
             var participant = new Participant
             {
                 Id = 1,
@@ -167,7 +165,31 @@ namespace P2_BDE_Events.DataAccessLayer
             };
             this.Participants.Add(participant);
             this.SaveChanges();
-            
+
+            //Compte Participant 2
+            var Participant2 = new Compte
+            {
+                Id = 6,
+                Email = "Participant1",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Participant",
+                Prenom = "Jon",
+                Nom = "LeFetar",
+                NumeroTelephone = "010206080901",
+            };
+            this.Comptes.Add(Participant2);
+            this.SaveChanges();
+
+            var particip2 = new Participant
+            {
+                Id = 3,
+                Compte = Participant2,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
+            };
+            this.Participants.Add(particip2);
+            this.SaveChanges();
+
             //Compte Orga
             var Orga1 = new Compte
             {
@@ -182,7 +204,6 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Comptes.Add(Orga1);
             this.SaveChanges();
 
-            // Associer le participant au compte
             var orgaParticip = new Participant
             {
                 Id = 2,
@@ -200,7 +221,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Organisateurs.Add(organisateur);
             this.SaveChanges();
 
-            ////Compte Participant
+            ////Compte Presta
             var Presta1 = new Compte
             {
                 Id = 4,
@@ -214,7 +235,6 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Comptes.Add(Presta1);
             this.SaveChanges();
 
-            // Associer le presta au compte
             var prestat1 = new Prestataire
             {
                 Id = 1,
@@ -248,7 +268,14 @@ namespace P2_BDE_Events.DataAccessLayer
                     PrixBillet = 8.5,
                     Organisateur = organisateur,
                 });
-
+            this.Reservations.Add(
+                new Reserver
+                {
+                    Id= 1,
+                    DateReservation = new DateTime(2023, 09, 02, 12, 30, 20),
+                    ParticipantId = 3,
+                    EvenementId = 1,
+                });
             
             
             this.Evenements.AddRange(
