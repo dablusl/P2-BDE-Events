@@ -9,6 +9,8 @@ namespace P2_BDE_Events.ViewModels
         public List<Evenement> Evenements { get; set; }
         public Participant Participant { get; set; }
         //public List<Participant> Participants { get; set; }
+        public int NbParticipant { get; set; }
+
 
 
     }

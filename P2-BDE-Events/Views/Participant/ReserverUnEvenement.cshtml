@@ -1,4 +1,4 @@
-﻿@model P2_BDE_Events.Models.Evenement.Evenement
+﻿@model P2_BDE_Events.ViewModels.ReserverUnEvenementViewModel
 
 @{
     Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
@@ -16,12 +16,16 @@
 }
 
 <h2>Réservation de l'événement</h2>
-<p>Événement ID: @Model.Titre</p>
+<p>Événement : @Model.Evenement.Titre</p>
+<p>Date : @Model.Evenement.DateEvenement</p>
+<p>Date limite d'inscription des participants : @Model.Evenement.DateLimiteInscription</p>
+<p>Description : @Model.Evenement.Description</p>
+<p>Prix d'un billet : @Model.Evenement.PrixBillet</p>
+<p>Nombre de participants inscrits : @Model.NbParticipant</p>
 
-<!-- Autres détails de l'événement à afficher -->
 
 <form method="post">
-    <input type="hidden" name="evenementId" value="@Model.Id" />
+    <input type="hidden" name="evenementId" value="@Model.Evenement.Id" />
     <button class="rejoindreEvenement" type="submit">Réserver</button>
 </form>
 

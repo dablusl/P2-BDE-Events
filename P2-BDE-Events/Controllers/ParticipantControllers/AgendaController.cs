@@ -31,7 +31,7 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
                 evenements = evenements.Where(e => e.Id == eventId.Value).ToList();
             }
             int compteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
-            Participant participant = ParticipantService.ObtenirParticipant(compteId);
+            Participant participant = ParticipantService.GetParticipantParCompte(compteId);
 
            if (!string.IsNullOrEmpty(universite))
             {
@@ -39,11 +39,24 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
                 evenements = EvenementService.ObtenirEvenementsParUniversite(universite);
 
             }
+            
+            //List<Participant> listeParticipants = new List<Participant>();
+            //int NbParticipant = 0;
+            //foreach (var evenement in evenements)
+            //{
+            //    listeParticipants = EvenementService.ObtenirParticipants(evenement.Id);
+            //    NbParticipant = listeParticipants.Count;
+            //}
 
+
+            
             var viewModel = new AgendaEvenementViewModel
             {
                 Evenements = evenements,
-                Participant = participant
+                Participant = participant,
+                //Participants = listeParticipants,
+                //NbParticipant = NbParticipant
+
             };
 
             return View("Views/Participant/AgendaEvenement.cshtml", viewModel);

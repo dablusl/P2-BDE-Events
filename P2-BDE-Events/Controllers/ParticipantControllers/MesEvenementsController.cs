@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
 using P2_BDE_Events.ViewModels;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace P2_BDE_Events.Controllers.ParticipantControllers
@@ -38,7 +40,18 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
         {
             var evenement = EvenementService.ObtenirEvenement(EvenementID);
 
-            return View("Views/Participant/ReserverUnEvenement.cshtml", evenement);
+            List<Participant> participants = EvenementService.ObtenirParticipants(EvenementID);
+
+            int NbParticipant = participants.Count;
+
+            var viewModel = new ReserverUnEvenementViewModel
+            {
+                Evenement = evenement,
+                NbParticipant = NbParticipant
+            };
+            
+
+            return View("Views/Participant/ReserverUnEvenement.cshtml", viewModel);
         }
 
         [HttpPost]
@@ -52,8 +65,8 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
 
             var evenement = EvenementService.ObtenirEvenement(evenementId);
 
-            var utilisateurId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
-            var participant = ParticipantService.ObtenirParticipant(utilisateurId);
+            var CompteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
+            var participant = ParticipantService.GetParticipantParCompte(CompteId);
 
 
             EvenementService.ReserverEvenement(participant.Id, evenement.Id);

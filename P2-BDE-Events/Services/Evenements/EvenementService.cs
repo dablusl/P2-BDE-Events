@@ -63,7 +63,7 @@ namespace P2_BDE_Events.Services.Evenements
         public void ReserverEvenement(int participantId, int evenementId)
         {
             var participant = _bddContext.Participants.Find(participantId);
-            var evenement = _bddContext.Evenements.Find(evenementId);
+            var evenement = _bddContext.Evenements.Include(e => e.Reservations).FirstOrDefault(e=> e.Id == evenementId);
 
             if (participant == null || evenement == null)
             {
@@ -76,6 +76,8 @@ namespace P2_BDE_Events.Services.Evenements
                 EvenementId = evenementId,
                 DateReservation = DateTime.Now
             };
+
+            evenement.NbParticipants = evenement.Reservations.Count+1;
 
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
