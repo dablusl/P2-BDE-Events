@@ -27,7 +27,7 @@ namespace P2_BDE_Events.Controllers
             {
                 _dbContext.Prestations.Add(prestation);
                 _dbContext.SaveChanges();
-                return RedirectToAction("Index"); // Redirigez où vous le souhaitez
+                return RedirectToAction("CreerUnePrestation"); 
             }
 
             return View(prestation);
@@ -52,7 +52,7 @@ namespace P2_BDE_Events.Controllers
             {
                 _dbContext.Prestations.Update(prestation);
                 _dbContext.SaveChanges();
-                return RedirectToAction("Index"); // Redirigez où vous le souhaitez
+                return RedirectToAction("ModifierUnePrestation"); 
             }
 
             return View(prestation);
@@ -70,7 +70,7 @@ namespace P2_BDE_Events.Controllers
             return View(prestation);
         }
 
-        [HttpPost, ActionName("Supprime")]
+        [HttpPost, ActionName("Supprimer")]
         public IActionResult SuppressionConfirmee(int id)
         {
             var prestation = _dbContext.Prestations.Find(id);
@@ -82,7 +82,7 @@ namespace P2_BDE_Events.Controllers
             _dbContext.Prestations.Remove(prestation);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index"); // Redirigez où vous le souhaitez
+            return RedirectToAction("SupprimerUnePrestation"); 
         }
     }
 }
