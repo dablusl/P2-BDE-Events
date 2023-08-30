@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using P2_BDE_Events.Models.Prestations
+@model P2_BDE_Events.ViewModels.PropositionsPrestationViewModel
+
+<h1>Propositions Pour</h1>
+<h2>@Model.Ligne.Type</h2>
+
+@foreach (PropositionPrestation proposition in Model.Propositions)
+{
+    <div class="proposition">
+        <h3>@proposition.Prestation.Titre</h3>
+        <h4>@proposition.Prestation.Description</h4>
+        <h5>@proposition.TarifPropose</h5>
+        <button>Choisir</button>
+    </div>
+}

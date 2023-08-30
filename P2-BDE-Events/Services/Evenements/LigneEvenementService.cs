@@ -1,4 +1,5 @@
-﻿using P2_BDE_Events.DataAccessLayer;
+﻿using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
@@ -84,7 +85,15 @@ namespace P2_BDE_Events.Services.Evenements
                 .ToList();
         }
 
-
+        public List<PropositionPrestation> ObtenirPropositions(int idLigneEvenement)
+        {
+            return _bddContext.LignesEvenement
+                .Include(l => l.Propositions)
+                    .ThenInclude(p => p.Prestation)
+                .FirstOrDefault(l => l.Id == idLigneEvenement)
+                .Propositions
+                .ToList();               
+        }
 
         public void Dispose()
         {
