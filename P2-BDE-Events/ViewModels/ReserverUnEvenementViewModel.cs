@@ -4,11 +4,9 @@ using System.Collections.Generic;
 
 namespace P2_BDE_Events.ViewModels
 {
-    public class ConsulterEvenementViewModel
+    public class ReserverUnEvenementViewModel
     {
         public Evenement Evenement { get; set; }
-        public List<Participant> Participants { get; set; }
         public int NbParticipant { get; set; }
-
     }
 }
