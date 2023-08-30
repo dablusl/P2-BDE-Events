@@ -8,14 +8,16 @@
 
 @model P2_BDE_Events.ViewModels.AppelDoffreViewModel
 
-@using (Html.BeginForm("ProposerUnePrestation", "AppelsDoffre", FormMethod.Get))
+@using (Html.BeginForm("ProposerUnePrestation", "AppelsDoffre", FormMethod.Get, new { id = "proposalForm" }))
 {
+    <input type="hidden" id="idEvenement" name="idEvenement" />
+    <input type="hidden" id="type" name="type" />
+
     foreach (Evenement evenement in Model.EvenementsEnAppelDoffre)
     {
         <div class="appel-d-offre card-evenement">
             <img src="@evenement.CoverPhotoPath">
-            <!-- titre a linker avec la view de levenement-->
-            <h1 class="appel-d-offre titre"></h1>
+            <h1 class="appel-d-offre titre">@evenement.Titre</h1>
             <h2>@evenement.DateEvenement</h2>
             <p class="appel-d-offre description">@evenement.Description</p>
 
@@ -25,13 +27,18 @@
                 {
                     if (ligne.Prestation == null && Model.Types.Contains(ligne.Type))
                     {
-                        <input type="hidden" name="idEvenement" value="@evenement.Id" />
-                        <input type="hidden" name="type" value="@ligne.Type" />
                         <span>@ligne.Type</span>
-                        <button class="creer-proposition">+</button>
+                        <button class="creer-proposition" onclick="submitForm(@evenement.Id, '@ligne.Type')">+</button>
                     }
                 }
             </div>
         </div>
     }
 }
+<script>
+    function submitForm(idEvenement, type) {
+        document.getElementById("idEvenement").value = idEvenement;
+        document.getElementById("type").value = type;
+        document.getElementById("proposalForm").submit();
+    }
+</script>
