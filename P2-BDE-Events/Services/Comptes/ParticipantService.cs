@@ -42,10 +42,10 @@ namespace P2_BDE_Events.Services.Comptes
             return _bddContext.Participants.Where(participant => participant.Compte.Id == compte.Id).ToList()[0];
             
         }
-        public Participant ObtenirParticipant(int id)
-        {
-            return _bddContext.Participants.Find(id);
-        }
+        //public Participant ObtenirParticipant(int id)
+        //{
+        //    return _bddContext.Participants.Find(id);
+        //}
 
         public Participant ObtenirParticipant(Compte compte)
         {
