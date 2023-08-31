@@ -685,7 +685,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
                 DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
                 Description = "Ramenez vos instruments et vos cordes vocales",
-                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                CoverPhotoPath = "/images/evenement/18.10.15_PeachPit_PeachPit.png",
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,

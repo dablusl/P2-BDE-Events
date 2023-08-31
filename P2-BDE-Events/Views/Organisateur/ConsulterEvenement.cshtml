@@ -10,9 +10,9 @@
         <li onclick="window.location.href = '@Url.Action("ConsulterParticipants", "MesEvenements", new { area = "OrganisateurControllers", evenementId = Model.Evenement.Id})'">
             Voir les participants</li>
         <li>
-        <li onclick="window.location.href = '@Url.Action("", "????", new { area = "OrganisateurControllers", id = Model.Evenement.Id})'">Voir les prestations</li>
+        <li onclick="window.location.href = '@Url.Action("PrestationsDelEvenement", "PropositionsPrestations", new { area = "OrganisateurControllers", id = Model.Evenement.Id})'">Voir les prestations</li>
         <li>Supprimer l'évènement</li>
-    </ul>
+    </ul
 }
 
 <div class="boxAffiche">
