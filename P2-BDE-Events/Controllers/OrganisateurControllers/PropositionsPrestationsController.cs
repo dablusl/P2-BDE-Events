@@ -40,7 +40,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             ligneEvenementService.ChoisirPrestation(model.LigneId,model.PropositionID);
             prestationService.NettoyerPropositions(model.LigneId);
 
-            return RedirectToAction("PrestationsDelEvenement",model.EvenementID);
+            return RedirectToAction("PrestationsDelEvenement",new { id = model.EvenementID });
         }
 
 
