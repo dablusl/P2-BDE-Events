@@ -10,40 +10,49 @@
 
 @model P2_BDE_Events.ViewModels.AppelDoffreViewModel
 
-@using (Html.BeginForm("ProposerUnePrestation", "AppelsDoffre", FormMethod.Get, new { id = "proposalForm" }))
-{
-    <input type="hidden" id="idEvenement" name="idEvenement" />
-    <input type="hidden" id="type" name="type" />
-    <input type="hidden" id="idLigne" name="idLigne" />
-
-
-    foreach (Evenement evenement in Model.EvenementsEnAppelDoffre)
+<style>
+    .scrollable-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+</style>
+<div class="scrollable-content">
+    @using (Html.BeginForm("ProposerUnePrestation", "AppelsDoffre", FormMethod.Get, new { id = "proposalForm" }))
     {
-        if(evenement.Lignes.Count != Model.Propositions.Count)
-        {
-        <div class="appel-d-offre card-evenement">
-            <img src="@evenement.CoverPhotoPath">
-            <h1 class="appel-d-offre titre">@evenement.Titre</h1>
-            <h2>@evenement.DateEvenement</h2>
-            <p class="appel-d-offre description">@evenement.Description</p>
+        <input type="hidden" id="idEvenement" name="idEvenement" />
+        <input type="hidden" id="type" name="type" />
+        <input type="hidden" id="idLigne" name="idLigne" />
 
-            <p>Services en appel</p>
-            <div class="list-services-en-attente">
-                @foreach (var ligne in evenement.Lignes)
-                {
-                    if (ligne.Prestation == null && 
-                            Model.Types.Contains(ligne.Type) && 
+
+        foreach (Evenement evenement in Model.EvenementsEnAppelDoffre)
+        {
+            if (evenement.Lignes.Count != Model.Propositions.Count)
+            {
+                <div class="appel-d-offre card-evenement">
+                    <img src="@evenement.CoverPhotoPath">
+                    <h1 class="appel-d-offre titre">@evenement.Titre</h1>
+                    <h2>@evenement.DateEvenement</h2>
+                    <p class="appel-d-offre description">@evenement.Description</p>
+
+                    <p>Services en appel</p>
+                    <div class="list-services-en-attente">
+                        @foreach (var ligne in evenement.Lignes)
+                        {
+                            if (ligne.Prestation == null &&
+                            Model.Types.Contains(ligne.Type) &&
                             !Model.Propositions.Select(p => p.LigneEvenementId).Contains(ligne.Id))
-                    {
-                        <span>@ligne.Type</span>
-                        <button class="creer-proposition" onclick="submitForm(@evenement.Id, '@ligne.Id')">+</button>
-                    }
-                }
-            </div>
-        </div>
+                            {
+                                <span>@ligne.Type</span>
+                                <button class="creer-proposition" onclick="submitForm(@evenement.Id, '@ligne.Id')">+</button>
+                            }
+                        }
+                    </div>
+                </div>
+            }
         }
     }
-}
+</div>
+
 <script>
     function submitForm(idEvenement, idLigne) {
         document.getElementById("idEvenement").value = idEvenement;
