@@ -5,8 +5,6 @@
     position: relative;
 }
 
-
-
 .background {
     position: absolute;
     top: 0;
@@ -126,30 +124,137 @@ main {
     position: absolute;
     top: 100vh;
     width: 100%;
-    height: 200vh;
+    height: 100vh;
 }
 
 .qui {
-    height: 50%;
-    background-color: wheat;
+    height: 100%;
+    background: linear-gradient(to bottom, #000000, #333333);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.bde {
+.bde, .prestataire, .participant {
+    height: 30%;
+    display: flex;
+}
+
+.bde:hover, .prestataire:hover, .participant:hover {
+    .img img {
+        box-shadow: 0 0 20px red;
+    }
 }
 
 .img {
+    width: 400px;
+    height: 100%;
+    background-color: black;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 0 20px yellow;
 }
 
 .txt {
+    margin-left: 90px;
+    margin-right: 90px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
 }
 
-.prestataire {
+.bde {
+    flex-direction: row-reverse;
 }
 
-.participant {
+footer {
+    position: absolute;
+    top: 200vh;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.commentaire {
-    height: 50%;
-    background-color: blue;
+.ensembleMedia {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    bottom: 6px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.contenue {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
+}
+
+.numerosUn:hover {
+    background-color: #d62966;
+    transition-duration: .3s;
+}
+
+.numerosDeux:hover {
+    background-color: #00acee;
+    transition-duration: .3s;
+}
+
+.numerosTrois:hover {
+    background-color: #00427f;
+    transition-duration: .3s;
+}
+
+.numerosQuatre:hover {
+    background-color: #0a845b;
+    transition-duration: .3s;
+}
+
+.contenue:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+}
+
+.socialSvg {
+    width: 17px;
+}
+
+    .socialSvg path {
+        fill: white;
+    }
+
+.contenue:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
