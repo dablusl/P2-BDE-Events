@@ -1,4 +1,17 @@
-﻿.creerEvenement {
+﻿main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y : scroll;
+}
+.noevent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.creerEvenement {
     padding: 5px 10px;
     border-radius: 7px;
     font-size: 15px;
@@ -21,14 +34,6 @@
         text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
         box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
     }
-
-/*Evenement*/
-
-main {
-    display: flex;
-    justify-content: center;
-    overflow-y: scroll;
-}
 
 .ensembleEvenement {
     margin-top: 40px;

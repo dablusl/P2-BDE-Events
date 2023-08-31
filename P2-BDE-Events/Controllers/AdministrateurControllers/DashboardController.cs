@@ -2,11 +2,12 @@
 
 namespace P2_BDE_Events.Controllers.AdministrateurControllers
 {
-    public class DashboardControllercs : Controller
+    public class DashboardController : Controller
     {
+
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/Admin/Index.cshtml");
         }
     }
 }

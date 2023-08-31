@@ -47,7 +47,7 @@ namespace P2_BDE_Events.Controllers
 
                 if (compte.Profil == "Organisateur")
                 {
-                    return RedirectToAction("EvenementsSuivants", "MesEvenements", new { area = "OrganisateurControllers" });
+                    return RedirectToAction("MesEvenementsOrga", "MesEvenements", new { area = "OrganisateurControllers" });
                 }
                 else if (compte.Profil == "Participant")
                 {
@@ -59,6 +59,7 @@ namespace P2_BDE_Events.Controllers
                 }
                 else if (compte.Profil == "Administrateur")
                 {
+                    //return RedirectToAction("EvenementsSuivants", "MesEvenements", new { area = "OrganisateurControllers" });
                     return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
                 }
                 else
@@ -113,6 +114,7 @@ namespace P2_BDE_Events.Controllers
                         }
                         else if (compte.Profil == "Administrateur")
                         {
+                            //return RedirectToAction("MesEvenementsOrga", "MesEvenements", new { area = "OrganisateurControllers" });
                             return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
                         }
                         else
@@ -216,7 +218,7 @@ namespace P2_BDE_Events.Controllers
                 CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
                 OrganisateurService.CreerOrganisateur(viewModel.Organisateur, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
-                return Redirect("/");
+                return RedirectToAction("MesEvenementsOrga", "MesEvenements", new { area = "OrganisateurControllers" });
             }
             return View(viewModel);
         }
@@ -239,7 +241,7 @@ namespace P2_BDE_Events.Controllers
                 CompteService.ModifierCompte(int.Parse(HttpContext.Session.GetString("iDCompte")), viewModel.Compte);
                 ParticipantService.CreerParticipant(viewModel, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
-                return Redirect("/");
+                return RedirectToAction("AgendaEvenement", "Agenda", new { area = "ParticipantControllers" });
             }
             return View(viewModel);
         }
@@ -281,7 +283,7 @@ namespace P2_BDE_Events.Controllers
 
                 PrestataireService.CreerPrestataire(viewModel.Prestataire, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
-                return Redirect("/");
+                return RedirectToAction("Index", "CreerUnePrestation", new { area = "PrestataireControllers" });
             }
             viewModel.AvailableServiceTypes = GetAvailableServiceTypes();
             return View(viewModel);
@@ -310,7 +312,7 @@ namespace P2_BDE_Events.Controllers
                 };
                 AdministrateurService.CreerAdministrateur(administrateur, viewModel.Compte.Id);
 
-                return Redirect("/");
+                return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
             }
             return View(viewModel);
 
