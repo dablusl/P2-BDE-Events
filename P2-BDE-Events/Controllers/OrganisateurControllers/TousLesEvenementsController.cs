@@ -39,7 +39,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             if (!string.IsNullOrEmpty(universite))
             {
                 universite = organisateur.Participant.Universite;
-                evenements = EvenementService.ObtenirEvenementsParUniversite(universite);
+                evenements = EvenementService.ObtenirEvenementsParUniversite(universite).Where(e =>e.Etat == Models.Evenement.Enums.EtatEvenement.PUBLIE).ToList();
 
             }
             
