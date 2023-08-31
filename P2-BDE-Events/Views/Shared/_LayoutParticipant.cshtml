@@ -25,12 +25,12 @@
     </header>
 
     <nav>
-        <a onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">
+        <a onclick="window.location.href = '@Url.Action("Index", "Home")'">
             <img src="~/Shared/logo.png" alt="logoDuSite">
         </a>
         <ul>
-            <li><a onclick="window.location.href = '/Participant/MesEvenements/ProchainsEvenements'">Mes événements</a></li>
-            <li><a onclick="window.location.href = '/Participant/Agenda/AgendaEvenement'">Tous les événements</a></li>
+            <li><a onclick="window.location.href = '/Participant/MesEvenements/ProchainsEvenements'">Mes évènements</a></li>
+            <li><a onclick="window.location.href = '/Participant/Agenda/AgendaEvenement'">Tous les évènements</a></li>
             <li><a onclick="window.location.href = '/Participant/MonCompte/Parametre'">Mon Compte</a></li>
             <li><a onclick="window.location.href = '@Url.Action("Logout", "Login")'">Déconnexion</a></li>
         </ul>

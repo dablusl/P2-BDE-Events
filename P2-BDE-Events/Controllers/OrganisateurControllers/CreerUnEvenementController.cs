@@ -178,7 +178,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                     nouveauEvent.CoverPhoto.CopyTo(stream);
                 }
 
-                return imagePath;
+                return "/images/evenement/" + imageFileName; ;
             }
 
             return "/images/evenement/default.jpg";

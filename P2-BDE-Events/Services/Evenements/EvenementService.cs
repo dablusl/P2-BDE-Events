@@ -26,6 +26,7 @@ namespace P2_BDE_Events.Services.Evenements
             evenement.Organisateur = null;
             evenement.OrganisateurId = idOrga;
             evenement.CoverPhotoPath = photoPath;
+            evenement.Etat = EtatEvenement.OUVERT;
             _bddContext.Evenements.Add(evenement);
             _bddContext.SaveChanges();
 
