@@ -55,7 +55,7 @@ namespace P2_BDE_Events.Controllers
                 }
                 else if (compte.Profil == "Prestataire")
                 {
-                    return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
+                    return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers", IdPrestataire = HttpContext.Session.GetString("iDCompte") });
                 }
                 else if (compte.Profil == "Administrateur")
                 {

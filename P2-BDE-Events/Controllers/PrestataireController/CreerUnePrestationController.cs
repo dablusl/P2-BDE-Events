@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using P2_BDE_Events.DataAccessLayer; 
 using P2_BDE_Events.Models.Prestations;
+using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Prestations;
 using P2_BDE_Events.ViewModels;
+using System;
 
 namespace P2_BDE_Events.Controllers.PrestataireController
 {
@@ -18,23 +20,37 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 
         
         [HttpGet]
-        public IActionResult Creer()
+        public IActionResult CreerUnePrestation()
         {
-            var viewModel = new UnePrestationViewsModel();
-            return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModel); ;
+            PrestataireService prestataireService = new PrestataireService();
+
+            
+            var viewModelLocal = new UnePrestationViewsModel()
+            {
+                prestataire = prestataireService.GetPrestataireParCompte(int.Parse(HttpContext.Session.GetString("iDCompte")))
+            };
+            
+            
+            return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModelLocal); ;
         }
 
         [HttpPost]
-        public IActionResult Creer(UnePrestationViewsModel viewModel)
+        public IActionResult CreerUnePrestation(UnePrestationViewsModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                PrestataireService prestataireService = new PrestataireService();
+                viewModel.prestataire = prestataireService.GetPrestataireParCompte(viewModel.prestation.PrestataireId); 
                 _dbContext.Prestations.Add(viewModel.prestation);
                 _dbContext.SaveChanges();
-                return View("~/Views/Prestation/CreerUnePrestation.cshtml");
+                return View("~/");
             }
+            PrestataireService prestataireServicefail = new PrestataireService();
+            int.TryParse(HttpContext.Session.GetString("Sid"), out int myId);
+            Console.WriteLine("-----------------------------------" + myId);
 
-            return View(viewModel);
+            viewModel.prestataire = prestataireServicefail.GetPrestataireParCompte(int.Parse(HttpContext.Session.GetString("iDCompte")));
+            return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModel);
         }
 
         [HttpGet]

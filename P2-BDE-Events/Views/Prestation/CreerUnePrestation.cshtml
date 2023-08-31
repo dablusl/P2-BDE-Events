@@ -1,88 +1,113 @@
-﻿@{
+﻿@model P2_BDE_Events.ViewModels.UnePrestationViewsModel
+@{
     Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
 }
-
 @section Header {
-
 }
 
-
-@model P2_BDE_Events.ViewModels.UnePrestationViewsModel
-@*@model P2_BDE_Events.Models.Prestations.Prestation*@
+<div>@Model.prestataire.Compte.Prenom</div>
 
 <h2>Créer une prestation</h2>
+<div class="row justify-content-center"> 
+    <div class="col-lg-8 col-xl-7">
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Html.LabelFor(m => m.prestation.Titre)
+                @Html.TextBoxFor(m => m.prestation.Titre)
+                @Html.ValidationMessageFor(m =>m.prestation.Titre)
+            </div>
+               <div>
+                @Html.LabelFor(m => m.prestation.CapaciteMax)
+                @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
+                @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
+            </div>
+            @Html.HiddenFor( m => m.prestation.PrestataireId, @Model.prestataire.Id)
+            <div>
+                @Html.LabelFor(m => m.prestation.Tarif)
+                @Html.TextBoxFor(m => m.prestation.Tarif, new { type = "number", min = "0"})
+                @Html.ValidationMessageFor(m =>m.prestation.Tarif)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.prestation.CapaciteMax)
+                @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
+                @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
+            </div>
+            <div class="form-group">
+                <label for="Prestataire.Calendrier">Calendrier</label>
+                <input type="datetime-local" class="form-control" asp-for="Calendrier">
+            </div>
+            <div>
+                @Html.LabelFor(m => m.prestation.Livraison)
+                @Html.CheckBoxFor(m => m.prestation.Livraison)
+                @Html.ValidationMessageFor(m =>m.prestation.Livraison)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.prestation.Description)
+                @Html.TextBoxFor(m => m.prestation.Description)
+                @Html.ValidationMessageFor(m =>m.prestation.Description)
+            </div>
 
-<form asp-action="Creer">
-     <div class="form-group">
-        <label for="Titre">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre" value="@Model.Titre">
-    </div>
-    <div class="form-group">
-        <label for="CapaciteMax">Capacité maximale</label>
-        <input type="number" class="form-control" asp-for="CapaciteMax" value="@Model.CapaciteMax" >
-    </div>
-    <div class="form-group">
-        <label for="Tarif">Tarif</label>
-        <input type="number" class="form-control" asp-for="Tarif" value="@Model.Tarif">
-    </div>
-    <div class="form-group">
-        <label for="Calendrier">Calendrier</label>
-        <input type="text" class="form-control" asp-for="Calendrier" value="@Model.Calendrier">
-    </div>
-    <div class="form-group">
-        <label for="Livraison">Livraison</label>
-        <input type="checkbox" class="form-control" asp-for="Livraison" value="@Model.Livraison">
-    </div>
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" asp-for="Description" value="@Model.Description"></textarea>
-    </div>
+           /* <div class="form-group">
+                    <label for="Prestataire.Tarif">Tarif</label>
+                    <input type="number" class="form-control" asp-for="Tarif">
+                </div>
+                <div class="form-group">
+                    <label for="Prestataire.Calendrier">Calendrier</label>
+                    <input type="datetime-local" class="form-control" asp-for="Calendrier">
+                </div>
+                <div class="form-group">
+                    <label for="Prestataire.Livraison">Livraison</label>
+                    <input type="checkbox" class="form-control" asp-for="Livraison">
+                </div>
+                <div class="form-group">
+                    <label for="Prestataire.Description">Description</label>
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                </div>*/
+                <div class="form-group">
+                    <label for="Type">Type</label>
+                    <select class="form-control" asp-for="Type">
+                        <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
+                        <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
+                        <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Créer</button>
+                }
+                <style>
+                    form {
+                        max-width: 500px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        background-color: #F5F5F5;
+                    }
 
-    <div class="form-group">
-        <label for="Type">Type</label>
-        <select class="form-control" asp-for="Type" value="@Model.Type">
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
+                    .form-group {
+                        margin-bottom: 15px;
+                    }
 
-        </select>
-    </div>
+                    label {
+                        font-weight: bold;
+                    }
 
-    <style>
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-        }
+                    input[type="text"],
+                    input[type="number"] {
+                        width: 100%;
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 3px;
+                    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+                    .btn-primary {
+                        background-color: green;
+                        color: #fff;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 3px;
+                        cursor: pointer;
+                    }
+                </style>
 
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        .btn-primary {
-            background-color: green;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-    </style>
-    <button type="submit" class="btn btn-primary">Créer</button>
-</form>
+            
