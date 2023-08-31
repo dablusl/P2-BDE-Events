@@ -5,7 +5,11 @@
         TRAITEUR,
         DJ,
         SALLE,
-        SECUTITE,
-        BAR
+        SECURITE,
+        BAR,
+        VIDEO_PROJECTION,
+        MUSICIEN,
+        PHOTOGRAPHIE,
+        LOCATION
     }
 }

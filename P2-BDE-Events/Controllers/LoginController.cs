@@ -41,7 +41,7 @@ namespace P2_BDE_Events.Controllers
         {
             CompteViewModel compteViewModel = new CompteViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
 
-            if (compteViewModel.Authentifie)
+            if (compteViewModel.Authentifie && HttpContext.Session.GetString("iDCompte") != null)
             {
                 Compte compte = new CompteService().ObtenirCompte(GetIdCompte());
 

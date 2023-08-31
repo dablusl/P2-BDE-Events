@@ -6,7 +6,10 @@
         REPAS,
         BRUNCH,
         JEUXDESOCIETE,
-        SPORT
+        SPORT,
+        CONCERT,
+        CINEMA,
+        PLEINE_AIRE
     }
 
 }

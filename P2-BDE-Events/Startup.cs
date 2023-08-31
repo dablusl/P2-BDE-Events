@@ -89,6 +89,7 @@ namespace P2_BDE_Events
                 endpoints.MapControllerRoute(
                     name: "prestataire",
                     pattern: "Prestataire/{controller=NomDuControleur}/{action=NomDeLAction}/{id?}");
+          
             });
         }
     }
