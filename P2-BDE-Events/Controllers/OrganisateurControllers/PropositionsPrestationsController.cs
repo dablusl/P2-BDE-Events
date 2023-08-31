@@ -36,11 +36,11 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         [HttpPost]
         public IActionResult PropositionsDeLaPrestation(PropositionsPrestationViewModel model)
         {
-            // authoriser seulement a lorganisateur de levenement
             ligneEvenementService.ChoisirPrestation(model.LigneId,model.PropositionID);
+            evenementService.PublierEvenement(model.EvenementID);
             prestationService.NettoyerPropositions(model.LigneId);
 
-            return RedirectToAction("PrestationsDelEvenement",model.EvenementID);
+            return RedirectToAction("PrestationsDelEvenement",new { id = model.EvenementID });
         }
 
 
