@@ -21,17 +21,15 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             evenementService = new EvenementService();
         }
 
-        public IActionResult PrestationDuEvenement(int id)
+        public IActionResult PrestationsDelEvenement(int id)
         {
             List<LigneEvenement> lignes = ligneEvenementService.GetLignesEvenement(id);
 
-            return View(lignes);
+            return View("~/Views/Organisateur/PrestationsDelEvenement.cshtml",lignes);
         }
 
         public IActionResult PropositionsDeLaPrestation(int id)
         {
-            // authoriser seulement a lorganisateur de levenement
-
             return View("~/Views/Organisateur/PropositionsPrestations.cshtml",InitViewModel(id));
         }
 
@@ -42,7 +40,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             ligneEvenementService.ChoisirPrestation(model.LigneId,model.PropositionID);
             prestationService.NettoyerPropositions(model.LigneId);
 
-            return View();
+            return RedirectToAction("PrestationsDelEvenement",model.EvenementID);
         }
 
 
@@ -60,7 +58,8 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             {
                 Ligne = ligne,
                 Propositions = propositions,
-                LigneId = idLigne
+                LigneId = idLigne,
+                EvenementID = ligne.EvenementId
             };
              
             return viewModel;
