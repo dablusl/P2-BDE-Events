@@ -133,9 +133,22 @@ namespace P2_BDE_Events.Services.Evenements
 
             if(evenement.Lignes.Count( l => l.Prestation == null) == 0)
             {
-                evenement.Etat = EtatEvenement.PUBLIE;
+                evenement.Etat = EtatEvenement.PUBLIE;   
                 _bddContext.SaveChanges();
             }
+        }
+
+        public double RecalculerBillet(int idEvenement)
+        {
+            Evenement evenement = _bddContext.Evenements.Include(e => e.Lignes).FirstOrDefault(e => e.Id==idEvenement);
+
+            evenement.PrixBillet = evenement.Lignes
+                .Select( l => l.TarifProposee)
+                .Aggregate((sum, tarif) => sum + tarif)/evenement.MaxParticipants;
+
+            _bddContext.SaveChanges();
+
+            return evenement.PrixBillet;
         }
 
         public void Dispose()
