@@ -48,9 +48,6 @@ namespace P2_BDE_Events.DataAccessLayer
                 .HasOne(r => r.Evenement)
                 .WithMany(e => e.Reservations)
                 .HasForeignKey(r => r.EvenementId);
-
-            modelBuilder.Entity<LigneEvenement>()
-                .HasKey(le => new { le.EvenementId, le.Type });
         }
         //Initiation différents comptes
         public void InitializeDb()
@@ -89,9 +86,9 @@ namespace P2_BDE_Events.DataAccessLayer
                 Email = "Presta5",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
-                NumeroTelephone = "010101010101",
+                Prenom = "Philipe",
+                Nom = "Xiu",
+                NumeroTelephone = "0145789698",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
@@ -152,7 +149,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 Profil = "Participant",
                 Prenom = "Jon",
                 Nom = "LeFetar",
-                NumeroTelephone = "010206080901",
+                NumeroTelephone = "0102060809",
             };
             this.Comptes.Add(Participant1);
             this.SaveChanges();
@@ -171,12 +168,12 @@ namespace P2_BDE_Events.DataAccessLayer
             var Participant2 = new Compte
             {
                 Id = 6,
-                Email = "Participant1",
+                Email = "Participant2",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Participant",
-                Prenom = "Jon",
-                Nom = "LeFetar",
-                NumeroTelephone = "010206080901",
+                Prenom = "Momo",
+                Nom = "Ali",
+                NumeroTelephone = "0105097841",
             };
             this.Comptes.Add(Participant2);
             this.SaveChanges();
@@ -258,8 +255,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 Email = "bBieres@gmail.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
+                Prenom = "Charles",
+                Nom = "DeVin",
                 NumeroTelephone = "+33674544676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
@@ -270,21 +267,21 @@ namespace P2_BDE_Events.DataAccessLayer
                 Email = "pizzasLumberjack@gmail.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
-                NumeroTelephone = "+33674544676",
+                Prenom = "Xavier",
+                Nom = "Brasseur",
+                NumeroTelephone = "+33674555576",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
             Compte cPrestataire12 = new Compte
             {
                 Id = 12,
-                Email = "j.elbeux@stereolux.fr",
+                Email = "camille@stereolux.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
-                NumeroTelephone = "+33674544676",
+                Prenom = "Camille",
+                Nom = "Durant",
+                NumeroTelephone = "+33689544676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
@@ -294,9 +291,9 @@ namespace P2_BDE_Events.DataAccessLayer
                 Email = "j.elbeux@crit.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
-                NumeroTelephone = "+33674544676",
+                Prenom = "Elodie",
+                Nom = "Van Trop",
+                NumeroTelephone = "+33774544676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
@@ -306,9 +303,9 @@ namespace P2_BDE_Events.DataAccessLayer
                 Email = "daDj@gmail.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
-                NumeroTelephone = "+33674544676",
+                Prenom = "Katia",
+                Nom = "Clichy",
+                NumeroTelephone = "+33679844676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
@@ -458,9 +455,9 @@ namespace P2_BDE_Events.DataAccessLayer
                 Id = 15,
                 Email = "michael.cera@gmail.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
-                Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
+                Profil = "Organisateur",
+                Prenom = "Michael",
+                Nom = "Cera",
                 NumeroTelephone = "+33674544676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
@@ -468,11 +465,11 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cOrga11 = new Compte
             {
                 Id = 16,
-                Email = "maybee.funke@gmail.com",
+                Email = "j.balie@gmail.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
-                Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
+                Profil = "Organisateur",
+                Prenom = "Jeanne",
+                Nom = "Bali",
                 NumeroTelephone = "+33674544676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
@@ -480,11 +477,11 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cOrga12 = new Compte
             {
                 Id = 17,
-                Email = "maybee.funke@gmail.com",
+                Email = "m.sako@gmail.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
-                Profil = "Prestataire",
-                Prenom = "Pierre",
-                Nom = "Dupont",
+                Profil = "Organisateur",
+                Prenom = "Moise",
+                Nom = "Sako",
                 NumeroTelephone = "+33674544676",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
@@ -499,24 +496,24 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 10,
                 Compte = cOrga10,
-                NomBDE = "Paris12-ECO-BDE",
-                Universite = "Paris12"
+                NomBDE = "Paris-Descartes-Droit-BDE",
+                Universite = "Paris-Descartes"
             };
 
             Participant pOrga11 = new Participant
             {
                 Id = 11,
                 Compte = cOrga11,
-                NomBDE = "Paris12-ECO-BDE",
-                Universite = "Paris12"
+                NomBDE = "ParisSorbonne-Lettres-BDE",
+                Universite = "Paris-Sorbonne"
             };
 
             Participant pOrga12 = new Participant
             {
                 Id = 12,
                 Compte = cOrga12,
-                NomBDE = "Paris12-ECO-BDE",
-                Universite = "Paris12"
+                NomBDE = "HEC-ECO-BDE",
+                Universite = "HEC"
             };
             this.Participants.AddRange(
                 pOrga10,
@@ -551,7 +548,79 @@ namespace P2_BDE_Events.DataAccessLayer
                 oOrga12
                 );
             this.SaveChanges();
+            //------------------
+            Compte cParticip3 = new Compte
+            {
+                Id = 18,
+                Email = "will@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Participant",
+                Prenom = "Will",
+                Nom = "LaFouine",
+                NumeroTelephone = "+33674544786",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
 
+            Compte cParticip4 = new Compte
+            {
+                Id = 19,
+                Email = "david@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Participant",
+                Prenom = "David",
+                Nom = "Leclerc",
+                NumeroTelephone = "+33675644676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+
+            Compte cParticip5 = new Compte
+            {
+                Id = 20,
+                Email = "salomon@gmail.com",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Participant",
+                Prenom = "Salomon",
+                Nom = "Ben Soussan",
+                NumeroTelephone = "+33674744676",
+                PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
+            };
+            this.Comptes.AddRange(
+                cParticip3,
+                cParticip4,
+                cParticip5
+                );
+            this.SaveChanges();
+
+            Participant pParticip3 = new Participant
+            {
+                Id = 13,
+                Compte = cParticip3,
+                NomBDE = "Paris-Descartes-Droit-BDE",
+                Universite = "Paris-Descartes"
+            };
+
+            Participant pParticip4 = new Participant
+            {
+                Id = 14,
+                Compte = cParticip4,
+                NomBDE = "ParisSorbonne-Lettres-BDE",
+                Universite = "Paris-Sorbonne"
+            };
+
+            Participant pParticip5 = new Participant
+            {
+                Id = 15,
+                Compte = cParticip5,
+                NomBDE = "HEC-ECO-BDE",
+                Universite = "HEC"
+            };
+            this.Participants.AddRange(
+                pParticip3,
+                pParticip4,
+                pParticip5
+                );
+            this.SaveChanges();
+            //-----------
             Evenement evenement1 = new Evenement
             {
                 Id = 1,
@@ -566,7 +635,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 100,
                 MinParticipants = 70,
                 NbReservations = 0,
-                NbParticipants = 0,
+                NbParticipants = 1,
                 PrixBillet = 8.5,
                 Organisateur = organisateur,
             };
@@ -584,9 +653,9 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 200,
                 MinParticipants = 120,
                 NbReservations = 0,
-                NbParticipants = 0,
+                NbParticipants = 1,
                 PrixBillet = 10,
-                Organisateur = organisateur,
+                Organisateur = oOrga10,
             };
             Evenement evenement3 = new Evenement
             {
@@ -602,7 +671,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,
-                NbParticipants = 0,
+                NbParticipants = 1,
                 PrixBillet = 5,
                 Organisateur = organisateur,
             };
@@ -756,122 +825,167 @@ namespace P2_BDE_Events.DataAccessLayer
             this.LignesEvenement.AddRange(
                 new LigneEvenement
                 {
+                    Id= 1,
                     Evenement = evenement1,
                     Type = TypeDePrestation.BAR,
                     Prestation = presta10
                 },
                 new LigneEvenement
                 {
+                    Id = 2,
                     Evenement = evenement1,
                     Type = TypeDePrestation.SALLE,
                     Prestation = presta11
                 },
                 new LigneEvenement
                 {
+                    Id = 3,
                     Evenement = evenement1,
                     Type = TypeDePrestation.TRAITEUR,
                     Prestation = presta12
                 },
                 new LigneEvenement
                 {
+                    Id = 4,
                     Evenement = evenement2,
                     Type = TypeDePrestation.SALLE,
                     Prestation = presta14
                 },
                 new LigneEvenement
                 {
+                    Id = 5,
                     Evenement = evenement3,
                     Type = TypeDePrestation.SECURITE,
                     Prestation = presta16
                 },
                 new LigneEvenement
                 {
+                    Id = 6,
                     Evenement = evenement2,
                     Type = TypeDePrestation.DJ,
                     Prestation = presta17
                 },
                 new LigneEvenement
                 {
+                    Id = 7,
                     Evenement = evenement4,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 8,
                     Evenement = evenement4,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 9,
                     Evenement = evenement5,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 10,
                     Evenement = evenement5,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 11,
                     Evenement = evenement6,
                     Type = TypeDePrestation.PHOTOGRAPHIE,
                 },
                 new LigneEvenement
                 {
+                    Id = 12,
                     Evenement = evenement7,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 13,
                     Evenement = evenement7,
                     Type = TypeDePrestation.TRAITEUR,
                 },
                 new LigneEvenement
                 {
+                    Id = 14,
                     Evenement = evenement7,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 15,
                     Evenement = evenement7,
                     Type = TypeDePrestation.LOCATION,
                 },
                 new LigneEvenement
                 {
+                    Id = 16,
                     Evenement = evenement8,
                     Type = TypeDePrestation.TRAITEUR,
                 },
                 new LigneEvenement
                 {
+                    Id = 17,
                     Evenement = evenement8,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 18,
                     Evenement = evenement9,
                     Type = TypeDePrestation.SALLE,
                 },
                 new LigneEvenement
                 {
+                    Id = 19,
                     Evenement = evenement9,
                     Type = TypeDePrestation.BAR,
                 },
                 new LigneEvenement
                 {
+                    Id = 20,
                     Evenement = evenement9,
                     Type = TypeDePrestation.DJ,
                 },
                 new LigneEvenement
                 {
+                    Id = 21,
                     Evenement = evenement9,
                     Type = TypeDePrestation.PHOTOGRAPHIE,
                 },
                 new LigneEvenement
                 {
+                    Id=22,
                     Evenement = evenement9,
                     Type = TypeDePrestation.LOCATION,
                     Location = TypeDeLocation.PHOTOMATON
                 }
                 );
+            this.SaveChanges();
+
+            this.Reservations.Add(new Reserver
+            {
+                DateReservation = DateTime.Now,
+                Participant = pParticip3,
+                Evenement = evenement1
+            });
+
+            this.Reservations.Add(new Reserver
+            {
+                DateReservation = DateTime.Now,
+                Participant = pParticip4,
+                Evenement = evenement2
+            });
+
+            this.Reservations.Add(new Reserver
+            {
+                DateReservation = DateTime.Now,
+                Participant = pParticip5,
+                Evenement = evenement5
+            });
+
             this.SaveChanges();
 
             /*

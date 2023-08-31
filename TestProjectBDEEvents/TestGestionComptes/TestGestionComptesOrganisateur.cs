@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Services.Comptes;
-using P2_BDE_Events.Models.Compte;
+using P2_BDE_Events.Models.Comptes;
 
 namespace TestProjectBDEEvents.TestGestionComptes
 {

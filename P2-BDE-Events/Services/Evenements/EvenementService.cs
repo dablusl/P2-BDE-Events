@@ -4,6 +4,7 @@ using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
 using P2_BDE_Events.Models.Evenement.Enums;
+using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Models.Prestations.Enums;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace P2_BDE_Events.Services.Evenements
         public void ReserverEvenement(int participantId, int evenementId)
         {
             var participant = _bddContext.Participants.Find(participantId);
-            var evenement = _bddContext.Evenements.Find(evenementId);
+            var evenement = _bddContext.Evenements.Include(e => e.Reservations).FirstOrDefault(e=> e.Id == evenementId);
 
             if (participant == null || evenement == null)
             {
@@ -76,6 +77,8 @@ namespace P2_BDE_Events.Services.Evenements
                 EvenementId = evenementId,
                 DateReservation = DateTime.Now
             };
+
+            evenement.NbParticipants = evenement.Reservations.Count+1;
 
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
@@ -96,16 +99,28 @@ namespace P2_BDE_Events.Services.Evenements
                 .Where(e => e.OrganisateurId == organisateurId)
                 .ToList();
         }
-        //count equiv .Length .Size
         public List<Evenement> EnAppelDoffre(List<TypeDePrestation> types)
         {
             return _bddContext.Evenements
                 .Include(e => e.Lignes)
-                .Where(e => e.Etat == EtatEvenement.OUVERT 
-                        && e.Lignes.Any(
-                            l => types.Contains(l.Type) 
-                                && l.Prestation == null))
+
+                .Where(e => e.Etat == EtatEvenement.OUVERT &&
+                    e.Lignes.Any(l => types.Contains(l.Type)))
                 .ToList();
+        }
+        public List<Evenement> ObtenirEvenementsParUniversite(string universite)
+        {
+
+            if (!string.IsNullOrEmpty(universite))
+            {
+                return _bddContext.Evenements
+                    .Include(o => o.Organisateur)
+                    .ThenInclude(p => p.Participant)
+                    .Where(e => e.Organisateur.Participant.Universite == universite)
+                           .ToList();
+            }
+
+            return null;
         }
 
         public void Dispose()
