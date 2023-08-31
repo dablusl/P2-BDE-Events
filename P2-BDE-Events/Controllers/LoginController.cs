@@ -59,7 +59,6 @@ namespace P2_BDE_Events.Controllers
                 }
                 else if (compte.Profil == "Administrateur")
                 {
-                    //return RedirectToAction("EvenementsSuivants", "MesEvenements", new { area = "OrganisateurControllers" });
                     return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
                 }
                 else
@@ -114,7 +113,6 @@ namespace P2_BDE_Events.Controllers
                         }
                         else if (compte.Profil == "Administrateur")
                         {
-                            //return RedirectToAction("MesEvenementsOrga", "MesEvenements", new { area = "OrganisateurControllers" });
                             return RedirectToAction("Index", "Dashboard", new { area = "AdministrateurControllers" });
                         }
                         else
