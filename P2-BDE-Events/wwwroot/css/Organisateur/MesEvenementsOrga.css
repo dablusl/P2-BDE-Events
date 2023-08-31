@@ -1,0 +1,89 @@
+﻿.creerEvenement {
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: 'Baloo 2', cursive;
+    color: red;
+    text-shadow: none;
+    background: transparent;
+    box-shadow: transparent;
+    border: 1px solid red;
+    transition: 0.5s ease;
+    user-select: none;
+    cursor: pointer;
+}
+
+    .creerEvenement:hover,
+    .creerEvenement:focus {
+        color: white;
+        background: red;
+        border: 1px solid red;
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+        box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+    }
+
+/*Evenement*/
+
+main {
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+.ensembleEvenement {
+    margin-top: 40px;
+    width: 900px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 200px;
+}
+
+.afficheComplete {
+    width: 350px;
+    height: 600px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    box-shadow: 0px 0px 10px 2px black;
+}
+
+.card {
+    width: 300px;
+    height: 450px;
+    background-image: linear-gradient(163deg, orange 0%, red 100%);
+    border-radius: 20px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.card2 {
+    width: 300px;
+    height: 450px;
+    transition: all .2s;
+}
+
+    .card2 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 2px solid white;
+    }
+
+        .card2 img:hover {
+            transform: scale(0.98);
+            border-radius: 20px;
+            border: none;
+        }
+
+.card:hover {
+    box-shadow: 0px 0px 30px 1px red;
+}
+
+.titre, .date {
+    color: white;
+    font-size: 18px;
+}

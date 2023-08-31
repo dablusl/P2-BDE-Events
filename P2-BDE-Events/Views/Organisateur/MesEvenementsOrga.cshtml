@@ -4,33 +4,46 @@
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/Organisateur/EvenementsEnCours.css">
+<link rel="stylesheet" href="~/css/Organisateur/MesEvenementsOrga.css">
 
 @section Header {
     <ul>
-        <li onclick="window.location.href = '@Url.Action("EvenementsPrecedents", "MesEvenements", new { area = "Organisateur" })'">Evenements précédents</li>
-        <li onclick="window.location.href = '@Url.Action("EvenementsEnCours", "MesEvenements", new { area = "Organisateur" })'">Evenements en cours</li>
-        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsSuivants", "MesEvenements", new { area = "Organisateur" })'">Evenements suivants</li>
+        <li
+            onclick="window.location.href = '@Url.Action("MesEvenementsOrgaTermines", "MesEvenements", new { area = "Organisateur" })'">
+            Evenements précédents</li>
+        <li class="pageActive"
+            onclick="window.location.href = '@Url.Action("MesEvenementsOrga", "MesEvenements", new { area = "Organisateur" })'">
+            Evenements suivants</li>
     </ul>
 }
 
-
-
 @if (Model.Evenements.Any())
 {
-    <ul>
+    <div class="ensembleEvenement">
         @foreach (var evenement in Model.Evenements)
         {
-            <span>@evenement.Titre @evenement.DateEvenement</span>
-            <button class="selectEvent" onclick="window.location.href = '@Url.Action("ConsulterEvenement", new { area = "Organisateur", evenementId = evenement.Id })'">Sélectionner</button>
+            <div class="afficheComplete">
+                <div class="card"
+                    onclick="window.location.href = '@Url.Action("ConsulterEvenement", new { area = "Organisateur", evenementId = evenement.Id })'">
+                    <div class="card2">
+                        <img src="@evenement.CoverPhotoPath" alt="">
+                    </div>
+                </div>
+                <div class="titre">
+                    <p>@evenement.Titre</p>
+                </div>
+                <div class="date">
+                    @{
+                        string dateISO = evenement.DateEvenement.ToString("dd-MM-yyyy HH:mm");
+                    }
+                    <p>@dateISO</p>
+                </div>
+            </div>
         }
-    </ul>
+    </div>
 }
 else
 {
     <p>Vous n'avez aucun évènement en cours</p>
-}
-
-<form>
     <button class="creerEvenement">Créer un évènement</button>
-</form>
+}

@@ -3,27 +3,74 @@
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/ProfilOrganisateur/mesEvenements.css">
+<link rel="stylesheet" href="~/css/Organisateur/ConsulterEvenement.css">
+
 @section Header {
     <ul>
-        <li onclick="window.location.href = '@Url.Action("EvenementsPrecedents", "MesEvenements", new { area = "Organisateur" })'">Evenements précédents</li>
-        <li onclick="window.location.href = '@Url.Action("EvenementsEnCours", "MesEvenements", new { area = "Organisateur" })'">Evenements en cours</li>
-        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsSuivants", "MesEvenements", new { area = "Organisateur" })'">Evenements suivants</li>
+        <li
+            onclick="window.location.href = '@Url.Action("ConsulterParticipants", "MesEvenements", new { area = "OrganisateurControllers" })'">
+            Voir les participants</li>
+        <li>Voir les prestattions</li>
+        <li>Supprimer l'évènement</li>
     </ul>
 }
-<h2>Détails de l'événement</h2>
 
-<p><strong>Nom de l'événement :</strong> @Model.Evenement.Titre</p>
-<p><strong>Date :</strong> @Model.Evenement.DateEvenement</p>
-<p><strong>Etat :</strong> @Model.Evenement.Etat</p>
-<p><strong>Date limite d'inscription des participants :</strong> @Model.Evenement.DateLimiteInscription</p>
-<p><strong>Description :</strong> @Model.Evenement.Description</p>
-<p><strong>Prix d'un billet :</strong> @Model.Evenement.PrixBillet</p>
-<p><strong>Nombre de participants inscrits :</strong> @Model.NbParticipant </p>
+<div class="boxAffiche">
+
+    <div class="affiche">
+        <img src="@Model.Evenement.CoverPhotoPath" alt="">
+        <div class="bordure"></div>
+    </div>
+
+</div>
+
+<div class="boxDetails">
+
+    <div class="login-box">
+
+        <form>
+            <div class="user-box">
+                <input type="text" name="" required="">
+                <label>@Model.Evenement.Titre</label>
+            </div>
+            <div class="user-box">
+                @{
+                    string dateISO = Model.Evenement.DateEvenement.ToString("yyyy-MM-dd");
+                }
+                <input type="date" name="" required="" value="@dateISO">
+                <label></label>
+            </div>
+            <div class="user-box">
+                <input type="number" name="" required="">
+                <label>@Model.Evenement.PrixBillet €</label>
+            </div>
+
+
+            <center>
+                <a href="#">
+                    MODIFIER
+                    <span></span>
+                </a>
+            </center>
+        </form>
+    </div>
+
+</div>
 
 
 
-<h3>Liste des participants :</h3>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h3>Liste des participants :</h3>
 @if (Model.Participants != null)
 {
     <ol>
@@ -32,8 +79,16 @@
             <li>@participant.Compte.Nom @participant.Compte.Prenom </li>
         }
     </ol>
-}
+} -->
 
 
 
 
+
+@* <p>Nom de l'événement : @Model.Evenement.Titre</p>
+<p>Date : @Model.Evenement.DateEvenement</p>
+<p>Etat : @Model.Evenement.Etat</p>
+<p>Date limite d'inscription des participants : @Model.Evenement.DateLimiteInscription</p>
+<p>Description : @Model.Evenement.Description</p>
+<p>Prix d'un billet : @Model.Evenement.PrixBillet</p>
+<p>Nombre de participants inscrits : @Model.Evenement.NbParticipants</p> *@
