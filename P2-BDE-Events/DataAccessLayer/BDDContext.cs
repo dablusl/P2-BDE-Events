@@ -671,7 +671,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,
-                NbParticipants = 1,
+                NbParticipants = 0,
                 PrixBillet = 5,
                 Organisateur = organisateur,
             };
@@ -708,7 +708,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,
-                NbParticipants = 0,
+                NbParticipants = 1,
                 PrixBillet = 5,
                 Organisateur = oOrga11,
             };
