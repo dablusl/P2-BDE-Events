@@ -31,7 +31,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
             {
                 _dbContext.Prestations.Add(viewModel.prestation);
                 _dbContext.SaveChanges();
-                return View("~/Views/Prestation/CreerUnePrestation.cshtml"); ; 
+                return View("~/Views/Prestation/CreerUnePrestation.cshtml");
             }
 
             return View(viewModel);
