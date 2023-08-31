@@ -71,6 +71,21 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             return View("Views/Organisateur/SolliciterEvenement.cshtml", viewModel);
         }
 
+        public IActionResult FormulairePartenariat (int EvenementID)
+        {
+            var evenement = EvenementService.ObtenirEvenement(EvenementID);
+            int compteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
+            Organisateur organisateur = OrganisateurService.GetOrganisateurParCompte(compteId);
+
+            FormulairePartenariatViewModel viewModel = new FormulairePartenariatViewModel
+            {
+                Evenement = evenement,
+                Organisateur = organisateur
+            };
+            return View("Views/Organisateur/FormulairePartenariat.cshtml", viewModel);
+        }
+         
+
     }
 
 }
