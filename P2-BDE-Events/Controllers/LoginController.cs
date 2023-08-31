@@ -55,7 +55,7 @@ namespace P2_BDE_Events.Controllers
                 }
                 else if (compte.Profil == "Prestataire")
                 {
-                    return RedirectToAction("Index", "CreerUnePrestation", new { area = "PrestataireControllers" });
+                    return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
                 }
                 else if (compte.Profil == "Administrateur")
                 {
@@ -110,7 +110,7 @@ namespace P2_BDE_Events.Controllers
                         }
                         else if (compte.Profil == "Prestataire")
                         {
-                            return RedirectToAction("Index", "CreerUnePrestation", new { area = "PrestataireControllers" });
+                            return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
                         }
                         else if (compte.Profil == "Administrateur")
                         {
