@@ -14,7 +14,7 @@
 <form asp-action="CreerEvenementSurMesure3" method="post">
     <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
     <label for="NombreParticipants">Nombre de participants souhaité (max)</label>
-    <input type="number" class="form-control" id="Evenement.NbParticipants" name="Evenement.NbParticipants" value="">
+    <input type="number" class="form-control" id="Evenement.MaxParticipants" name="Evenement.MaxParticipants" value="">
 
     @foreach (var prestation in Model.Types)
     {

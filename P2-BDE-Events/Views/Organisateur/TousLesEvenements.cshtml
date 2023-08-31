@@ -1,20 +1,16 @@
-﻿@model P2_BDE_Events.ViewModels.AgendaEvenementViewModel
+﻿@model P2_BDE_Events.ViewModels.TousLesEvenementsViewModel
 
 @{
-    Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/Participant/AgendaEvenement.css">
 
 @section Header {
     <ul>
-@*        <li>Intérêt</li>
-        <li class="pageActive">Date</li>
-        <li>Participant</li>
-        <li>Prix</li>*@
         <li class="search-form">
-            <form method="get" action="@Url.Action("AgendaEvenement", "Agenda", new { area = "Participant" })">
-                <input type="hidden" name="universite" value="@Model.Participant.Universite" />
+            <form method="get" action="@Url.Action("TousLesEvenement", "TousLesEvenements", new { area = "Organisateur" })">
+                <input type="hidden" name="universite" value="@Model.Organisateur.Participant"/>
                 <button type="submit">Les évènements de mon université</button>
             </form>
         </li>
@@ -30,7 +26,7 @@
 
 @foreach (var evenement in Model.Evenements)
 {
-    <a href="@Url.Action("ReserverUnEvenement", "MesEvenements", new { area = "Participant", EvenementID = evenement.Id })" class="voirPlus">
+    <a href="@Url.Action("SolliciterEvenement", "TousLesEvenements", new { area = "Organisateur", EvenementID = evenement.Id })" class="voirPlus">
         <div class="evenement">
             <div class="photo">
                 <img src="@evenement.CoverPhotoPath" alt="">
