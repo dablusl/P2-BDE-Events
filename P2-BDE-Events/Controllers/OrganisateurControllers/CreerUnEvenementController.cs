@@ -84,7 +84,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             {
                 EvenementViewModel savedEvent = GetEventSession();
 
-                savedEvent.Evenement.NbParticipants = model.Evenement.NbParticipants;
+                savedEvent.Evenement.MaxParticipants = model.Evenement.MaxParticipants;
 
                 foreach (var typePrestation in model.Types)
                 {
@@ -178,7 +178,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                     nouveauEvent.CoverPhoto.CopyTo(stream);
                 }
 
-                return imagePath;
+                return "/images/evenement/" + imageFileName; ;
             }
 
             return "/images/evenement/default.jpg";

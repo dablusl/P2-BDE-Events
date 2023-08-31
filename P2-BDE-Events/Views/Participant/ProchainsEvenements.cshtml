@@ -6,9 +6,9 @@
 
 @section Header {
     <ul>
-        <li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Evènements terminés</li>
-        <li class="pageActive" onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Prochains évènements</li>
-        <li onclick="window.location.href = '@Url.Action("EvenementsInteressant", "MesEvenements", new { area = "Participant" })'">Evènements intéréssants</li>
+        <li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Évènements passés</li>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Évènements à venir</li>
+        @*<li onclick="window.location.href = '@Url.Action("EvenementsInteressant", "MesEvenements", new { area = "Participant" })'">Evènements intéréssants</li>*@
     </ul>
 }
 

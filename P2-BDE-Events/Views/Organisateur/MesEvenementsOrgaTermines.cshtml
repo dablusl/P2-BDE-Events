@@ -6,12 +6,8 @@
 
 @section Header {
     <ul>
-        <li class="pageActive"
-            onclick="window.location.href = '@Url.Action("MesEvenementsOrgaTermines", "MesEvenements", new { area = "Organisateur" })'">
-            Evenements précédents</li>
-        <li
-            onclick="window.location.href = '@Url.Action("MesEvenementsOrga", "MesEvenements", new { area = "Organisateur" })'">
-            Evenements suivants</li>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("MesEvenementsOrgaTermines", "MesEvenements", new { area = "Organisateur" })'">Évènements passés</li>
+        <li onclick="window.location.href = '@Url.Action("MesEvenementsOrga", "MesEvenements", new { area = "Organisateur" })'">Évènements à venir</li>
     </ul>
 }
 <div class="noEvent">
