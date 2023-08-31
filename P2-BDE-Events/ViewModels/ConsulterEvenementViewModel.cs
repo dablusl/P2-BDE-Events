@@ -1,5 +1,6 @@
 ﻿using P2_BDE_Events.Models.Comptes;
 using P2_BDE_Events.Models.Evenement;
+using P2_BDE_Events.Models.Prestations;
 using System.Collections.Generic;
 
 namespace P2_BDE_Events.ViewModels

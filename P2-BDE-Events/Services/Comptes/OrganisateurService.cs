@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace P2_BDE_Events.Services.Comptes
 {
@@ -43,6 +44,7 @@ namespace P2_BDE_Events.Services.Comptes
         public Organisateur ObtenirOrganisateur(Participant participant)
         {
             return _bddContext.Organisateurs
+                .Include(o => o.Participant)
                 .Where( organisateur => organisateur.Participant.Id == participant.Id)
                 .ToList()[0];
 
