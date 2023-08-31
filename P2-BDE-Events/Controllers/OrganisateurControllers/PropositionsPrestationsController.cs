@@ -36,7 +36,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         [HttpPost]
         public IActionResult PropositionsDeLaPrestation(PropositionsPrestationViewModel model)
         {
-            ligneEvenementService.ChoisirPrestation(model.LigneId,model.PropositionID);
+            ligneEvenementService.ChoisirPrestation(model.LigneId,model.PropositionID,model.EvenementID);
             evenementService.PublierEvenement(model.EvenementID);
             prestationService.NettoyerPropositions(model.LigneId);
 

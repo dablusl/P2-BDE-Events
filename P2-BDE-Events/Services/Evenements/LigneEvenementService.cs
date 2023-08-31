@@ -95,7 +95,7 @@ namespace P2_BDE_Events.Services.Evenements
                 .ToList();               
         }
 
-        public int ChoisirPrestation(int idLigne, int idProposition)
+        public int ChoisirPrestation(int idLigne, int idProposition, int idEvenement)
         {
             LigneEvenement ligne = _bddContext.LignesEvenement.Find(idLigne);
             PropositionPrestation proposition = _bddContext.Propositions
@@ -104,8 +104,9 @@ namespace P2_BDE_Events.Services.Evenements
 
             ligne.Prestation = proposition.Prestation;
             ligne.TarifProposee = proposition.TarifPropose;
-
             _bddContext.SaveChanges();
+
+            double nouvelleTarif = new EvenementService().RecalculerBillet(idEvenement);          
 
             return ligne.Id;
         }
