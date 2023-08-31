@@ -71,7 +71,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
                 return NotFound();
             }
 
-            return View(prestation);
+            return View("~/Views/Prestation/ModifierUnePrestation.cshtml"); ;
         }
 
         [HttpPost, ActionName("Supprimer")]
@@ -88,5 +88,6 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 
             return View("~/Views/Prestation/SupprimerUnePrestation.cshtml"); 
         }
+
     }
 }

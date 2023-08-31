@@ -6,7 +6,7 @@
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <label for="Titre">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre">
+        <input type="text" class="form-control" asp-for="Titre" value="@Model.Titre">
     </div>
     <div class="form-group">
         <label for="CapaciteMax">Capacité maximale</label>
@@ -14,24 +14,24 @@
     </div>
     <div class="form-group">
         <label for="Tarif">Tarif</label>
-        <input type="number" class="form-control" asp-for="Tarif">
+        <input type="number" class="form-control" asp-for="Tarif" value="@Model.Tarif">
     </div>
     <div class="form-group">
         <label for="Calendrier">Calendrier</label>
-        <input type="text" class="form-control" asp-for="Calendrier">
+        <input type="text" class="form-control" asp-for="Calendrier" value="@Model.Calendrier">
     </div>
     <div class="form-group">
         <label for="Livraison">Livraison</label>
-        <input type="checkbox" class="form-control" asp-for="Livraison">
+        <input type="checkbox" class="form-control" asp-for="Livraison" value="@Model.Livraison">
     </div>
     <div class="form-group">
         <label for="Description">Description</label>
-        <textarea class="form-control" asp-for="Description"></textarea>
+        <textarea class="form-control" asp-for="Description" value="@Model.Description"></textarea>
     </div>
 
     <div class="form-group">
         <label for="Type">Type</label>
-        <select class="form-control" asp-for="Type">
+        <select class="form-control" asp-for="Type" value="@Model.Type">
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>

@@ -1,36 +1,36 @@
-﻿@model P2_BDE_Events.ViewModels.UnePrestationViewsModel
+﻿@model P2_BDE_Events.Models.Prestations.Prestation
 
 <h2>Créer une prestation</h2>
 
 <form asp-action="Creer">
-    <div class="form-group">
-        <label for="Prestataire.Titre">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre">
-    </div>
      <div class="form-group">
-        <label for="Prestataire.CapaciteMax">Capacité maximale</label>
-        <input type="number" class="form-control" asp-for="CapaciteMax">
+        <label for="Titre">Titre</label>
+        <input type="text" class="form-control" asp-for="Titre" value="@Model.Titre">
     </div>
     <div class="form-group">
-        <label for="Prestataire.Tarif">Tarif</label>
-        <input type="number" class="form-control" asp-for="Tarif">
+        <label for="CapaciteMax">Capacité maximale</label>
+        <input type="number" class="form-control" asp-for="CapaciteMax" value="@Model.CapaciteMax" >
     </div>
     <div class="form-group">
-        <label for="Prestataire.Calendrier">Calendrier</label>
-        <input type="text" class="form-control" asp-for="Calendrier">
+        <label for="Tarif">Tarif</label>
+        <input type="number" class="form-control" asp-for="Tarif" value="@Model.Tarif">
     </div>
     <div class="form-group">
-        <label for="Prestataire.Livraison">Livraison</label>
-        <input type="checkbox" class="form-control" asp-for="Livraison">
+        <label for="Calendrier">Calendrier</label>
+        <input type="text" class="form-control" asp-for="Calendrier" value="@Model.Calendrier">
     </div>
     <div class="form-group">
-        <label for="Prestataire.Description">Description</label>
-        <textarea class="form-control" asp-for="Description"></textarea>
+        <label for="Livraison">Livraison</label>
+        <input type="checkbox" class="form-control" asp-for="Livraison" value="@Model.Livraison">
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" asp-for="Description" value="@Model.Description"></textarea>
     </div>
 
     <div class="form-group">
         <label for="Type">Type</label>
-        <select class="form-control" asp-for="Type">
+        <select class="form-control" asp-for="Type" value="@Model.Type">
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
             <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
