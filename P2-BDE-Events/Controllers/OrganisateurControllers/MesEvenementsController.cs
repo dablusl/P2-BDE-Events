@@ -21,21 +21,27 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             OrganisateurService = new OrganisateurService();
             ParticipantService = new ParticipantService();
         }
-        public IActionResult EvenementsEnCours()
+
+        public IActionResult MesEvenementsOrgaTermines()
         {
-            return View("Views/Organisateur/EvenementsEnCours.cshtml");
+            return View("Views/Organisateur/MesEvenementsOrgaTermines.cshtml");
         }
 
-
-        public IActionResult EvenementsPrecedents()
+        [HttpGet]
+        public IActionResult ConsulterParticipants(int evenementId)
         {
-            return View("Views/Organisateur/EvenementsPrecedents.cshtml");
+            var evenement = EvenementService.ObtenirEvenement(evenementId);
+            List<Participant> participants = EvenementService.ObtenirParticipants(evenementId);
+
+            var viewModel = new ConsulterEvenementViewModel
+            {
+                Evenement = evenement,
+                Participants = participants
+            };
+
+            return View("Views/Organisateur/ConsulterParticipants.cshtml", viewModel);
         }
 
-        public IActionResult EvenementsSuivants()
-        {
-            return View("Views/Organisateur/EvenementsSuivants.cshtml");
-        }
         [HttpGet]
         public IActionResult ConsulterEvenement(int evenementId)
         {
@@ -50,6 +56,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
             return View("Views/Organisateur/ConsulterEvenement.cshtml", viewModel);
         }
+
         [HttpGet]
         public IActionResult MesEvenementsOrga()
         {

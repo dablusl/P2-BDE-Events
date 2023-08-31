@@ -101,7 +101,7 @@ namespace P2_BDE_Events.Controllers
                     {
                         if (compte.Profil == "Organisateur")
                         {
-                            return RedirectToAction("EvenementsSuivants", "MesEvenements", new { area = "OrganisateurControllers" });
+                            return RedirectToAction("MesEvenementsOrga", "MesEvenements", new { area = "OrganisateurControllers" });
                         }
                         else if (compte.Profil == "Participant")
                         {
@@ -131,16 +131,19 @@ namespace P2_BDE_Events.Controllers
         {
             var viewModel = new CreationCompteViewModel
             {
+                Compte = new Compte(), // Initialisez Compte ici
                 AvailableProfiles = new List<SelectListItem>
-                {
-                    new SelectListItem { Value = "Prestataire", Text = "Prestataire" },
-                    new SelectListItem { Value = "Organisateur", Text = "BDE" },
-                    new SelectListItem { Value = "Participant", Text = "Etudiant" }
-                }
+        {
+            new SelectListItem { Value = "Prestataire", Text = "Prestataire" },
+            new SelectListItem { Value = "Organisateur", Text = "BDE" },
+            new SelectListItem { Value = "Participant", Text = "Etudiant" }
+        }
             };
 
             return View(viewModel);
         }
+
+
         [HttpPost]
         public IActionResult CreerCompte(CreationCompteViewModel viewModel)
 

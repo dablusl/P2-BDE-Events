@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<link rel="stylesheet" href="/css/Login/Index.css">
+<link rel="stylesheet" href="/css/Login/CreerCompte.css">
 
 @section Header {
     <p>Selectionner votre profil</p>
@@ -15,14 +15,12 @@
     <li>Obtenir de l'aide</li>
 }
 
-<section class="page-section portfolio mt-5">
+@* <section class="page-section portfolio mt-5">
 
     <div class="container">
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
-            @*<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>*@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
@@ -48,4 +46,72 @@
             </div>
         </div>
     </div>
-</section>
+</section> *@
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm" }))
+{
+    
+
+    <div class="choixProfil">
+
+        <div class="parent">
+            <div class="radio-ensemble-groupe">
+                <div class="input-parent">
+                    @Html.RadioButtonFor(m => m.SelectedProfile, "Organisateur", new { id = "Organisateur" })
+                    <div class="radio-ensemble">
+                        <ion-icon name="clipboard-outline"></ion-icon>
+                        @Html.Label("Organisateur", "BDE")
+                    </div>
+                </div>
+                <div class="input-parent">
+                    @Html.RadioButtonFor(m => m.SelectedProfile, "Participant", new { id = "Participant" })
+                    <div class="radio-ensemble">
+                        <ion-icon name="school-outline"></ion-icon>
+                        @Html.Label("Participant", "Etudiant")
+                    </div>
+                </div>
+                <div class="input-parent">
+                    @Html.RadioButtonFor(m => m.SelectedProfile, "Prestataire", new { id = "Prestataire" })
+                    <div class="radio-ensemble">
+                        <ion-icon name="storefront-outline"></ion-icon>
+                        @Html.Label("Prestataire", "Prestataire")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="login">
+        <div class="login-box">
+
+            <div class="user-box">
+                @Html.TextBoxFor(m => m.Compte.Email, new { required = "required" })
+                @Html.LabelFor(m => m.Compte.Email, "Email")
+                @Html.ValidationMessageFor(m => m.Compte.Email)
+            </div>
+            <div class="user-box">
+                @Html.PasswordFor(m => m.Compte.MotDePasse, new { required = "required" })
+                @Html.LabelFor(m => m.Compte.MotDePasse, "Mot de passe")
+                @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
+            </div>
+            <center>
+                <a href="#" id="submitAllForms">
+                    S'INSCRIRE
+                    <span></span>
+                </a>
+            </center>
+
+        </div>
+    </div>
+
+}
+<script>
+    document.getElementById("submitAllForms").addEventListener("click", function (event) {
+        event.preventDefault();
+        document.getElementById("myForm").submit();
+    });
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+

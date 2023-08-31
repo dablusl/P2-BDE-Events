@@ -1,0 +1,33 @@
+@model P2_BDE_Events.ViewModels.ConsulterEvenementViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/ProfilOrganisateur/ConsulterParticipant.css">
+@section Header {
+    <ul>
+        <li>Voir l'évènement</li>
+        <li>Modifier l'évènement</li>
+        <li>Supprimer l'évènement</li>
+        <li>Soumettre l'évènement</li>
+    </ul>
+}
+
+<p><strong>Nom de l'événement :</strong> @Model.Evenement.Titre</p>
+
+<p><strong>Nombre de participants inscrits :</strong> @Model.Evenement.NbParticipants</p>
+
+<h3>Liste des participants :</h3>
+@if (Model.Participants != null)
+{
+    <ol>
+        @foreach (var participant in Model.Participants)
+        {
+            <li>@participant.Compte.Nom @participant.Compte.Prenom </li>
+        }
+    </ol>
+}
+
+
+
+
