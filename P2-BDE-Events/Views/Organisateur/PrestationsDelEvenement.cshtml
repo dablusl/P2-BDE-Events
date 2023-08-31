@@ -1,0 +1,57 @@
+﻿@using P2_BDE_Events.Models.Prestations
+@using P2_BDE_Events.Models.Evenement
+@model List<LigneEvenement>
+@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Organisateur/ConsulterEvenement.css">
+
+@section Header {
+    <ul>
+        <li onclick="window.location.href = '@Url.Action("ConsulterParticipants", "MesEvenements", new { area = "OrganisateurControllers" })'">
+            Voir les participants
+        </li>
+        <li>Voir les prestattions</li>
+        <li>Supprimer l'évènement</li>
+    </ul>
+}
+<style>
+    .scrollable-content {
+        max-height: 80vh;
+        overflow-y: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+</style>
+
+<div class="scrollable-content">
+    <ul>
+        @foreach (LigneEvenement ligne in Model)
+        {
+            <li>
+                <div class="card-prestation">
+                    <h2>@ligne.Type</h2>
+                    @if (ligne.Prestation != null)
+                    {
+                        <p>@ligne.Prestation.Titre</p>
+                        <p>@ligne.Prestation.Description</p>
+                        <p>@ligne.TarifProposee €</p>
+                    }
+                    else if (ligne.Propositions.Count > 0)
+                    {
+                        <a class="button-link" href="@Url.Action("PropositionsDeLaPrestation", "PropositionsPrestations", new { area = "OrganisateurControllers", id = @ligne.Id })">
+                            Voir Propositions à valider
+                        </a>
+                    }
+                    else
+                    {
+                        <p>En attente de propositions</p>
+                    }
+                </div>
+            </li>
+        }
+    </ul>
+</div>

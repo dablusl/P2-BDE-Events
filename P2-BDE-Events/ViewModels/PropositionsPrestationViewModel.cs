@@ -10,5 +10,6 @@ namespace P2_BDE_Events.ViewModels
         public List<PropositionPrestation> Propositions { get; set; }
         public int LigneId { get; set; }
         public int PropositionID { get; set; }
+        public int EvenementID { get; set; }
     }
 }

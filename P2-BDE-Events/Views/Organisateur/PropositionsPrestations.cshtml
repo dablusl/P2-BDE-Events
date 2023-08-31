@@ -12,6 +12,7 @@
         <h5>@proposition.TarifPropose</h5>
         @using (Html.BeginForm("PropositionsDeLaPrestation", "PropositionsPrestations", FormMethod.Post))
         {
+            @Html.HiddenFor(m => m.EvenementID, Model.EvenementID)
             <input type="hidden" name="LigneId" value="@Model.LigneId" />
             <input type="hidden" name="propositionId" value="@proposition.Id" />
             <button type="submit">Choisir</button>

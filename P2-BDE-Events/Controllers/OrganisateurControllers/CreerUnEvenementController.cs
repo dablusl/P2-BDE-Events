@@ -110,7 +110,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             int idNouveauEvenement = CreationEvenementBD(nouveauEvent);
             CreationLignesEvenement(idNouveauEvenement);
 
-            return View("~/Views/Organisateur/MesEvenements/EvenementsEnCours");
+            return RedirectToAction("MesEvenementsOrga", "MesEvenements");
         }
 
         public EvenementViewModel InitViewModel()
@@ -162,7 +162,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
         public string SaveCoverPhoto(EvenementViewModel nouveauEvent)
         {
-            if (nouveauEvent.CoverPhoto != null & nouveauEvent.CoverPhoto.Length > 0)
+            if (nouveauEvent.CoverPhoto != null && nouveauEvent.CoverPhoto.Length > 0)
             {
                 string imageFileName = $"{Guid.NewGuid()}{Path.GetExtension(nouveauEvent.CoverPhoto.FileName)}";
                 string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "evenement");
@@ -181,7 +181,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
                 return imagePath;
             }
 
-            return "";
+            return "/images/evenement/default.jpg";
         }
     }
 }
