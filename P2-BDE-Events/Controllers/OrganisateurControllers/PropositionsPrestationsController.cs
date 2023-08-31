@@ -13,10 +13,19 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
     {
         private LigneEvenementService ligneEvenementService;
         private PrestationService prestationService;
+        private EvenementService evenementService;
         public PropositionsPrestationsController()
         {
             ligneEvenementService = new LigneEvenementService();
             prestationService = new PrestationService();
+            evenementService = new EvenementService();
+        }
+
+        public IActionResult PrestationDuEvenement(int id)
+        {
+            List<LigneEvenement> lignes = ligneEvenementService.GetLignesEvenement(id);
+
+            return View(lignes);
         }
 
         public IActionResult PropositionsDeLaPrestation(int id)
