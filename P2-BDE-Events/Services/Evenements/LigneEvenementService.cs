@@ -110,6 +110,17 @@ namespace P2_BDE_Events.Services.Evenements
             return ligne.Id;
         }
 
+        public List<LigneEvenement> GetLignesEvenement(int idEvenement) {
+            Evenement evenement = _bddContext.Evenements
+                .Include( e => e.Lignes)
+                    .ThenInclude( l => l.Prestation)
+                .Include(e => e.Lignes)
+                    .ThenInclude(l => l.Propositions)
+                .FirstOrDefault(e => e.Id == idEvenement);
+
+            return evenement.Lignes.ToList();
+        }
+
         public void Dispose()
         {
             _bddContext.Dispose();
