@@ -3,6 +3,9 @@
 }
 
 @section Header {
+    <ul>
+        <li onclick="window.location.href = '@Url.Action("Creer", "CreerUnePrestation", new { area = "Prestataire" })'">Crée Une Prestation</li>
+    </ul>
 
 }
 
@@ -15,6 +18,7 @@
         padding: 0;
         background-color: #f4f4f4;
     }
+
     .container {
         width: 80%;
         margin: auto;
@@ -24,6 +28,7 @@
         grid-auto-rows: minmax(300px, auto);
         gap: 20px;
     }
+
     .prestation {
         background: #fff;
         padding: 20px;
@@ -34,29 +39,34 @@
         justify-content: space-between;
         cursor: pointer;
     }
-    .prestation h3 {
-        margin: 0;
-        padding: 0;
-        font-size: 1.5rem;
-        text-align: center;
-    }
-    .prestation p {
-        margin: 10px 0;
-    }
-    .prestation .btn {
-        background: #444;
-        color: #fff;
-        padding: 6px 10px;
-        text-decoration: none;
-        border: none;
-        border-radius: 3px;
-        margin-top: auto;
-    }
+
+        .prestation h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .prestation p {
+            margin: 10px 0;
+        }
+
+        .prestation .btn {
+            background: #444;
+            color: #fff;
+            padding: 6px 10px;
+            text-decoration: none;
+            border: none;
+            border-radius: 3px;
+            margin-top: auto;
+        }
+
     .title {
         text-align: center;
         margin-bottom: 20px;
         font-size: 24px;
     }
+
     .separator {
         width: 100%;
         height: 2px;
@@ -66,17 +76,18 @@
 </style>
 
 <section>
-    <h1 class="title">Toutes les prestations</h1>
+    <h1 class="title">Mes prestations</h1>
     <div class="container">
-            @foreach (var prestation in Model.Prestations)
-            {
-                    <div class="prestation">
-                    <h3>@prestation.Titre</h3>
-                    <p>@prestation.Description</p>
-                    <p>Tarif : $@prestation.Tarif</p>
-                    <a href="#" class="btn">En savoir plus</a>
-                </div>
-            }
-        </div>
+        @foreach (var prestation in Model.Prestations)
+        {
+            <div class="prestation">
+                <h3>@prestation.Titre</h3>
+                <p>@prestation.Description</p>
+                <p>Tarif : $@prestation.Tarif</p>
+                <button>Modifier</button>
+                <a href="#" class="btn">En savoir plus</a>
+            </div>
+        }
+    </div>
     <div class="separator"></div>
 </section>
