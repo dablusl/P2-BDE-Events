@@ -248,11 +248,14 @@ namespace P2_BDE_Events.Controllers
         {
             return new List<SelectListItem>
             {
+                new SelectListItem { Value = "Lieu de réception", Text = "Lieu de réception" },
                 new SelectListItem { Value = "Restaurateur", Text = "Restaurateur" },
+                new SelectListItem { Value = "Bar", Text = "Bar" },
                 new SelectListItem { Value = "Photographe", Text = "Photographe" },
                 new SelectListItem { Value = "Vidéaste", Text = "Vidéaste" },
-                new SelectListItem { Value = "Lieu de réception", Text = "Lieu de réception" },
-                new SelectListItem { Value = "Service de sécurité", Text = "Service de sécurité" }
+                new SelectListItem { Value = "DJ", Text = "DJ" },
+                new SelectListItem { Value = "Service de sécurité", Text = "Service de sécurité" }             
+
             };
         }
         public IActionResult CreaComptePresta()
@@ -281,7 +284,7 @@ namespace P2_BDE_Events.Controllers
 
                 PrestataireService.CreerPrestataire(viewModel.Prestataire, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
-                return RedirectToAction("Index", "CreerUnePrestation", new { area = "PrestataireControllers" });
+                return RedirectToAction("Creer", "CreerUnePrestation", new { area = "PrestataireControllers" });
             }
             viewModel.AvailableServiceTypes = GetAvailableServiceTypes();
             return View(viewModel);

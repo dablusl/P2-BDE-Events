@@ -1,11 +1,13 @@
-﻿@model P2_BDE_Events.ViewModels.ListePrestationsViewModel
+@model P2_BDE_Events.ViewModels.ListePrestationsViewModel
 @{
     Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
 }
 
 @section Header {
     <ul>
-        <li onclick="window.location.href = '@Url.Action("CreerUnePrestation", "CreerUnePrestation", new { area = "Prestataire"})'">Créer Une Prestation</li>
+
+        <li class="creerPrestation" onclick="window.location.href = '@Url.Action("Creer", "CreerUnePrestation", new { area = "Prestataire" })'"> CREER UNE PRESTATION</li>
+
     </ul>
 
 }
@@ -94,6 +96,7 @@
         margin: 20px 0;
     }
 
+
     body::-webkit-scrollbar {
         width: 10px;
     }
@@ -109,6 +112,16 @@
 
         body::-webkit-scrollbar-thumb:hover {
             background-color: #b5076b;
+
+    .creerPrestation {
+        color: tomato;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s, background-color 0.2s;
+    }
+        .creerPrestation:hover {
+            color: red;
+            background-color: #f9f9f9;
         }
 </style>
 

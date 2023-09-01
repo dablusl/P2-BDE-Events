@@ -1,0 +1,26 @@
+﻿@model P2_BDE_Events.ViewModels.ReserverUnEvenementViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+
+<link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
+
+@section Header {
+    
+}
+
+<h2>Fiche de l'événement</h2>
+<p>Événement : @Model.Evenement.Titre</p>
+<p>Date : @Model.Evenement.DateEvenement</p>
+<p>Date limite d'inscription des participants : @Model.Evenement.DateLimiteInscription</p>
+<p>Description : @Model.Evenement.Description</p>
+<p>Prix d'un billet : @Model.Evenement.PrixBillet</p>
+<p>Nombre de participants inscrits : @Model.NbParticipant</p>
+
+
+<form method="get" action="@Url.Action("FormulairePartenariat", "TousLesEvenements", new { area = "Organisateur", EvenementID = @Model.Evenement.Id })" class="voirPlus">
+    <input type="hidden" name="evenementId" value="@Model.Evenement.Id" />
+    <button class="rejoindreEvenement" type="submit">Solliciter Partenariat</button>
+</form>

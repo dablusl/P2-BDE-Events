@@ -1,33 +1,76 @@
-﻿@{
+﻿@model P2_BDE_Events.ViewModels.EvenementViewModel
+
+@{
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
 @section Header {
 
+ <div class="bar">
+    <div class="progression1"></div>
+</div>
+
 }
 
-@model P2_BDE_Events.ViewModels.EvenementViewModel
-
-<!-- model P2_BDE_Events.ViewModels.Etape1ViewModel-->
+<link rel="stylesheet" href="~/css/Organisateur/CreerEvenementSurMesure.css">
 
 
-<form asp-action="CreerEvenementSurMesure1" method="post">
-    <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
-    <div class="form-group">
-        <label for="Titre">Titre de l'événement</label>
-        <input type="text" class="form-control" id="Evenement.Titre" name="Evenement.Titre" value="">
-    </div>
-    
-    
-    <div class="form-group">
-        <label for="Theme">Thème de l'événement</label>
-        <select class="form-control" id="Evenement.Type" name="Evenement.Type">
-            @foreach (var eventType in Enum.GetValues(typeof(P2_BDE_Events.Models.Evenement.Enums.TypeEvenement)))
-            {
-                <!-- A voir-->
-                <option value="@eventType">@eventType</option>
-            }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Suivant</button>
-</form>
+<div class="login-box">
+    <form asp-action="CreerEvenementSurMesure1" method="post" id="myForm">
+        <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
+            value="@Model.Evenement.Organisateur.Id" />
+
+        <div class="user-box">
+            <input type="text" class="form-control" id="Evenement.Titre" name="Evenement.Titre" required="">
+            <label for="Evenement.Titre">Titre de l'événement</label>
+        </div>
+
+        <div class="user-box">
+            <select class="form-control" id="Evenement.Type" name="Evenement.Type">
+                <option class="defaut" value="" disabled selected>Thème de l'évènement</option>
+                @foreach (var eventType in Enum.GetValues(typeof(P2_BDE_Events.Models.Evenement.Enums.TypeEvenement)))
+                {
+                    <option value="@eventType">@eventType</option>
+                }
+            </select>
+        </div>
+        <center>
+            <a href="#" id="boutonForm">
+                SUIVANT
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script>
+
+
+
+
+
+@* <form asp-action="CreerEvenementSurMesure1" method="post">
+<input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
+value="@Model.Evenement.Organisateur.Id" />
+<div class="form-group">
+<label for="Titre">Titre de l'événement</label>
+<input type="text" class="form-control" id="Evenement.Titre" name="Evenement.Titre" value="">
+</div>
+
+<div class="form-group">
+<label for="Theme">Thème de l'événement</label>
+<select class="form-control" id="Evenement.Type" name="Evenement.Type">
+@foreach (var eventType in Enum.GetValues(typeof(P2_BDE_Events.Models.Evenement.Enums.TypeEvenement)))
+{
+<option value="@eventType">@eventType</option>
+}
+</select>
+</div>
+<button type="submit" class="btn btn-primary">Suivant</button>
+</form> *@

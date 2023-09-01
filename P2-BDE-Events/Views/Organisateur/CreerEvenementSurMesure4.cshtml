@@ -5,29 +5,98 @@
 <!--model P2_BDE_Events.ViewModels.Etape1ViewModel-->
 
 
+<link rel="stylesheet" href="~/css/Organisateur/CreerEvenementSurMesure4.css">
 @section Header {
-
-}
-
-<h1>Choses Optionnels?</h1>
-
-@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
-    /*
-    @Html.LabelFor(model => model.CoverPhoto)
-    @Html.TextBoxFor(model => model.CoverPhoto, new { type = "file", accept = "image/*" })
-    */
-
-
-    <div class="form-group">
-        <label for="Affiche">Affiche de l'événement</label>
-        <input type="file" class="form-control" id="CoverPhoto" name="CoverPhoto">
+    <div class="bar">
+        <div class="progression4"></div>
     </div>
-    <br />
-
-    <!-- truc à cocher evement privé , habiliter le parrinage de BDE etc....-->
-
-    <button type="submit">next</button>
 }
+
+
+
+<div class="afficheComplete">
+        <div class="card2">
+            <img class="apercuAffiche" id="imagePreview" src="" alt="">
+        </div>
+</div>
+
+
+<div class="login-box">
+    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm">
+        <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
+            value="@Model.Evenement.Organisateur.Id" />
+
+        <label for="CoverPhoto" class="custom-file-upload">
+            Sélectionner l'affiche de l'évènement
+        </label>
+        <input type="file" class="form-control" id="CoverPhoto" name="CoverPhoto" style="display: none;">
+
+        <center>
+            <a href="#" id="boutonForm">
+                SUIVANT
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script>
+
+<script>
+    function previewImage() {
+        var preview = document.getElementById('imagePreview');
+        var fileInput = document.getElementById('CoverPhoto');
+
+        fileInput.addEventListener('change', function() {
+            var file = fileInput.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+            }
+        });
+    }
+
+    previewImage();
+</script>
+
+
+
+
+
+
+
+@* @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
+value="@Model.Evenement.Organisateur.Id" />
+/*
+@Html.LabelFor(model => model.CoverPhoto)
+@Html.TextBoxFor(model => model.CoverPhoto, new { type = "file", accept = "image/*" })
+*/
+
+
+<div class="form-group">
+<label for="Affiche">Affiche de l'événement</label>
+<input type="file" class="form-control" id="CoverPhoto" name="CoverPhoto">
+</div>
+<br />
+
+<!-- truc à cocher evement privé , habiliter le parrinage de BDE etc....-->
+
+<button type="submit">Valider</button>
+} *@
 
