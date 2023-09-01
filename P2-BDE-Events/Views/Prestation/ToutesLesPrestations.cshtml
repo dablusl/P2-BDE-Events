@@ -131,6 +131,10 @@
                 <p>@prestation.Description</p>
                 <p>Tarif : $@prestation.Tarif</p>
                 <button type="submit" class="btn btn-primary">Modifier</button>
+                @*<li>
+                  <a onclick="window.location.href = '@Url.Action("CreerUnePrestation", "ModifierUnePrestation", new { area = "OrganisateurControllers", id = Model.Evenement.Id})'">Voir les prestations</a>
+                <li>Modifier l'évènement</li>*@
+                @*Rajouter on click et @prestation.Id*@
                 <button type="submit" class="btn btn-supp">Supprimer</button>
                 <a href="#" class="btn">En savoir plus</a>
             </div>
