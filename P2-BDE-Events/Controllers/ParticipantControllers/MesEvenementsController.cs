@@ -85,5 +85,47 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             return View("Views/Participant/Confirmation.cshtml");
         }
 
+        [HttpGet]
+        public IActionResult MesEvenementsPart()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Login/Index");
+            }
+            int compteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
+            Participant participant = new ParticipantService().GetParticipantParCompte(compteId);
+
+            // Récupérer la liste des événements créés par l'organisateur
+            var evenements = EvenementService.ObtenirEvenementsReservesParParticipant(participant.Id);
+
+            var viewModel = new MesEvenementsPartViewModel
+            {
+                Evenements = evenements
+            };
+
+            return View("Views/Participant/MesEvenementsPart.cshtml", viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult EvenementReserve(int EvenementID)
+        {
+            var evenement = EvenementService.ObtenirEvenement(EvenementID);
+
+            List<Participant> participants = EvenementService.ObtenirParticipants(EvenementID);
+
+            int NbParticipant = participants.Count;
+
+            var viewModel = new ReserverUnEvenementViewModel
+            {
+                Evenement = evenement,
+                NbParticipant = NbParticipant
+            };
+
+
+            return View("Views/Participant/EvenementReserve.cshtml", viewModel);
+        }
+
+
+
     }
 }
