@@ -64,7 +64,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 Profil = "Administrateur",
                 Prenom = "Pierre",
                 Nom = "Dupont",
-                NumeroTelephone = "010101010101",
+                NumeroTelephone = "0632655289",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
             this.Comptes.Add(adminCompte);
@@ -216,9 +216,39 @@ namespace P2_BDE_Events.DataAccessLayer
                 Participant = orgaParticip,
                 FonctionBDE = "Directeur"
             };
+
             this.Organisateurs.Add(organisateur);
             this.SaveChanges();
+            //-----
+            var Orga2 = new Compte
+            {
+                Id = 121,
+                Email = "jcdm@paris12.fr",
+                MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                Profil = "Organisateur",
+                Prenom = "Juan Carlos",
+                Nom = "Del Mar",
+                NumeroTelephone = "0652458796",
+            };
+            this.Comptes.Add(Orga2);
+            this.SaveChanges();
 
+            var orga2Particip = new Participant
+            {
+                Id = 116,
+                Compte = Orga2,
+                NomBDE = "Paris12-ECO-BDE",
+                Universite = "Paris12"
+
+            };
+            var orgaP12 = new Organisateur
+            {
+                Id = 2,
+                Participant = orga2Particip,
+                FonctionBDE = "Responsable"
+            };
+            this.Organisateurs.Add(orgaP12);
+            this.SaveChanges();
             ////Compte Presta
             var Presta1 = new Compte
             {
@@ -691,87 +721,87 @@ namespace P2_BDE_Events.DataAccessLayer
             Evenement evenement1 = new Evenement
             {
                 Id = 1,
-                Titre = "Beer-pong LEA vs DROIT",
+                Titre = "Back to School",
                 Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.SOIREE,
-                CreeLe = new DateTime(2023, 09, 02, 10, 30, 20),
-                DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
-                DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
-                Description = "Defend l'honneur de ta fac avec ton talent surhumain",
-                CoverPhotoPath = "/images/evenement/1/jonah-brown--a0G9u37gyI-unsplash.jpg",
+                CreeLe = new DateTime(2023, 06, 4, 10, 30, 20),
+                DateEvenement = new DateTime(2023, 09, 06, 23, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 09, 05, 0, 0, 0),
+                Description = "Soirée Back to School pour bien commencer l'année",
+                CoverPhotoPath = "/images/evenement/backtoschool.jpg",
                 MaxParticipants = 100,
                 MinParticipants = 70,
                 NbReservations = 0,
                 NbParticipants = 1,
-                PrixBillet = 8.5,
-                Organisateur = organisateur,
+                PrixBillet = 12,
+                Organisateur = oOrga11,
             };
             Evenement evenement2 = new Evenement
             {
                 Id = 2,
-                Titre = "BOOO BOOO BOOO Halloween",
+                Titre = "Soirée d'Intégration HEC",
                 Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.SOIREE,
-                CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
-                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
-                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
-                Description = "Soirée faits moi très peur et concours de costumes",
-                CoverPhotoPath = "/images/evenement/5/HEX-HP-344199-site-080823-4x3.jpeg",
+                CreeLe = new DateTime(2023, 08, 10, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 09, 08, 23, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 09, 01, 0, 0, 0),
+                Description = "Soirée d'intégration pour les premières années",
+                CoverPhotoPath = "/images/evenement/vendredibyloftclub.jpg",
                 MaxParticipants = 200,
                 MinParticipants = 120,
                 NbReservations = 0,
                 NbParticipants = 1,
-                PrixBillet = 10,
-                Organisateur = oOrga10,
+                PrixBillet = 12,
+                Organisateur = oOrga12,
             };
             Evenement evenement3 = new Evenement
             {
                 Id = 3,
-                Titre = "Karaoke Jam Sesh Beaux Arts",
+                Titre = "Let's All Chant",
                 Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.SOIREE,
-                CreeLe = new DateTime(2023, 09, 10, 20, 30, 20),
-                DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
-                DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
+                CreeLe = new DateTime(2023, 08, 29, 20, 30, 20),
+                DateEvenement = new DateTime(2023, 10, 5, 20, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 01, 0, 0, 0),
                 Description = "Ramenez vos instruments et vos cordes vocales",
-                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                CoverPhotoPath = "/images/evenement/karaokep12.png",
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,
                 NbParticipants = 0,
-                PrixBillet = 5,
-                Organisateur = organisateur,
+                PrixBillet = 10,
+                Organisateur = orgaP12,
             };
             Evenement evenement4 = new Evenement
             {
                 Id = 4,
                 Titre = "Concert Indie",
-                Etat = EtatEvenement.OUVERT,
+                Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.CONCERT,
                 CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
                 DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
                 DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
-                Description = "Ramenez vos instruments et vos cordes vocales",
-                CoverPhotoPath = "/images/evenement/18.10.15_PeachPit_PeachPit.png",
+                Description = "Soirée Chill Concert",
+                CoverPhotoPath = "/images/evenement/indie.png",
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,
                 NbParticipants = 0,
                 PrixBillet = 5,
-                Organisateur = organisateur,
+                Organisateur = orgaP12,
             };
 
             Evenement evenement5 = new Evenement
             {
                 Id = 5,
-                Titre = "Soiree Jeux de Societes & Trivia",
-                Etat = EtatEvenement.OUVERT,
+                Titre = "Soirée Jeux de Société",
+                Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.JEUXDESOCIETE,
                 CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
                 DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
                 DateLimiteInscription = new DateTime(2023, 10, 31, 0, 0, 0),
                 Description = "Ramenez vos instruments et vos cordes vocales",
-                CoverPhotoPath = "/images/evenement/3/top-karaoke-songs.jpg",
+                CoverPhotoPath = "/images/evenement/soireejeux.jpg",
                 MaxParticipants = 80,
                 MinParticipants = 50,
                 NbReservations = 0,
@@ -860,7 +890,7 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 10,
                 Titre = "Picnic et Animaux de Compagnie",
-                Etat = EtatEvenement.PUBLIE,
+                Etat = EtatEvenement.OUVERT,
                 Type = TypeEvenement.PLEINE_AIRE,
                 CreeLe = new DateTime(2023, 10, 15, 20, 30, 20),
                 DateEvenement = new DateTime(2023, 10, 31, 21, 0, 0),
@@ -874,6 +904,24 @@ namespace P2_BDE_Events.DataAccessLayer
                 PrixBillet = 0,
                 Organisateur = oOrga12,
             };
+            Evenement evenement11 = new Evenement
+            {
+                Id = 11,
+                Titre = "Beer Pong LEA vs Droit",
+                Etat = EtatEvenement.PUBLIE,
+                Type = TypeEvenement.SOIREE,
+                CreeLe = new DateTime(2023, 06, 4, 10, 30, 20),
+                DateEvenement = new DateTime(2023, 09, 06, 23, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
+                Description = "Defend l'honneur de ta fac avec ton talent surhumain",
+                CoverPhotoPath = "/images/evenement/Beer-Pong.jpg",
+                MaxParticipants = 100,
+                MinParticipants = 70,
+                NbReservations = 0,
+                NbParticipants = 1,
+                PrixBillet = 10,
+                Organisateur = oOrga10,
+            };
 
             this.Evenements.AddRange(
                 evenement1,
@@ -885,7 +933,9 @@ namespace P2_BDE_Events.DataAccessLayer
                 evenement7,
                 evenement8,
                 evenement9,
-                evenement10
+                evenement10,
+                evenement11
+
                 );
             this.SaveChanges();
 
