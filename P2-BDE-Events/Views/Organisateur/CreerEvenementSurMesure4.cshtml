@@ -22,7 +22,7 @@
 
 
 <div class="login-box">
-    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm">
+    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm" enctype="multipart/form-data">
         <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
             value="@Model.Evenement.Organisateur.Id" />
 

@@ -9,7 +9,7 @@
 .card {
     width: 325px;
     height: 525px;
-    background-color: black;
+    background-color: rgba(24, 20, 20, 0.987);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@
     .card p {
         z-index: 1;
         color: white;
-        font-size: 2em;
+        font-size: 1.4em;
     }
 
     ion-icon {
@@ -80,7 +80,7 @@
 .card::after {
     content: '';
     position: absolute;
-    background: black;
+    background: rgba(24, 20, 20, 0.987);
     inset: 5px;
     border-radius: 15px;
 }
