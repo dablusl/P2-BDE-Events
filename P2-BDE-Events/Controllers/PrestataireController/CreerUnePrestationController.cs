@@ -48,7 +48,6 @@ namespace P2_BDE_Events.Controllers.PrestataireController
                 _dbContext.Prestations.Add(viewModel.prestation);
                 _dbContext.SaveChanges();
                 return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
-               // return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations");
             }
           
             return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModel);
