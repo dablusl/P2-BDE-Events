@@ -5,15 +5,37 @@
 }
 
 
-<link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
+<link rel="stylesheet" href="/css/Organisateur/SolliciterEvenement.css">
 
 @section Header {
 
     <p>Votre évènement réservé</p>
 }
 
-<p>Événement : @Model.Evenement.Titre</p>
-<p>Date : @Model.Evenement.DateEvenement</p>
-<p>Description : @Model.Evenement.Description</p>
-<p>Nombre de participants inscrits : @Model.NbParticipant</p>
 
+<div class="login-box">
+        <div class="box">
+            <h4>Nom</h4>
+            <p>@Model.Evenement.Titre</p>
+        </div>
+        <div class="box">
+            <h4>Date de l'évènement</h4>
+            @{
+                string dateISO = @Model.Evenement.DateEvenement.ToString("dd-MM-yyyy HH:mm");
+            }
+            <p>@dateISO</p>
+        </div>
+        <div class="box">
+            <h4>Description</h4>
+            <p>@Model.Evenement.Description</p>
+        </div>
+        <div class="box">
+            <h4>Prix du billet</h4>
+            <p>@Model.Evenement.PrixBillet €</p>
+        </div>
+        <div class="box">
+            <h4>Nombre actuelle de participant</h4>
+            <p>@Model.Evenement.NbParticipants / @Model.Evenement.MaxParticipants</p>
+        </div>
+
+</div>
