@@ -19,14 +19,15 @@
             value="@Model.Evenement.Organisateur.Id" />
 
         <div class="user-box">
-            <input type="number" class="form-control" id="Evenement.NbParticipants" name="Evenement.NbParticipants"
+            <input type="number" class="form-control" id="Evenement.MaxParticipants" name="Evenement.MaxParticipants"
                 value="" placeholder="Nombre maximum de participant">
         </div>
 
         @foreach (var prestation in Model.Types)
         {
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="@prestation.Key" name="Types[@prestation.Key]" />
+@*                <input type="checkbox" class="form-check-input" id="@prestation.Key" name="Types[@prestation.Key]" />
+*@                @Html.CheckBoxFor(m => m.Types[@prestation.Key])
                 <label class="form-check-label" for="@prestation.Key">@prestation.Key</label>
             </div>
         }
