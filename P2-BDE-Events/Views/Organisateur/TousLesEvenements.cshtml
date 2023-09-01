@@ -4,27 +4,66 @@
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/Participant/AgendaEvenement.css">
+<link rel="stylesheet" href="~/css/Organisateur/MesEvenementsOrga.css">
 
 @section Header {
     <ul>
         <li class="search-form">
             <form method="get" action="@Url.Action("TousLesEvenement", "TousLesEvenements", new { area = "Organisateur" })">
-                <input type="hidden" name="universite" value="@Model.Organisateur.Participant"/>
-                <button type="submit">Les évènements de mon université</button>
+                <input type="hidden" name="universite" value="@Model.Organisateur.Participant" />
+                <button type="submit" class="evenementUniversite">Les évènements de mon université</button>
             </form>
         </li>
         <li>
             <form method="get">
-                <input type="text" name="nomEvent" placeholder="Rechercher par nom de l'évènement'" />
-                <button type="submit">Rechercher</button>
+                <input type="text" name="nomEvent" placeholder="Nom de l'évènement" class="nomEvenement" />
+                <button type="submit" class="btnNomEvenement"><ion-icon name="search-outline"></ion-icon></button>
             </form>
         </li>
     </ul>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 }
 
+<div class="ensembleEvenement">
+    @foreach (var evenement in Model.Evenements)
+    {
+        <div class="afficheComplete">
+            <div class="card"
+                 onclick="window.location.href = '@Url.Action("SolliciterEvenement", "TousLesEvenements", new { area = "Organisateur", EvenementID = evenement.Id })">
+                <div class="card2">
+                    <img src="@evenement.CoverPhotoPath" alt="">
+                </div>
+            </div>
+            <div class="titre">
+                <p>@evenement.Titre</p>
+            </div>
+            <div class="date">
+                @{
+                    string dateISO = evenement.DateEvenement.ToString("dd-MM-yyyy HH:mm");
+                }
+                <p>@dateISO</p>
+            </div>
+            <div class="PrixEtParticipant">
+                <div class="Prix">
+                    <p>@evenement.PrixBillet € / personne</p>
+                </div>
+                <div class="NbParticipant">
+                    <p>Participant : @evenement.NbParticipants/@evenement.MaxParticipants</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-@foreach (var evenement in Model.Evenements)
+
+
+
+
+
+
+@* @foreach (var evenement in Model.Evenements)
 {
     <a href="@Url.Action("SolliciterEvenement", "TousLesEvenements", new { area = "Organisateur", EvenementID = evenement.Id })" class="voirPlus">
         <div class="evenement">
@@ -44,5 +83,5 @@
             </div>
         </div>
     </a>
-}
+} *@
 
