@@ -149,25 +149,40 @@ namespace P2_BDE_Events.Services.Evenements
                 .ThenInclude(l => l.Prestation)
                 .FirstOrDefault(e => e.Id == idEvenement);
 
-            if(evenement.Lignes.Count( l => l.Prestation == null) == 0)
+            if (evenement.Lignes.Count(l => l.Prestation == null) == 0)
             {
-                evenement.Etat = EtatEvenement.PUBLIE;   
+                evenement.Etat = EtatEvenement.PUBLIE;
                 _bddContext.SaveChanges();
             }
         }
 
         public double RecalculerBillet(int idEvenement)
         {
-            Evenement evenement = _bddContext.Evenements.Include(e => e.Lignes).FirstOrDefault(e => e.Id==idEvenement);
+            Evenement evenement = _bddContext.Evenements.Include(e => e.Lignes).FirstOrDefault(e => e.Id == idEvenement);
 
             evenement.PrixBillet = evenement.Lignes
-                .Select( l => l.TarifProposee)
-                .Aggregate((sum, tarif) => sum + tarif)/evenement.MaxParticipants;
+                .Select(l => l.TarifProposee)
+                .Aggregate((sum, tarif) => sum + tarif) / evenement.MaxParticipants;
 
             _bddContext.SaveChanges();
 
             return evenement.PrixBillet;
         }
+
+        public List<Evenement> EvenementsPrestataire(int idCompte, EtatEvenement etat)
+        {
+            int idPrestataire = _bddContext.Prestataires.Where(p => p.CompteId == idCompte).ToList()[0].Id;
+
+            return _bddContext.Evenements
+                .Where(e => e.Etat == etat)
+                .Include(e => e.Lignes)
+                    .ThenInclude(l => l.Prestation)
+                    .Where(e => e.Lignes.Any(l => l.Prestation.PrestataireId == idPrestataire))
+                    .ToList();
+
+        }
+
+
 
         public void Dispose()
         {
