@@ -11,120 +11,117 @@
 
 }
 
-
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-
-    .container {
-        width: 80%;
-        margin: auto;
-        overflow: hidden;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: minmax(300px, auto);
-        gap: 20px;
-    }
-
-    .prestation {
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-    }
-
-        .prestation h3 {
-            margin: 0;
-            padding: 0;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-
-        .prestation p {
-            margin: 10px 0;
-        }
-
-
-        .prestation .btn {
-            background: #444;
-            color: #fff;
-            text-align: center;
-            padding: 6px 10px;
-            text-decoration: none;
-            border: none;
-            border-radius: 3px;
-            margin-top: auto;
-            cursor: pointer;
-            -webkit-transition: all 0.5s;
-            -moz-transition: all 0.5s;
-            -o-transition: all 0.5s;
-            transition: all 0.5s;
-        }
-
-            .prestation .btn:hover {
-                background-color: #ffffff;
-                border: 2px solid #1f69ec;
-                box-shadow: 5px 5px 5px #719fee;
-                color: #1f69ec;
-                text-align: center;
-                font-size: 18px;
-            }
-
-
-
-
-
-    .title {
-        text-align: center;
-        margin-bottom: 20px;
+/* Styles pour la section "Mes prestations" */
+.header {
         font-size: 24px;
+}
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.prestation {
+    background-color: rgba(24, 20, 20, 0.987);
+    color: white;
+    font-size: 18px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    text-align: left;
+}
+
+.prestation h3 {
+            font-size: 22px;
+            text-align: center;
+}
+
+/* Styles pour les boutons */
+ 
+    .btn {
+        background-color: transparent;
     }
 
-    .separator {
-        width: 100%;
-        height: 2px;
-        background-color: black;
-        margin: 20px 0;
+    .btn-supp {
+        background-color: transparent;
     }
-
-
-    body::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    body::-webkit-scrollbar-track {
-        background-color: #e5e5e5;
-    }
-
-    body::-webkit-scrollbar-thumb {
-        border-radius: 15px;
-        background-color: #5c2a9d;
-    }
-
-        body::-webkit-scrollbar-thumb:hover {
-            background-color: #b5076b;
-        }
-
-    .creerPrestation {
-        color: tomato;
-        font-weight: bold;
+    .btn,
+    .btn-supp {
+        border: 2px solid grey;
+        border-radius: 25px;
+        box-sizing: border-box;
+        color: whitesmoke;
         cursor: pointer;
-        transition: color 0.2s, background-color 0.2s;
+        display: inline-block;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+        margin: 5px;
+        min-height: 60px;
+        min-width: 0;
+        outline: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        touch-action: manipulation;
+        width: 100%;
+        will-change: transform;
     }
 
-        .creerPrestation:hover {
-            color: red;
-            background-color: #f9f9f9;
-        }
+    
+    .btn:disabled {
+        pointer-events: none;
+    }
+
+
+    .btn:hover,
+    .btn-supp:hover {
+        color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+    }
+
+    .btn:focus,
+    .btn:hover {
+        background-color: mediumblue;
+        border-color: aquamarine;
+        outline:0;
+        box-shadow: 0 0 0 1px blue;
+    }
+
+    .btn-supp:hover,
+    .btn-supp:focus {
+        background-color: darkred;
+        border-color: orangered;
+        outline: 0;
+        box-shadow: 0 0 0 1px red;
+    }
+
+
+/* Style pour le séparateur */
+.separator {
+    height: 2px;
+    background-color: red;
+    margin: 20px 0;
+}
 </style>
+
+
 
 <section>
     <h1 class="title">Mes prestations</h1>
@@ -133,14 +130,16 @@
         {
             <div class="prestation">
                 <h3>@prestation.Titre</h3>
+                <div class="separator"></div>
                 <p>Description : @prestation.Description</p>
                 <p>Livraison : @(prestation.Livraison ? "Oui" : "Non")</p>
                 <p>Capacite Maximale : @prestation.CapaciteMax</p>
                 <p>Tarif : $@prestation.Tarif</p>
+
                 
-                <button type="submit" class="btn btn-primary">Modifier</button>
+                <button type="submit" class="btn">Modifier</button>
                 <button type="submit" class="btn btn-supp">Supprimer</button>
-                <a href="#" class="btn">En savoir plus</a>
+              
             </div>
         }
     </div>
