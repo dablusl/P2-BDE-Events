@@ -21,14 +21,16 @@ namespace P2_BDE_Events.Services.Evenements
         {
             _bddContext = new BDDContext();
         }
-        public int CreerEvenement(Evenement evenement, int idOrga, string photoPath)
+        public int CreerEvenement(Evenement evenement, Organisateur organisateur, string photoPath)
         {
             evenement.Organisateur = null;
-            evenement.OrganisateurId = idOrga;
+            evenement.OrganisateurId = organisateur.Id;
             evenement.CoverPhotoPath = photoPath;
             evenement.Etat = EtatEvenement.OUVERT;
             _bddContext.Evenements.Add(evenement);
             _bddContext.SaveChanges();
+
+            this.ReserverEvenement(organisateur.ParticipantId, evenement.Id);
 
             return evenement.Id;
         }
