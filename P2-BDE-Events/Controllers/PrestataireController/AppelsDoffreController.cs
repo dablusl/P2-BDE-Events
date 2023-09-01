@@ -74,7 +74,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
                 EvenementInteresse = evenement,
                 Ligne = ligne,
                 PrestationsDuPrestataire = prestataire.Prestations.Where(p => p.Type == ligne.Type).ToList(),
-                PropositionPrestation = new PropositionPrestation()
+                PropositionPrestation = new PropositionPrestation(),
             };
 
             return viewModel;

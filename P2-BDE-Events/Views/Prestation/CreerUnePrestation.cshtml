@@ -8,7 +8,7 @@
 <div>@Model.prestataire.Compte.Prenom</div>
 
 <h2>Créer une prestation</h2>
-<div class="row justify-content-center"> 
+<div class="row justify-content-center">
     <div class="col-lg-8 col-xl-7">
         @using (Html.BeginForm())
         {
@@ -18,7 +18,7 @@
                 @Html.TextBoxFor(m => m.prestation.Titre)
                 @Html.ValidationMessageFor(m =>m.prestation.Titre)
             </div>
-               <div>
+            <div>
                 @Html.LabelFor(m => m.prestation.CapaciteMax)
                 @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
                 @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
@@ -28,10 +28,12 @@
                 @Html.TextBoxFor(m => m.prestation.Tarif, new { type = "number", min = "0"})
                 @Html.ValidationMessageFor(m =>m.prestation.Tarif)
             </div>
-            <div class="form-group">
-                <label for="Prestation.Calendrier">Calendrier</label>
-                <input type="datetime-local" class="form-control" asp-for="Calendrier">
-            </div>
+            @Html.HiddenFor( m => m.prestation.Calendrier, @Model.prestation.Calendrier)
+            /*<div class="form-group">
+                <label asp-for="Calendrier">Calendrier</label>
+                <input asp-for="Calendrier" type="datetime-local" class="form-control" />
+                <span asp-validation-for="Calendrier" class="text-danger"></span>
+            </div>*/
             <div>
                 @Html.LabelFor(m => m.prestation.Livraison)
                 @Html.CheckBoxFor(m => m.prestation.Livraison)
@@ -42,50 +44,54 @@
                 @Html.TextBoxFor(m => m.prestation.Description)
                 @Html.ValidationMessageFor(m =>m.prestation.Description)
             </div>
-                <div class="form-group">
-                    <label for="Type">Type</label>
-                    <select class="form-control" asp-for="Type">
-                        <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
-                        <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
-                        <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Créer</button>
-                }
-                <style>
-                    form {
-                        max-width: 500px;
-                        margin: 0 auto;
-                        padding: 20px;
-                        border: 1px solid #ccc;
-                        border-radius: 5px;
-                        background-color: #F5F5F5;
+            <div>
+                <select class="form-control" id="Prestation.Type" name="Prestation.Type">
+                    @foreach (var prestationType in Enum.GetValues(typeof(@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation)))
+                    {
+                        <option value="@prestationType">@prestationType</option>
                     }
+                </select>
+            </div>
 
-                    .form-group {
-                        margin-bottom: 15px;
-                    }
 
-                    label {
-                        font-weight: bold;
-                    }
+            <button type="submit" class="btn btn-primary">Créer</button>
+        }
+    </div>
+</div>
+<style>
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
 
-                    input[type="text"],
-                    input[type="number"] {
-                        width: 100%;
-                        padding: 10px;
-                        border: 1px solid #ccc;
-                        border-radius: 3px;
-                    }
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-                    .btn-primary {
-                        background-color: green;
-                        color: #fff;
-                        padding: 10px 20px;
-                        border: none;
-                        border-radius: 3px;
-                        cursor: pointer;
-                    }
-                </style>
+    label {
+        font-weight: bold;
+    }
 
-            
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .btn-primary {
+        background-color: green;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
+
+

@@ -103,7 +103,6 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
             int compteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
             Participant participant = new ParticipantService().GetParticipantParCompte(compteId);
 
-            // Récupérer la liste des événements créés par l'organisateur
             var evenements = EvenementService.ObtenirEvenementsReservesParParticipant(participant.Id);
 
             var viewModel = new MesEvenementsPartViewModel
