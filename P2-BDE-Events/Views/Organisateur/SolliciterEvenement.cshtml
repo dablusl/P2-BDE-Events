@@ -14,7 +14,7 @@
 <div class="login-box">
     <form method="get" id="myForm" action="@Url.Action("FormulairePartenariat", "TousLesEvenements", new { area = "Organisateur", EvenementID = @Model.Evenement.Id })" class="voirPlus">
         <div class="box">
-            <h4>Titre</h4>
+            <h4>Nom</h4>
             <p>@Model.Evenement.Titre</p>
         </div>
         <div class="box">
@@ -24,13 +24,13 @@
             }
             <p>@dateISO</p>
         </div>
-        <div class="box">
-            <h4>Date LimiteInscription</h4>
+@*        <div class="box">
+            <h4>Date Limite Inscription</h4>
             @{
                 string dateLIMISO = @Model.Evenement.DateLimiteInscription.ToString("dd-MM-yyyy HH:mm");
             }
             <p>@dateLIMISO</p>
-        </div>
+        </div>*@
         <div class="box">
             <h4>Description</h4>
             <p>@Model.Evenement.Description</p>

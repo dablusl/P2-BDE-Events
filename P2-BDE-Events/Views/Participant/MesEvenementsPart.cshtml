@@ -5,6 +5,8 @@
 }
 
 <link rel="stylesheet" href="~/css/Organisateur/MesEvenementsOrga.css">
+<link rel="stylesheet" href="~/css/Participant/EvenementsTermines.css">
+
 
 @section Header {
     <ul>
@@ -47,6 +49,6 @@ else
 {
     <div class="noevent">
         <p>Vous n'avez aucun évènement en cours</p>
-        <button class="creerEvenement">Créer un évènement</button>
+        <button class="rejoindreEvenement" onclick="window.location.href = '@Url.Action("AgendaEvenement", "Agenda", new { area = "Participant" })'">Rejoindre un évènement</button>
     </div>
 }
