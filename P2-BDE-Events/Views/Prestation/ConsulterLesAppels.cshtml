@@ -10,63 +10,8 @@
 
 @model P2_BDE_Events.ViewModels.AppelDoffreViewModel
 
-<style>
-    .scrollable-content {
-        background-color: violet;
-        width: 100%;
-        padding: 30px;
-        max-height: 80vh;
-        overflow-y: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .card-evenement-appeloffre {
-        background-color: white;
-        border-radius: 40px 40px 20px 20px;
-        padding: 10px;
-        width: 50%;
-    }
-
-    .card-image-appel {
-        width: 100%;
-        border-radius: 30px;
-    }
-
-    .gradient-container {
-        position: relative;
-        display: inline-block;
-    }
-
-        .gradient-container img {
-            display: block;
-        }
-
-    .gradient-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, 1));
-        pointer-events: none;
-    }
-
-    .titre-appel {
-        position: absolute;
-        top: 50%; 
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: black; /* Adjust the color as needed */
-        font-size: 40px; /* Adjust the font size as needed */
-        z-index: 1; /* Place the text above the gradient overlay */
-    }
-
-</style>
-
 <div class="scrollable-content">
-    @using (Html.BeginForm("ProposerUnePrestation", "AppelsDoffre", FormMethod.Get, new { id = "proposalForm" }))
+    @using (Html.BeginForm("ProposerUnePrestation", "AppelsDoffre", FormMethod.Get, new { id = "proposalForm", @class = "form-readjusting" }))
     {
 
         <input type="hidden" id="idEvenement" name="idEvenement" />
@@ -85,24 +30,36 @@
                     <div class="gradient-container">
                         <img class="card-image-appel" src="@evenement.CoverPhotoPath">
                         <div class="gradient-overlay"></div>
-                        <h1 class="titre-appel">@evenement.Titre</h1>
-                    </div>                    
-                    <h2>@evenement.DateEvenement</h2>
-                    <p class="appel-d-offre description">@evenement.Description</p>
-
-                    <p>Services en appel</p>
-                    <div class="list-services-en-attente">
-                        @foreach (var ligne in evenement.Lignes)
-                        {
-                            if (ligne.Prestation == null &&
-                            Model.Types.Contains(ligne.Type) &&
-                            !Model.Propositions.Select(p => p.LigneEvenementId).Contains(ligne.Id))
-                            {
-                                <span>@ligne.Type</span>
-                                <button class="creer-proposition" onclick="submitForm(@evenement.Id, '@ligne.Id')">+</button>
-                            }
-                        }
                     </div>
+                    <div class="event-info-overlay">
+                        <div class="Appels">
+                            @foreach (var ligne in evenement.Lignes)
+                            {
+                                if (ligne.Prestation == null &&
+                                Model.Types.Contains(ligne.Type) &&
+                                !Model.Propositions.Select(p => p.LigneEvenementId).Contains(ligne.Id))
+                                {
+                                    <button class="creer-proposition" onclick="submitForm(@evenement.Id, '@ligne.Id')">@ligne.Type +</button>
+                                }
+                            }
+                        </div>
+                        <div class="Description">
+                            @evenement.Description
+                        </div>
+                        <div class="Lil-Info">
+                            <div class="Participants">
+                                @evenement.MaxParticipants Participants
+                            </div>
+                            <div class="DateTime">
+                                @evenement.DateEvenement
+                            </div>
+                        </div>
+                        <div class="Titre">
+                            @evenement.Titre
+                        </div>
+                    </div>
+
+
                 </div>
             }
         }
@@ -116,3 +73,159 @@
         document.getElementById("proposalForm").submit();
     }
 </script>
+
+<style>
+    .scrollable-content {
+        width: 100%;
+        padding: 30px;
+        max-height: 80vh;
+        overflow-y: auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        display: flex; /* Use flex layout */
+        flex-wrap: wrap; /* Allow wrapping into multiple rows */
+        justify-content: space-between;
+    }
+
+    .form-readjusting {
+        width: 75%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        display: flex; /* Use flex layout */
+        flex-wrap: wrap; /* Allow wrapping into multiple rows */
+        justify-content: space-between;
+    }
+
+    .card-evenement-appeloffre {
+        position: relative;
+        background-color: white;
+        border-radius: 40px 40px 20px 20px;
+        padding: 10px;
+        width: 40%;
+        max-width : 700px;
+        height: 400px;
+        border: 2px solid grey;
+        overflow: hidden;
+        margin : 20px;
+    }
+
+        .card-evenement-appeloffre:hover {
+            border: 2px solid red;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .card-image-appel {
+        max-width: 100%; /* Cover the width of the container */
+        min-height:100%;
+        object-fit: cover;
+        border-radius: 30px 30px 0px 0px;
+        overflow: hidden;
+        object-fit: cover; /* Maintain aspect ratio and fill the available space */
+        object-position: top center; /* Position image at the top */
+    }
+
+
+
+    .gradient-container {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        height: 100%;
+    }
+
+        .gradient-container img {
+            display: block;
+        }
+
+    .gradient-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, 1));
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* grid Overlay*/
+    .event-info-overlay {
+        position: absolute; /* Position it absolutely within the card */
+        top: 0; /* Position it at the top of the card */
+        left: 0; /* Position it at the left of the card */
+        width: 90%; /* Make it cover the entire card */
+        height: 90%; /* Make it cover the entire card */
+        background: transparent; /* Make the background transparent */
+        padding: 20px; /* Adjust padding as needed */
+        border-radius: 10px; /* Adjust border radius as needed */
+        z-index: 1; /* Place the overlay above the gradient overlay */
+        display: grid;
+        grid-template-columns: 1.1fr;
+        grid-template-rows: 2fr 0.2fr 0.6fr 0.5fr;
+        /*grid-template-rows: 1.5fr 0.3fr 1fr 0.5fr;*/
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "Titre"
+            "Lil-Info"
+            "Description"
+            "Appels";
+    }
+
+    .Appels {
+        grid-area: Appels;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+    }
+
+    .Description {
+        grid-area: Description;
+    }
+
+    .Lil-Info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "DateTime Participants";
+        grid-area: Lil-Info;
+        font-weight: bold;
+    }
+
+    .Participants {
+        grid-area: Participants;
+    }
+
+    .DateTime {
+        grid-area: DateTime;
+    }
+
+    .Titre {
+        grid-area: Titre;
+        align-self: end;
+        font-size: 40px;
+        font-weight: Bolder;
+    }
+
+    /*button creer proposition*/
+    .creer-proposition {
+        text-transform: capitalize;
+        background-color: white;
+        border-radius: 20px;
+        width: 80px;
+        height: 40px;
+        font-weight: bold;
+    }
+
+        .creer-proposition:hover {
+            background-color: deeppink;
+            color: white;
+        }
+
+</style>

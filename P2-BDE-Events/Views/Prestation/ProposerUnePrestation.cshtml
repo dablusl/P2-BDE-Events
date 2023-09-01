@@ -10,22 +10,100 @@
 @model P2_BDE_Events.ViewModels.AppelDoffreViewModel
 
 
-<h1>@Model.EvenementInteresse.Titre</h1>
-<h1>@Model.EvenementInteresse.Description</h1>
-
-@foreach (Prestation prestation in Model.PrestationsDuPrestataire)
-{
-    <div class="container-prestation-proposition">
-        @using (Html.BeginForm())
-        {
-            @*<form method="post" action="/YourControllerName/ProposerUnePrestation">*@
-            <h4>@prestation.Titre</h4>
-            <p>@prestation.Description</p>
-            <input type="hidden" name="PropositionPrestation.LigneEvenementId" value="@Model.Ligne.Id" />
-            <input type="hidden" name="PropositionPrestation.PrestationId" value="@prestation.Id" />
-            <input type="number" name="PropositionPrestation.TarifPropose" /> <!-- Input for TarifPropose -->
-            <button type="submit">proposer</button>
-            @*</form>*@
-        }
+<div class="affichage-evenement">
+    <div class="card-evenement-appeloffre">
+        <div class="gradient-container">
+            <img class="card-image-appel" src="@Model.EvenementInteresse.CoverPhotoPath">
+            <div class="gradient-overlay"></div>
+            <div class="gradient-overlay-2"></div>
+        </div>
     </div>
-}
+    <h1>@Model.EvenementInteresse.Titre</h1>
+    <h1>@Model.EvenementInteresse.Description</h1>
+
+
+    @foreach (Prestation prestation in Model.PrestationsDuPrestataire)
+    {
+        <div class="container-prestation-proposition">
+
+
+            @using (Html.BeginForm())
+            {
+                <h4>@prestation.Titre</h4>
+                <p>@prestation.Description</p>
+                <input type="hidden" name="PropositionPrestation.LigneEvenementId" value="@Model.Ligne.Id" />
+                <input type="hidden" name="PropositionPrestation.PrestationId" value="@prestation.Id" />
+                <input type="number" name="PropositionPrestation.TarifPropose" />
+                <button type="submit">proposer</button>
+            }
+        </div>
+
+    }
+</div>
+
+<style>
+    .affichage-evenement{
+        background-color : violet;
+        width: 70%;
+        height: 80%;
+        max-height: 600px;
+        max-width: 1500px;
+    }
+
+    .card-evenement-appeloffre {
+        position: relative;
+        padding: 10px;
+        background-color: blue;
+        overflow: hidden;
+        margin: 20px;
+        width:50%;
+        height:80%;
+    }
+
+    .card-image-appel {
+        max-width: 100%; 
+        min-height: 100%;
+        object-fit: cover;
+        object-fit: cover;
+        border-radius: 30px 0px 0px 0px;
+        overflow: hidden;
+        object-fit: cover; 
+        object-position: top center;
+    }
+
+
+
+    .gradient-container {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        height: 100%;
+        width:100%;
+    }
+
+        .gradient-container img {
+            display: block;
+        }
+
+    .gradient-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 1));
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .gradient-overlay-2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0) 62%, rgba(255, 255, 255, 1));
+        pointer-events: none;
+        z-index: 1;
+    }
+</style>
