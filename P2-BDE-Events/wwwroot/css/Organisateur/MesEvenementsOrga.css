@@ -4,11 +4,13 @@
     align-items: center;
     overflow-y : scroll;
 }
-.noevent {
+
+.noEvent {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .creerEvenement {

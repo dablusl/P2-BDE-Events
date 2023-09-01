@@ -1,4 +1,11 @@
-﻿.rejoindreEvenement {
+﻿main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rejoindreEvenement {
     padding: 5px 10px;
     border-radius: 7px;
     font-size: 15px;
