@@ -129,7 +129,7 @@ namespace P2_BDE_Events.DataAccessLayer
              new Prestation
              {
                  Id = 3,
-                 Titre = "Tratieur pour vos papille",
+                 Titre = "Traiteur pour vos papille",
                  Type = TypeDePrestation.TRAITEUR,
                  CapaciteMax = 300,
                  Tarif = 1000,

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using P2_BDE_Events.DataAccessLayer;
+using P2_BDE_Events.Services.Prestations;
 using System;
 
 
@@ -14,6 +15,8 @@ namespace P2_BDE_Events
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<PrestationService>();
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
