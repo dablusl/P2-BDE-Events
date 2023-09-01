@@ -40,6 +40,20 @@ namespace P2_BDE_Events.Services.Prestations
         {
             return _bddContext.Prestations.ToList();
         }
+        public List<Prestation> ObtenirPrestationsParPrestataire(int idPrestataire)
+        {
+            return _bddContext.Prestations
+                .Where(p => p.PrestataireId == idPrestataire)
+                .ToList();
+        }
+        public int ObtenirIdPrestataire(int IdPrestataire)
+        {
+            // Recherchez le prestataire dans la base de données en fonction de son nom
+            var prestataire = _bddContext.Prestataires.FirstOrDefault(p => p.Id == IdPrestataire);
+
+            // Si le prestataire est trouvé, retournez son ID, sinon, retournez une valeur par défaut, par exemple -1
+            return prestataire?.Id ?? -1;
+        }
 
         public void SupprimerPrestation(int id)
         {

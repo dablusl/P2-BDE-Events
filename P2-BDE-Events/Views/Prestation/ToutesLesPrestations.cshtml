@@ -1,4 +1,5 @@
-@model P2_BDE_Events.ViewModels.ListePrestationsViewModel
+@using P2_BDE_Events.Models.Prestations
+@model List<Prestation>
 @{
     Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
 }
@@ -128,12 +129,15 @@
 <section>
     <h1 class="title">Mes prestations</h1>
     <div class="container">
-        @foreach (var prestation in Model.Prestations)
+        @foreach (var prestation in Model)
         {
             <div class="prestation">
                 <h3>@prestation.Titre</h3>
-                <p>@prestation.Description</p>
+                <p>Description : @prestation.Description</p>
+                <p>Livraison : @(prestation.Livraison ? "Oui" : "Non")</p>
+                <p>Capacite Maximale : @prestation.CapaciteMax</p>
                 <p>Tarif : $@prestation.Tarif</p>
+                
                 <button type="submit" class="btn btn-primary">Modifier</button>
                 <button type="submit" class="btn btn-supp">Supprimer</button>
                 <a href="#" class="btn">En savoir plus</a>
