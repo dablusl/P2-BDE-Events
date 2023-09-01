@@ -12,6 +12,7 @@
     <div class="col-lg-8 col-xl-7">
         @using (Html.BeginForm())
         {
+            @Html.HiddenFor( m => m.prestation.PrestataireId, @Model.prestataire.Id)
             <div>
                 @Html.LabelFor(m => m.prestation.Titre)
                 @Html.TextBoxFor(m => m.prestation.Titre)
@@ -22,19 +23,13 @@
                 @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
                 @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
             </div>
-            @Html.HiddenFor( m => m.prestation.PrestataireId, @Model.prestataire.Id)
             <div>
                 @Html.LabelFor(m => m.prestation.Tarif)
                 @Html.TextBoxFor(m => m.prestation.Tarif, new { type = "number", min = "0"})
                 @Html.ValidationMessageFor(m =>m.prestation.Tarif)
             </div>
-            <div>
-                @Html.LabelFor(m => m.prestation.CapaciteMax)
-                @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
-                @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
-            </div>
             <div class="form-group">
-                <label for="Prestataire.Calendrier">Calendrier</label>
+                <label for="Prestation.Calendrier">Calendrier</label>
                 <input type="datetime-local" class="form-control" asp-for="Calendrier">
             </div>
             <div>
@@ -47,23 +42,6 @@
                 @Html.TextBoxFor(m => m.prestation.Description)
                 @Html.ValidationMessageFor(m =>m.prestation.Description)
             </div>
-
-           /* <div class="form-group">
-                    <label for="Prestataire.Tarif">Tarif</label>
-                    <input type="number" class="form-control" asp-for="Tarif">
-                </div>
-                <div class="form-group">
-                    <label for="Prestataire.Calendrier">Calendrier</label>
-                    <input type="datetime-local" class="form-control" asp-for="Calendrier">
-                </div>
-                <div class="form-group">
-                    <label for="Prestataire.Livraison">Livraison</label>
-                    <input type="checkbox" class="form-control" asp-for="Livraison">
-                </div>
-                <div class="form-group">
-                    <label for="Prestataire.Description">Description</label>
-                    <textarea class="form-control" asp-for="Description"></textarea>
-                </div>*/
                 <div class="form-group">
                     <label for="Type">Type</label>
                     <select class="form-control" asp-for="Type">
