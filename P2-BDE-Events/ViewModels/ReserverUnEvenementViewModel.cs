@@ -8,5 +8,6 @@ namespace P2_BDE_Events.ViewModels
     {
         public Evenement Evenement { get; set; }
         public int NbParticipant { get; set; }
+        public bool DejaReserve { get; set; }
     }
 }

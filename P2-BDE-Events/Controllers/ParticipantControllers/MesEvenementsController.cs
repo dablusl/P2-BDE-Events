@@ -5,6 +5,7 @@ using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
 using P2_BDE_Events.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 
 namespace P2_BDE_Events.Controllers.ParticipantControllers
@@ -44,10 +45,17 @@ namespace P2_BDE_Events.Controllers.ParticipantControllers
 
             int NbParticipant = participants.Count;
 
+            var CompteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
+            var participant = ParticipantService.GetParticipantParCompte(CompteId);
+
+            bool dejaReserve = participant.Reservations.Where(r => r.EvenementId == EvenementID).Count() == 1 ? true : false;
+
+
             var viewModel = new ReserverUnEvenementViewModel
             {
                 Evenement = evenement,
-                NbParticipant = NbParticipant
+                NbParticipant = NbParticipant,
+                DejaReserve = dejaReserve
             };
             
 
