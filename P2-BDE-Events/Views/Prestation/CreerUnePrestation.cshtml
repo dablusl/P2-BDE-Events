@@ -6,46 +6,142 @@
 }
 
 <div>@Model.prestataire.Compte.Prenom</div>
+<style>
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    /* Styles pour le conteneur principal */
+    .CreerUnePrestation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
 
-<h2>Créer une prestation</h2>
+        /* Styles pour le formulaire */
+        .CreerUnePrestation form {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(24, 20, 20, 0.987);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+        }
+        .CreerUnePrestation .user-box.description {
+            margin-top: 20px;
+        }
+        /* Styles pour les éléments du formulaire */
+        .CreerUnePrestation label {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .CreerUnePrestation input[type="text"],
+        .CreerUnePrestation input[type="number"],
+        .CreerUnePrestation textarea,
+        .CreerUnePrestation select {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+
+          @*  /* Styles pour les labels des champs actifs */
+            .CreerUnePrestation input[type="text"]:focus ~ label,
+            .CreerUnePrestation input[type="text"]:valid ~ label,
+            .CreerUnePrestation input[type="number"]:focus ~ label,
+            .CreerUnePrestation input[type="number"]:valid ~ label,
+            .CreerUnePrestation textarea:focus ~ label,
+            .CreerUnePrestation textarea:valid ~ label,
+            .CreerUnePrestation select:focus ~ label,
+            .CreerUnePrestation select:valid ~ label {
+                top: -20px;
+                left: 0;
+                color: white;
+                font-size: 12px;
+            }*@
+
+            .CreerUnePrestation select.bg-black {
+                background-color: black;
+                color: white;
+            }
+
+            .CreerUnePrestation select.text-white {
+                color: white;
+            }
+
+        /* Styles pour le bouton Créer */
+        .CreerUnePrestation button[type="submit"] {
+            padding: 20px 100px;
+            border-radius: 7px;
+            font-size: 20px;
+            font-family: 'Baloo 2', cursive;
+            color: white;
+            text-shadow: none;
+            background: transparent;
+            box-shadow: transparent;
+            border: none;
+            transition: 0.5s ease;
+            user-select: none;
+            cursor: pointer;
+            margin-top: 40px;
+            letter-spacing: 4px;
+        }
+
+            .CreerUnePrestation button[type="submit"]:hover,
+            .CreerUnePrestation button[type="submit"]:focus {
+                color: white;
+                background: red;
+                text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+                box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+            }
+</style>
+<section>
+<h1 class="title">CREER UNE PRESTATION</h1>
 <div class="row justify-content-center">
-    <div class="col-lg-8 col-xl-7">
+    <div class="col-lg-8 col-xl-7 CreerUnePrestation">
         @using (Html.BeginForm())
         {
-            @Html.HiddenFor( m => m.prestation.PrestataireId, @Model.prestataire.Id)
-            <div>
-                @Html.LabelFor(m => m.prestation.Titre)
+            @Html.HiddenFor(m => m.prestation.PrestataireId, @Model.prestataire.Id)
+            <div class="user-box">  
+            @Html.LabelFor(m => m.prestation.Titre)
                 @Html.TextBoxFor(m => m.prestation.Titre)
                 @Html.ValidationMessageFor(m =>m.prestation.Titre)
             </div>
-            <div>
-                @Html.LabelFor(m => m.prestation.CapaciteMax)
+            <div class="user-box">
+            @Html.LabelFor(m => m.prestation.CapaciteMax)
                 @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
                 @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
             </div>
-            <div>
-                @Html.LabelFor(m => m.prestation.Tarif)
+            <div class="user-box">
+            @Html.LabelFor(m => m.prestation.Tarif)
                 @Html.TextBoxFor(m => m.prestation.Tarif, new { type = "number", min = "0"})
                 @Html.ValidationMessageFor(m =>m.prestation.Tarif)
             </div>
-            @Html.HiddenFor( m => m.prestation.Calendrier, @Model.prestation.Calendrier)
-            /*<div class="form-group">
-                <label asp-for="Calendrier">Calendrier</label>
-                <input asp-for="Calendrier" type="datetime-local" class="form-control" />
-                <span asp-validation-for="Calendrier" class="text-danger"></span>
-            </div>*/
-            <div>
-                @Html.LabelFor(m => m.prestation.Livraison)
+            @Html.HiddenFor(m => m.prestation.Calendrier, @Model.prestation.Calendrier)
+            <div class="user-box">
+            @Html.LabelFor(m => m.prestation.Livraison)
                 @Html.CheckBoxFor(m => m.prestation.Livraison)
                 @Html.ValidationMessageFor(m =>m.prestation.Livraison)
             </div>
-            <div>
-                @Html.LabelFor(m => m.prestation.Description)
+            <div class="user-box description">
+            @Html.LabelFor(m => m.prestation.Description)
                 @Html.TextBoxFor(m => m.prestation.Description)
                 @Html.ValidationMessageFor(m =>m.prestation.Description)
             </div>
-            <div>
-                <select class="form-control" id="Prestation.Type" name="Prestation.Type">
+            <div class="user-box">
+                 <select class="form-control" id="Prestation.Type" name="Prestation.Type">
                     @foreach (var prestationType in Enum.GetValues(typeof(@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation)))
                     {
                         <option value="@prestationType">@prestationType</option>
@@ -53,45 +149,14 @@
                 </select>
             </div>
 
-
-            <button type="submit" class="btn btn-primary">Créer</button>
+            <div class="text-center">
+                <!-- Ajout de la classe text-center pour centrer le bouton horizontalement -->
+                <button type="submit" class="creerEvenement">CREER LA PRESTATION</button>
+            </div>
         }
     </div>
 </div>
-<style>
-    form {
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #F5F5F5;
-    }
+</section>
 
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    label {
-        font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    .btn-primary {
-        background-color: green;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-</style>
 
 

@@ -2,15 +2,15 @@
 {
     public enum TypeDePrestation
     {
-        TRAITEUR,
-        DJ,
-        SALLE,
-        SECURITE,
         BAR,
-        VIDEO_PROJECTION,
+        DJ,
+        LOCATION,
         MUSICIEN,
         PHOTOGRAPHIE,
-        VIDEASTE,
-        LOCATION
+        SALLE,
+        SECURITE,
+        TRAITEUR,
+        VIDEO_PROJECTION,
+        VIDEASTE
     }
 }
