@@ -9,14 +9,15 @@
 
 @section Header {
     <ul>
-        <li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Evènements terminés</li>
-        <li onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Prochains évènements</li>
-        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsInteressant", "MesEvenements", new { area = "Participant" })'">Evènements intéréssants</li>
+        @*<li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Évènements passés</li>
+        <li class="pageActive" onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Évènements à venir</li>*@
+
     </ul>
+    <p>Réserver votre évènement</p>
 }
 
-<h2>Réservation de l'événement</h2>
-<p>Événement : @Model.Evenement.Titre</p>
+@*<h2>Réservation de l'événement</h2>
+*@<p>Événement : @Model.Evenement.Titre</p>
 <p>Date : @Model.Evenement.DateEvenement</p>
 <p>Date limite d'inscription des participants : @Model.Evenement.DateLimiteInscription</p>
 <p>Description : @Model.Evenement.Description</p>
