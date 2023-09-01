@@ -87,3 +87,11 @@
     animation: btn-anim1 2s linear infinite;
 }
 
+.validation-error {
+    position: absolute;
+    top: 190%;
+    left: 20%;
+    color: white;
+    font-size: 12px;
+}
+
