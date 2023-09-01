@@ -10,13 +10,14 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 {
     public class ConsultationPrestationsController : Controller
     {
-        public IActionResult ToutesLesPrestations()
+        public IActionResult ToutesLesPrestations(int IdPrestataire)
         {
             using (PrestationService prestationService = new PrestationService())
             {
                 ListePrestationsViewModel viewModel = new ListePrestationsViewModel
                 {
-                    Prestations = prestationService.ObtenirToutesLesPrestations()
+                    Prestations = prestationService.ObtenirToutesLesPrestations(),
+                    IdPrestataire = IdPrestataire
                 };
                 return View("~/Views/Prestation/ToutesLesPrestations.cshtml", viewModel);
             }
