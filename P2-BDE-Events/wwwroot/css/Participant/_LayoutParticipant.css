@@ -38,10 +38,6 @@ nav {
 main {
     grid-row: 5/48;
     grid-column: 9/51;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 nav img {
