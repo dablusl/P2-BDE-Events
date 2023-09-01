@@ -22,7 +22,11 @@
 
 
 <div class="login-box">
-    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm">
+    @*@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {*@
+        
+   
+    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm" enctype="multipart/form-data">
         <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
             value="@Model.Evenement.Organisateur.Id" />
 
@@ -38,7 +42,28 @@
             </a>
         </center>
     </form>
+    @*}*@
 </div>
+    
+
+@*<div class="login-box">
+    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm">
+        <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
+               value="@Model.Evenement.Organisateur.Id" />
+
+        <label for="CoverPhoto" class="custom-file-upload">
+            Sélectionner l'affiche de l'évènement
+        </label>
+        <input type="file" class="form-control" id="CoverPhoto" name="CoverPhoto" style="display: none;">
+
+        <center>
+            <a href="#" id="boutonForm">
+                SUIVANT
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>*@
 
 <script>
     document.getElementById("boutonForm").addEventListener("click", function (e) {
