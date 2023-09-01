@@ -12,7 +12,7 @@
         <li>
         <li onclick="window.location.href = '@Url.Action("PrestationsDelEvenement", "PropositionsPrestations", new { area = "OrganisateurControllers", id = Model.Evenement.Id})'">Voir les prestations</li>
         <li>Supprimer l'évènement</li>
-    </ul
+    </ul>
 }
 
 <div class="boxAffiche">
@@ -56,39 +56,3 @@
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <h3>Liste des participants :</h3>
-@if (Model.Participants != null)
-{
-    <ol>
-        @foreach (var participant in Model.Participants)
-        {
-            <li>@participant.Compte.Nom @participant.Compte.Prenom </li>
-        }
-    </ol>
-} -->
-
-
-
-
-
-@* <p>Nom de l'événement : @Model.Evenement.Titre</p>
-<p>Date : @Model.Evenement.DateEvenement</p>
-<p>Etat : @Model.Evenement.Etat</p>
-<p>Date limite d'inscription des participants : @Model.Evenement.DateLimiteInscription</p>
-<p>Description : @Model.Evenement.Description</p>
-<p>Prix d'un billet : @Model.Evenement.PrixBillet</p>
-<p>Nombre de participants inscrits : @Model.Evenement.NbParticipants</p> *@

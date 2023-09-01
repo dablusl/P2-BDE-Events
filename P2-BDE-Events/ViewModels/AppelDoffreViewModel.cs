@@ -17,5 +17,6 @@ namespace P2_BDE_Events.ViewModels
         public Evenement EvenementInteresse { get; set; }
         public TypeDePrestation TypeInteresse { get; set; }
         public List<Prestation> PrestationsDuPrestataire { get; set; }
+
     }
 }

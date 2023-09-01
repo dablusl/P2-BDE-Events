@@ -393,7 +393,8 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 13,
                 Type = TypeDePrestation.SALLE,
-                Description = "Salle MAXI - Salle Concert",
+                Titre = "Salle MAXI",
+                Description = "Salle Concert",
                 CapaciteMax = 1000,
                 Prestataire = pPrestataire12,
                 Tarif = 1000,
@@ -402,7 +403,8 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 14,
                 Type = TypeDePrestation.SALLE,
-                Description = "Salle MICRO - Salle Concert",
+                Titre = "Salle MICRO",
+                Description = "Salle Concert",
                 CapaciteMax = 500,
                 Prestataire = pPrestataire12,
                 Tarif = 1000,
