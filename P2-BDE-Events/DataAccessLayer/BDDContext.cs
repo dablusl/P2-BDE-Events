@@ -413,7 +413,8 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 15,
                 Type = TypeDePrestation.BAR,
-                Description = "Bière Pression Locale, plus d'info inbox",
+                Titre = "Bières Locales",
+                Description = "plus d'info inbox pour une offre plus detaille",
                 CapaciteMax = 1000,
                 Prestataire = pPrestataire12,
                 Tarif = 1000,
