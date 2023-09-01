@@ -145,7 +145,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
             return evenementService.CreerEvenement(
                 GetEventSession().Evenement,
-                organisateur.Id,
+                organisateur,
                 SaveCoverPhoto(nouveauEvent));
         }
 
