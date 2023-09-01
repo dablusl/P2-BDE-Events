@@ -10,6 +10,7 @@
         VIDEO_PROJECTION,
         MUSICIEN,
         PHOTOGRAPHIE,
+        VIDEASTE,
         LOCATION
     }
 }
