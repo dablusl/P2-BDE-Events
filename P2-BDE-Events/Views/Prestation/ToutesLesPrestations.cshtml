@@ -5,9 +5,7 @@
 
 @section Header {
     <ul>
-
-        <li class="creerPrestation" onclick="window.location.href = '@Url.Action("Creer", "CreerUnePrestation", new { area = "Prestataire" })'"> CREER UNE PRESTATION</li>
-
+        <li class="creerPrestation" onclick="window.location.href = '@Url.Action("CreerUnePrestation", "CreerUnePrestation", new { area = "Prestataire"})'">CREER UNE PRESTATION</li>
     </ul>
 
 }
@@ -70,18 +68,18 @@
             transition: all 0.5s;
         }
 
-        .prestation .btn:hover {
-        background-color: #ffffff;
-        border: 2px solid #1f69ec;
-        box-shadow: 5px 5px 5px #719fee;
-        color: #1f69ec;
-        text-align: center;
-        font-size: 18px;
-    }
-        
+            .prestation .btn:hover {
+                background-color: #ffffff;
+                border: 2px solid #1f69ec;
+                box-shadow: 5px 5px 5px #719fee;
+                color: #1f69ec;
+                text-align: center;
+                font-size: 18px;
+            }
 
 
-    
+
+
 
     .title {
         text-align: center;
@@ -112,6 +110,7 @@
 
         body::-webkit-scrollbar-thumb:hover {
             background-color: #b5076b;
+        }
 
     .creerPrestation {
         color: tomato;
@@ -119,6 +118,7 @@
         cursor: pointer;
         transition: color 0.2s, background-color 0.2s;
     }
+
         .creerPrestation:hover {
             color: red;
             background-color: #f9f9f9;
