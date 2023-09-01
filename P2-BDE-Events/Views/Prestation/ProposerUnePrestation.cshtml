@@ -10,22 +10,266 @@
 @model P2_BDE_Events.ViewModels.AppelDoffreViewModel
 
 
-<h1>@Model.EvenementInteresse.Titre</h1>
-<h1>@Model.EvenementInteresse.Description</h1>
 
-@foreach (Prestation prestation in Model.PrestationsDuPrestataire)
-{
-    <div class="container-prestation-proposition">
-        @using (Html.BeginForm())
-        {
-            @*<form method="post" action="/YourControllerName/ProposerUnePrestation">*@
-            <h4>@prestation.Titre</h4>
-            <p>@prestation.Description</p>
-            <input type="hidden" name="PropositionPrestation.LigneEvenementId" value="@Model.Ligne.Id" />
-            <input type="hidden" name="PropositionPrestation.PrestationId" value="@prestation.Id" />
-            <input type="number" name="PropositionPrestation.TarifPropose" /> <!-- Input for TarifPropose -->
-            <button type="submit">proposer</button>
-            @*</form>*@
-        }
+<div class="grid-container">
+    <div class="affichage-evenement">
+        <div class="Image-Evenement-gradient"></div>
+        <div class="Titre">
+            @Model.EvenementInteresse.Titre
+        </div>
+        <div class="Date-evenement">
+            @Model.EvenementInteresse.DateEvenement
+        </div>
+        <div class="nb-participants">
+            @Model.EvenementInteresse.MaxParticipants participants attendus
+        </div>
+        <div class="description">
+            @Model.EvenementInteresse.Description
+        </div>
+        <div class="MesPrestations">
+            @foreach (Prestation prestation in Model.PrestationsDuPrestataire)
+            {
+                <div class="container-prestation-proposition">
+                    @using (Html.BeginForm())
+                    {
+                        
+                        <input type="hidden" name="PropositionPrestation.LigneEvenementId" value="@Model.Ligne.Id" />
+                        <input type="hidden" name="PropositionPrestation.PrestationId" value="@prestation.Id" />
+
+                        <div class="container">
+                            <div class="Titre-Prestation-Card">
+                                @prestation.Titre
+                            </div>
+                            <div class="description-prestation-card">
+                                @prestation.Description
+                            </div>
+                            <div class="tarif-prestation-card">
+                                <input type="number" name="PropositionPrestation.TarifPropose" value="@prestation.Tarif" class="tarif-input" placeholder="€" />
+                            </div>
+                            <div class="Icon-Select">
+                                <button type="submit" class="button-image">
+                                    <img src="~/Assets/check-icon.png">
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="TypePrestation">
+            Vos prestations @Model.Ligne.Type
+        </div>
+        <div class="Image-Evenement-gradient card-evenement-appeloffre gradient-container">
+                <img class="card-image-appel" src="@Model.EvenementInteresse.CoverPhotoPath">
+                <div class="gradient-overlay"></div>
+                <div class="gradient-overlay-2"></div>
+        </div>
     </div>
-}
+</div>
+
+<style>
+    .container-prestation-proposition{
+        background-color : white;
+        width : 300px;
+        min-height : 80px;
+        border-radius : 20px;
+        padding : 10px 20px;
+        border: 2px solid grey;
+    }
+
+        .container-prestation-proposition:hover{
+            border: 2px solid black;
+        }
+
+    .grid-container {
+        width: 70%;
+        height: 80%;
+        max-height: 600px;
+        max-width: 1500px;
+        padding:30px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .card-evenement-appeloffre {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    .card-image-appel {
+        max-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        object-fit: cover;
+        border-radius: 30px 0px 0px 0px;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: top center;
+    }
+
+
+
+    .gradient-container {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+
+        .gradient-container img {
+            display: block;
+        }
+
+    .gradient-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 1));
+        pointer-events: none;
+    }
+
+    .gradient-overlay-2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0) 62%, rgba(255, 255, 255, 1));
+        pointer-events: none;
+    }
+
+    /*grid*/
+
+    .affichage-evenement {
+        display: grid;
+        grid-template-columns: 1.5fr 0.5fr;
+        grid-template-rows: 2.6fr 0.3fr 0.2fr 1.6fr 0.3fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        width: 100%;
+        height: 100%;
+    }
+
+    .Image-Evenement-gradient {
+        grid-area: 1 / 1 / 7 / 2;
+        z-index: 0;
+    }
+
+    .Titre {
+        grid-area: 1 / 2 / 2 / 3;
+        z-index: 1;
+        align-self: end;
+        font-size : 40px;
+        font-weight : bolder;
+    }
+
+    .Date-evenement {
+        grid-area: 2 / 2 / 3 / 3;
+        z-index: 1;
+        font-weight : bolder;
+    }
+
+    .nb-participants {
+        grid-area: 3 / 2 / 4 / 3;
+        z-index: 1;
+    }
+
+    .description {
+        grid-area: 4 / 2 / 5 / 3;
+        z-index: 1;
+    }
+
+    .MesPrestations {
+        grid-area: 6 / 1 / 7 / 3;
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        margin : 20px 0px 0px 0px;
+    }
+
+    .TypePrestation {
+        grid-area: 5 / 1 / 6 / 2;
+        z-index: 1;
+        padding:0px 0px 0px 50px;
+        font-weight : bolder;
+    }
+
+    /*grid card prestation*/
+
+    .container {
+        display: grid;
+        grid-template-columns: 1.6fr 0.4fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "Titre-Prestation-Card Icon-Select"
+            "description-prestation-card Icon-Select"
+            "tarif-prestation-card Icon-Select";
+    }
+
+    .Titre-Prestation-Card {
+        grid-area: Titre-Prestation-Card;
+        font-weight : bolder;
+    }
+
+    .description-prestation-card {
+        grid-area: description-prestation-card;
+        max-height: 100px; /* Set the maximum height as needed */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .tarif-prestation-card {
+        grid-area: tarif-prestation-card;
+    }
+
+    .Icon-Select {
+        grid-area: Icon-Select;
+        align-items : center;
+        justify-content: center;
+        justify-items : center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+
+
+    .button-image {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        width : 50%;
+    }
+
+    .button-image img{
+        width : 100%;
+        height : 100%;
+    }
+
+    .tarif-input{
+        border: 1px solid #ccc; /* Lighter border color */
+        border-radius: 8px; /* Rounded border radius */
+        padding: 5px; 
+    }
+
+</style>
