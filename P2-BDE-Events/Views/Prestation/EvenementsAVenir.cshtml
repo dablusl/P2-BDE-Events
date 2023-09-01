@@ -6,9 +6,42 @@
 }
 
 @section Header {
+     <ul>
+        <li>
+            Mes Evenements A Venir
+        </li>
+    </ul>
 }
 
-@if (Model.Evenements.Count() == 0)
+<link rel="stylesheet" href="~/css/Organisateur/MesEvenementsOrga.css">
+
+<div class="ensembleEvenement">
+        @foreach (var evenement in Model.Evenements)
+        {
+            <div class="afficheComplete">
+                <div class="card">
+                    <div class="card2">
+                        <img src="@evenement.CoverPhotoPath" alt="">
+                    </div>
+                </div>
+                <div class="titre">
+                    <p>@evenement.Titre</p>
+                </div>
+                <div class="date">
+                    @{
+                        string dateISO = evenement.DateEvenement.ToString("dd-MM-yyyy HH:mm");
+                    }
+                    <p>@dateISO</p>
+                </div>
+            </div>
+        }
+</div>
+
+
+
+
+
+@*@if (Model.Evenements.Count() == 0)
     {
         <div>Vous avez pas des evenements à venir</div>
         <button>Consulter les appels d'offre</button>
@@ -42,4 +75,4 @@
         }
     </div>
     }
-}
+}*@
