@@ -18,25 +18,71 @@ main {
 
 .progression1 {
     height: 100%;
-    width: 25%;
+    width: 0%;
     background-color: red;
+    animation: progress1 2s ease-in-out forwards;
 }
+
+@keyframes progress1 {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 25%;
+    }
+}
+
 
 .progression2 {
     height: 100%;
-    width: 50%;
+    width: 25%;
     background-color: red;
+    animation: progress2 2s ease-in-out forwards;
 }
+
+@keyframes progress2 {
+    0% {
+        width: 25%;
+    }
+
+    100% {
+        width: 50%;
+    }
+}
+
 .progression3 {
     height: 100%;
-    width: 75%;
+    width: 50%;
     background-color: red;
+    animation: progress3 2s ease-in-out forwards;
+}
+
+@keyframes progress3 {
+    0% {
+        width: 50%;
+    }
+
+    100% {
+        width: 75%;
+    }
 }
 
 .progression4 {
     height: 100%;
-    width: 100%;
+    width: 75%;
     background-color: red;
+    animation: progress4 2s ease-in-out forwards;
+}
+
+@keyframes progress4 {
+    0% {
+        width: 75%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 /*forms*/
