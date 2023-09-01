@@ -84,6 +84,22 @@ namespace P2_BDE_Events.Services.Evenements
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
         }
+        public List<Evenement> ObtenirEvenementsReservesParParticipant(int participantId)
+        {
+            var participant = _bddContext.Participants.Find(participantId);
+
+            if (participant == null)
+            {
+                throw new ArgumentException("Participant non trouvé");
+            }
+
+            var evenementsReserves = _bddContext.Evenements
+                .Where(e => e.Reservations.Any(r => r.ParticipantId == participantId))
+                .ToList();
+
+            return evenementsReserves;
+        }
+
         public List<Participant> ObtenirParticipants(int evenementId)
         {
             return _bddContext.Reservations

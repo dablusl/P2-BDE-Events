@@ -5,13 +5,114 @@
 }
 
 
-<link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
+<link rel="stylesheet" href="/css/Organisateur/SolliciterEvenement.css">
 
 @section Header {
-    
+    Demander un partenariat pour faire un évènement en commun
 }
 
-<h2>Fiche de l'événement</h2>
+<div class="login-box">
+    <form method="get" id="myForm" action="@Url.Action("FormulairePartenariat", "TousLesEvenements", new { area = "Organisateur", EvenementID = @Model.Evenement.Id })" class="voirPlus">
+        <div class="box">
+            <h4>Titre</h4>
+            <p>@Model.Evenement.Titre</p>
+        </div>
+        <div class="box">
+            <h4>Date de l'évènement</h4>
+            @{
+                string dateISO = @Model.Evenement.DateEvenement.ToString("dd-MM-yyyy HH:mm");
+            }
+            <p>@dateISO</p>
+        </div>
+        <div class="box">
+            <h4>Date LimiteInscription</h4>
+            @{
+                string dateLIMISO = @Model.Evenement.DateLimiteInscription.ToString("dd-MM-yyyy HH:mm");
+            }
+            <p>@dateLIMISO</p>
+        </div>
+        <div class="box">
+            <h4>Description</h4>
+            <p>@Model.Evenement.Description</p>
+        </div>
+        <div class="box">
+            <h4>Prix du billet</h4>
+            <p>@Model.Evenement.PrixBillet €</p>
+        </div>
+        <div class="box">
+            <h4>Nombre actuelle de participant</h4>
+            <p>@Model.Evenement.NbParticipants / @Model.Evenement.MaxParticipants</p>
+        </div>
+        <center>
+            <a href="#" id="boutonForm">
+                ENVOYER
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+@* <div class="login-box">
+    <form method="get" id="myForm" action="@Url.Action("FormulairePartenariat", "TousLesEvenements", new { area = "Organisateur", EvenementID = @Model.Evenement.Id })" class="voirPlus">
+        <div class="user-box">
+            <label for="Compte.Evenement.Titre">@Model.Evenement.Titre</label>
+        </div>
+        <div class="user-box">
+            <label for="Evenement.DateEvenement">@Model.Evenement.DateEvenement</label>
+        </div>
+        <div class="user-box">
+            <label for="Evenement.DateLimiteInscription">@Model.Evenement.DateLimiteInscription</label>
+        </div> 
+        <div class="user-box">
+            <label for="Evenement.Description">@Model.Evenement.Description</label>
+        </div>
+        <div class="user-box">
+            <label for="Evenement.PrixBillet">@Model.Evenement.PrixBillet €</label>
+        </div>
+        <div class="user-box">
+            <label for="Evenement.NbParticipant">@Model.Evenement.NbParticipants / @Model.Evenement.MaxParticipants</label>
+        </div>
+        <center>
+            <a href="#" id="boutonForm">
+                ENVOYER
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script> *@
+
+
+
+
+
+@* <h2>Fiche de l'événement</h2>
 <p>Événement : @Model.Evenement.Titre</p>
 <p>Date : @Model.Evenement.DateEvenement</p>
 <p>Date limite d'inscription des participants : @Model.Evenement.DateLimiteInscription</p>
@@ -23,4 +124,4 @@
 <form method="get" action="@Url.Action("FormulairePartenariat", "TousLesEvenements", new { area = "Organisateur", EvenementID = @Model.Evenement.Id })" class="voirPlus">
     <input type="hidden" name="evenementId" value="@Model.Evenement.Id" />
     <button class="rejoindreEvenement" type="submit">Solliciter Partenariat</button>
-</form>
+</form> *@

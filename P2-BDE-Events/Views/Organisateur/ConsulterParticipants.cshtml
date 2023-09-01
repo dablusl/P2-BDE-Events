@@ -3,31 +3,36 @@
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/ProfilOrganisateur/ConsulterParticipant.css">
+<link rel="stylesheet" href="~/css/Organisateur/ConsulterParticipant.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @section Header {
     <ul>
-        <li>Voir l'évènement</li>
-        <li>Modifier l'évènement</li>
-        <li>Supprimer l'évènement</li>
-        <li>Soumettre l'évènement</li>
+        <li onclick="window.location.href = '@Url.Action("ConsulterEvenement", "MesEvenements", new { area = "OrganisateurControllers", evenementId = Model.Evenement.Id })'">Voir l'évènement</li>
+        <li>Supprimer participant</li>
+        <li>Ajouter participant</li>
+    </ul>
+    <form>
+        <div class="recherche">
+            <input type="text" placeholder="Rechercher un participant">
+        </div>
+    </form>
+}
+
+@if (Model.Participants != null)
+{
+    <ul class="ulParticipant">
+        @foreach (var participant in Model.Participants)
+        {
+            <li class="participant">
+                <span class="prenom">@participant.Compte.Prenom</span>
+                <span class="nom">@participant.Compte.Nom</span>
+                <span class="classement">1 / 100</span>
+            </li>
+        }
     </ul>
 }
 
-<p><strong>Nom de l'événement :</strong> @Model.Evenement.Titre</p>
-
-<p><strong>Nombre de participants inscrits :</strong> @Model.Evenement.NbParticipants</p>
-
-<h3>Liste des participants :</h3>
-@if (Model.Participants != null)
+else
 {
-    <ol>
-        @foreach (var participant in Model.Participants)
-        {
-            <li>@participant.Compte.Nom @participant.Compte.Prenom </li>
-        }
-    </ol>
+        <p>Aucun participant n'a encore rejoint votre évènement</p>
 }
-
-
-
-

@@ -4,8 +4,8 @@
     font-family: 'Baloo 2', cursive;
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(50, 2%);
-    grid-template-rows: repeat(50, 2%);
+    grid-template-columns: repeat(100, 2%);
+    grid-template-rows: repeat(100, 2%);
     overflow: hidden;
 }
 

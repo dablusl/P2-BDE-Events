@@ -4,9 +4,9 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 {
     public class MonBDEController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Compte()
         {
-            return View();
+            return View("/Views/Organisateur/Compte.cshtml");
         }
     }
 }

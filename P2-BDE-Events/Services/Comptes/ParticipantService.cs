@@ -1,4 +1,5 @@
-﻿using P2_BDE_Events.DataAccessLayer;
+﻿using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Comptes;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,10 @@ namespace P2_BDE_Events.Services.Comptes
         public Participant GetParticipantParCompte(int idCompte)
         {
             Compte compte = new CompteService().ObtenirCompte(idCompte);
-            return _bddContext.Participants.Where(participant => participant.Compte.Id == compte.Id).ToList()[0];
+            return _bddContext.Participants
+                .Include(p => p.Reservations)
+                .Where(participant => participant.Compte.Id == compte.Id)
+                .ToList()[0];
             
         }
         //public Participant ObtenirParticipant(int id)

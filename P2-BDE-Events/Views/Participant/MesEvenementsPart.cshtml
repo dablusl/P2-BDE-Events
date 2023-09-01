@@ -1,0 +1,52 @@
+﻿@model P2_BDE_Events.ViewModels.MesEvenementsPartViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutParticipant.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Organisateur/MesEvenementsOrga.css">
+
+@section Header {
+    <ul>
+        <li onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">
+            Évènements passés
+        </li>
+        <li class="pageActive"
+            onclick="window.location.href = '@Url.Action("MesEvenementsPart", "MesEvenements", new { area = "Participant" })'">
+            Évènements à venir
+        </li>
+    </ul>
+}
+
+@if (Model.Evenements.Any())
+{
+    <div class="ensembleEvenement">
+        @foreach (var evenement in Model.Evenements)
+        {
+            <div class="afficheComplete">
+                <div class="card"
+                     onclick="window.location.href = '@Url.Action("EvenementReserve", new { area = "Participant", evenementId = evenement.Id })'">
+                    <div class="card2">
+                        <img src="@evenement.CoverPhotoPath" alt="">
+                    </div>
+                </div>
+                <div class="titre">
+                    <p>@evenement.Titre</p>
+                </div>
+                <div class="date">
+                    @{
+                        string dateISO = evenement.DateEvenement.ToString("dd-MM-yyyy HH:mm");
+                    }
+                    <p>@dateISO</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="noevent">
+        <p>Vous n'avez aucun évènement en cours</p>
+        <button class="creerEvenement">Créer un évènement</button>
+    </div>
+}

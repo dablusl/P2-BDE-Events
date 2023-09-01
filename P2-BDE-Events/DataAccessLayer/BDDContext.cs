@@ -107,7 +107,7 @@ namespace P2_BDE_Events.DataAccessLayer
              Type = TypeDePrestation.SALLE,
              CapaciteMax = 10,
              Tarif = 100,
-             Calendrier = "Du 1er au 5 août",
+             Calendrier = DateTime.Today,
              Livraison = true,
              Description = "Une description de la prestation",
              Etat = EtatDePrestation.EnAttenteDeValidation,
@@ -120,7 +120,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 Type = TypeDePrestation.DJ,
                 CapaciteMax = 50,
                 Tarif = 200,
-                Calendrier = "Tout août",
+                Calendrier = DateTime.Today,
                 Livraison = true,
                 Description = "Dj pour vos soirée",
                 Etat = EtatDePrestation.EnCours,
@@ -133,7 +133,7 @@ namespace P2_BDE_Events.DataAccessLayer
                  Type = TypeDePrestation.TRAITEUR,
                  CapaciteMax = 300,
                  Tarif = 1000,
-                 Calendrier = "3eme weekend du mois",
+                 Calendrier = DateTime.Today,
                  Livraison = true,
                  Description = "Traiteur spécialisé en calamar",
                  Etat = EtatDePrestation.Annulee,
@@ -624,6 +624,70 @@ namespace P2_BDE_Events.DataAccessLayer
                 );
             this.SaveChanges();
             //-----------
+            // Ajoute de 100 profils de participants
+            string[] noms = {
+    "Smith", "Johnson", "Brown", "Davis", "Wilson", "Miller", "Moore", "Taylor", "Anderson", "Jackson",
+    "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Lewis", "Lee",
+    "Walker", "Hall", "Allen", "Young", "Wright", "King", "Scott", "Green", "Baker", "Adams",
+    "Nelson", "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner",
+    "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook",
+    "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Reyes", "Russell",
+    "Diaz", "Hayes", "Myers", "Ford", "Hamilton", "Graham", "Sullivan", "Wallace", "Woods", "Cole",
+    "West", "Jordan", "Owens", "Reynolds", "Fisher", "Ellis", "Harrison", "Gibson", "McDonald", "Cruz",
+    "Marshall", "Ortiz", "Gonzales", "Fowler", "Fleming", "Long", "Hicks", "Robertson", "Murray", "Freeman",
+    "Wells", "Webb", "Simpson", "Stevens", "Tucker", "Porter", "Hunter", "Hudson", "Bishop", "Nichols"
+};
+            string[] prenoms = {
+    "Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace", "Henry", "Isabel", "Jack",
+    "Katherine", "Liam", "Mia", "Noah", "Olivia", "Paul", "Quinn", "Ryan", "Sophia", "Thomas",
+    "Uma", "Victor", "Willow", "Xander", "Yara", "Zach", "Ava", "Benjamin", "Chloe", "Daniel",
+    "Emily", "Finn", "Gemma", "Hannah", "Isaac", "Julia", "Kyle", "Lily", "Mason", "Nora",
+    "Owen", "Peyton", "Quincy", "Ruby", "Samuel", "Taylor", "Victoria", "William", "Ximena", "Yasmine",
+    "Zane", "Abigail", "Bradley", "Cora", "Dylan", "Ella", "Fiona", "Gavin", "Haley", "Ian",
+    "Jasmine", "Kaden", "Layla", "Max", "Natalie", "Oscar", "Piper", "Quinn", "Riley", "Savannah",
+    "Theo", "Uma", "Violet", "Wyatt", "Xander", "Yvonne", "Zoe", "Aiden", "Brooklyn", "Caleb", "Delilah",
+    "Elijah", "Faith", "Gabriel", "Hazel", "Ivy", "Jude", "Kylie", "Liam", "Madison", "Nathan", "Olivia",
+    "Peyton", "Quincy", "Rebecca", "Sofia", "Tyler", "Ulysses", "Vivian", "Wyatt", "Xander", "Yasmine", "Zachary"
+};
+
+            string[] universites = { "Paris12", "Paris-Descartes", "Paris-Sorbonne", "HEC" };
+
+            string[] bdeNoms = { "Paris12-ECO-BDE", "Paris-Descartes-Droit-BDE", "ParisSorbonne-Lettres-BDE", "HEC-ECO-BDE" };
+
+            for (int i = 0; i < 100; i++)
+            {
+                var nom = noms[i % noms.Length];
+                var prenom = prenoms[i % noms.Length];
+                var telephone = $"+33{new Random().Next(600000000, 699999999)}";
+                var universite = universites[i % universites.Length];
+                var email = $"{prenom.ToLower()[0]}.{nom.ToLower()}@{universite.ToLower()}.fr";
+                var bdeNom = bdeNoms[i % bdeNoms.Length];
+
+                var compte = new Compte
+                {
+                    Id = i + 21,
+                    Email = email,
+                    MotDePasse = CompteService.EncodeMD5("rrrrr"),
+                    Profil = "Participant",
+                    Prenom = prenom,
+                    Nom = nom,
+                    NumeroTelephone = telephone,
+                    PhotoProfilePath = null 
+                };
+                this.Comptes.Add(compte);
+                this.SaveChanges();
+
+                var participant100 = new Participant
+                {
+                    Id = i + 16, 
+                    Compte = compte,
+                    NomBDE = bdeNom,
+                    Universite = universite
+                };
+                this.Participants.Add(participant100);
+                this.SaveChanges();
+            }
+            //---------------
             Evenement evenement1 = new Evenement
             {
                 Id = 1,
@@ -634,7 +698,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
                 DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
                 Description = "Defend l'honneur de ta fac avec ton talent surhumain",
-                CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
+                CoverPhotoPath = "/images/evenement/1/jonah-brown--a0G9u37gyI-unsplash.jpg",
                 MaxParticipants = 100,
                 MinParticipants = 70,
                 NbReservations = 0,
@@ -828,7 +892,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.LignesEvenement.AddRange(
                 new LigneEvenement
                 {
-                    Id= 1,
+                    Id = 1,
                     Evenement = evenement1,
                     Type = TypeDePrestation.BAR,
                     Prestation = presta10
@@ -960,7 +1024,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 },
                 new LigneEvenement
                 {
-                    Id=22,
+                    Id = 22,
                     Evenement = evenement9,
                     Type = TypeDePrestation.LOCATION,
                     Location = TypeDeLocation.PHOTOMATON
@@ -1078,6 +1142,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.SaveChanges();
 
         }
+
     }
 
 }

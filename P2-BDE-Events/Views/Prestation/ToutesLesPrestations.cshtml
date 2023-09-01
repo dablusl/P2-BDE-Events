@@ -1,15 +1,15 @@
-﻿@{
+@model P2_BDE_Events.ViewModels.ListePrestationsViewModel
+@{
     Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
 }
 
 @section Header {
     <ul>
-        <li class="creerPrestation" onclick="window.location.href = '@Url.Action("Creer", "CreerUnePrestation", new { area = "Prestataire" })'"> CREER UNE PRESTATION</li>
+        <li class="creerPrestation" onclick="window.location.href = '@Url.Action("CreerUnePrestation", "CreerUnePrestation", new { area = "Prestataire"})'">CREER UNE PRESTATION</li>
     </ul>
 
 }
 
-@model P2_BDE_Events.ViewModels.ListePrestationsViewModel
 
 <style>
     body {
@@ -51,15 +51,35 @@
             margin: 10px 0;
         }
 
+
         .prestation .btn {
             background: #444;
             color: #fff;
+            text-align: center;
             padding: 6px 10px;
             text-decoration: none;
             border: none;
             border-radius: 3px;
             margin-top: auto;
+            cursor: pointer;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            transition: all 0.5s;
         }
+
+            .prestation .btn:hover {
+                background-color: #ffffff;
+                border: 2px solid #1f69ec;
+                box-shadow: 5px 5px 5px #719fee;
+                color: #1f69ec;
+                text-align: center;
+                font-size: 18px;
+            }
+
+
+
+
 
     .title {
         text-align: center;
@@ -74,12 +94,31 @@
         margin: 20px 0;
     }
 
+
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: #e5e5e5;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        border-radius: 15px;
+        background-color: #5c2a9d;
+    }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #b5076b;
+        }
+
     .creerPrestation {
         color: tomato;
         font-weight: bold;
         cursor: pointer;
         transition: color 0.2s, background-color 0.2s;
     }
+
         .creerPrestation:hover {
             color: red;
             background-color: #f9f9f9;
@@ -95,7 +134,8 @@
                 <h3>@prestation.Titre</h3>
                 <p>@prestation.Description</p>
                 <p>Tarif : $@prestation.Tarif</p>
-                <button>Modifier</button>
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                <button type="submit" class="btn btn-supp">Supprimer</button>
                 <a href="#" class="btn">En savoir plus</a>
             </div>
         }

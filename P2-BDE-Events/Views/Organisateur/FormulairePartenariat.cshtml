@@ -5,30 +5,51 @@
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/Participant/EvenementsInteressant.css">
+<link rel="stylesheet" href="~/css/Organisateur/SolliciterEvenement.css">
 
 
 
 
 @section Header {
-    
+    <p>Envoyer un message à votre confrère de BDE</p>
 }
 
 
-    <h2>Sollicitation pour un partenariat</h2>
-    <form action="/EnvoyerSollicitation" method="post">
-       @* <label for="nomOrganisateur">Votre Nom :</label>
-        <input type="text" id="nomOrganisateur" name="nomOrganisateur" required><br>
+<div class="login-box">
+    <form method="post" id="myForm">
+        <div class="box">
+            <label for="message">Message :</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+        </div>
+        <center>
+            <a href="#" id="boutonForm">
+                ENVOYER
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
 
-        <label for="emailOrganisateur">Votre Email :</label>
-        <input type="email" id="emailOrganisateur" name="emailOrganisateur" required><br>
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
 
-        <label for="nomEvenement">Nom de l'Événement :</label>
-        <input type="text" id="nomEvenement" name="nomEvenement" required><br>*@
+        document.getElementById("myForm").submit();
+    });
+</script>
+
+
+
+
+
+
+
+
+@*     <form action="/EnvoyerSollicitation" method="post">
 
         <label for="message">Message :</label><br>
         <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
 
     <button class="rejoindreEvenement" type="submit">Envoyer la Sollicitation</button>
 
-    </form>
+    </form> *@
