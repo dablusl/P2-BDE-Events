@@ -41,12 +41,12 @@
         <div class="user-box">
             @Html.TextBoxFor(m => m.Compte.Email, new { required = "required" })
             @Html.LabelFor(m => m.Compte.Email, "Email")
-            @Html.ValidationMessageFor(m => m.Compte.Email)
+            @Html.ValidationMessageFor(m => m.Compte.Email, "", new { @class = "validation-error" })
         </div>
         <div class="user-box">
             @Html.PasswordFor(m => m.Compte.MotDePasse, new { required = "required" })
             @Html.LabelFor(m => m.Compte.MotDePasse, "Mot de passe")
-            @Html.ValidationMessageFor(m => m.Compte.MotDePasse)
+            @Html.ValidationMessageFor(m => m.Compte.MotDePasse, "", new { @class = "validation-error" })
         </div>
         <center>
             <a href="#" id="submitForm">
