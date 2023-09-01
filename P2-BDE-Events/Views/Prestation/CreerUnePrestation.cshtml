@@ -29,8 +29,9 @@
                 @Html.ValidationMessageFor(m =>m.prestation.Tarif)
             </div>
             <div class="form-group">
-                <label for="Prestation.Calendrier">Calendrier</label>
-                <input type="datetime-local" class="form-control" asp-for="Calendrier">
+                <label asp-for="Calendrier">Calendrier</label>
+                <input asp-for="Calendrier" type="datetime-local" class="form-control" />
+                <span asp-validation-for="Calendrier" class="text-danger"></span>
             </div>
             <div>
                 @Html.LabelFor(m => m.prestation.Livraison)
@@ -44,7 +45,7 @@
             </div>
                 <div class="form-group">
                     <label for="Type">Type</label>
-                    <select class="form-control" asp-for="Type">
+                        <select class="form-control" asp-for="form-control">
                         <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
                         <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
                         <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
