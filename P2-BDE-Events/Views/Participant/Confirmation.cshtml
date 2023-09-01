@@ -7,10 +7,8 @@
 
 @section Header {
     <ul>
-        <li class="pageActive" onclick="window.location.href = '@Url.Action("EvenementsTermines", "MesEvenements", new { area = "Participant" })'">Évènements passés</li>
-        <li onclick="window.location.href = '@Url.Action("ProchainsEvenements", "MesEvenements", new { area = "Participant" })'">Évènements à venir</li>
+        <p>Confirmation de réservation</p>
     </ul>
 }
 
-<h2>Confirmation de réservation</h2>
 <p>Merci pour votre réservation à l'événement <strong>@ViewBag.EvenementTitre</strong>. Vous êtes maintenant inscrit à l'événement.</p>
