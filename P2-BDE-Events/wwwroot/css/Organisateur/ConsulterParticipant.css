@@ -1,0 +1,40 @@
+.recherche input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+/* Liste */
+
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ulParticipant {
+    background-color: black;
+    width: 600px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.ulParticipant li {
+    color: white;
+    list-style: none;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.nom {
+    margin-left: 20px;
+}
+
+.classement {
+    margin-left: 360px;
+}
+

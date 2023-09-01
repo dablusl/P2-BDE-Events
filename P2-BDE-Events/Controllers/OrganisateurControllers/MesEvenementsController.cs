@@ -81,5 +81,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             return View("Views/Organisateur/MesEvenementsOrga.cshtml", viewModel);
         }
 
+
+
     }
 }

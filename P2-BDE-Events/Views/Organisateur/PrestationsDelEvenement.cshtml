@@ -5,16 +5,9 @@
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/Organisateur/ConsulterEvenement.css">
 
 @section Header {
-    <ul>
-        <li onclick="window.location.href = '@Url.Action("ConsulterParticipants", "MesEvenements", new { area = "OrganisateurControllers" })'">
-            Voir les participants
-        </li>
-        <li>Voir les prestattions</li>
-        <li>Supprimer l'évènement</li>
-    </ul>
+    
 }
 <style>
     .scrollable-content {

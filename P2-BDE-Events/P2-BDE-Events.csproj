@@ -41,7 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\evenement\1\" />
     <Folder Include="wwwroot\images\evenement\2\" />
     <Folder Include="wwwroot\images\evenement\3\" />
     <Folder Include="wwwroot\images\evenement\4\" />

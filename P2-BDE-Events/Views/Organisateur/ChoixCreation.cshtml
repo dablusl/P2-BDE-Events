@@ -11,13 +11,24 @@
 <div class="card">
     <h2>Pack Event</h2>
     <p class="description">Un minimum d'effort, avec des évènements clé en main  !</p>
-    <p class="continuer" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'">Continuer</p>
+    <ion-icon name="arrow-forward-outline" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'"></ion-icon>
+    @* <p class="continuer" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'">Continuer</p> *@
 </div>
 
-<div class="card2">
+<div class="card">
+    <h2>Sur mesure</h2>
+    <p class="description">Créer votre évènement de A à Z !</p>
+    <ion-icon name="arrow-forward-outline" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'"></ion-icon>
+    @* <p class="continuer" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'">Continuer</p> *@
+</div>
+
+@* <div class="card2">
     <div class="card-details">
         <p class="text-title">Sur mesure</p>
         <p class="text-body">Créer votre évènement de A à Z !</p>
     </div>
     <button class="card-button" onclick="window.location.href = '@Url.Action("CreerEvenementSurMesure1", "CreerUnEvenement", new { area = "OrganisateurControllers" })'">Continuer</button>
-</div>
+</div> *@
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

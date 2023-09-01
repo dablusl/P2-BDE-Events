@@ -1,16 +1,50 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
-
+<link rel="stylesheet" href="~/css/Organisateur/CreerEvenementSurMesure.css">
 @section Header {
-
+ <div class="bar">
+    <div class="progression2"></div>
+</div>
 }
 
 @model P2_BDE_Events.ViewModels.EvenementViewModel
 <!--model P2_BDE_Events.ViewModels.Etape1ViewModel-->
 
 
-<form asp-action="CreerEvenementSurMesure2" method="post">
+
+<div class="login-box">
+    <form asp-action="CreerEvenementSurMesure2" method="post" id="myForm">
+        <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id"
+            value="@Model.Evenement.Organisateur.Id" />
+
+        <div class="user-box">
+            <input type="datetime-local" class="form-control" id="Evenement.DateEvenement" name="Evenement.DateEvenement" value="">
+        </div>
+        <center>
+            <a href="#" id="boutonForm">
+                SUIVANT
+                <span></span>
+            </a>
+        </center>
+        </center>
+    </form>
+</div>
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script>
+
+
+
+
+
+
+@* <form asp-action="CreerEvenementSurMesure2" method="post">
     <input type="hidden" id="Evenement.Organisateur.Id" name="Evenement.Organisateur.Id" value="@Model.Evenement.Organisateur.Id" />
     <div class="form-group">
         <!-- Gestion region,localisation ??? etc... -->
@@ -21,8 +55,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Suivant</button>
-</form>
-<h1>Quand et Où ?</h1>
+</form> *@
 
 
 

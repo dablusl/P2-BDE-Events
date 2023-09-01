@@ -26,6 +26,7 @@ namespace P2_BDE_Events.Services.Evenements
             evenement.Organisateur = null;
             evenement.OrganisateurId = idOrga;
             evenement.CoverPhotoPath = photoPath;
+            evenement.Etat = EtatEvenement.OUVERT;
             _bddContext.Evenements.Add(evenement);
             _bddContext.SaveChanges();
 
@@ -64,7 +65,7 @@ namespace P2_BDE_Events.Services.Evenements
         public void ReserverEvenement(int participantId, int evenementId)
         {
             var participant = _bddContext.Participants.Find(participantId);
-            var evenement = _bddContext.Evenements.Include(e => e.Reservations).FirstOrDefault(e=> e.Id == evenementId);
+            var evenement = _bddContext.Evenements.Include(e => e.Reservations).FirstOrDefault(e => e.Id == evenementId);
 
             if (participant == null || evenement == null)
             {
@@ -78,7 +79,7 @@ namespace P2_BDE_Events.Services.Evenements
                 DateReservation = DateTime.Now
             };
 
-            evenement.NbParticipants = evenement.Reservations.Count+1;
+            evenement.NbParticipants = evenement.Reservations.Count + 1;
 
             _bddContext.Reservations.Add(reservation);
             _bddContext.SaveChanges();
@@ -103,7 +104,7 @@ namespace P2_BDE_Events.Services.Evenements
         {
             return _bddContext.Evenements
                 .Include(e => e.Lignes)
-
+                    .ThenInclude(l => l.Prestation)
                 .Where(e => e.Etat == EtatEvenement.OUVERT &&
                     e.Lignes.Any(l => types.Contains(l.Type)))
                 .ToList();
@@ -121,6 +122,33 @@ namespace P2_BDE_Events.Services.Evenements
             }
 
             return null;
+        }
+
+        public void PublierEvenement(int idEvenement)
+        {
+            Evenement evenement = _bddContext.Evenements
+                .Include(e => e.Lignes)
+                .ThenInclude(l => l.Prestation)
+                .FirstOrDefault(e => e.Id == idEvenement);
+
+            if(evenement.Lignes.Count( l => l.Prestation == null) == 0)
+            {
+                evenement.Etat = EtatEvenement.PUBLIE;   
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public double RecalculerBillet(int idEvenement)
+        {
+            Evenement evenement = _bddContext.Evenements.Include(e => e.Lignes).FirstOrDefault(e => e.Id==idEvenement);
+
+            evenement.PrixBillet = evenement.Lignes
+                .Select( l => l.TarifProposee)
+                .Aggregate((sum, tarif) => sum + tarif)/evenement.MaxParticipants;
+
+            _bddContext.SaveChanges();
+
+            return evenement.PrixBillet;
         }
 
         public void Dispose()

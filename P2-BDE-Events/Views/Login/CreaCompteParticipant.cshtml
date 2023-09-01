@@ -2,60 +2,57 @@
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
+
 @section Header {
-    
+<p>Remplissez les champs de la création de votre profil d'étudiant</p>
 }
+
 @section Nav {
+    <li>Obtenir de l'aide</li>
 }
 
-<section class="page-section portfolio mt-5">
+<link rel="stylesheet" href="/css/Login/CreerCompteSpecifique.css">
 
-    <div class="container">
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Compléter mon compte</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            @*<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>*@
+<div class="login-box">
+    <form asp-action="CreerEvenementSurMesure1" method="post" id="myForm">
+        <div class="user-box">
+            <input type="text" name="Compte.Nom" required="">
+            <label>Nom</label>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-7">
-                @using (Html.BeginForm())
-                {
-                    @Html.HiddenFor( m => m.Compte.Email, @Model.Compte.Email)
-                    @Html.HiddenFor( m => m.Compte.MotDePasse, @Model.Compte.MotDePasse)
-                    //@Html.HiddenFor( m => m.Organisateur.Compte, @Model.Compte.Id)
-                    <div>
-                        @Html.LabelFor(m => m.Compte.Nom)
-                        @Html.TextBoxFor(m => m.Compte.Nom)
-                        @Html.ValidationMessageFor(m => m.Compte.Nom)
-                    </div>
-                    <div>
-                        @Html.LabelFor(m => m.Compte.Prenom)
-                        @Html.TextBoxFor(m => m.Compte.Prenom)
-                        @Html.ValidationMessageFor(m => m.Compte.Prenom)
-                    </div>
-                    <div>
-                        @Html.LabelFor(m => m.Compte.NumeroTelephone, "Votre numéro de téléphone")
-                        @Html.TextBoxFor(m => m.Compte.NumeroTelephone)
-                        @Html.ValidationMessageFor(m => m.Compte.NumeroTelephone)
-                    </div>
-                    <div>
-                        @Html.LabelFor(m => m.Universite, "Nom de votre établissement")
-                        @Html.TextBoxFor(m => m.Universite)
-                        @Html.ValidationMessageFor(m => m.Universite)
-                    </div>
-                    <div>
-                        @Html.LabelFor(m => m.NomBDE, "Nom de votre BDE")
-                        @Html.TextBoxFor(m => m.NomBDE)
-                        @Html.ValidationMessageFor(m => m.NomBDE)
-                    </div>
-
-
-
-                    <button class="btn btn-primary btn-xl" type="submit">Créer</button>
-                }
-            </div>
+        
+        <div class="user-box">
+            <input type="text" name="Compte.Prenom" required="">
+            <label>Prénom</label>
         </div>
-    </div>
-</section>
+        
+        <div class="user-box">
+            <input type="text" name="Compte.NumeroTelephone" required="">
+            <label>Votre numéro de téléphone</label>
+        </div>
+        
+        <div class="user-box">
+            <input type="text" name="Universite" required="">
+            <label>Nom de votre établissement</label>
+        </div>
+        
+        <div class="user-box">
+            <input type="text" name="NomBDE" required="">
+            <label>Nom de votre BDE</label>
+        </div>
+        
+        <center>
+            <a href="#" id="boutonForm">
+                CREER
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script>
