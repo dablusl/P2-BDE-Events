@@ -631,7 +631,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 DateEvenement = new DateTime(2023, 10, 15, 20, 0, 0),
                 DateLimiteInscription = new DateTime(2023, 10, 15, 0, 0, 0),
                 Description = "Defend l'honneur de ta fac avec ton talent surhumain",
-                CoverPhotoPath = "/images/evenement/1/téléchargement (1).jpeg",
+                CoverPhotoPath = "/images/evenement/1/jonah-brown--a0G9u37gyI-unsplash.jpg",
                 MaxParticipants = 100,
                 MinParticipants = 70,
                 NbReservations = 0,

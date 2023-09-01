@@ -1,0 +1,55 @@
+@model P2_BDE_Events.ViewModels.CreaCompteOrgaViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
+}
+
+@section Header {
+<p>Modifier vos informations</p>
+}
+
+<link rel="stylesheet" href="/css/Organisateur/Compte.css">
+
+<div class="login-box">
+    <form asp-action="CreerEvenementSurMesure1" method="post" id="myForm">
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Compte.Nom, new { @class = "custom-input", required = "required" })
+            <label for="Compte.Nom">Nom</label>
+        </div>
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Compte.Prenom, new { @class = "custom-input", required = "required" })
+            <label for="Compte.Prenom">Prénom</label>
+        </div>
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Compte.NumeroTelephone, new { @class = "custom-input", required = "required" })
+            <label for="Compte.NumeroTelephone">Votre numéro de téléphone</label>
+        </div>
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Organisateur.Participant.Universite, new { @class = "custom-input", required =
+            "required" })
+            <label for="Organisateur.Participant.Universite">Nom de votre établissement</label>
+        </div>
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Organisateur.Participant.NomBDE, new { @class = "custom-input", required =
+            "required" })
+            <label for="Organisateur.Participant.NomBDE">Nom de votre BDE</label>
+        </div>
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Organisateur.FonctionBDE, new { @class = "custom-input", required = "required" })
+            <label for="Organisateur.FonctionBDE">Votre fonction au sein du BDE</label>
+        </div>
+        <center>
+            <a href="#" id="boutonForm">
+                MODFIER
+                <span></span>
+            </a>
+        </center>
+    </form>
+</div>
+
+<script>
+    document.getElementById("boutonForm").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.getElementById("myForm").submit();
+    });
+</script>

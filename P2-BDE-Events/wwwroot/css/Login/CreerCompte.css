@@ -1,6 +1,7 @@
 ﻿main {
     display: flex;
     flex-direction: column;
+    justify-content: start;
 }
 
 .login {
@@ -15,8 +16,6 @@
     width: 100%;
     height: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .parent {
@@ -177,3 +176,26 @@ input:checked + .radio-ensemble label {
     animation: btn-anim1 2s linear infinite;
 }
 
+
+.creerEvenement {
+    padding: 15px 20px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: 'Baloo 2', cursive;
+    color: white;
+    text-shadow: none;
+    background: transparent;
+    box-shadow: transparent;
+    border: none;
+    transition: 0.5s ease;
+    user-select: none;
+    cursor: pointer;
+}
+
+    .creerEvenement:hover,
+    .creerEvenement:focus {
+        color: white;
+        background: red;
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+        box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+    }
