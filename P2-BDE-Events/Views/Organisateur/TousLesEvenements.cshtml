@@ -29,9 +29,8 @@
 <div class="ensembleEvenement">
     @foreach (var evenement in Model.Evenements)
     {
-        <div class="afficheComplete">
-            <div class="card"
-                 onclick="window.location.href = '@Url.Action("SolliciterEvenement", "TousLesEvenements", new { area = "Organisateur", EvenementID = evenement.Id })">
+        <div class="afficheComplete" onclick="window.location.href = '@Url.Action("SolliciterEvenement", "TousLesEvenements", new { area = "Organisateur", EvenementID = evenement.Id })';">
+            <div class="card">
                 <div class="card2">
                     <img src="@evenement.CoverPhotoPath" alt="">
                 </div>
@@ -56,6 +55,7 @@
         </div>
     }
 </div>
+
 
 
 

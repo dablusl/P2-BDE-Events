@@ -17,27 +17,21 @@ main {
     overflow: hidden;
 }
 
-.progression1 {
-    height: 100%;
-    width: 25%;
-    background-color: red;
-}
-
-.progression2 {
-    height: 100%;
-    width: 50%;
-    background-color: red;
-}
-.progression3 {
+.progression4 {
     height: 100%;
     width: 75%;
     background-color: red;
+    animation: progress4 2s ease-in-out forwards;
 }
 
-.progression4 {
-    height: 100%;
-    width: 100%;
-    background-color: red;
+@keyframes progress4 {
+    0% {
+        width: 75%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 /*forms*/

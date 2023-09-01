@@ -7,9 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @section Header {
     <ul>
-        <li
-            onclick="window.location.href = '@Url.Action("ConsulterEvenement", "MesEvenements", new { area = "OrganisateurControllers", evenementId = Model.Evenement.Id })'">
-            Voir l'évènement</li>
+        <li onclick="window.location.href = '@Url.Action("ConsulterEvenement", "MesEvenements", new { area = "OrganisateurControllers", evenementId = Model.Evenement.Id })'">Voir l'évènement</li>
         <li>Supprimer participant</li>
         <li>Ajouter participant</li>
     </ul>
