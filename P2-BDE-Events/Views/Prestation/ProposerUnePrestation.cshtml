@@ -48,7 +48,7 @@
                             </div>
                             <div class="Icon-Select">
                                 <button type="submit" class="button-image">
-                                    <img src="~/Assets/check-icon.png">
+                                    <img class="creerEvenement" src="~/Assets/check-icon.png">
                                 </button>
                             </div>
                         </div>
@@ -271,5 +271,31 @@
         border-radius: 8px; /* Rounded border radius */
         padding: 5px; 
     }
+
+    .creerEvenement {
+        padding: 5px 10px;
+        border-radius: 7px;
+        font-size: 15px;
+        font-family: 'Baloo 2', cursive;
+        color: red;
+        text-shadow: none;
+        background: transparent;
+        box-shadow: transparent;
+        
+        transition: 0.5s ease;
+        user-select: none;
+        cursor: pointer;
+        align-self: center;
+        justify-self: center;
+    }
+
+        .creerEvenement:hover,
+        .creerEvenement:focus {
+            color: white;
+            background: red;
+            border: 1px solid red;
+            text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+            box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+        }
 
 </style>
