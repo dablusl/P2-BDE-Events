@@ -7,6 +7,135 @@
 
 }
 
+<style>
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    /* Styles pour le conteneur principal */
+    .ModifierUnePrestation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+
+        /* Styles pour le formulaire */
+        .ModifierUnePrestation form {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(24, 20, 20, 0.987);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+        }
+
+        .ModifierUnePrestation .user-box.description {
+            margin-top: 20px;
+        }
+        /* Styles pour les éléments du formulaire */
+        .ModifierUnePrestation label {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ModifierUnePrestation input[type="text"],
+        .ModifierUnePrestation input[type="number"],
+        .ModifierUnePrestation textarea,
+        .ModifierUnePrestation select {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+
+            /* Styles pour les labels des champs actifs */
+            .ModifierUnePrestation input[type="text"]:focus ~ label,
+            .ModifierUnePrestation input[type="text"]:valid ~ label,
+            .ModifierUnePrestation input[type="number"]:focus ~ label,
+            .ModifierUnePrestation input[type="number"]:valid ~ label,
+            .ModifierUnePrestation textarea:focus ~ label,
+            .ModifierUnePrestation textarea:valid ~ label,
+            .ModifierUnePrestation select:focus ~ label,
+            .ModifierUnePrestation select:valid ~ label {
+                top: -20px;
+                left: 0;
+                color: white;
+                font-size: 12px;
+            }
+
+        .ModifierUnePrestation select {
+            background-color: rgba(24, 20, 20, 0.987);
+            color: white;
+        }
+
+        .ModifierUnePrestation select {
+            color: white;
+        }
+
+        /* Styles pour le bouton Créer */
+        .ModifierUnePrestation button[type="submit"] {
+            padding: 20px 100px;
+            border-radius: 7px;
+            font-size: 20px;
+            font-family: 'Baloo 2', cursive;
+            color: white;
+            text-shadow: none;
+            background: transparent;
+            box-shadow: transparent;
+            border: none;
+            transition: 0.5s ease;
+            user-select: none;
+            cursor: pointer;
+            margin-top: 40px;
+            letter-spacing: 4px;
+        }
+
+            .ModifierUnePrestation button[type="submit"]:hover,
+            .ModifierUnePrestation button[type="submit"]:focus {
+                color: white;
+                background: red;
+                text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+                box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+            }
+
+    /* Style pour les messages d'erreur */
+    .error-message {
+        color: red;
+        background: white;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    /* Style pour marquer les champs invalides */
+    .invalid {
+        border-bottom: 1px solid red;
+        background: white;
+    }
+
+    /* Style pour le message global sous le formulaire */
+    #form-error {
+        color: red;
+        background: transparent;
+        display: block;
+        font-size: 28px;
+        margin-top: 10px;
+        text-align: center
+    }
+
+</style>
+
+
 <section>
     <h1 class="title">MODIFIER UNE PRESTATION</h1>
     <div class="row justify-content-center">
@@ -65,41 +194,45 @@
     </div>
 </section>
 
-    <style>
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-        }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
 
-        label {
-            font-weight: bold;
-        }
+        form.addEventListener('submit', function (event) {
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let formValid = true;
 
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
+            for (const input of inputs) {
+                const errorMessage = document.createElement('span');
+                errorMessage.classList.add('error-message');
+                errorMessage.textContent = "Pssst... Ce n'est pas rempli ici";
 
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
+                if (!input.value.trim()) {
+                    input.classList.add('invalid');
+                    input.parentNode.appendChild(errorMessage);
+                    formValid = false;
+                } else {
+                    input.classList.remove('invalid');
+                    const existingErrorMessage = input.parentNode.querySelector('.error-message');
+                    if (existingErrorMessage) {
+                        existingErrorMessage.remove();
+                    }
+                }
+            }
 
-    </style>
+            if (!formValid) {
+                const formErrorMessage = document.createElement('span');
+                formErrorMessage.id = 'form-error';
+                formErrorMessage.classList.add('error-message');
+                formErrorMessage.textContent = "Remplir tous les champs";
+                form.appendChild(formErrorMessage);
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 
-    
+
+
+

@@ -38,6 +38,7 @@
     <Content Remove="C:\Users\lucas\.nuget\packages\bootstrap\5.3.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.css.map" />
     <Content Remove="C:\Users\lucas\.nuget\packages\bootstrap\5.3.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.min.css" />
     <Content Remove="C:\Users\lucas\.nuget\packages\bootstrap\5.3.1\contentFiles\any\any\wwwroot\css\bootstrap.rtl.min.css.map" />
+    <Content Remove="Views\Prestation\SupprimerUnePrestation.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

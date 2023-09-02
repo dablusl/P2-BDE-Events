@@ -16,26 +16,26 @@
 
     /* Styles pour le lien "CREER UNE PRESTATION" */
     .creerPrestation {
-        font-size: 21px; 
-        color: darkred; 
+        font-size: 21px;
+        color: darkred;
         text-decoration: none;
-        transition: color 0.2s ease-in-out; 
+        transition: color 0.2s ease-in-out;
         text-align: center;
     }
 
         .creerPrestation:hover {
-            color: red; 
-            cursor: pointer; 
+            color: red;
+            cursor: pointer;
         }
 
     /* Styles pour la section "Mes prestations" */
-.title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
 
-.container {
+    .container {
         display: flex;
         margin: 0 auto;
         max-width: 1200px;
@@ -48,27 +48,27 @@
         justify-content: center;
     }
 
-.prestation {
-    background-color: rgba(24, 20, 20, 0.987);
-    color: white;
-    font-size: 18px;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    flex: 1;
-    min-width: 300px;
-    max-width: 400px;
-    text-align: left;
-}
+    .prestation {
+        background-color: rgba(24, 20, 20, 0.987);
+        color: white;
+        font-size: 18px;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        flex: 1;
+        min-width: 300px;
+        max-width: 400px;
+        text-align: left;
+    }
 
-.prestation h3 {
-    font-size: 22px;
-    text-align: center;
-}
+        .prestation h3 {
+            font-size: 22px;
+            text-align: center;
+        }
 
-/* Styles pour les boutons */
- 
+    /* Styles pour les boutons */
+
     .btn {
         background-color: transparent;
     }
@@ -76,6 +76,7 @@
     .btn-supp {
         background-color: transparent;
     }
+
     .btn,
     .btn-supp {
         border: 2px solid grey;
@@ -101,42 +102,42 @@
         will-change: transform;
     }
 
-    
-    .btn:disabled {
-        pointer-events: none;
+
+        .btn:disabled {
+            pointer-events: none;
+        }
+
+
+        .btn:hover,
+        .btn-supp:hover {
+            color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+        }
+
+        .btn:focus,
+        .btn:hover {
+            background-color: mediumblue;
+            border-color: aquamarine;
+            outline: 0;
+            box-shadow: 0 0 0 1px blue;
+        }
+
+        .btn-supp:hover,
+        .btn-supp:focus {
+            background-color: darkred;
+            border-color: orangered;
+            outline: 0;
+            box-shadow: 0 0 0 1px red;
+        }
+
+
+    /* Style pour le séparateur */
+    .separator {
+        height: 2px;
+        background-color: red;
+        margin: 20px 0;
     }
-
-
-    .btn:hover,
-    .btn-supp:hover {
-        color: #fff;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-        transform: translateY(-2px);
-    }
-
-    .btn:focus,
-    .btn:hover {
-        background-color: mediumblue;
-        border-color: aquamarine;
-        outline:0;
-        box-shadow: 0 0 0 1px blue;
-    }
-
-    .btn-supp:hover,
-    .btn-supp:focus {
-        background-color: darkred;
-        border-color: orangered;
-        outline: 0;
-        box-shadow: 0 0 0 1px red;
-    }
-
-
-/* Style pour le séparateur */
-.separator {
-    height: 2px;
-    background-color: red;
-    margin: 20px 0;
-}
 </style>
 
 
@@ -154,12 +155,11 @@
                 <p>Capacite Maximale : @prestation.CapaciteMax</p>
                 <p>Tarif : $@prestation.Tarif</p>
 
-                
+
                 @*<button type="submit" class="btn">Modifier</button>*@
-          
-                    <a href="@Url.Action("ModifierUnePrestation", "CreerUnePrestation",new { area = "Prestataire", id = prestation.Id })" class="btn">Modifier</a>
-                <button type="submit" class="btn btn-supp">Supprimer</button>
-              
+                <a href="@Url.Action("ModifierUnePrestation", "CreerUnePrestation",new {id = prestation.Id })" class="btn">Modifier</a>
+                @*<button type="submit" class="btn btn-supp">Supprimer</button>*@
+                <a href="@Url.Action("SupprimerUnePrestation", "CreerUnePrestation",new { area = "Prestataire", id = prestation.Id })" class="btn">Supprimer</a>
             </div>
         }
     </div>

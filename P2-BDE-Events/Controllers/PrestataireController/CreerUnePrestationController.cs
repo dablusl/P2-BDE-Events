@@ -85,23 +85,11 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 
             }
 
-            return View("~/Views/Prestation/ToutesLesPrestions.cshtml", viewModel);
+            return View("~/Views/Prestation/ToutesLesPrestations.cshtml", viewModel);
         }
 
         [HttpGet]
-        public IActionResult Supprimer(int id)
-        {
-            var prestation = _dbContext.Prestations.Find(id);
-            if (prestation == null)
-            {
-                return NotFound();
-            }
-
-            return View("~/Views/Prestation/ModifierUnePrestation.cshtml"); ;
-        }
-
-        [HttpPost, ActionName("Supprimer")]
-        public IActionResult SuppressionConfirmee(int id)
+        public IActionResult SupprimerUnePrestation(int id)
         {
             var prestation = _dbContext.Prestations.Find(id);
             if (prestation == null)
@@ -112,7 +100,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
             _dbContext.Prestations.Remove(prestation);
             _dbContext.SaveChanges();
 
-            return View("~/Views/Prestation/SupprimerUnePrestation.cshtml");
+            return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations");
         }
 
     }
