@@ -6,25 +6,120 @@
 }
 
 @section Header {
-    
+
 }
 
+<link rel="stylesheet" href="~/css/Organisateur/ConsulterEvenement.css">
 
-<h1>Propositions Pour</h1>
-<h2>@Model.Ligne.Type</h2>
+<div class="boxAffiche">
 
-@foreach (PropositionPrestation proposition in Model.Propositions)
-{
-    <div class="proposition">
-        <h3>@proposition.Prestation.Titre</h3>
-        <h4>@proposition.Prestation.Description</h4>
-        <h5>@proposition.TarifPropose</h5>
-        @using (Html.BeginForm("PropositionsDeLaPrestation", "PropositionsPrestations", FormMethod.Post))
-        {
-            @Html.HiddenFor(m => m.EvenementID, Model.EvenementID)
-            <input type="hidden" name="LigneId" value="@Model.LigneId" />
-            <input type="hidden" name="propositionId" value="@proposition.Id" />
-            <button type="submit">Choisir</button>
-        }
+    <div class="affiche">
+        <img src="@Model.Evenement.CoverPhotoPath" alt="">
+        <div class="bordure"></div>
     </div>
-}
+
+</div>
+
+
+<div class="boxDetails">
+    <div class="login-box">
+        <div class="entete">
+            Propositions de <em>@Model.Ligne.Type</em> pour <em>@Model.Evenement.Titre</em>
+
+        </div>
+        <div>
+            @foreach (PropositionPrestation proposition in Model.Propositions)
+            {
+                <div class="card-prestation">
+                    <div class="presta">@proposition.Prestation.Prestataire.RaisonSocial - @proposition.Prestation.Titre</div>
+                    <div class="description">@proposition.Prestation.Description</div>
+                    <div class="tarif">@proposition.TarifPropose €</div>
+
+                    @using (Html.BeginForm("PropositionsDeLaPrestation", "PropositionsPrestations", FormMethod.Post, new { @class = "btn-container" }))
+                    {
+                        @Html.HiddenFor(m => m.EvenementID, Model.EvenementID)
+                        <input type="hidden" name="LigneId" value="@Model.LigneId" />
+                        <input type="hidden" name="propositionId" value="@proposition.Id" />
+                        <button class="creerEvenement" type="submit">Choisir</button>
+                    }
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .boxDetails {
+        color: white
+    }
+
+    .login-box {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: normal;
+        align-items: normal;
+        align-content: normal;
+    }
+
+    .card-prestation {
+        padding: 5px 10px;
+        margin: 10px;
+        background-color: #343434;
+    }
+
+        .card-prestation:hover {
+            background-color: #28282B;
+        }
+
+    .entete {
+        margin-bottom: 10px;
+    }
+
+    .btn-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .creerEvenement {
+        padding: 5px 10px;
+        border-radius: 7px;
+        font-size: 15px;
+        font-family: 'Baloo 2', cursive;
+        color: red;
+        text-shadow: none;
+        background: transparent;
+        box-shadow: transparent;
+        border: 1px solid red;
+        transition: 0.5s ease;
+        user-select: none;
+        cursor: pointer;
+        align-self: center;
+        justify-self: center;
+    }
+
+        .creerEvenement:hover,
+        .creerEvenement:focus {
+            color: white;
+            background: red;
+            border: 1px solid red;
+            text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+            box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+        }
+
+    .presta {
+        font-weight: bolder;
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .tarif {
+        font-weight: bolder;
+    }
+
+</style>

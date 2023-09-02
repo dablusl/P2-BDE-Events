@@ -1,46 +1,51 @@
 ﻿@using P2_BDE_Events.Models.Prestations
 @using P2_BDE_Events.Models.Evenement
-@model List<LigneEvenement>
+@model P2_BDE_Events.ViewModels.PrestationEvenementViewModel
 @{
     Layout = "~/Views/Shared/_LayoutOrganisateur.cshtml";
 }
 
+<link rel="stylesheet" href="~/css/Organisateur/ConsulterEvenement.css">
 
 @section Header {
     <ul>
         <li onclick="window.history.back();">
             Voir l'évènement
         </li>
-        <</ul>
+    </ul>
 }
-<style>
-    .scrollable-content {
-        max-height: 80vh;
-        overflow-y: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
 
-</style>
 
-<div class="scrollable-content">
-    <ul>
-        @foreach (LigneEvenement ligne in Model)
-        {
-            <li>
+<div class="boxAffiche">
+
+    <div class="affiche">
+        <img src="@Model.Evenement.CoverPhotoPath" alt="">
+        <div class="bordure"></div>
+    </div>
+
+</div>
+
+
+
+<div class="boxDetails">
+    <div class="login-box">
+        <div class="entete">
+            Prestations de l'Evenement <em>@Model.Evenement.Titre</em>
+        </div>
+        <div>
+            @foreach (LigneEvenement ligne in Model.Lignes)
+            {
                 <div class="card-prestation">
-                    <h2>@ligne.Type</h2>
+                    <div class="presta-type">@ligne.Type</div>
                     @if (ligne.Prestation != null)
                     {
-                        <p>@ligne.Prestation.Titre</p>
-                        <p>@ligne.Prestation.Description</p>
-                        <p>@ligne.TarifProposee €</p>
+                        <p>@ligne.Prestation.Prestataire.RaisonSocial - @ligne.Prestation.Titre</p>
+                        <em>@ligne.TarifProposee €</em>
                     }
                     else if (ligne.Propositions.Count > 0)
                     {
                         <a class="button-link" href="@Url.Action("PropositionsDeLaPrestation", "PropositionsPrestations", new { area = "OrganisateurControllers", id = @ligne.Id })">
-                            Voir Propositions à valider
+                            Propositions à valider
                         </a>
                     }
                     else
@@ -48,7 +53,58 @@
                         <p>En attente de propositions</p>
                     }
                 </div>
-            </li>
-        }
-    </ul>
+            }
+        </div>
+    </div>
 </div>
+
+<style>
+    .boxDetails {
+        color: white
+    }
+
+    .login-box {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: normal;
+        align-items: normal;
+        align-content: normal;
+    }
+
+    .card-prestation {
+        padding: 5px 10px;
+        margin: 5px;
+        background-color: #343434;
+    }
+
+        .card-prestation:hover {
+            background-color: #28282B;
+        }
+
+    .entete{
+        margin-bottom : 10px;
+    }
+
+    .presta-type {
+        padding: 0px;
+        font-weight : bolder;
+    }
+
+    .card-prestation p {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .card-prestation a{
+        color : red;
+        text-decoration : none;
+    }
+
+    .card-prestation em {
+        color: #D3D3D3;
+        text-decoration: none;
+        font-weight : bolder;
+    }
+
+</style>

@@ -23,14 +23,12 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
         public IActionResult PrestationsDelEvenement(int id)
         {
-            List<LigneEvenement> lignes = ligneEvenementService.GetLignesEvenement(id);
-
-            return View("~/Views/Organisateur/PrestationsDelEvenement.cshtml",lignes);
+            return View("~/Views/Organisateur/PrestationsDelEvenement.cshtml",PrestationViewModel(id));
         }
 
         public IActionResult PropositionsDeLaPrestation(int id)
         {
-            return View("~/Views/Organisateur/PropositionsPrestations.cshtml",InitViewModel(id));
+            return View("~/Views/Organisateur/PropositionsPrestations.cshtml",PropositionViewModel(id));
         }
 
         [HttpPost]
@@ -49,20 +47,28 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             return int.Parse(HttpContext.Session.GetString("iDCompte"));
         }
 
-        public PropositionsPrestationViewModel InitViewModel(int idLigne)
+        public PropositionsPrestationViewModel PropositionViewModel(int idLigne)
         {
             LigneEvenement ligne = ligneEvenementService.ObtenirLigneEvenement(idLigne);
             List<PropositionPrestation> propositions = ligneEvenementService.ObtenirPropositions(idLigne);
 
-            PropositionsPrestationViewModel viewModel = new PropositionsPrestationViewModel
+            return new PropositionsPrestationViewModel
             {
                 Ligne = ligne,
                 Propositions = propositions,
+                Evenement = evenementService.ObtenirEvenement(ligne.EvenementId),
                 LigneId = idLigne,
                 EvenementID = ligne.EvenementId
             };
-             
-            return viewModel;
+        }
+
+        public PrestationEvenementViewModel PrestationViewModel(int idEvenement)
+        {
+            return new PrestationEvenementViewModel
+            {
+                Lignes = ligneEvenementService.GetLignesEvenement(idEvenement),
+                Evenement = evenementService.ObtenirEvenement(idEvenement),
+            };
         }
 
     }
