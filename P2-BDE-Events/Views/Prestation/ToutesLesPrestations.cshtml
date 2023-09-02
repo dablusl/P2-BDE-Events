@@ -12,10 +12,23 @@
 }
 
 <style>
-/* Styles pour la section "Mes prestations" */
-.header {
-        font-size: 24px;
-}
+
+
+    /* Styles pour le lien "CREER UNE PRESTATION" */
+    .creerPrestation {
+        font-size: 20px; 
+        color: darkred; 
+        text-decoration: none;
+        transition: color 0.2s ease-in-out; 
+        text-align: center;
+    }
+
+        .creerPrestation:hover {
+            color: red; 
+            cursor: pointer; 
+        }
+
+    /* Styles pour la section "Mes prestations" */
 .title {
     text-align: center;
     margin-bottom: 20px;
@@ -23,12 +36,17 @@
 }
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 auto;
-    max-width: 1200px;
-}
+        display: flex;
+        margin: 0 auto;
+        max-width: 1200px;
+        overflow: auto;
+        max-height: 700px;
+        align-content: stretch;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+    }
 
 .prestation {
     background-color: rgba(24, 20, 20, 0.987);
@@ -45,8 +63,8 @@
 }
 
 .prestation h3 {
-            font-size: 22px;
-            text-align: center;
+    font-size: 22px;
+    text-align: center;
 }
 
 /* Styles pour les boutons */
@@ -124,8 +142,8 @@
 
 
 <section>
-    <h1 class="title">Mes prestations</h1>
-    <div class="container">
+    <h1 class="title">MES PRESTATIONS</h1>
+    <div class="container" style="overflow-y: auto;">
         @foreach (var prestation in Model)
         {
             <div class="prestation">
@@ -145,3 +163,16 @@
     </div>
     <div class="separator"></div>
 </section>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var container = document.querySelector('.container');
+        var content = document.querySelector('.container > div');
+
+        if (content.clientHeight > container.clientHeight) {
+            container.style.overflowY = 'auto';
+        } else {
+            container.style.overflowY = 'auto';
+        }
+    });
+</script>

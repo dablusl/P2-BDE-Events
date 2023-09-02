@@ -3,6 +3,7 @@
     public enum TypeDePrestation
     {
         BAR,
+        CHANTEUR,
         DJ,
         LOCATION,
         MUSICIEN,
