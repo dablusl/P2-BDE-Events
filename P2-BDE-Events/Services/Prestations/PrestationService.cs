@@ -28,10 +28,20 @@ namespace P2_BDE_Events.Services.Prestations
             Prestation cible = _bddContext.Prestations.Find(id);
             if (cible != null)
             {
-                cible = modifications;
+                // Mettez à jour les propriétés de l'objet cible avec les valeurs de modifications
+                cible.Titre = modifications.Titre;
+                cible.Description = modifications.Description;
+                cible.Livraison = modifications.Livraison;
+                cible.CapaciteMax = modifications.CapaciteMax;
+                cible.Tarif = modifications.Tarif;
+                cible.Calendrier = modifications.Calendrier;
+                cible.Type = modifications.Type;
+
+                // Enregistrez les modifications dans la base de données
                 _bddContext.SaveChanges();
             }
         }
+
         public Prestation ObtenirPrestation(int id)
         {
             return _bddContext.Prestations.Find(id);

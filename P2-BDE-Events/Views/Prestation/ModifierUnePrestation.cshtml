@@ -1,3 +1,4 @@
+@model P2_BDE_Events.ViewModels.UnePrestationViewsModel
 @{
     Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
 }
@@ -6,84 +7,232 @@
 
 }
 
+<style>
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    /* Styles pour le conteneur principal */
+    .ModifierUnePrestation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
 
-@model P2_BDE_Events.Models.Prestations.Prestation
-
-<h2>Modifier une prestation</h2>
-
-<form asp-action="Modifier">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label for="Titre">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre" value="@Model.Titre">
-    </div>
-    <div class="form-group">
-        <label for="CapaciteMax">CapacitÃ© maximale</label>
-        <input type="number" class="form-control" asp-for="CapaciteMax" value="@Model.CapaciteMax" >
-    </div>
-    <div class="form-group">
-        <label for="Tarif">Tarif</label>
-        <input type="number" class="form-control" asp-for="Tarif" value="@Model.Tarif">
-    </div>
-    <div class="form-group">
-        <label for="Calendrier">Calendrier</label>
-        <input type="text" class="form-control" asp-for="Calendrier" value="@Model.Calendrier">
-    </div>
-    <div class="form-group">
-        <label for="Livraison">Livraison</label>
-        <input type="checkbox" class="form-control" asp-for="Livraison" value="@Model.Livraison">
-    </div>
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" asp-for="Description" value="@Model.Description"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="Type">Type</label>
-        <select class="form-control" asp-for="Type" value="@Model.Type">
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
-
-        </select>
-    </div>
-
-    <style>
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="number"] {
+        /* Styles pour le formulaire */
+        .ModifierUnePrestation form {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(24, 20, 20, 0.987);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
         }
 
-        .btn-primary {
-            background-color: #007bff;
+        .ModifierUnePrestation .user-box.description {
+            margin-top: 20px;
+        }
+        /* Styles pour les éléments du formulaire */
+        .ModifierUnePrestation label {
             color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-    </style>
+        .ModifierUnePrestation input[type="text"],
+        .ModifierUnePrestation input[type="number"],
+        .ModifierUnePrestation textarea,
+        .ModifierUnePrestation select {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
 
-    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-</form>
+            /* Styles pour les labels des champs actifs */
+            .ModifierUnePrestation input[type="text"]:focus ~ label,
+            .ModifierUnePrestation input[type="text"]:valid ~ label,
+            .ModifierUnePrestation input[type="number"]:focus ~ label,
+            .ModifierUnePrestation input[type="number"]:valid ~ label,
+            .ModifierUnePrestation textarea:focus ~ label,
+            .ModifierUnePrestation textarea:valid ~ label,
+            .ModifierUnePrestation select:focus ~ label,
+            .ModifierUnePrestation select:valid ~ label {
+                top: -20px;
+                left: 0;
+                color: white;
+                font-size: 12px;
+            }
+
+        .ModifierUnePrestation select {
+            background-color: rgba(24, 20, 20, 0.987);
+            color: white;
+        }
+
+        .ModifierUnePrestation select {
+            color: white;
+        }
+
+        /* Styles pour le bouton Créer */
+        .ModifierUnePrestation button[type="submit"] {
+            padding: 20px 100px;
+            border-radius: 7px;
+            font-size: 20px;
+            font-family: 'Baloo 2', cursive;
+            color: white;
+            text-shadow: none;
+            background: transparent;
+            box-shadow: transparent;
+            border: none;
+            transition: 0.5s ease;
+            user-select: none;
+            cursor: pointer;
+            margin-top: 40px;
+            letter-spacing: 4px;
+        }
+
+            .ModifierUnePrestation button[type="submit"]:hover,
+            .ModifierUnePrestation button[type="submit"]:focus {
+                color: white;
+                background: red;
+                text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+                box-shadow: 0 0 5px red, 0 0 20px red, 0 0 50px red, 0 0 100px red;
+            }
+
+    /* Style pour les messages d'erreur */
+    .error-message {
+        color: red;
+        background: white;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    /* Style pour marquer les champs invalides */
+    .invalid {
+        border-bottom: 1px solid red;
+        background: white;
+    }
+
+    /* Style pour le message global sous le formulaire */
+    #form-error {
+        color: red;
+        background: transparent;
+        display: block;
+        font-size: 28px;
+        margin-top: 10px;
+        text-align: center
+    }
+
+</style>
+
+
+<section>
+    <h1 class="title">MODIFIER UNE PRESTATION</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7 ModifierUnePrestation">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(m => m.prestation.PrestataireId, @Model.prestataire.Id)
+                @Html.HiddenFor(m => m.prestation.Id, @Model.prestation.Id)
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.Titre)
+                    @Html.TextBoxFor(m => m.prestation.Titre)
+                    @Html.ValidationMessageFor(m =>m.prestation.Titre)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.CapaciteMax)
+                    @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
+                    @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.Tarif)
+                    @Html.TextBoxFor(m => m.prestation.Tarif, new { type = "number", min = "0"})
+                    @Html.ValidationMessageFor(m =>m.prestation.Tarif)
+                    <span class="error-container"></span>
+                </div>
+                @Html.HiddenFor(m => m.prestation.Calendrier, @Model.prestation.Calendrier)
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.Livraison)
+                    @Html.CheckBoxFor(m => m.prestation.Livraison)
+                    @Html.ValidationMessageFor(m =>m.prestation.Livraison)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box description">
+                    @Html.LabelFor(m => m.prestation.Description)
+                    @Html.TextBoxFor(m => m.prestation.Description)
+                    @Html.ValidationMessageFor(m =>m.prestation.Description)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box">
+                    <select class="form-control" id="Prestation.Type" name="Prestation.Type">
+                        @foreach (var prestationType in Enum.GetValues(typeof(@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation)))
+                        {
+                            var formattedPrestationType = prestationType.ToString()[0].ToString().ToUpper() + prestationType.ToString().Substring(1).ToLower();
+                            <option value="@prestationType">@formattedPrestationType</option>
+                        }
+                        }
+                    </select>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="creerEvenement">MODIFIER LA PRESTATION</button>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function (event) {
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let formValid = true;
+
+            for (const input of inputs) {
+                const errorMessage = document.createElement('span');
+                errorMessage.classList.add('error-message');
+                errorMessage.textContent = "Pssst... Ce n'est pas rempli ici";
+
+                if (!input.value.trim()) {
+                    input.classList.add('invalid');
+                    input.parentNode.appendChild(errorMessage);
+                    formValid = false;
+                } else {
+                    input.classList.remove('invalid');
+                    const existingErrorMessage = input.parentNode.querySelector('.error-message');
+                    if (existingErrorMessage) {
+                        existingErrorMessage.remove();
+                    }
+                }
+            }
+
+            if (!formValid) {
+                const formErrorMessage = document.createElement('span');
+                formErrorMessage.id = 'form-error';
+                formErrorMessage.classList.add('error-message');
+                formErrorMessage.textContent = "Remplir tous les champs";
+                form.appendChild(formErrorMessage);
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
+
+
+
