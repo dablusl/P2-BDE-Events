@@ -90,6 +90,7 @@ namespace P2_BDE_Events.Services.Evenements
             return _bddContext.LignesEvenement
                 .Include(l => l.Propositions)
                     .ThenInclude(p => p.Prestation)
+                    .ThenInclude(p => p.Prestataire)
                 .FirstOrDefault(l => l.Id == idLigneEvenement)
                 .Propositions
                 .ToList();               
@@ -115,6 +116,7 @@ namespace P2_BDE_Events.Services.Evenements
             Evenement evenement = _bddContext.Evenements
                 .Include( e => e.Lignes)
                     .ThenInclude( l => l.Prestation)
+                    .ThenInclude( p => p.Prestataire)
                 .Include(e => e.Lignes)
                     .ThenInclude(l => l.Propositions)
                 .FirstOrDefault(e => e.Id == idEvenement);
