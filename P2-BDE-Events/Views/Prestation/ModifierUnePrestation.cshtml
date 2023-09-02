@@ -1,3 +1,4 @@
+@model P2_BDE_Events.ViewModels.UnePrestationViewsModel
 @{
     Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
 }
@@ -6,47 +7,63 @@
 
 }
 
+<section>
+    <h1 class="title">MODIFIER UNE PRESTATION</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7 ModifierUnePrestation">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(m => m.prestation.PrestataireId, @Model.prestataire.Id)
+                @Html.HiddenFor(m => m.prestation.Id, @Model.prestation.Id)
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.Titre)
+                    @Html.TextBoxFor(m => m.prestation.Titre)
+                    @Html.ValidationMessageFor(m =>m.prestation.Titre)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.CapaciteMax)
+                    @Html.TextBoxFor(m => m.prestation.CapaciteMax, new { type = "number", min = "0"})
+                    @Html.ValidationMessageFor(m =>m.prestation.CapaciteMax)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.Tarif)
+                    @Html.TextBoxFor(m => m.prestation.Tarif, new { type = "number", min = "0"})
+                    @Html.ValidationMessageFor(m =>m.prestation.Tarif)
+                    <span class="error-container"></span>
+                </div>
+                @Html.HiddenFor(m => m.prestation.Calendrier, @Model.prestation.Calendrier)
+                <div class="user-box">
+                    @Html.LabelFor(m => m.prestation.Livraison)
+                    @Html.CheckBoxFor(m => m.prestation.Livraison)
+                    @Html.ValidationMessageFor(m =>m.prestation.Livraison)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box description">
+                    @Html.LabelFor(m => m.prestation.Description)
+                    @Html.TextBoxFor(m => m.prestation.Description)
+                    @Html.ValidationMessageFor(m =>m.prestation.Description)
+                    <span class="error-container"></span>
+                </div>
+                <div class="user-box">
+                    <select class="form-control" id="Prestation.Type" name="Prestation.Type">
+                        @foreach (var prestationType in Enum.GetValues(typeof(@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation)))
+                        {
+                            var formattedPrestationType = prestationType.ToString()[0].ToString().ToUpper() + prestationType.ToString().Substring(1).ToLower();
+                            <option value="@prestationType">@formattedPrestationType</option>
+                        }
+                        }
+                    </select>
+                </div>
 
-@model P2_BDE_Events.Models.Prestations.Prestation
-
-<h2>Modifier une prestation</h2>
-
-<form asp-action="Modifier">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label for="Titre">Titre</label>
-        <input type="text" class="form-control" asp-for="Titre" value="@Model.Titre">
+                <div class="text-center">
+                    <button type="submit" class="creerEvenement">MODIFIER LA PRESTATION</button>
+                </div>
+            }
+        </div>
     </div>
-    <div class="form-group">
-        <label for="CapaciteMax">Capacité maximale</label>
-        <input type="number" class="form-control" asp-for="CapaciteMax" value="@Model.CapaciteMax" >
-    </div>
-    <div class="form-group">
-        <label for="Tarif">Tarif</label>
-        <input type="number" class="form-control" asp-for="Tarif" value="@Model.Tarif">
-    </div>
-    <div class="form-group">
-        <label for="Calendrier">Calendrier</label>
-        <input type="text" class="form-control" asp-for="Calendrier" value="@Model.Calendrier">
-    </div>
-    <div class="form-group">
-        <label for="Livraison">Livraison</label>
-        <input type="checkbox" class="form-control" asp-for="Livraison" value="@Model.Livraison">
-    </div>
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" asp-for="Description" value="@Model.Description"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="Type">Type</label>
-        <select class="form-control" asp-for="Type" value="@Model.Type">
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.SALLE">Salle</option>
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.DJ">DJ</option>
-            <option value="@P2_BDE_Events.Models.Prestations.Enums.TypeDePrestation.TRAITEUR">Traiteur</option>
-
-        </select>
-    </div>
+</section>
 
     <style>
         form {
@@ -85,5 +102,4 @@
 
     </style>
 
-    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-</form>
+    

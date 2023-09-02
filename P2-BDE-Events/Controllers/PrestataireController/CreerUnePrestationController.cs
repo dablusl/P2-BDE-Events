@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using P2_BDE_Events.DataAccessLayer; 
+using Microsoft.EntityFrameworkCore;
+using P2_BDE_Events.DataAccessLayer;
 using P2_BDE_Events.Models.Prestations;
 using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Prestations;
@@ -11,14 +12,14 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 {
     public class CreerUnePrestationController : Controller
     {
-        private readonly BDDContext _dbContext; 
+        private readonly BDDContext _dbContext;
 
         public CreerUnePrestationController()
         {
             _dbContext = new BDDContext();
         }
 
-        
+
         [HttpGet]
         public IActionResult CreerUnePrestation()
         {
@@ -30,9 +31,9 @@ namespace P2_BDE_Events.Controllers.PrestataireController
                 prestataire = prestataireService.GetPrestataireParCompte(int.Parse(HttpContext.Session.GetString("iDCompte"))),
                 prestation = new Prestation()
             };
-            
-            
-            return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModelLocal); ;
+
+
+            return View("~/Views/Prestation/CreerUnePrestation.cshtml", viewModelLocal); ;
         }
 
         [HttpPost]
@@ -44,38 +45,47 @@ namespace P2_BDE_Events.Controllers.PrestataireController
 
             if (ModelState.IsValid)
             {
-                
+
                 _dbContext.Prestations.Add(viewModel.prestation);
                 _dbContext.SaveChanges();
                 return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
             }
-          
-            return View("~/Views/Prestation/CreerUnePrestation.cshtml",viewModel);
+
+            return View("~/Views/Prestation/CreerUnePrestation.cshtml", viewModel);
         }
 
         [HttpGet]
-        public IActionResult Modifier(int id)
+
+        public IActionResult ModifierUnePrestation(int id)
         {
-            var prestation = _dbContext.Prestations.Find(id);
-            if (prestation == null)
+            PrestataireService prestataireService = new PrestataireService();
+
+            var viewModel = new UnePrestationViewsModel()
+            {
+                prestataire = prestataireService.GetPrestataireParCompte(int.Parse(HttpContext.Session.GetString("iDCompte"))),
+                prestation = _dbContext.Prestations.Find(id)
+            };
+            if (viewModel == null)
             {
                 return NotFound();
             }
 
-            return View("~/Views/Prestation/ModifierUnePrestation.cshtml",prestation);
+            return View("~/Views/Prestation/ModifierUnePrestation.cshtml", viewModel);
         }
 
         [HttpPost]
-        public IActionResult Modifier(Prestation prestation)
+        public IActionResult ModifierUnePrestation(UnePrestationViewsModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Prestations.Update(prestation);
-                _dbContext.SaveChanges();
-                return View("~/Views/Prestation/ModifierUnePrestation.cshtml");
+
+                PrestationService prestationService = new PrestationService();
+                prestationService.ModifierPrestation(viewModel.prestation.Id, viewModel.prestation);
+                return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
+
             }
 
-            return View(prestation);
+            return View("~/Views/Prestation/ToutesLesPrestions.cshtml", viewModel);
         }
 
         [HttpGet]
@@ -102,7 +112,7 @@ namespace P2_BDE_Events.Controllers.PrestataireController
             _dbContext.Prestations.Remove(prestation);
             _dbContext.SaveChanges();
 
-            return View("~/Views/Prestation/SupprimerUnePrestation.cshtml"); 
+            return View("~/Views/Prestation/SupprimerUnePrestation.cshtml");
         }
 
     }

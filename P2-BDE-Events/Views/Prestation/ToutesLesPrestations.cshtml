@@ -16,7 +16,7 @@
 
     /* Styles pour le lien "CREER UNE PRESTATION" */
     .creerPrestation {
-        font-size: 20px; 
+        font-size: 21px; 
         color: darkred; 
         text-decoration: none;
         transition: color 0.2s ease-in-out; 
@@ -155,7 +155,9 @@
                 <p>Tarif : $@prestation.Tarif</p>
 
                 
-                <button type="submit" class="btn">Modifier</button>
+                @*<button type="submit" class="btn">Modifier</button>*@
+          
+                    <a href="@Url.Action("ModifierUnePrestation", "CreerUnePrestation",new { area = "Prestataire", id = prestation.Id })" class="btn">Modifier</a>
                 <button type="submit" class="btn btn-supp">Supprimer</button>
               
             </div>
