@@ -25,16 +25,11 @@ main {
 
 .ulParticipant li {
     color: white;
-    list-style: none;
     padding: 10px;
     font-size: 20px;
 }
 
-.nom {
+/*.nom {
     margin-left: 20px;
-}
-
-.classement {
-    margin-left: 275px;
-}
+}*/
 
