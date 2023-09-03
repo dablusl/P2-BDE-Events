@@ -28,7 +28,7 @@ namespace P2_BDE_Events.Services.Comptes
             Compte cible = _bddContext.Comptes.Find(id);
             if (cible != null)
             {
-                cible.Email = modifications.Email;
+                //cible.Email = modifications.Email;
                 cible.Prenom = modifications.Prenom;
                 cible.Nom = modifications.Nom;
                 cible.NumeroTelephone = modifications.NumeroTelephone;
