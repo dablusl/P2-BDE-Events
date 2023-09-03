@@ -1,3 +1,4 @@
+/* Styles pour le champ de recherche */
 .recherche input[type=text] {
     float: right;
     padding: 6px;
@@ -8,8 +9,6 @@
 }
 
 /* Liste */
-
-
 main {
     display: flex;
     align-items: center;
@@ -21,15 +20,32 @@ main {
     width: 600px;
     border-radius: 20px;
     cursor: pointer;
+    max-height: 500px;
+    overflow-y: auto;
+    list-style-type: decimal;
+    color: white;
 }
 
-.ulParticipant li {
-    color: white;
-    padding: 10px;
+    .ulParticipant li {
+        color: white;
+        padding: 5px 20px;
+        font-size: 20px;
+    }
+    .ulParticipant ol {
+        color: white;
+        padding: 5px 20px;
+        font-size: 20px;
+    }
+
+.container-tout {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
+.entete {
     font-size: 20px;
 }
-
-/*.nom {
-    margin-left: 20px;
-}*/
-
