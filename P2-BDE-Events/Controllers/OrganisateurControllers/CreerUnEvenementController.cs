@@ -64,6 +64,8 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             {
                 EvenementViewModel savedEvent = GetEventSession();
                 savedEvent.Evenement.DateEvenement = model.Evenement.DateEvenement;
+                savedEvent.Evenement.DateLimiteInscription = savedEvent.Evenement.DateEvenement.AddDays(-5);
+
                 SetEventSession(savedEvent);
 
                 return RedirectToAction("CreerEvenementSurMesure3");

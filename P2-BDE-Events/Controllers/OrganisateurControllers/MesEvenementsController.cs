@@ -32,6 +32,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
         public IActionResult ConsulterParticipants(int evenementId)
         {
             var evenement = EvenementService.ObtenirEvenement(evenementId);
+            
             List<Participant> participants = EvenementService.ObtenirParticipants(evenementId);
 
             var viewModel = new ConsulterEvenementViewModel
