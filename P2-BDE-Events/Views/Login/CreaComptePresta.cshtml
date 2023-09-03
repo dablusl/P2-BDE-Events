@@ -15,6 +15,12 @@
 
 <div class="login-box">
     <form asp-action="CreerEvenementSurMesure1" method="post" id="myForm">
+        <!-- Champs d'entrée pour le téléphone -->
+        <div class="user-box">
+            @Html.TextBoxFor(m => m.Prestataire.RaisonSocial, new { required = "required" })
+            @Html.LabelFor(m => m.Prestataire.RaisonSocial, "Raison Sociale")
+        </div>
+
         <!-- Champs d'entrée pour le nom -->
         <div class="user-box">
             @Html.TextBoxFor(m => m.Compte.Nom, new { required = "required" })
