@@ -7,6 +7,7 @@ using System;
 using P2_BDE_Events.Models.Evenement.Enums;
 using P2_BDE_Events.Models.Stats;
 using P2_BDE_Events.Services.Comptes;
+using System.Threading;
 
 namespace P2_BDE_Events.DataAccessLayer
 {
@@ -277,7 +278,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Prestataires.Add(prestat1);
             this.SaveChanges();
 
-            //prestations
+            //prestataires
 
             Compte cPrestataire10 = new Compte
             {
@@ -395,20 +396,22 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 10,
                 Type = TypeDePrestation.BAR,
+                Titre = "Bar à bières",
                 Description = "Bar à bières, large sélection belge et allemande",
-                CapaciteMax = 99999999,
+                CapaciteMax = 80,
                 Prestataire = pPrestataire10,
-                Tarif = 100,
+                Tarif = 1000,
             };
 
             Prestation presta11 = new Prestation
             {
                 Id = 11,
                 Type = TypeDePrestation.SALLE,
-                Description = "Bar à bières, large sélection belge et allemande",
-                CapaciteMax = 80,
+                Titre = "Salle de réception",
+                Description = "Salle de réception privative. Sono, tables et chaises disponibles à la demande",
+                CapaciteMax = 180,
                 Prestataire = pPrestataire10,
-                Tarif = 100,
+                Tarif = 1800,
             };
             Prestation presta12 = new Prestation
             {
@@ -486,7 +489,7 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cOrga10 = new Compte
             {
                 Id = 15,
-                Email = "michael.cera@gmail.com",
+                Email = "m.cera@paris-descartes.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Organisateur",
                 Prenom = "Michael",
@@ -498,7 +501,7 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cOrga11 = new Compte
             {
                 Id = 16,
-                Email = "j.balie@paris-sorbonne.com",
+                Email = "j.balie@paris-sorbonne.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Organisateur",
                 Prenom = "Jeanne",
@@ -510,7 +513,7 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cOrga12 = new Compte
             {
                 Id = 17,
-                Email = "m.sako@gmail.com",
+                Email = "m.sako@hec.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Organisateur",
                 Prenom = "Moise",

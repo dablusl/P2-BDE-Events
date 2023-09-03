@@ -284,7 +284,7 @@ namespace P2_BDE_Events.Controllers
 
                 PrestataireService.CreerPrestataire(viewModel.Prestataire, int.Parse(HttpContext.Session.GetString("iDCompte")));
 
-                return RedirectToAction("Creer", "CreerUnePrestation", new { area = "PrestataireControllers" });
+                return RedirectToAction("ToutesLesPrestations", "ConsultationPrestations", new { area = "PrestataireControllers" });
             }
             viewModel.AvailableServiceTypes = GetAvailableServiceTypes();
             return View(viewModel);
