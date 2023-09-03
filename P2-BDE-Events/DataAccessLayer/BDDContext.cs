@@ -60,7 +60,7 @@ namespace P2_BDE_Events.DataAccessLayer
             var adminCompte = new Compte
             {
                 Id = 1,
-                Email = "AdminAlpha",
+                Email = "adminalpha@bdeevents.com",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Administrateur",
                 Prenom = "Pierre",
@@ -89,7 +89,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 Profil = "Prestataire",
                 Prenom = "Philipe",
                 Nom = "Xiu",
-                NumeroTelephone = "0145789698",
+                NumeroTelephone = "0145889698",
                 PhotoProfilePath = "/images/utilisateurs/41752-125261.jpg"
             };
 
