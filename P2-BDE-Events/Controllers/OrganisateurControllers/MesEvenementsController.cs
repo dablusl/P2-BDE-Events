@@ -5,6 +5,7 @@ using P2_BDE_Events.Services.Comptes;
 using P2_BDE_Events.Services.Evenements;
 using P2_BDE_Events.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 
 namespace P2_BDE_Events.Controllers.OrganisateurControllers
@@ -22,10 +23,10 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             ParticipantService = new ParticipantService();
         }
 
-        public IActionResult MesEvenementsOrgaTermines()
-        {
-            return View("Views/Organisateur/MesEvenementsOrgaTermines.cshtml");
-        }
+        //public IActionResult MesEvenementsOrgaTermines()
+        //{
+        //    return View("Views/Organisateur/MesEvenementsOrgaTermines.cshtml");
+        //}
 
         [HttpGet]
         public IActionResult ConsulterParticipants(int evenementId)
@@ -71,7 +72,7 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
             Organisateur organisateur = new OrganisateurService().GetOrganisateurParCompte(compteId);
 
             // Récupérer la liste des événements créés par l'organisateur
-            var evenements = EvenementService.ObtenirEvenementsOrganisateur(organisateur.Id);
+            var evenements = EvenementService.ObtenirEvenementsOrganisateur(organisateur.Id).Where(e => e.Etat != Models.Evenement.Enums.EtatEvenement.PASSE).ToList();
 
             var viewModel = new MesEvenementsOrgaViewModel
             {
@@ -80,7 +81,22 @@ namespace P2_BDE_Events.Controllers.OrganisateurControllers
 
             return View("Views/Organisateur/MesEvenementsOrga.cshtml", viewModel);
         }
+        [HttpGet]
+        public IActionResult MesEvenementsOrgaTermines()
+        {
+            
+            int compteId = int.Parse(User.FindFirstValue(ClaimTypes.Sid));
+            Organisateur organisateur = new OrganisateurService().GetOrganisateurParCompte(compteId);
 
+            var evenements = EvenementService.ObtenirEvenementsOrganisateur(organisateur.Id).Where(e => e.Etat == Models.Evenement.Enums.EtatEvenement.PASSE).ToList();
+    
+            var viewModel = new MesEvenementsOrgaViewModel
+            {
+                Evenements = evenements
+            };
+
+            return View("Views/Organisateur/MesEvenementsOrgaTermines.cshtml", viewModel);
+        }
 
 
     }
