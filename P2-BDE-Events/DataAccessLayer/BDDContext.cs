@@ -588,7 +588,7 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cParticip3 = new Compte
             {
                 Id = 18,
-                Email = "will@gmail.com",
+                Email = "will@paris-descartes.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Participant",
                 Prenom = "Will",
@@ -600,7 +600,7 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cParticip4 = new Compte
             {
                 Id = 19,
-                Email = "david@gmail.com",
+                Email = "d.leclerc@paris-sorbonne.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Participant",
                 Prenom = "David",
@@ -612,7 +612,7 @@ namespace P2_BDE_Events.DataAccessLayer
             Compte cParticip5 = new Compte
             {
                 Id = 20,
-                Email = "salomon@gmail.com",
+                Email = "salomon@hec.fr",
                 MotDePasse = CompteService.EncodeMD5("rrrrr"),
                 Profil = "Participant",
                 Prenom = "Salomon",
@@ -671,7 +671,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 150,
                 MinParticipants = 120,
                 NbReservations = 0,
-                NbParticipants = 1,
+                NbParticipants = 143,
                 PrixBillet = 12,
                 Organisateur = oOrga11,
             };
@@ -679,6 +679,14 @@ namespace P2_BDE_Events.DataAccessLayer
                 evenement1
                 );
             this.SaveChanges();
+            this.Reservations.Add(new Reserver
+            {
+                DateReservation = DateTime.Now,
+                Participant = pOrga10,
+                Evenement = evenement1
+            });
+            this.SaveChanges();
+
             // Ajoute de 100 profils de participants
             string[] noms = {
     "Smith", "Johnson", "Brown", "Davis", "Wilson", "Miller", "Moore", "Taylor", "Anderson", "Jackson",
@@ -783,7 +791,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 MaxParticipants = 200,
                 MinParticipants = 120,
                 NbReservations = 0,
-                NbParticipants = 1,
+                NbParticipants = 187,
                 PrixBillet = 12,
                 Organisateur = oOrga12,
             };
@@ -818,8 +826,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/indie.png",
                 MaxParticipants = 80,
                 MinParticipants = 50,
-                NbReservations = 0,
-                NbParticipants = 0,
+                NbReservations = 56,
+                NbParticipants = 56,
                 PrixBillet = 5,
                 Organisateur = orgaP12,
             };
@@ -837,8 +845,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/soireejeux.jpg",
                 MaxParticipants = 80,
                 MinParticipants = 50,
-                NbReservations = 0,
-                NbParticipants = 1,
+                NbReservations = 68,
+                NbParticipants = 68,
                 PrixBillet = 5,
                 Organisateur = oOrga11,
             };
@@ -856,8 +864,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/Cpétanque.jpg",
                 MaxParticipants = 100,
                 MinParticipants = 50,
-                NbReservations = 0,
-                NbParticipants = 0,
+                NbReservations = 35,
+                NbParticipants = 35,
                 PrixBillet = 4.5,
                 Organisateur = oOrga10,
             };
@@ -875,8 +883,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/SUMMERPARTY.jpg",
                 MaxParticipants = 250,
                 MinParticipants = 200,
-                NbReservations = 0,
-                NbParticipants = 0,
+                NbReservations = 222,
+                NbParticipants = 222,
                 PrixBillet = 12,
                 Organisateur = oOrga11,
             };
@@ -894,8 +902,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/backto2000.png",
                 MaxParticipants = 180,
                 MinParticipants = 130,
-                NbReservations = 0,
-                NbParticipants = 0,
+                NbReservations = 98,
+                NbParticipants = 98,
                 PrixBillet = 15,
                 Organisateur = oOrga10,
             };
@@ -913,8 +921,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/magic.jpg",
                 MaxParticipants = 120,
                 MinParticipants = 100,
-                NbReservations = 0,
-                NbParticipants = 0,
+                NbReservations = 26,
+                NbParticipants = 26,
                 PrixBillet = 12,
                 Organisateur = oOrga11,
             };
@@ -932,8 +940,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/pirates.jpg",
                 MaxParticipants = 80,
                 MinParticipants = 50,
-                NbReservations = 0,
-                NbParticipants = 0,
+                NbReservations = 69,
+                NbParticipants = 69,
                 PrixBillet = 0,
                 Organisateur = oOrga12,
             };
@@ -950,8 +958,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 CoverPhotoPath = "/images/evenement/Beer-Pong.jpg",
                 MaxParticipants = 100,
                 MinParticipants = 70,
-                NbReservations = 0,
-                NbParticipants = 1,
+                NbReservations = 91,
+                NbParticipants = 91,
                 PrixBillet = 10,
                 Organisateur = oOrga10,
             };
@@ -1127,21 +1135,21 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Reservations.Add(new Reserver
             {
                 DateReservation = DateTime.Now,
-                Participant = pOrga10,
+                Participant = pParticip4,
                 Evenement = evenement1
             });
 
             this.Reservations.Add(new Reserver
             {
                 DateReservation = DateTime.Now,
-                Participant = pParticip4,
+                Participant = pParticip5,
                 Evenement = evenement2
             });
 
             this.Reservations.Add(new Reserver
             {
                 DateReservation = DateTime.Now,
-                Participant = pParticip5,
+                Participant = pParticip3,
                 Evenement = evenement5
             });
 
