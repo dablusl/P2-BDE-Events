@@ -657,6 +657,28 @@ namespace P2_BDE_Events.DataAccessLayer
                 );
             this.SaveChanges();
             //-----------
+            Evenement evenement1 = new Evenement
+            {
+                Id = 1,
+                Titre = "Back to School",
+                Etat = EtatEvenement.PUBLIE,
+                Type = TypeEvenement.SOIREE,
+                CreeLe = new DateTime(2023, 06, 4, 10, 30, 20),
+                DateEvenement = new DateTime(2023, 09, 06, 23, 0, 0),
+                DateLimiteInscription = new DateTime(2023, 09, 05, 0, 0, 0),
+                Description = "Soirée Back to School pour bien commencer l'année",
+                CoverPhotoPath = "/images/evenement/backtoschool2.jpg",
+                MaxParticipants = 150,
+                MinParticipants = 120,
+                NbReservations = 0,
+                NbParticipants = 1,
+                PrixBillet = 12,
+                Organisateur = oOrga11,
+            };
+            this.Evenements.Add(
+                evenement1
+                );
+            this.SaveChanges();
             // Ajoute de 100 profils de participants
             string[] noms = {
     "Smith", "Johnson", "Brown", "Davis", "Wilson", "Miller", "Moore", "Taylor", "Anderson", "Jackson",
@@ -718,27 +740,35 @@ namespace P2_BDE_Events.DataAccessLayer
                     Universite = universite
                 };
                 this.Participants.Add(participant100);
+
+                this.Reservations.Add(new Reserver
+                {
+                    DateReservation = DateTime.Now,
+                    Participant = participant100,
+                    Evenement = evenement1
+                });
+
                 this.SaveChanges();
             }
             //---------------
-            Evenement evenement1 = new Evenement
-            {
-                Id = 1,
-                Titre = "Back to School",
-                Etat = EtatEvenement.PUBLIE,
-                Type = TypeEvenement.SOIREE,
-                CreeLe = new DateTime(2023, 06, 4, 10, 30, 20),
-                DateEvenement = new DateTime(2023, 09, 06, 23, 0, 0),
-                DateLimiteInscription = new DateTime(2023, 09, 05, 0, 0, 0),
-                Description = "Soirée Back to School pour bien commencer l'année",
-                CoverPhotoPath = "/images/evenement/backtoschool.jpg",
-                MaxParticipants = 100,
-                MinParticipants = 70,
-                NbReservations = 0,
-                NbParticipants = 1,
-                PrixBillet = 12,
-                Organisateur = oOrga11,
-            };
+            //Evenement evenement1 = new Evenement
+            //{
+            //    Id = 1,
+            //    Titre = "Back to School",
+            //    Etat = EtatEvenement.PUBLIE,
+            //    Type = TypeEvenement.SOIREE,
+            //    CreeLe = new DateTime(2023, 06, 4, 10, 30, 20),
+            //    DateEvenement = new DateTime(2023, 09, 06, 23, 0, 0),
+            //    DateLimiteInscription = new DateTime(2023, 09, 05, 0, 0, 0),
+            //    Description = "Soirée Back to School pour bien commencer l'année",
+            //    CoverPhotoPath = "/images/evenement/backtoschool.jpg",
+            //    MaxParticipants = 150,
+            //    MinParticipants = 120,
+            //    NbReservations = 0,
+            //    NbParticipants = 1,
+            //    PrixBillet = 12,
+            //    Organisateur = oOrga11,
+            //};
             Evenement evenement2 = new Evenement
             {
                 Id = 2,
@@ -761,15 +791,15 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 3,
                 Titre = "Let's All Chant",
-                Etat = EtatEvenement.PUBLIE,
+                Etat = EtatEvenement.OUVERT,
                 Type = TypeEvenement.SOIREE,
                 CreeLe = new DateTime(2023, 08, 29, 20, 30, 20),
                 DateEvenement = new DateTime(2023, 10, 5, 20, 0, 0),
                 DateLimiteInscription = new DateTime(2023, 10, 01, 0, 0, 0),
                 Description = "Ramenez vos instruments et vos cordes vocales",
                 CoverPhotoPath = "/images/evenement/karaokep12.png",
-                MaxParticipants = 80,
-                MinParticipants = 50,
+                MaxParticipants = 100,
+                MinParticipants = 80,
                 NbReservations = 0,
                 NbParticipants = 0,
                 PrixBillet = 10,
@@ -817,7 +847,7 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 6,
                 Titre = "Concours de pétanque",
-                Etat = EtatEvenement.OUVERT,
+                Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.SPORT,
                 CreeLe = new DateTime(2023, 09, 02, 11, 30, 20),
                 DateEvenement = new DateTime(2023, 10, 22, 14, 0, 0),
@@ -829,7 +859,7 @@ namespace P2_BDE_Events.DataAccessLayer
                 NbReservations = 0,
                 NbParticipants = 0,
                 PrixBillet = 4.5,
-                Organisateur = oOrga11,
+                Organisateur = oOrga10,
             };
 
             Evenement evenement7 = new Evenement
@@ -855,7 +885,7 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 8,
                 Titre = "Back to the 2000",
-                Etat = EtatEvenement.OUVERT,
+                Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.REPAS,
                 CreeLe = new DateTime(2023, 08, 16, 15, 47, 00),
                 DateEvenement = new DateTime(2023, 10, 19, 19, 0, 0),
@@ -874,7 +904,7 @@ namespace P2_BDE_Events.DataAccessLayer
             {
                 Id = 9,
                 Titre = "my loft is MAGIC",
-                Etat = EtatEvenement.OUVERT,
+                Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.SOIREE,
                 CreeLe = new DateTime(2023, 09, 01, 12, 12, 20),
                 DateEvenement = new DateTime(2023, 11, 04, 23, 0, 0),
@@ -886,14 +916,14 @@ namespace P2_BDE_Events.DataAccessLayer
                 NbReservations = 0,
                 NbParticipants = 0,
                 PrixBillet = 12,
-                Organisateur = oOrga10,
+                Organisateur = oOrga11,
             };
 
             Evenement evenement10 = new Evenement
             {
                 Id = 10,
                 Titre = "Chasses aux trésors",
-                Etat = EtatEvenement.OUVERT,
+                Etat = EtatEvenement.PUBLIE,
                 Type = TypeEvenement.PLEINE_AIRE,
                 CreeLe = new DateTime(2023, 08, 22, 18, 36, 40),
                 DateEvenement = new DateTime(2023, 09, 05, 18, 0, 0),
@@ -927,7 +957,7 @@ namespace P2_BDE_Events.DataAccessLayer
             };
 
             this.Evenements.AddRange(
-                evenement1,
+                //evenement1,
                 evenement2,
                 evenement3,
                 evenement4,
@@ -946,23 +976,26 @@ namespace P2_BDE_Events.DataAccessLayer
                 new LigneEvenement
                 {
                     Id = 1,
-                    Evenement = evenement1,
+                    Evenement = evenement11,
                     Type = TypeDePrestation.BAR,
-                    Prestation = presta10
+                    Prestation = presta10,
+                    TarifProposee = 1000
                 },
                 new LigneEvenement
                 {
                     Id = 2,
                     Evenement = evenement1,
                     Type = TypeDePrestation.SALLE,
-                    Prestation = presta11
+                    Prestation = presta13,
+                    TarifProposee = 1500
                 },
                 new LigneEvenement
                 {
                     Id = 3,
                     Evenement = evenement1,
                     Type = TypeDePrestation.TRAITEUR,
-                    Prestation = presta12
+                    Prestation = presta12,
+                    TarifProposee = 300
                 },
                 new LigneEvenement
                 {
@@ -975,8 +1008,8 @@ namespace P2_BDE_Events.DataAccessLayer
                 {
                     Id = 5,
                     Evenement = evenement3,
-                    Type = TypeDePrestation.SECURITE,
-                    Prestation = presta16
+                    Type = TypeDePrestation.PHOTOGRAPHIE,
+                    Prestation = presta12
                 },
                 new LigneEvenement
                 {
@@ -1081,6 +1114,12 @@ namespace P2_BDE_Events.DataAccessLayer
                     Evenement = evenement9,
                     Type = TypeDePrestation.LOCATION,
                     Location = TypeDeLocation.PHOTOMATON
+                },
+                new LigneEvenement
+                {
+                    Id = 23,
+                    Evenement = evenement3,
+                    Type = TypeDePrestation.SALLE,
                 }
                 );
             this.SaveChanges();
@@ -1088,7 +1127,7 @@ namespace P2_BDE_Events.DataAccessLayer
             this.Reservations.Add(new Reserver
             {
                 DateReservation = DateTime.Now,
-                Participant = pParticip3,
+                Participant = pOrga10,
                 Evenement = evenement1
             });
 
